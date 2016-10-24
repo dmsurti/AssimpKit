@@ -18,6 +18,10 @@
   return [self importScene:file];
 }
 
++ (instancetype)assimpSceneWithURL:(NSURL*)url {
+  return [self importScene:url.path];
+}
+
 + (instancetype)importScene:(NSString*)filePath {
   // Start the import on the given file with some example postprocessing
   // Usually - if speed is not the most important aspect for you - you'll t
