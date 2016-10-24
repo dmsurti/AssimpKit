@@ -12,10 +12,10 @@
 @implementation GameViewController
 
 - (void)awakeFromNib {
-  NSString* filePath =
-      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/explorer_skinned.dae";
-  // SCNScene* scene =
-  // [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
+  //  NSString* filePath =
+  //      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/explorer_skinned.dae";
+  //  SCNScene* scene =
+  //      [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
   SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
 
   self.gameView.scene = scene;
