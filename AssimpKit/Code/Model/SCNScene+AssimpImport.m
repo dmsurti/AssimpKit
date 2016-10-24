@@ -32,7 +32,8 @@
                  aiProcess_JoinIdenticalVertices | aiProcess_SortByPType);
   // If the import failed, report it
   if (!aiScene) {
-    NSLog(@" Scene importing failed");
+    NSLog(@" Scene importing failed for filePath %@", filePath);
+    return nil;
   }
   // Now we can access the file's contents
   SCNScene* scene = [self makeSCNSceneFromAssimpScene:aiScene];
