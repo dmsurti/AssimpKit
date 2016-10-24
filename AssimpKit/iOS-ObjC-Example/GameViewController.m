@@ -6,18 +6,15 @@
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
-#import "AssimpScene.h"
 #import "GameViewController.h"
+#import "SCNScene+AssimpImport.h"
 
 @implementation GameViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  AssimpScene* assimpScene = [[AssimpScene alloc] init];
-  NSString* filePath =
-      [[NSBundle mainBundle] pathForResource:@"spider" ofType:@"obj"];
-  SCNScene* scene = [assimpScene importScene:filePath];
+  SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
 
   // create a new scene
   // SCNScene* scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
