@@ -37,10 +37,10 @@
   return scene;
 }
 
-+ (SCNScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene {
++ (instancetype)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
-  SCNScene* scene = [[SCNScene alloc] init];
+  SCNScene* scene = [[[self class] alloc] init];
   SCNNode* scnRootNode =
       [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene];
   [scene.rootNode addChildNode:scnRootNode];
