@@ -6,16 +6,13 @@
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
-#import "AssimpScene.h"
 #import "GameViewController.h"
+#import "SCNScene+AssimpImport.h"
 
 @implementation GameViewController
 
 - (void)awakeFromNib {
-  AssimpScene* assimpScene = [[AssimpScene alloc] init];
-  NSString* objFile =
-      [[NSBundle mainBundle] pathForResource:@"spider" ofType:@"obj"];
-  SCNScene* scene = [assimpScene importScene:objFile];
+  SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
   // set the scene to the view
   self.gameView.scene = scene;
 
