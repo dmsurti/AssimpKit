@@ -11,6 +11,6 @@
 
 @interface SCNScene (AssimpImport)
 
-+ (SCNScene*)assimpSceneNamed:(NSString*)name;
++ (instancetype)assimpSceneNamed:(NSString*)name;
 
 @end
