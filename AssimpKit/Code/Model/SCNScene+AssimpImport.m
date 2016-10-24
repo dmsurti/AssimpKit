@@ -13,6 +13,8 @@
 
 @implementation SCNScene (AssimpImport)
 
+#pragma mark - Loading a Scene
+
 + (instancetype)assimpSceneNamed:(NSString*)name {
   NSString* file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
   return [self importScene:file];
@@ -21,6 +23,8 @@
 + (instancetype)assimpSceneWithURL:(NSURL*)url {
   return [self importScene:url.path];
 }
+
+#pragma mark - Import with Assimp
 
 + (instancetype)importScene:(NSString*)filePath {
   // Start the import on the given file with some example postprocessing
@@ -42,6 +46,8 @@
   return scene;
 }
 
+#pragma mark - Make SCN Scene
+
 + (instancetype)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
@@ -51,6 +57,45 @@
   [scene.rootNode addChildNode:scnRootNode];
   return scene;
 }
+
+#pragma mark - Make SCN Node
+
++ (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
+                              inScene:(const struct aiScene*)aiScene {
+  SCNNode* node = [[SCNNode alloc] init];
+  const struct aiString* aiNodeName = &aiNode->mName;
+  node.name = [NSString stringWithUTF8String:aiNodeName->data];
+  NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
+  node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene];
+
+  // ---------
+  // TRANSFORM
+  // ---------
+  const struct aiMatrix4x4 aiNodeMatrix = aiNode->mTransformation;
+  // May be I should not ignore scale, rotation components and use
+  // full matrix
+  //  GLKMatrix4 glkNodeMatrix = GLKMatrix4Make(
+  //      aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
+  //      aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
+  //      aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
+  //      aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
+
+  GLKMatrix4 glkNodeMatrix =
+      GLKMatrix4Make(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, aiNodeMatrix.a4,
+                     aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
+  SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
+  node.transform = scnMatrix;
+
+  for (int i = 0; i < aiNode->mNumChildren; i++) {
+    const struct aiNode* aiChildNode = aiNode->mChildren[i];
+    SCNNode* childNode =
+        [self makeSCNNodeFromAssimpNode:aiChildNode inScene:aiScene];
+    [node addChildNode:childNode];
+  }
+  return node;
+}
+
+#pragma mark - Number of vertices, faces and indices
 
 + (int)findNumVerticesInNode:(const struct aiNode*)aiNode
                      inScene:(const struct aiScene*)aiScene {
@@ -84,6 +129,8 @@
   }
   return nIndices;
 }
+
+#pragma mark - Make SCN Geometry sources
 
 + (SCNGeometrySource*)
 makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
@@ -146,6 +193,8 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
                                         withNVertices:nVertices]];
   return scnGeometrySources;
 }
+
+#pragma mark - Make SCN Geometry elements
 
 + (SCNGeometryElement*)
 makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
@@ -223,41 +272,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return scnGeometry;
   }
   return nil;
-}
-
-+ (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
-                              inScene:(const struct aiScene*)aiScene {
-  SCNNode* node = [[SCNNode alloc] init];
-  const struct aiString* aiNodeName = &aiNode->mName;
-  node.name = [NSString stringWithUTF8String:aiNodeName->data];
-  NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
-  node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene];
-
-  // ---------
-  // TRANSFORM
-  // ---------
-  const struct aiMatrix4x4 aiNodeMatrix = aiNode->mTransformation;
-  // May be I should not ignore scale, rotation components and use
-  // full matrix
-  //  GLKMatrix4 glkNodeMatrix = GLKMatrix4Make(
-  //      aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
-  //      aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
-  //      aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
-  //      aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
-
-  GLKMatrix4 glkNodeMatrix =
-      GLKMatrix4Make(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, aiNodeMatrix.a4,
-                     aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
-  SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
-  node.transform = scnMatrix;
-
-  for (int i = 0; i < aiNode->mNumChildren; i++) {
-    const struct aiNode* aiChildNode = aiNode->mChildren[i];
-    SCNNode* childNode =
-        [self makeSCNNodeFromAssimpNode:aiChildNode inScene:aiScene];
-    [node addChildNode:childNode];
-  }
-  return node;
 }
 
 @end
