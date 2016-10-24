@@ -12,8 +12,12 @@
 @implementation GameViewController
 
 - (void)awakeFromNib {
+  NSString* filePath =
+      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/explorer_skinned.dae";
+  // SCNScene* scene =
+  // [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
   SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
-  // set the scene to the view
+
   self.gameView.scene = scene;
 
   // allows the user to manipulate the camera
