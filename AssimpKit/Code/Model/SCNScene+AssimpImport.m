@@ -1,19 +1,24 @@
 //
-//  AssimpScene.m
+//  SCNScene+AssimpImport.m
 //  AssimpKit
 //
 //  Created by Deepak Surti on 10/24/16.
 //
 //
 
-#import "AssimpScene.h"
+#import "SCNScene+AssimpImport.h"
 #include "assimp/cimport.h"      // Plain-C interface
 #include "assimp/postprocess.h"  // Post processing flags
 #include "assimp/scene.h"        // Output data structure
 
-@implementation AssimpScene
+@implementation SCNScene (AssimpImport)
 
-- (SCNScene*)importScene:(NSString*)filePath {
++ (SCNScene*)assimpSceneNamed:(NSString*)name {
+  NSString* file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
+  return [self importScene:file];
+}
+
++ (SCNScene*)importScene:(NSString*)filePath {
   // Start the import on the given file with some example postprocessing
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
@@ -32,7 +37,7 @@
   return scene;
 }
 
-- (SCNScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene {
++ (SCNScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
   SCNScene* scene = [[SCNScene alloc] init];
@@ -42,7 +47,7 @@
   return scene;
 }
 
-- (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
++ (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
                                       inScene:(const struct aiScene*)aiScene {
   NSMutableArray* scnGeometrySources = [[NSMutableArray alloc] init];
   NSMutableArray* scnGeometryElements = [[NSMutableArray alloc] init];
@@ -130,7 +135,7 @@
   return nil;
 }
 
-- (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
++ (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
                               inScene:(const struct aiScene*)aiScene {
   SCNNode* node = [[SCNNode alloc] init];
   const struct aiString* aiNodeName = &aiNode->mName;
