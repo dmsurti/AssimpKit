@@ -51,11 +51,7 @@
                                       inScene:(const struct aiScene*)aiScene {
   NSMutableArray* scnGeometrySources = [[NSMutableArray alloc] init];
   NSMutableArray* scnGeometryElements = [[NSMutableArray alloc] init];
-  int k = aiNode->mNumMeshes;
-  if (k > 0) {
-    k = 1;
-  }
-  for (int i = 0; i < k; i++) {
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
     // create SCNGeometry source for aiMesh vertices, normals, texture
