@@ -52,85 +52,174 @@
   return scene;
 }
 
-+ (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
-                                      inScene:(const struct aiScene*)aiScene {
-  NSMutableArray* scnGeometrySources = [[NSMutableArray alloc] init];
-  NSMutableArray* scnGeometryElements = [[NSMutableArray alloc] init];
++ (int)findNumVerticesInNode:(const struct aiNode*)aiNode
+                     inScene:(const struct aiScene*)aiScene {
+  int nVertices = 0;
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    nVertices += aiMesh->mNumVertices;
+  }
+  return nVertices;
+}
+
++ (int)findNumFacesInNode:(const struct aiNode*)aiNode
+                  inScene:(const struct aiScene*)aiScene {
+  int nFaces = 0;
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    nFaces += aiMesh->mNumFaces;
+  }
+  return nFaces;
+}
+
++ (int)findNumIndicesInMesh:(int)aiMeshIndex
+                    inScene:(const struct aiScene*)aiScene {
+  int nIndices = 0;
+  const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+  for (int j = 0; j < aiMesh->mNumFaces; j++) {
+    const struct aiFace* aiFace = &aiMesh->mFaces[j];
+    nIndices += aiFace->mNumIndices;
+  }
+  return nIndices;
+}
+
++ (SCNGeometrySource*)
+makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
+                        inScene:(const struct aiScene*)aiScene
+                  withNVertices:(int)nVertices {
+  SCNVector3 scnVertices[nVertices];
+  int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
     // create SCNGeometry source for aiMesh vertices, normals, texture
     // coordinates
-    // --------
-    // vertices
-    // --------
-    SCNVector3 scnVertices[aiMesh->mNumVertices];
-    for (int i = 0; i < aiMesh->mNumVertices; i++) {
-      const struct aiVector3D* aiVector3D = &aiMesh->mVertices[i];
+    for (int j = 0; j < aiMesh->mNumVertices; j++) {
+      const struct aiVector3D* aiVector3D = &aiMesh->mVertices[j];
       SCNVector3 pos =
           SCNVector3Make(aiVector3D->x, aiVector3D->y, aiVector3D->z);
-      scnVertices[i] = pos;
+      scnVertices[verticesCounter++] = pos;
     }
-    SCNGeometrySource* vertexSource =
-        [SCNGeometrySource geometrySourceWithVertices:scnVertices
-                                                count:aiMesh->mNumVertices];
-    [scnGeometrySources addObject:vertexSource];
-    // -------
-    // normals
-    // -------
-    SCNVector3 scnNormals[aiMesh->mNumVertices];
-    SCNGeometrySource* normalSource;
+  }
+  SCNGeometrySource* vertexSource =
+      [SCNGeometrySource geometrySourceWithVertices:scnVertices
+                                              count:nVertices];
+  return vertexSource;
+}
+
++ (SCNGeometrySource*)
+makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
+                        inScene:(const struct aiScene*)aiScene
+                  withNVertices:(int)nVertices {
+  SCNVector3 scnNormals[nVertices];
+  int verticesCounter = 0;
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
     if (aiMesh->mNormals == NULL) {
-      for (int i = 0; i < aiMesh->mNumVertices; i++) {
-        const struct aiVector3D* aiVector3D = &aiMesh->mNormals[i];
+      for (int j = 0; j < aiMesh->mNumVertices; j++) {
+        const struct aiVector3D* aiVector3D = &aiMesh->mNormals[j];
         SCNVector3 normal =
             SCNVector3Make(aiVector3D->x, aiVector3D->y, aiVector3D->z);
-        scnNormals[i] = normal;
+        scnNormals[verticesCounter++] = normal;
       }
-      normalSource =
-          [SCNGeometrySource geometrySourceWithVertices:scnVertices
-                                                  count:aiMesh->mNumVertices];
-      [scnGeometrySources addObject:normalSource];
     }
+  }
+  SCNGeometrySource* normalSource =
+      [SCNGeometrySource geometrySourceWithVertices:scnNormals count:nVertices];
+  return normalSource;
+}
 
-    // create SCNGeometryElement for aiMesh indices
-    int scnIndices[aiMesh->mNumFaces * 3];
-    int k = 0;
-    for (int i = 0; i < aiMesh->mNumFaces; i++) {
-      const struct aiFace* aiFace = &aiMesh->mFaces[i];
-      for (int j = 0; j < aiFace->mNumIndices; j++) {
-        scnIndices[k] = aiFace->mIndices[j];
-        ++k;
-      }
++ (NSArray*)makeGeometrySourcesForNode:(const struct aiNode*)aiNode
+                               inScene:(const struct aiScene*)aiScene {
+  NSMutableArray* scnGeometrySources = [[NSMutableArray alloc] init];
+  int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
+  [scnGeometrySources
+      addObject:[self makeVertexGeometrySourceForNode:aiNode
+                                              inScene:aiScene
+                                        withNVertices:nVertices]];
+  [scnGeometrySources
+      addObject:[self makeNormalGeometrySourceForNode:aiNode
+                                              inScene:aiScene
+                                        withNVertices:nVertices]];
+  return scnGeometrySources;
+}
+
++ (SCNGeometryElement*)
+makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
+                                inNode:(const struct aiNode*)aiNode
+                               inScene:(const struct aiScene*)aiScene
+                       withIndexOffset:(int)indexOffset
+                                nFaces:(int)nFaces {
+  int indicesCounter = 0;
+  int nIndices = [self findNumIndicesInMesh:aiMeshIndex inScene:aiScene];
+  int scnIndices[nIndices];
+  const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+  for (int i = 0; i < aiMesh->mNumFaces; i++) {
+    const struct aiFace* aiFace = &aiMesh->mFaces[i];
+    for (int j = 0; j < aiFace->mNumIndices; j++) {
+      scnIndices[indicesCounter++] = indexOffset + aiFace->mIndices[j];
     }
-    NSData* indicesData =
-        [NSData dataWithBytes:scnIndices length:sizeof(scnIndices)];
-    SCNGeometryElement* indices = [SCNGeometryElement
-        geometryElementWithData:indicesData
-                  primitiveType:SCNGeometryPrimitiveTypeTriangles
-                 primitiveCount:aiMesh->mNumFaces
-                  bytesPerIndex:sizeof(int)];
+  }
+  indexOffset += aiMesh->mNumVertices;
+  NSData* indicesData =
+      [NSData dataWithBytes:scnIndices length:sizeof(scnIndices)];
+  SCNGeometryElement* indices = [SCNGeometryElement
+      geometryElementWithData:indicesData
+                primitiveType:SCNGeometryPrimitiveTypeTriangles
+               primitiveCount:nFaces
+                bytesPerIndex:sizeof(int)];
+  return indices;
+}
+
++ (NSArray*)makeGeometryElementsforNode:(const struct aiNode*)aiNode
+                                inScene:(const struct aiScene*)aiScene {
+  NSMutableArray* scnGeometryElements = [[NSMutableArray alloc] init];
+  int nFaces = [self findNumFacesInNode:aiNode inScene:aiScene];
+  int indexOffset = 0;
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    SCNGeometryElement* indices =
+        [self makeIndicesGeometryElementForMeshIndex:aiMeshIndex
+                                              inNode:aiNode
+                                             inScene:aiScene
+                                     withIndexOffset:indexOffset
+                                              nFaces:nFaces];
     [scnGeometryElements addObject:indices];
-
-    // create SCNGeometryMaterial for aiMesh material
-    //    const struct aiMaterial* aiMaterial = aiScene->mMaterials[0];
-    //    struct aiColor3D color;
-    //    color.r = 0.0f;
-    //    color.g = 0.0f;
-    //    color.b = 0.0f;
-    //    aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color);
-    //    if (color.r == 0.0 && color.g == 0.0 && color.b == 0.0) {
-    //      // implies this is possibly a texture
-    //    } else {
-    //      // implies this is a texture
-    //    }
+    indexOffset += aiMesh->mNumVertices;
   }
 
+  return scnGeometryElements;
+}
+
++ (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
+                                      inScene:(const struct aiScene*)aiScene {
+  // create SCNGeometryMaterial for aiMesh material
+  //    const struct aiMaterial* aiMaterial = aiScene->mMaterials[0];
+  //    struct aiColor3D color;
+  //    color.r = 0.0f;
+  //    color.g = 0.0f;
+  //    color.b = 0.0f;
+  //    aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color);
+  //    if (color.r == 0.0 && color.g == 0.0 && color.b == 0.0) {
+  //      // implies this is possibly a texture
+  //    } else {
+  //      // implies this is a texture
+  //    }
+
   // make SCNGeometry with sources, elements and materials
+  NSArray* scnGeometrySources =
+      [self makeGeometrySourcesForNode:aiNode inScene:aiScene];
   if (scnGeometrySources.count > 0) {
-    SCNGeometry* scnGeometry =
-        [SCNGeometry geometryWithSources:scnGeometrySources
-                                elements:scnGeometryElements];
+    NSArray* scnGeometryElements =
+        [self makeGeometryElementsforNode:aiNode inScene:aiScene];
+    SCNGeometry* scnGeometry = [SCNGeometry
+
+        geometryWithSources:scnGeometrySources
+                   elements:scnGeometryElements];
     return scnGeometry;
   }
   return nil;
@@ -141,7 +230,7 @@
   SCNNode* node = [[SCNNode alloc] init];
   const struct aiString* aiNodeName = &aiNode->mName;
   node.name = [NSString stringWithUTF8String:aiNodeName->data];
-  NSLog(@" Creating node : %@", node.name);
+  NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
   node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene];
 
   // ---------
