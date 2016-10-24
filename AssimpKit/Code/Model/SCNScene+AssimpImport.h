@@ -12,5 +12,6 @@
 @interface SCNScene (AssimpImport)
 
 + (instancetype)assimpSceneNamed:(NSString*)name;
++ (instancetype)assimpSceneWithURL:(NSURL*)url;
 
 @end
