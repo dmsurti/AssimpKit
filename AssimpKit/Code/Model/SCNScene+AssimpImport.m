@@ -13,12 +13,12 @@
 
 @implementation SCNScene (AssimpImport)
 
-+ (SCNScene*)assimpSceneNamed:(NSString*)name {
++ (instancetype)assimpSceneNamed:(NSString*)name {
   NSString* file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
   return [self importScene:file];
 }
 
-+ (SCNScene*)importScene:(NSString*)filePath {
++ (instancetype)importScene:(NSString*)filePath {
   // Start the import on the given file with some example postprocessing
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
