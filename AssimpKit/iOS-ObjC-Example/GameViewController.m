@@ -32,7 +32,7 @@
   scnView.showsStatistics = YES;
 
   // configure the view
-  scnView.backgroundColor = [UIColor blackColor];
+  scnView.backgroundColor = [UIColor whiteColor];
 }
 
 - (BOOL)shouldAutorotate {
