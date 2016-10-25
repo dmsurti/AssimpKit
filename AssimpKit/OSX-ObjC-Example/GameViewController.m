@@ -6,17 +6,18 @@
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
-#import "AssimpScene.h"
 #import "GameViewController.h"
+#import "SCNScene+AssimpImport.h"
 
 @implementation GameViewController
 
 - (void)awakeFromNib {
-  AssimpScene* assimpScene = [[AssimpScene alloc] init];
-  NSString* objFile =
-      [[NSBundle mainBundle] pathForResource:@"spider" ofType:@"obj"];
-  SCNScene* scene = [assimpScene importScene:objFile];
-  // set the scene to the view
+  //  NSString* filePath =
+  //      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/explorer_skinned.dae";
+  //  SCNScene* scene =
+  //      [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
+  SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
+
   self.gameView.scene = scene;
 
   // allows the user to manipulate the camera

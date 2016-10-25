@@ -17,16 +17,16 @@
 		7708826C1DBE21CA0067790B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708826B1DBE21CA0067790B /* main.m */; };
 		7708826F1DBE21CA0067790B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708826E1DBE21CA0067790B /* AppDelegate.m */; };
 		770882711DBE21CA0067790B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 770882701DBE21CA0067790B /* art.scnassets */; };
-		770882741DBE21CA0067790B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882731DBE21CA0067790B /* GameViewController.m */; };
 		770882771DBE21CA0067790B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 770882751DBE21CA0067790B /* Main.storyboard */; };
 		770882791DBE21CA0067790B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770882781DBE21CA0067790B /* Assets.xcassets */; };
 		7708827C1DBE21CA0067790B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7708827A1DBE21CA0067790B /* LaunchScreen.storyboard */; };
 		770882C31DBE22BD0067790B /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 770882C21DBE22BD0067790B /* libassimp.a */; };
-		770882C61DBE23040067790B /* AssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882C51DBE23040067790B /* AssimpScene.m */; };
-		770882C71DBE23040067790B /* AssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882C51DBE23040067790B /* AssimpScene.m */; };
 		770882C91DBE27510067790B /* spider.obj in Resources */ = {isa = PBXBuildFile; fileRef = 770882C81DBE27510067790B /* spider.obj */; };
 		770882CA1DBE27510067790B /* spider.obj in Resources */ = {isa = PBXBuildFile; fileRef = 770882C81DBE27510067790B /* spider.obj */; };
 		770882CC1DBE27F50067790B /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 770882CB1DBE27F50067790B /* libassimp-fat.a */; };
+		770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */; };
+		770882D01DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */; };
+		770882D41DBE31490067790B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882D11DBE30AE0067790B /* GameViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,16 +48,16 @@
 		7708826E1DBE21CA0067790B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		770882701DBE21CA0067790B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		770882721DBE21CA0067790B /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		770882731DBE21CA0067790B /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		770882761DBE21CA0067790B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		770882781DBE21CA0067790B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7708827B1DBE21CA0067790B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7708827D1DBE21CA0067790B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		770882C21DBE22BD0067790B /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = Assimp/lib/osx/libassimp.a; sourceTree = SOURCE_ROOT; };
-		770882C41DBE23040067790B /* AssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssimpScene.h; sourceTree = "<group>"; };
-		770882C51DBE23040067790B /* AssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssimpScene.m; sourceTree = "<group>"; };
 		770882C81DBE27510067790B /* spider.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spider.obj; sourceTree = "<group>"; };
 		770882CB1DBE27F50067790B /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "Assimp/lib/ios/libassimp-fat.a"; sourceTree = SOURCE_ROOT; };
+		770882CD1DBE2D790067790B /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
+		770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
+		770882D11DBE30AE0067790B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,7 @@
 				7708826E1DBE21CA0067790B /* AppDelegate.m */,
 				770882701DBE21CA0067790B /* art.scnassets */,
 				770882721DBE21CA0067790B /* GameViewController.h */,
-				770882731DBE21CA0067790B /* GameViewController.m */,
+				770882D11DBE30AE0067790B /* GameViewController.m */,
 				770882751DBE21CA0067790B /* Main.storyboard */,
 				770882781DBE21CA0067790B /* Assets.xcassets */,
 				7708827A1DBE21CA0067790B /* LaunchScreen.storyboard */,
@@ -164,8 +164,8 @@
 		770882821DBE224C0067790B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				770882C41DBE23040067790B /* AssimpScene.h */,
-				770882C51DBE23040067790B /* AssimpScene.m */,
+				770882CD1DBE2D790067790B /* SCNScene+AssimpImport.h */,
+				770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,8 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				770882581DBE21B50067790B /* GameViewController.m in Sources */,
+				770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 				770882551DBE21B50067790B /* GameView.m in Sources */,
-				770882C61DBE23040067790B /* AssimpScene.m in Sources */,
 				770882521DBE21B50067790B /* main.m in Sources */,
 				7708824F1DBE21B50067790B /* AppDelegate.m in Sources */,
 			);
@@ -286,10 +286,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				770882D41DBE31490067790B /* GameViewController.m in Sources */,
 				7708826F1DBE21CA0067790B /* AppDelegate.m in Sources */,
-				770882741DBE21CA0067790B /* GameViewController.m in Sources */,
 				7708826C1DBE21CA0067790B /* main.m in Sources */,
-				770882C71DBE23040067790B /* AssimpScene.m in Sources */,
+				770882D01DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
