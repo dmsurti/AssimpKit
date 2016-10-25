@@ -74,17 +74,12 @@
   // TRANSFORM
   // ---------
   const struct aiMatrix4x4 aiNodeMatrix = aiNode->mTransformation;
-  // May be I should not ignore scale, rotation components and use
-  // full matrix
-  //  GLKMatrix4 glkNodeMatrix = GLKMatrix4Make(
-  //      aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
-  //      aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
-  //      aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
-  //      aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
+  GLKMatrix4 glkNodeMatrix = GLKMatrix4Make(
+      aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
+      aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
+      aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
+      aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
 
-  GLKMatrix4 glkNodeMatrix =
-      GLKMatrix4Make(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, aiNodeMatrix.a4,
-                     aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
   SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
   node.transform = scnMatrix;
 
