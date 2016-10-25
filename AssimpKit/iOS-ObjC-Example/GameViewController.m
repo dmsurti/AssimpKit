@@ -14,7 +14,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
+  SCNScene* scene = [SCNScene assimpSceneNamed:@"jeep1.3ds"];
 
   // create a new scene
   // SCNScene* scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
@@ -32,7 +32,7 @@
   scnView.showsStatistics = YES;
 
   // configure the view
-  scnView.backgroundColor = [UIColor blackColor];
+  scnView.backgroundColor = [UIColor whiteColor];
 }
 
 - (BOOL)shouldAutorotate {

@@ -27,6 +27,9 @@
 		770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */; };
 		770882D01DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */; };
 		770882D41DBE31490067790B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882D11DBE30AE0067790B /* GameViewController.m */; };
+		770882DF1DBF27F60067790B /* SpiderTex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 770882DE1DBF27F60067790B /* SpiderTex.jpg */; };
+		770882E21DBF622D0067790B /* jeep1.3ds in Resources */ = {isa = PBXBuildFile; fileRef = 770882E01DBF622D0067790B /* jeep1.3ds */; };
+		770882E31DBF622D0067790B /* jeep1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 770882E11DBF622D0067790B /* jeep1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,9 @@
 		770882CD1DBE2D790067790B /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
 		770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
 		770882D11DBE30AE0067790B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		770882DE1DBF27F60067790B /* SpiderTex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpiderTex.jpg; sourceTree = "<group>"; };
+		770882E01DBF622D0067790B /* jeep1.3ds */ = {isa = PBXFileReference; lastKnownFileType = file; path = jeep1.3ds; sourceTree = "<group>"; };
+		770882E11DBF622D0067790B /* jeep1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jeep1.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 		7708824C1DBE21B50067790B /* OSX-ObjC-Example */ = {
 			isa = PBXGroup;
 			children = (
+				770882DE1DBF27F60067790B /* SpiderTex.jpg */,
 				770882C81DBE27510067790B /* spider.obj */,
 				770882C21DBE22BD0067790B /* libassimp.a */,
 				7708824D1DBE21B50067790B /* AppDelegate.h */,
@@ -130,6 +137,8 @@
 		770882691DBE21CA0067790B /* iOS-ObjC-Example */ = {
 			isa = PBXGroup;
 			children = (
+				770882E01DBF622D0067790B /* jeep1.3ds */,
+				770882E11DBF622D0067790B /* jeep1.jpg */,
 				770882CB1DBE27F50067790B /* libassimp-fat.a */,
 				7708826D1DBE21CA0067790B /* AppDelegate.h */,
 				7708826E1DBE21CA0067790B /* AppDelegate.m */,
@@ -250,6 +259,7 @@
 			files = (
 				7708825C1DBE21B50067790B /* Assets.xcassets in Resources */,
 				7708825A1DBE21B50067790B /* art.scnassets in Resources */,
+				770882DF1DBF27F60067790B /* SpiderTex.jpg in Resources */,
 				770882C91DBE27510067790B /* spider.obj in Resources */,
 				7708825F1DBE21B50067790B /* MainMenu.xib in Resources */,
 			);
@@ -259,6 +269,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				770882E31DBF622D0067790B /* jeep1.jpg in Resources */,
+				770882E21DBF622D0067790B /* jeep1.3ds in Resources */,
 				770882711DBE21CA0067790B /* art.scnassets in Resources */,
 				7708827C1DBE21CA0067790B /* LaunchScreen.storyboard in Resources */,
 				770882791DBE21CA0067790B /* Assets.xcassets in Resources */,
@@ -577,6 +589,7 @@
 				770882631DBE21B50067790B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7708827E1DBE21CA0067790B /* Build configuration list for PBXNativeTarget "iOS-ObjC-Example" */ = {
 			isa = XCConfigurationList;
@@ -585,6 +598,7 @@
 				770882801DBE21CA0067790B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
