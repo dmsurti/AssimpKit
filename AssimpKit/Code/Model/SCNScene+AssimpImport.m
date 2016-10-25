@@ -510,23 +510,47 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       material.blendMode = SCNBlendModeAdd;
     }
     NSLog(@"+++ Loading cull/double sided mode");
-    int cullMode = 0;
-    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_TWOSIDED, (int*)&cullMode,
-                              max);
-    if (cullMode == 0) {
-      NSLog(@" Using back face culling");
-      material.cullMode = SCNCullBack;
-    } else {
-      NSLog(@" Using front face culling");
-      material.cullMode = SCNCullFront;
-    }
+    /**
+     FIXME: The cull mode works only on iOS. Not on OSX.
+     Hence has been defaulted to Cull Back.
+     USE AI_MATKEY_TWOSIDED to get the cull mode.
+     */
+    material.cullMode = SCNCullBack;
     NSLog(@"+++ Loading shininess");
     float shininess = 0.0;
     aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
                               (float*)&shininess, max);
     NSLog(@"   shininess: %f", shininess);
     material.shininess = shininess;
+    NSLog(@"+++ Loading shading model");
 
+#if TARGET_OS_IPHONE
+    /**
+     FIXME: The shading mode works only on iOS. Not on OSX.
+     */
+    int shadingMode;
+    int* smax;
+    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_SHADING_MODEL,
+                              (int*)&shadingMode, smax);
+    if (shadingMode == aiShadingMode_Phong) {
+      NSLog(@"   phong");
+      material.lightingModelName = SCNLightingModelPhong;
+    } else if (shadingMode == aiShadingMode_Blinn) {
+      NSLog(@"   blinn-phong");
+      material.lightingModelName = SCNLightingModelBlinn;
+    } else if (shadingMode == aiShadingMode_OrenNayar) {
+      NSLog(@"   orennayar -> lambert");
+      material.lightingModelName = SCNLightingModelLambert;
+    } else if (shadingMode == aiShadingMode_Minnaert) {
+      NSLog(@"   minnaert -> lambert");
+      material.lightingModelName = SCNLightingModelLambert;
+    } else if (shadingMode == aiShadingMode_NoShading) {
+      NSLog(@"   constant ");
+      material.lightingModelName = SCNLightingModelConstant;
+    }
+#else
+    material.lightingModelName = SCNLightingModelBlinn;
+#endif
     [scnMaterials addObject:material];
   }
   return scnMaterials;
