@@ -301,12 +301,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return scnGeometryElements;
 }
 
+#pragma mark - Make Materials
+
 + (void)makeMaterialPropertyForMaterial:(const struct aiMaterial*)aiMaterial
                         withTextureType:(enum aiTextureType)aiTextureType
                         withSCNMaterial:(SCNMaterial*)material
                                  atPath:(NSString*)path {
   int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
-
   if (nTextures > 0) {
     NSLog(@" has %d textures", nTextures);
     struct aiString aiPath;
@@ -418,6 +419,35 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   }
 }
 
++ (void)applyMultiplyPropertyForMaterial:(const struct aiMaterial*)aiMaterial
+                         withSCNMaterial:(SCNMaterial*)material
+                                  atPath:(NSString*)path {
+  struct aiColor4D color;
+  color.r = 0.0f;
+  color.g = 0.0f;
+  color.b = 0.0f;
+  int matColor = -100;
+  matColor =
+      aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
+  NSString* key = @"multiply.contents";
+  if (AI_SUCCESS == matColor) {
+#if TARGET_OS_IPHONE
+    [material setValue:[UIColor colorWithRed:color.r
+                                       green:color.g
+                                        blue:color.b
+                                       alpha:color.a]
+                forKey:key];
+#else
+    [material setValue:[NSColor colorWithRed:color.r
+                                       green:color.g
+                                        blue:color.b
+                                       alpha:color.a]
+                forKey:key];
+
+#endif
+  }
+}
+
 + (NSMutableArray*)makeMaterialsForNode:(const struct aiNode*)aiNode
                                 inScene:(const struct aiScene*)aiScene
                                  atPath:(NSString*)path {
@@ -466,6 +496,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                           withTextureType:aiTextureType_LIGHTMAP
                           withSCNMaterial:material
                                    atPath:path];
+    NSLog(@"+++ Loading multiply color");
+    [self applyMultiplyPropertyForMaterial:aiMaterial
+                           withSCNMaterial:material
+                                    atPath:path];
     [scnMaterials addObject:material];
   }
   return scnMaterials;
