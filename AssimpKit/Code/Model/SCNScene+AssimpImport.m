@@ -343,6 +343,9 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     } else if (aiTextureType == aiTextureType_NORMALS) {
       material.specular.contents = texPath;
       keyPrefix = @"normal";
+    } else if (aiTextureType == aiTextureType_LIGHTMAP) {
+      material.specular.contents = texPath;
+      keyPrefix = @"ambientOcclusion";
     }
 
     // Update the keys
@@ -361,7 +364,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                 forKey:minFilter];
     [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
                 forKey:magFilter];
-    material.blendMode = SCNBlendModeAlpha;
   } else {
     NSLog(@" has color");
     struct aiColor4D color;
