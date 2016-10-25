@@ -344,6 +344,9 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     } else if (aiTextureType == aiTextureType_OPACITY) {
       material.specular.contents = texPath;
       keyPrefix = @"transparent";
+    } else if (aiTextureType == aiTextureType_NORMALS) {
+      material.specular.contents = texPath;
+      keyPrefix = @"normal";
     }
 
     // Update the keys
