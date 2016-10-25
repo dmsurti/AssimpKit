@@ -520,6 +520,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       NSLog(@" Using front face culling");
       material.cullMode = SCNCullFront;
     }
+    NSLog(@"+++ Loading shininess");
+    float shininess = 0.0;
+    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
+                              (float*)&shininess, max);
+    NSLog(@"   shininess: %f", shininess);
+    material.shininess = shininess;
+
     [scnMaterials addObject:material];
   }
   return scnMaterials;
