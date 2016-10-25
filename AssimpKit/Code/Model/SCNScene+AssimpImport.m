@@ -139,7 +139,7 @@
 makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
                         inScene:(const struct aiScene*)aiScene
                   withNVertices:(int)nVertices {
-  SCNVector3 scnVertices[nVertices];
+  float scnVertices[nVertices * 3];
   int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
@@ -148,15 +148,22 @@ makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
     // coordinates
     for (int j = 0; j < aiMesh->mNumVertices; j++) {
       const struct aiVector3D* aiVector3D = &aiMesh->mVertices[j];
-      SCNVector3 pos =
-          SCNVector3Make(aiVector3D->x, aiVector3D->y, aiVector3D->z);
-      scnVertices[verticesCounter++] = pos;
+      scnVertices[verticesCounter++] = aiVector3D->x;
+      scnVertices[verticesCounter++] = aiVector3D->y;
+      scnVertices[verticesCounter++] = aiVector3D->z;
     }
   }
-  SCNGeometrySource* vertexSource =
-      [SCNGeometrySource geometrySourceWithVertices:scnVertices
-                                              count:nVertices];
-
+  SCNGeometrySource* vertexSource = [SCNGeometrySource
+      geometrySourceWithData:[NSData
+                                 dataWithBytes:scnVertices
+                                        length:nVertices * 3 * sizeof(float)]
+                    semantic:SCNGeometrySourceSemanticVertex
+                 vectorCount:nVertices
+             floatComponents:YES
+         componentsPerVector:3
+           bytesPerComponent:sizeof(float)
+                  dataOffset:0
+                  dataStride:3 * sizeof(float)];
   return vertexSource;
 }
 
