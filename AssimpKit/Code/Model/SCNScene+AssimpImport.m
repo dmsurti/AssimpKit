@@ -7,7 +7,8 @@
 //
 
 #import "SCNScene+AssimpImport.h"
-#include "assimp/cimport.h"      // Plain-C interface
+#include "assimp/cimport.h"  // Plain-C interface
+#include "assimp/material.h"
 #include "assimp/postprocess.h"  // Post processing flags
 #include "assimp/scene.h"        // Output data structure
 
@@ -246,19 +247,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 + (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
                                       inScene:(const struct aiScene*)aiScene {
-  // create SCNGeometryMaterial for aiMesh material
-  //    const struct aiMaterial* aiMaterial = aiScene->mMaterials[0];
-  //    struct aiColor3D color;
-  //    color.r = 0.0f;
-  //    color.g = 0.0f;
-  //    color.b = 0.0f;
-  //    aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color);
-  //    if (color.r == 0.0 && color.g == 0.0 && color.b == 0.0) {
-  //      // implies this is possibly a texture
-  //    } else {
-  //      // implies this is a texture
-  //    }
-
   // make SCNGeometry with sources, elements and materials
   NSArray* scnGeometrySources =
       [self makeGeometrySourcesForNode:aiNode inScene:aiScene];
@@ -268,6 +256,28 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     SCNGeometry* scnGeometry =
         [SCNGeometry geometryWithSources:scnGeometrySources
                                 elements:scnGeometryElements];
+    // ---------
+    // materials
+    // ---------
+
+    for (int i = 0; i < aiNode->mNumMeshes; i++) {
+      int aiMeshIndex = aiNode->mMeshes[i];
+      const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+      const struct aiMaterial* aiMaterial =
+          aiScene->mMaterials[aiMesh->mMaterialIndex];
+      struct aiString name;
+      aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
+      NSLog(@" Material name is %@",
+            [NSString stringWithUTF8String:&name.data]);
+      struct aiColor3D color;
+      color.r = 0.0f;
+      color.g = 0.0f;
+      color.b = 0.0f;
+      if (AI_SUCCESS ==
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color)) {
+        NSLog(@" diffuse color defined");
+      }
+    }
     return scnGeometry;
   }
   return nil;
