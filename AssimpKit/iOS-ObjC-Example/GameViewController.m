@@ -14,7 +14,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
+  SCNScene* scene = [SCNScene assimpSceneNamed:@"jeep1.3ds"];
 
   // create a new scene
   // SCNScene* scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
