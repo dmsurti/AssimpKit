@@ -455,27 +455,11 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     SCNGeometry* scnGeometry =
         [SCNGeometry geometryWithSources:scnGeometrySources
                                 elements:scnGeometryElements];
-    // ---------
-    // materials
-    // ---------
-
-    for (int i = 0; i < aiNode->mNumMeshes; i++) {
-      int aiMeshIndex = aiNode->mMeshes[i];
-      const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
-      const struct aiMaterial* aiMaterial =
-          aiScene->mMaterials[aiMesh->mMaterialIndex];
-      struct aiString name;
-      aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
-      NSLog(@" Material name is %@",
-            [NSString stringWithUTF8String:&name.data]);
-      struct aiColor3D color;
-      color.r = 0.0f;
-      color.g = 0.0f;
-      color.b = 0.0f;
-      if (AI_SUCCESS ==
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color)) {
-        NSLog(@" diffuse color defined");
-      }
+    NSArray* scnMaterials =
+        [self makeMaterialsForNode:aiNode inScene:aiScene atPath:path];
+    if (scnMaterials.count > 0) {
+      scnGeometry.materials = scnMaterials;
+      scnGeometry.firstMaterial = [scnMaterials objectAtIndex:0];
     }
     return scnGeometry;
   }
