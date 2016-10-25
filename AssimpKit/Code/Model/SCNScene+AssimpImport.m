@@ -171,7 +171,7 @@ makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
 makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
                         inScene:(const struct aiScene*)aiScene
                   withNVertices:(int)nVertices {
-  SCNVector3 scnNormals[nVertices];
+  float scnNormals[nVertices * 3];
   int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
@@ -179,14 +179,23 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
     if (aiMesh->mNormals != NULL) {
       for (int j = 0; j < aiMesh->mNumVertices; j++) {
         const struct aiVector3D* aiVector3D = &aiMesh->mNormals[j];
-        SCNVector3 normal =
-            SCNVector3Make(aiVector3D->x, aiVector3D->y, aiVector3D->z);
-        scnNormals[verticesCounter++] = normal;
+        scnNormals[verticesCounter++] = aiVector3D->x;
+        scnNormals[verticesCounter++] = aiVector3D->y;
+        scnNormals[verticesCounter++] = aiVector3D->z;
       }
     }
   }
-  SCNGeometrySource* normalSource =
-      [SCNGeometrySource geometrySourceWithVertices:scnNormals count:nVertices];
+  SCNGeometrySource* normalSource = [SCNGeometrySource
+      geometrySourceWithData:[NSData
+                                 dataWithBytes:scnNormals
+                                        length:nVertices * 3 * sizeof(float)]
+                    semantic:SCNGeometrySourceSemanticNormal
+                 vectorCount:nVertices
+             floatComponents:YES
+         componentsPerVector:3
+           bytesPerComponent:sizeof(float)
+                  dataOffset:0
+                  dataStride:3 * sizeof(float)];
   return normalSource;
 }
 
