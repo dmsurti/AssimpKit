@@ -509,6 +509,17 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       NSLog(@" Using add blend mode");
       material.blendMode = SCNBlendModeAdd;
     }
+    NSLog(@"+++ Loading cull/double sided mode");
+    int cullMode = 0;
+    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_TWOSIDED, (int*)&cullMode,
+                              max);
+    if (cullMode == 0) {
+      NSLog(@" Using back face culling");
+      material.cullMode = SCNCullBack;
+    } else {
+      NSLog(@" Using front face culling");
+      material.cullMode = SCNCullFront;
+    }
     [scnMaterials addObject:material];
   }
   return scnMaterials;
