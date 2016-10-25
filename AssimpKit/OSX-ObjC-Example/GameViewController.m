@@ -12,11 +12,13 @@
 @implementation GameViewController
 
 - (void)awakeFromNib {
-  //  NSString* filePath =
-  //      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/explorer_skinned.dae";
-  //  SCNScene* scene =
-  //      [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
-  SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
+  //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
+  // @"models-nonbsd/3DS/jeep1.3ds";
+  NSString* filePath =
+      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/explorer_skinned.dae";
+  SCNScene* scene =
+      [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
+  // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
 
   self.gameView.scene = scene;
 
@@ -27,7 +29,7 @@
   self.gameView.showsStatistics = YES;
 
   // configure the view
-  self.gameView.backgroundColor = [NSColor blackColor];
+  self.gameView.backgroundColor = [NSColor whiteColor];
 }
 
 @end
