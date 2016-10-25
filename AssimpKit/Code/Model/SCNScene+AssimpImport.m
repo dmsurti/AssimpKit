@@ -32,16 +32,14 @@
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
   const char* pFile = [filePath UTF8String];
-  const struct aiScene* aiScene = aiImportFile(
-      pFile, aiProcess_CalcTangentSpace | aiProcess_Triangulate |
-                 aiProcess_JoinIdenticalVertices | aiProcess_SortByPType);
+  const struct aiScene* aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
   // If the import failed, report it
   if (!aiScene) {
     NSLog(@" Scene importing failed for filePath %@", filePath);
     return nil;
   }
   // Now we can access the file's contents
-  SCNScene* scene = [self makeSCNSceneFromAssimpScene:aiScene];
+  SCNScene* scene = [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
   // We're done. Release all resources associated with this import
   aiReleaseImport(aiScene);
   return scene;
@@ -49,12 +47,13 @@
 
 #pragma mark - Make SCN Scene
 
-+ (instancetype)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene {
++ (instancetype)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene
+                                     atPath:(NSString*)path {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
   SCNScene* scene = [[[self class] alloc] init];
   SCNNode* scnRootNode =
-      [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene];
+      [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
   [scene.rootNode addChildNode:scnRootNode];
   return scene;
 }
@@ -62,12 +61,14 @@
 #pragma mark - Make SCN Node
 
 + (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
-                              inScene:(const struct aiScene*)aiScene {
+                              inScene:(const struct aiScene*)aiScene
+                               atPath:(NSString*)path {
   SCNNode* node = [[SCNNode alloc] init];
   const struct aiString* aiNodeName = &aiNode->mName;
   node.name = [NSString stringWithUTF8String:aiNodeName->data];
   NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
-  node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene];
+  node.geometry =
+      [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
 
   // ---------
   // TRANSFORM
@@ -89,8 +90,9 @@
 
   for (int i = 0; i < aiNode->mNumChildren; i++) {
     const struct aiNode* aiChildNode = aiNode->mChildren[i];
-    SCNNode* childNode =
-        [self makeSCNNodeFromAssimpNode:aiChildNode inScene:aiScene];
+    SCNNode* childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
+                                                 inScene:aiScene
+                                                  atPath:path];
     [node addChildNode:childNode];
   }
   return node;
@@ -154,6 +156,7 @@ makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
   SCNGeometrySource* vertexSource =
       [SCNGeometrySource geometrySourceWithVertices:scnVertices
                                               count:nVertices];
+
   return vertexSource;
 }
 
