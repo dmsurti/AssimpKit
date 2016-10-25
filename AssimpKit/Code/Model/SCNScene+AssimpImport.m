@@ -329,7 +329,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     if (aiTextureType == aiTextureType_DIFFUSE) {
       material.diffuse.contents = texPath;
       keyPrefix = @"diffuse";
-    } else if (aiTextureType == aiTextureType_DIFFUSE) {
+    } else if (aiTextureType == aiTextureType_SPECULAR) {
       material.specular.contents = texPath;
       keyPrefix = @"specular";
     } else if (aiTextureType == aiTextureType_AMBIENT) {
