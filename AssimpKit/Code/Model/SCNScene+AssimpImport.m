@@ -265,10 +265,9 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   if (scnGeometrySources.count > 0) {
     NSArray* scnGeometryElements =
         [self makeGeometryElementsforNode:aiNode inScene:aiScene];
-    SCNGeometry* scnGeometry = [SCNGeometry
-
-        geometryWithSources:scnGeometrySources
-                   elements:scnGeometryElements];
+    SCNGeometry* scnGeometry =
+        [SCNGeometry geometryWithSources:scnGeometrySources
+                                elements:scnGeometryElements];
     return scnGeometry;
   }
   return nil;
