@@ -203,7 +203,7 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
 makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
                          inScene:(const struct aiScene*)aiScene
                    withNVertices:(int)nVertices {
-  CGPoint scnTextures[nVertices];
+  float scnTextures[nVertices * 2];
   int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
@@ -213,13 +213,22 @@ makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
       for (int j = 0; j < aiMesh->mNumVertices; j++) {
         float x = aiMesh->mTextureCoords[0][j].x;
         float y = aiMesh->mTextureCoords[0][j].y;
-        scnTextures[verticesCounter++] = CGPointMake(x, y);
+        scnTextures[verticesCounter++] = x;
+        scnTextures[verticesCounter++] = y;
       }
     }
   }
-  SCNGeometrySource* textureSource =
-      [SCNGeometrySource geometrySourceWithTextureCoordinates:scnTextures
-                                                        count:nVertices];
+  SCNGeometrySource* textureSource = [SCNGeometrySource
+      geometrySourceWithData:[NSData
+                                 dataWithBytes:scnTextures
+                                        length:nVertices * 2 * sizeof(float)]
+                    semantic:SCNGeometrySourceSemanticTexcoord
+                 vectorCount:nVertices
+             floatComponents:YES
+         componentsPerVector:2
+           bytesPerComponent:sizeof(float)
+                  dataOffset:0
+                  dataStride:2 * sizeof(float)];
   return textureSource;
 }
 
