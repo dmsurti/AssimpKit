@@ -497,6 +497,18 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     [self applyMultiplyPropertyForMaterial:aiMaterial
                            withSCNMaterial:material
                                     atPath:path];
+    NSLog(@"+++ Loading blend mode");
+    int blendMode = 0;
+    int* max;
+    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
+                              (int*)&blendMode, max);
+    if (blendMode == aiBlendMode_Default) {
+      NSLog(@" Using alpha blend mode");
+      material.blendMode = SCNBlendModeAlpha;
+    } else if (blendMode == aiBlendMode_Additive) {
+      NSLog(@" Using add blend mode");
+      material.blendMode = SCNBlendModeAdd;
+    }
     [scnMaterials addObject:material];
   }
   return scnMaterials;
