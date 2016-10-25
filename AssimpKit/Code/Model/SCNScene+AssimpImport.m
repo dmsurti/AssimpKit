@@ -169,7 +169,7 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
-    if (aiMesh->mNormals == NULL) {
+    if (aiMesh->mNormals != NULL) {
       for (int j = 0; j < aiMesh->mNumVertices; j++) {
         const struct aiVector3D* aiVector3D = &aiMesh->mNormals[j];
         SCNVector3 normal =
@@ -181,6 +181,30 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
   SCNGeometrySource* normalSource =
       [SCNGeometrySource geometrySourceWithVertices:scnNormals count:nVertices];
   return normalSource;
+}
+
++ (SCNGeometrySource*)
+makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
+                         inScene:(const struct aiScene*)aiScene
+                   withNVertices:(int)nVertices {
+  CGPoint scnTextures[nVertices];
+  int verticesCounter = 0;
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    if (aiMesh->mTextureCoords != NULL) {
+      NSLog(@" Getting texture coordinates");
+      for (int j = 0; j < aiMesh->mNumVertices; j++) {
+        float x = aiMesh->mTextureCoords[0][j].x;
+        float y = aiMesh->mTextureCoords[0][j].y;
+        scnTextures[verticesCounter++] = CGPointMake(x, y);
+      }
+    }
+  }
+  SCNGeometrySource* textureSource =
+      [SCNGeometrySource geometrySourceWithTextureCoordinates:scnTextures
+                                                        count:nVertices];
+  return textureSource;
 }
 
 + (NSArray*)makeGeometrySourcesForNode:(const struct aiNode*)aiNode
@@ -195,6 +219,10 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
       addObject:[self makeNormalGeometrySourceForNode:aiNode
                                               inScene:aiScene
                                         withNVertices:nVertices]];
+  [scnGeometrySources
+      addObject:[self makeTextureGeometrySourceForNode:aiNode
+                                               inScene:aiScene
+                                         withNVertices:nVertices]];
   return scnGeometrySources;
 }
 
@@ -248,8 +276,176 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return scnGeometryElements;
 }
 
++ (void)makeMaterialPropertyForMaterial:(const struct aiMaterial*)aiMaterial
+                        withTextureType:(enum aiTextureType)aiTextureType
+                        withSCNMaterial:(SCNMaterial*)material
+                                 atPath:(NSString*)path {
+  int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
+
+  if (nTextures > 0) {
+    NSLog(@" has %d textures", nTextures);
+    struct aiString aiPath;
+    aiGetMaterialTexture(aiMaterial, aiTextureType, 0, &aiPath, NULL, NULL,
+                         NULL, NULL, NULL, NULL);
+    NSString* texFileName = [NSString stringWithUTF8String:&aiPath.data];
+    NSString* sceneDir =
+        [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
+    NSString* texPath = [sceneDir
+        stringByAppendingString:[NSString stringWithUTF8String:&aiPath.data]];
+
+    NSString* channel = @".mappingChannel";
+    NSString* wrapS = @".wrapS";
+    NSString* wrapT = @".wrapS";
+    NSString* intensity = @".intensity";
+    NSString* minFilter = @".minificationFilter";
+    NSString* magFilter = @".magnificationFilter";
+
+    NSString* keyPrefix = @"";
+    if (aiTextureType == aiTextureType_DIFFUSE) {
+      material.diffuse.contents = texPath;
+      keyPrefix = @"diffuse";
+    } else if (aiTextureType == aiTextureType_DIFFUSE) {
+      material.specular.contents = texPath;
+      keyPrefix = @"specular";
+    } else if (aiTextureType == aiTextureType_AMBIENT) {
+      material.specular.contents = texPath;
+      keyPrefix = @"ambient";
+    } else if (aiTextureType == aiTextureType_REFLECTION) {
+      material.specular.contents = texPath;
+      keyPrefix = @"reflective";
+    } else if (aiTextureType == aiTextureType_EMISSIVE) {
+      material.specular.contents = texPath;
+      keyPrefix = @"emissive";
+    } else if (aiTextureType == aiTextureType_OPACITY) {
+      material.specular.contents = texPath;
+      keyPrefix = @"transparent";
+    }
+
+    // Update the keys
+    channel = [keyPrefix stringByAppendingString:channel];
+    wrapS = [keyPrefix stringByAppendingString:wrapS];
+    wrapT = [keyPrefix stringByAppendingString:wrapT];
+    intensity = [keyPrefix stringByAppendingString:intensity];
+    minFilter = [keyPrefix stringByAppendingString:minFilter];
+    magFilter = [keyPrefix stringByAppendingString:magFilter];
+
+    [material setValue:0 forKey:channel];
+    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat] forKey:wrapS];
+    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat] forKey:wrapT];
+    [material setValue:[NSNumber numberWithInt:1] forKey:intensity];
+    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
+                forKey:minFilter];
+    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
+                forKey:magFilter];
+    material.blendMode = SCNBlendModeAlpha;
+  } else {
+    NSLog(@" has color");
+    struct aiColor4D color;
+    color.r = 0.0f;
+    color.g = 0.0f;
+    color.b = 0.0f;
+    int matColor = -100;
+    NSString* key = @"";
+    if (aiTextureType == aiTextureType_DIFFUSE) {
+      matColor =
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color);
+      key = @"diffuse.contents";
+    } else if (aiTextureType == aiTextureType_SPECULAR) {
+      matColor =
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_SPECULAR, &color);
+      key = @"specular.contents";
+    } else if (aiTextureType == aiTextureType_AMBIENT) {
+      matColor =
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, &color);
+      key = @"ambient.contents";
+    } else if (aiTextureType == aiTextureType_REFLECTION) {
+      matColor =
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_REFLECTIVE, &color);
+      key = @"reflective.contents";
+    } else if (aiTextureType == aiTextureType_EMISSIVE) {
+      matColor =
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_EMISSIVE, &color);
+      key = @"emissive.contents";
+    } else if (aiTextureType == aiTextureType_OPACITY) {
+      matColor =
+          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
+      key = @"transparent.contents";
+    }
+    if (AI_SUCCESS == matColor) {
+#if TARGET_OS_IPHONE
+      [material setValue:[UIColor colorWithRed:color.r
+                                         green:color.g
+                                          blue:color.b
+                                         alpha:color.a]
+                  forKey:key];
+#else
+      [material setValue:[NSColor colorWithRed:color.r
+                                         green:color.g
+                                          blue:color.b
+                                         alpha:color.a]
+                  forKey:key];
+
+#endif
+    }
+  }
+}
+
++ (NSMutableArray*)makeMaterialsForNode:(const struct aiNode*)aiNode
+                                inScene:(const struct aiScene*)aiScene
+                                 atPath:(NSString*)path {
+  NSMutableArray* scnMaterials = [[NSMutableArray alloc] init];
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    const struct aiMaterial* aiMaterial =
+        aiScene->mMaterials[aiMesh->mMaterialIndex];
+    struct aiString name;
+    aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
+    NSLog(@" Material name is %@", [NSString stringWithUTF8String:&name.data]);
+    SCNMaterial* material = [SCNMaterial material];
+    NSLog(@"+++ Loading diffuse");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_DIFFUSE
+                          withSCNMaterial:material
+                                   atPath:path];
+    NSLog(@"+++ Loading specular");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_SPECULAR
+                          withSCNMaterial:material
+                                   atPath:path];
+    NSLog(@"+++ Loading ambient");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_AMBIENT
+                          withSCNMaterial:material
+                                   atPath:path];
+    NSLog(@"+++ Loading reflective");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_REFLECTION
+                          withSCNMaterial:material
+                                   atPath:path];
+    NSLog(@"+++ Loading emissive");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_EMISSIVE
+                          withSCNMaterial:material
+                                   atPath:path];
+    NSLog(@"+++ Loading transparent");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_OPACITY
+                          withSCNMaterial:material
+                                   atPath:path];
+    NSLog(@"+++ Loading ambient occlusion");
+    [self makeMaterialPropertyForMaterial:aiMaterial
+                          withTextureType:aiTextureType_LIGHTMAP
+                          withSCNMaterial:material
+                                   atPath:path];
+    [scnMaterials addObject:material];
+  }
+  return scnMaterials;
+}
+
 + (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
-                                      inScene:(const struct aiScene*)aiScene {
+                                      inScene:(const struct aiScene*)aiScene
+                                       atPath:(NSString*)path {
   // make SCNGeometry with sources, elements and materials
   NSArray* scnGeometrySources =
       [self makeGeometrySourcesForNode:aiNode inScene:aiScene];
