@@ -55,8 +55,7 @@
   SCNScene* scene = [[[self class] alloc] init];
   /*
    -------------------------------------------------------------------
-   This will construct the graph of nodes with transform, geometry and
-   materials.
+   Assign geometry, materials, lights and cameras to the node
    ---------------------------------------------------------------------
    */
   SCNNode* scnRootNode =
