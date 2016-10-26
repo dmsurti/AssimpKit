@@ -7,8 +7,9 @@
 //
 
 #import "SCNScene+AssimpImport.h"
-#include "assimp/cimport.h"  // Plain-C interface
-#include "assimp/material.h"
+#include "assimp/cimport.h"      // Plain-C interface
+#include "assimp/light.h"        // Lights
+#include "assimp/material.h"     // Materials
 #include "assimp/postprocess.h"  // Post processing flags
 #include "assimp/scene.h"        // Output data structure
 
@@ -52,6 +53,12 @@
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
   SCNScene* scene = [[[self class] alloc] init];
+  /*
+   -------------------------------------------------------------------
+   This will construct the graph of nodes with transform, geometry and
+   materials.
+   ---------------------------------------------------------------------
+   */
   SCNNode* scnRootNode =
       [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
   [scene.rootNode addChildNode:scnRootNode];
@@ -69,6 +76,7 @@
   NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
   node.geometry =
       [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
+  node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
 
   // ---------
   // TRANSFORM
@@ -203,8 +211,8 @@ makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
-    if (aiMesh->mTextureCoords != NULL) {
-      NSLog(@" Getting texture coordinates");
+    if (aiMesh->mTextureCoords[0] != NULL) {
+      NSLog(@"  Getting texture coordinates");
       for (int j = 0; j < aiMesh->mNumVertices; j++) {
         float x = aiMesh->mTextureCoords[0][j].x;
         float y = aiMesh->mTextureCoords[0][j].y;
@@ -313,6 +321,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
     NSString* texPath = [sceneDir
         stringByAppendingString:[NSString stringWithUTF8String:&aiPath.data]];
+    NSLog(@"  tex path is %@", texPath);
 
     NSString* channel = @".mappingChannel";
     NSString* wrapS = @".wrapS";
@@ -398,20 +407,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       key = @"transparent.contents";
     }
     if (AI_SUCCESS == matColor) {
-#if TARGET_OS_IPHONE
-      [material setValue:[UIColor colorWithRed:color.r
-                                         green:color.g
-                                          blue:color.b
-                                         alpha:color.a]
-                  forKey:key];
-#else
-      [material setValue:[NSColor colorWithRed:color.r
-                                         green:color.g
-                                          blue:color.b
-                                         alpha:color.a]
-                  forKey:key];
-
-#endif
+      CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+      CGFloat components[4] = {color.r, color.g, color.b, color.a};
+      CGColorRef color = CGColorCreate(space, components);
+      [material setValue:(__bridge id _Nullable)color forKey:key];
+      CGColorSpaceRelease(space);
+      CGColorRelease(color);
     }
   }
 }
@@ -428,20 +429,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
   NSString* key = @"multiply.contents";
   if (AI_SUCCESS == matColor) {
-#if TARGET_OS_IPHONE
-    [material setValue:[UIColor colorWithRed:color.r
-                                       green:color.g
-                                        blue:color.b
-                                       alpha:color.a]
-                forKey:key];
-#else
-    [material setValue:[NSColor colorWithRed:color.r
-                                       green:color.g
-                                        blue:color.b
-                                       alpha:color.a]
-                forKey:key];
-
-#endif
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+    CGFloat components[4] = {color.r, color.g, color.b, color.a};
+    CGColorRef color = CGColorCreate(space, components);
+    material.multiply.contents = (__bridge id _Nullable)(color);
+    CGColorSpaceRelease(space);
+    CGColorRelease(color);
   }
 }
 
@@ -557,5 +550,85 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   }
   return nil;
 }
+
+#pragma mark - Lights
+
++ (SCNLight*)makeSCNLightTypeDirectionalForAssimpLight:
+    (const struct aiLight*)aiLight {
+  SCNLight* light = [SCNLight light];
+  light.type = SCNLightTypeDirectional;
+  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+  CGColorRef cgGolor = CGColorCreate(space, components);
+  light.color = (__bridge id _Nullable)(cgGolor);
+  CGColorSpaceRelease(space);
+  CGColorRelease(cgGolor);
+  return light;
+}
+
++ (SCNLight*)makeSCNLightTypePointForAssimpLight:
+    (const struct aiLight*)aiLight {
+  SCNLight* light = [SCNLight light];
+  light.type = SCNLightTypeOmni;
+  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+  CGColorRef cgGolor = CGColorCreate(space, components);
+  light.color = (__bridge id _Nullable)(cgGolor);
+  CGColorSpaceRelease(space);
+  CGColorRelease(cgGolor);
+  if (aiLight->mAttenuationQuadratic != 0) {
+    light.attenuationFalloffExponent = 2.0;
+  } else if (aiLight->mAttenuationLinear != 0) {
+    light.attenuationFalloffExponent = 1.0;
+  }
+  return light;
+}
+
++ (SCNLight*)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight*)aiLight {
+  SCNLight* light = [SCNLight light];
+  light.type = SCNLightTypeOmni;
+  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+  CGColorRef cgGolor = CGColorCreate(space, components);
+  light.color = (__bridge id _Nullable)(cgGolor);
+  CGColorSpaceRelease(space);
+  CGColorRelease(cgGolor);
+  if (aiLight->mAttenuationQuadratic != 0) {
+    light.attenuationFalloffExponent = 2.0;
+  } else if (aiLight->mAttenuationLinear != 0) {
+    light.attenuationFalloffExponent = 1.0;
+  }
+  light.spotInnerAngle = aiLight->mAngleInnerCone;
+  light.spotOuterAngle = aiLight->mAngleOuterCone;
+  return light;
+}
+
++ (SCNLight*)makeSCNLightFromAssimpNode:(const struct aiNode*)aiNode
+                                inScene:(const struct aiScene*)aiScene {
+  const struct aiString aiNodeName = aiNode->mName;
+  NSString* nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
+  for (int i = 0; i < aiScene->mNumLights; i++) {
+    const struct aiLight* aiLight = aiScene->mLights[i];
+    const struct aiString aiLightNodeName = aiLight->mName;
+    NSString* lightNodeName =
+        [NSString stringWithUTF8String:&aiLightNodeName.data];
+    if ([nodeName isEqualToString:lightNodeName]) {
+      NSLog(@"### Creating light for node %@", nodeName);
+      if (aiLight->mType == aiLightSource_DIRECTIONAL) {
+        return [self makeSCNLightTypeDirectionalForAssimpLight:aiLight];
+      } else if (aiLight->mType == aiLightSource_POINT) {
+        return [self makeSCNLightTypePointForAssimpLight:aiLight];
+      } else if (aiLight->mType == aiLightSource_SPOT) {
+        return [self makeSCNLightTypeSpotForAssimpLight:aiLight];
+      }
+    }
+  }
+  return nil;
+}
+
+#pragma mark - Cross platform colors
 
 @end
