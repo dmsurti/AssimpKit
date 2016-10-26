@@ -76,6 +76,7 @@
   NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
   node.geometry =
       [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
+  node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
 
   // ---------
   // TRANSFORM
