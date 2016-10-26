@@ -407,20 +407,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       key = @"transparent.contents";
     }
     if (AI_SUCCESS == matColor) {
-#if TARGET_OS_IPHONE
-      [material setValue:[UIColor colorWithRed:color.r
-                                         green:color.g
-                                          blue:color.b
-                                         alpha:color.a]
-                  forKey:key];
-#else
-      [material setValue:[NSColor colorWithRed:color.r
-                                         green:color.g
-                                          blue:color.b
-                                         alpha:color.a]
-                  forKey:key];
-
-#endif
+      CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+      CGFloat components[4] = {color.r, color.g, color.b, color.a};
+      CGColorRef color = CGColorCreate(space, components);
+      [material setValue:(__bridge id _Nullable)color forKey:key];
+      CGColorSpaceRelease(space);
+      CGColorRelease(color);
     }
   }
 }
@@ -437,20 +429,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
   NSString* key = @"multiply.contents";
   if (AI_SUCCESS == matColor) {
-#if TARGET_OS_IPHONE
-    [material setValue:[UIColor colorWithRed:color.r
-                                       green:color.g
-                                        blue:color.b
-                                       alpha:color.a]
-                forKey:key];
-#else
-    [material setValue:[NSColor colorWithRed:color.r
-                                       green:color.g
-                                        blue:color.b
-                                       alpha:color.a]
-                forKey:key];
-
-#endif
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+    CGFloat components[4] = {color.r, color.g, color.b, color.a};
+    CGColorRef color = CGColorCreate(space, components);
+    material.multiply.contents = (__bridge id _Nullable)(color);
+    CGColorSpaceRelease(space);
+    CGColorRelease(color);
   }
 }
 
