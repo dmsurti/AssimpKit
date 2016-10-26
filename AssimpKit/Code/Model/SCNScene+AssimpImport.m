@@ -90,6 +90,8 @@
 
   SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
   node.transform = scnMatrix;
+  NSLog(@" Node %@ position %f %f %f", node.name, aiNodeMatrix.a4,
+        aiNodeMatrix.b4, aiNodeMatrix.c4);
 
   for (int i = 0; i < aiNode->mNumChildren; i++) {
     const struct aiNode* aiChildNode = aiNode->mChildren[i];
@@ -429,12 +431,14 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
   NSString* key = @"multiply.contents";
   if (AI_SUCCESS == matColor) {
-    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-    CGFloat components[4] = {color.r, color.g, color.b, color.a};
-    CGColorRef color = CGColorCreate(space, components);
-    material.multiply.contents = (__bridge id _Nullable)(color);
-    CGColorSpaceRelease(space);
-    CGColorRelease(color);
+    if (color.r != 0 && color.g != 0 && color.b != 0) {
+      CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+      CGFloat components[4] = {color.r, color.g, color.b, color.a};
+      CGColorRef color = CGColorCreate(space, components);
+      material.multiply.contents = (__bridge id _Nullable)(color);
+      CGColorSpaceRelease(space);
+      CGColorRelease(color);
+    }
   }
 }
 
@@ -557,13 +561,16 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     (const struct aiLight*)aiLight {
   SCNLight* light = [SCNLight light];
   light.type = SCNLightTypeDirectional;
-  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
-  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
-  CGColorRef cgGolor = CGColorCreate(space, components);
-  light.color = (__bridge id _Nullable)(cgGolor);
-  CGColorSpaceRelease(space);
-  CGColorRelease(cgGolor);
+  const struct aiColor3D aiColor = aiLight->mColorSpecular;
+  if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0) {
+    NSLog(@" Setting color: %f %f %f", aiColor.r, aiColor.g, aiColor.b);
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+    CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+    CGColorRef cgGolor = CGColorCreate(space, components);
+    light.color = (__bridge id _Nullable)(cgGolor);
+    CGColorSpaceRelease(space);
+    CGColorRelease(cgGolor);
+  }
   return light;
 }
 
@@ -571,13 +578,16 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     (const struct aiLight*)aiLight {
   SCNLight* light = [SCNLight light];
   light.type = SCNLightTypeOmni;
-  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
-  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
-  CGColorRef cgGolor = CGColorCreate(space, components);
-  light.color = (__bridge id _Nullable)(cgGolor);
-  CGColorSpaceRelease(space);
-  CGColorRelease(cgGolor);
+  const struct aiColor3D aiColor = aiLight->mColorSpecular;
+  if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0) {
+    NSLog(@" Setting color: %f %f %f", aiColor.r, aiColor.g, aiColor.b);
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+    CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+    CGColorRef cgGolor = CGColorCreate(space, components);
+    light.color = (__bridge id _Nullable)(cgGolor);
+    CGColorSpaceRelease(space);
+    CGColorRelease(cgGolor);
+  }
   if (aiLight->mAttenuationQuadratic != 0) {
     light.attenuationFalloffExponent = 2.0;
   } else if (aiLight->mAttenuationLinear != 0) {
@@ -589,18 +599,23 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 + (SCNLight*)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight*)aiLight {
   SCNLight* light = [SCNLight light];
   light.type = SCNLightTypeOmni;
-  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
-  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
-  CGColorRef cgGolor = CGColorCreate(space, components);
-  light.color = (__bridge id _Nullable)(cgGolor);
-  CGColorSpaceRelease(space);
-  CGColorRelease(cgGolor);
+  const struct aiColor3D aiColor = aiLight->mColorSpecular;
+  if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0) {
+    NSLog(@" Setting color: %f %f %f", aiColor.r, aiColor.g, aiColor.b);
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+    CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+    CGColorRef cgGolor = CGColorCreate(space, components);
+    light.color = (__bridge id _Nullable)(cgGolor);
+    CGColorSpaceRelease(space);
+    CGColorRelease(cgGolor);
+  }
   if (aiLight->mAttenuationQuadratic != 0) {
     light.attenuationFalloffExponent = 2.0;
   } else if (aiLight->mAttenuationLinear != 0) {
     light.attenuationFalloffExponent = 1.0;
   }
+  light.attenuationStartDistance = 0;
+  light.attenuationEndDistance = 0;
   light.spotInnerAngle = aiLight->mAngleInnerCone;
   light.spotOuterAngle = aiLight->mAngleOuterCone;
   return light;
@@ -617,11 +632,27 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         [NSString stringWithUTF8String:&aiLightNodeName.data];
     if ([nodeName isEqualToString:lightNodeName]) {
       NSLog(@"### Creating light for node %@", nodeName);
+      NSLog(@"    ambient     %f %f %f ", aiLight->mColorAmbient.r,
+            aiLight->mColorAmbient.g, aiLight->mColorAmbient.b);
+      NSLog(@"    diffuse     %f %f %f ", aiLight->mColorDiffuse.r,
+            aiLight->mColorDiffuse.g, aiLight->mColorDiffuse.b);
+      NSLog(@"    specular    %f %f %f ", aiLight->mColorSpecular.r,
+            aiLight->mColorSpecular.g, aiLight->mColorSpecular.b);
+      NSLog(@"    inner angle %f", aiLight->mAngleInnerCone);
+      NSLog(@"    outer angle %f", aiLight->mAngleOuterCone);
+      NSLog(@"    att const   %f", aiLight->mAttenuationConstant);
+      NSLog(@"    att linear  %f", aiLight->mAttenuationLinear);
+      NSLog(@"    att quad    %f", aiLight->mAttenuationQuadratic);
+      NSLog(@"    position    %f %f %f", aiLight->mPosition.x,
+            aiLight->mPosition.y, aiLight->mPosition.z);
       if (aiLight->mType == aiLightSource_DIRECTIONAL) {
+        NSLog(@"    type        Directional");
         return [self makeSCNLightTypeDirectionalForAssimpLight:aiLight];
       } else if (aiLight->mType == aiLightSource_POINT) {
+        NSLog(@"    type        Omni");
         return [self makeSCNLightTypePointForAssimpLight:aiLight];
       } else if (aiLight->mType == aiLightSource_SPOT) {
+        NSLog(@"    type        Spot");
         return [self makeSCNLightTypeSpotForAssimpLight:aiLight];
       }
     }
