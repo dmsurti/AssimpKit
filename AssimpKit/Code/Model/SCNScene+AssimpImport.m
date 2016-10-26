@@ -551,4 +551,84 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return nil;
 }
 
+#pragma mark - Lights
+
++ (SCNLight*)makeSCNLightTypeDirectionalForAssimpLight:
+    (const struct aiLight*)aiLight {
+  SCNLight* light = [SCNLight light];
+  light.type = SCNLightTypeDirectional;
+  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+  CGColorRef cgGolor = CGColorCreate(space, components);
+  light.color = (__bridge id _Nullable)(cgGolor);
+  CGColorSpaceRelease(space);
+  CGColorRelease(cgGolor);
+  return light;
+}
+
++ (SCNLight*)makeSCNLightTypePointForAssimpLight:
+    (const struct aiLight*)aiLight {
+  SCNLight* light = [SCNLight light];
+  light.type = SCNLightTypeOmni;
+  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+  CGColorRef cgGolor = CGColorCreate(space, components);
+  light.color = (__bridge id _Nullable)(cgGolor);
+  CGColorSpaceRelease(space);
+  CGColorRelease(cgGolor);
+  if (aiLight->mAttenuationQuadratic != 0) {
+    light.attenuationFalloffExponent = 2.0;
+  } else if (aiLight->mAttenuationLinear != 0) {
+    light.attenuationFalloffExponent = 1.0;
+  }
+  return light;
+}
+
++ (SCNLight*)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight*)aiLight {
+  SCNLight* light = [SCNLight light];
+  light.type = SCNLightTypeOmni;
+  const struct aiColor3D aiColor = aiLight->mColorDiffuse;
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+  CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+  CGColorRef cgGolor = CGColorCreate(space, components);
+  light.color = (__bridge id _Nullable)(cgGolor);
+  CGColorSpaceRelease(space);
+  CGColorRelease(cgGolor);
+  if (aiLight->mAttenuationQuadratic != 0) {
+    light.attenuationFalloffExponent = 2.0;
+  } else if (aiLight->mAttenuationLinear != 0) {
+    light.attenuationFalloffExponent = 1.0;
+  }
+  light.spotInnerAngle = aiLight->mAngleInnerCone;
+  light.spotOuterAngle = aiLight->mAngleOuterCone;
+  return light;
+}
+
++ (SCNLight*)makeSCNLightFromAssimpNode:(const struct aiNode*)aiNode
+                                inScene:(const struct aiScene*)aiScene {
+  const struct aiString aiNodeName = aiNode->mName;
+  NSString* nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
+  for (int i = 0; i < aiScene->mNumLights; i++) {
+    const struct aiLight* aiLight = aiScene->mLights[i];
+    const struct aiString aiLightNodeName = aiLight->mName;
+    NSString* lightNodeName =
+        [NSString stringWithUTF8String:&aiLightNodeName.data];
+    if ([nodeName isEqualToString:lightNodeName]) {
+      NSLog(@"### Creating light for node %@", nodeName);
+      if (aiLight->mType == aiLightSource_DIRECTIONAL) {
+        return [self makeSCNLightTypeDirectionalForAssimpLight:aiLight];
+      } else if (aiLight->mType == aiLightSource_POINT) {
+        return [self makeSCNLightTypePointForAssimpLight:aiLight];
+      } else if (aiLight->mType == aiLightSource_SPOT) {
+        return [self makeSCNLightTypeSpotForAssimpLight:aiLight];
+      }
+    }
+  }
+  return nil;
+}
+
+#pragma mark - Cross platform colors
+
 @end
