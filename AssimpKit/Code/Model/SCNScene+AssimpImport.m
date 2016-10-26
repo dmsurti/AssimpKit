@@ -7,8 +7,9 @@
 //
 
 #import "SCNScene+AssimpImport.h"
-#include "assimp/cimport.h"  // Plain-C interface
-#include "assimp/material.h"
+#include "assimp/cimport.h"      // Plain-C interface
+#include "assimp/light.h"        // Lights
+#include "assimp/material.h"     // Materials
 #include "assimp/postprocess.h"  // Post processing flags
 #include "assimp/scene.h"        // Output data structure
 
@@ -52,6 +53,12 @@
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
   SCNScene* scene = [[[self class] alloc] init];
+  /*
+   -------------------------------------------------------------------
+   This will construct the graph of nodes with transform, geometry and
+   materials.
+   ---------------------------------------------------------------------
+   */
   SCNNode* scnRootNode =
       [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
   [scene.rootNode addChildNode:scnRootNode];
