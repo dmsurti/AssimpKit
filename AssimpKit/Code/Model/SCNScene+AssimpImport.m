@@ -55,8 +55,7 @@
   SCNScene* scene = [[[self class] alloc] init];
   /*
    -------------------------------------------------------------------
-   This will construct the graph of nodes with transform, geometry and
-   materials.
+   Assign geometry, materials, lights and cameras to the node
    ---------------------------------------------------------------------
    */
   SCNNode* scnRootNode =
@@ -77,6 +76,7 @@
   node.geometry =
       [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
   node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
+  node.camera = [self makeSCNCameraFromAssimpNode:aiNode inScene:aiScene];
 
   // ---------
   // TRANSFORM
@@ -551,7 +551,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return nil;
 }
 
-#pragma mark - Lights
+#pragma mark - Make Lights
 
 + (SCNLight*)makeSCNLightTypeDirectionalForAssimpLight:
     (const struct aiLight*)aiLight {
@@ -629,6 +629,25 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return nil;
 }
 
-#pragma mark - Cross platform colors
+#pragma mark - Make Cameras
++ (SCNCamera*)makeSCNCameraFromAssimpNode:(const struct aiNode*)aiNode
+                                  inScene:(const struct aiScene*)aiScene {
+  const struct aiString aiNodeName = aiNode->mName;
+  NSString* nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
+  for (int i = 0; i < aiScene->mNumCameras; i++) {
+    const struct aiCamera* aiCamera = aiScene->mCameras[i];
+    const struct aiString aiCameraName = aiCamera->mName;
+    NSString* cameraNodeName =
+        [NSString stringWithUTF8String:&aiCameraName.data];
+    if ([nodeName isEqualToString:cameraNodeName]) {
+      SCNCamera* camera = [SCNCamera camera];
+      camera.xFov = aiCamera->mHorizontalFOV;
+      camera.zNear = aiCamera->mClipPlaneNear;
+      camera.zFar = aiCamera->mClipPlaneFar;
+      return camera;
+    }
+  }
+  return nil;
+}
 
 @end
