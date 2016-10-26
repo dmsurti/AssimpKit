@@ -76,6 +76,7 @@
   node.geometry =
       [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
   node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
+  node.camera = [self makeSCNCameraFromAssimpNode:aiNode inScene:aiScene];
 
   // ---------
   // TRANSFORM
@@ -550,7 +551,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return nil;
 }
 
-#pragma mark - Lights
+#pragma mark - Make Lights
 
 + (SCNLight*)makeSCNLightTypeDirectionalForAssimpLight:
     (const struct aiLight*)aiLight {
