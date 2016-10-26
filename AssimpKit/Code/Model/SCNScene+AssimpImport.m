@@ -523,34 +523,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     NSLog(@"   shininess: %f", shininess);
     material.shininess = shininess;
     NSLog(@"+++ Loading shading model");
-
-#if TARGET_OS_IPHONE
     /**
-     FIXME: The shading mode works only on iOS. Not on OSX.
+     FIXME: The shading mode works only on iOS for iPhone.
+     Does not work on iOS for iPad and OS X.
+     Hence has been defaulted to Blinn.
+     USE AI_MATKEY_SHADING_MODEL to get the shading mode.
      */
-    int shadingMode;
-    int* smax;
-    aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_SHADING_MODEL,
-                              (int*)&shadingMode, smax);
-    if (shadingMode == aiShadingMode_Phong) {
-      NSLog(@"   phong");
-      material.lightingModelName = SCNLightingModelPhong;
-    } else if (shadingMode == aiShadingMode_Blinn) {
-      NSLog(@"   blinn-phong");
-      material.lightingModelName = SCNLightingModelBlinn;
-    } else if (shadingMode == aiShadingMode_OrenNayar) {
-      NSLog(@"   orennayar -> lambert");
-      material.lightingModelName = SCNLightingModelLambert;
-    } else if (shadingMode == aiShadingMode_Minnaert) {
-      NSLog(@"   minnaert -> lambert");
-      material.lightingModelName = SCNLightingModelLambert;
-    } else if (shadingMode == aiShadingMode_NoShading) {
-      NSLog(@"   constant ");
-      material.lightingModelName = SCNLightingModelConstant;
-    }
-#else
     material.lightingModelName = SCNLightingModelBlinn;
-#endif
     [scnMaterials addObject:material];
   }
   return scnMaterials;
