@@ -211,8 +211,8 @@ makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
-    if (aiMesh->mTextureCoords != NULL) {
-      NSLog(@" Getting texture coordinates");
+    if (aiMesh->mTextureCoords[0] != NULL) {
+      NSLog(@"  Getting texture coordinates");
       for (int j = 0; j < aiMesh->mNumVertices; j++) {
         float x = aiMesh->mTextureCoords[0][j].x;
         float y = aiMesh->mTextureCoords[0][j].y;
@@ -321,6 +321,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
     NSString* texPath = [sceneDir
         stringByAppendingString:[NSString stringWithUTF8String:&aiPath.data]];
+    NSLog(@"  tex path is %@", texPath);
 
     NSString* channel = @".mappingChannel";
     NSString* wrapS = @".wrapS";
