@@ -733,6 +733,44 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return boneNames;
 }
 
+- (NSDictionary*)getBoneTransformsForAssimpNode:(const struct aiNode*)aiNode
+                                        inScene:(const struct aiScene*)aiScene {
+  NSMutableDictionary* boneTransforms = [[NSMutableDictionary alloc] init];
+
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    for (int j = 0; j < aiMesh->mNumBones; j++) {
+      const struct aiBone* aiBone = aiMesh->mBones[j];
+      const struct aiString name = aiBone->mName;
+      NSString* key = [NSString stringWithUTF8String:&name.data];
+      if ([boneTransforms valueForKey:key] == nil) {
+        const struct aiMatrix4x4 aiNodeMatrix = aiBone->mOffsetMatrix;
+        GLKMatrix4 glkBoneMatrix = GLKMatrix4Make(
+            aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
+            aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
+            aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
+            aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
+
+        SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkBoneMatrix);
+        [boneTransforms setValue:[NSValue valueWithSCNMatrix4:scnMatrix]
+                          forKey:key];
+      }
+    }
+  }
+
+  return boneTransforms;
+}
+
+- (NSArray*)getTransformsForBones:(NSArray*)boneNames
+                   fromTransforms:(NSDictionary*)boneTransforms {
+  NSMutableArray* transforms = [[NSMutableArray alloc] init];
+  for (NSString* boneName in boneNames) {
+    [transforms addObject:[boneTransforms valueForKey:boneName]];
+  }
+  return transforms;
+}
+
 - (NSArray*)findBoneNodesInScene:(SCNScene*)scene forBones:(NSArray*)boneNames {
   NSMutableArray* boneNodes = [[NSMutableArray alloc] init];
   for (NSString* boneName in boneNames) {
