@@ -66,6 +66,10 @@
   SCNNode* scnRootNode =
       [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
   [scene.rootNode addChildNode:scnRootNode];
+  self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
+  NSLog(@" bone names %lu: %@", self.boneNames.count, self.boneNames);
+  NSLog(@" unique bone names %lu: %@", self.uniqueBoneNames.count,
+        self.uniqueBoneNames);
   return scene;
 }
 
@@ -82,6 +86,8 @@
       [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
   node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
   node.camera = [self makeSCNCameraFromAssimpNode:aiNode inScene:aiScene];
+  [self.boneNames addObjectsFromArray:[self getBoneNamesForAssimpNode:aiNode
+                                                              inScene:aiScene]];
 
   // ---------
   // TRANSFORM
@@ -684,6 +690,25 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
   }
   return nil;
+}
+
+#pragma mark - Make Skinner
+
+- (NSArray*)getBoneNamesForAssimpNode:(const struct aiNode*)aiNode
+                              inScene:(const struct aiScene*)aiScene {
+  NSMutableArray* boneNames = [[NSMutableArray alloc] init];
+
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    for (int j = 0; j < aiMesh->mNumBones; j++) {
+      const struct aiBone* aiBone = aiMesh->mBones[j];
+      const struct aiString name = aiBone->mName;
+      [boneNames addObject:[NSString stringWithUTF8String:&name.data]];
+    }
+  }
+
+  return boneNames;
 }
 
 @end
