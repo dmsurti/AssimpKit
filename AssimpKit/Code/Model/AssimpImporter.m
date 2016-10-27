@@ -70,9 +70,9 @@
 
 #pragma mark - Make SCN Node
 
-- (SCNScene*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
-                               inScene:(const struct aiScene*)aiScene
-                                atPath:(NSString*)path {
+- (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
+                              inScene:(const struct aiScene*)aiScene
+                               atPath:(NSString*)path {
   SCNNode* node = [[SCNNode alloc] init];
   const struct aiString* aiNodeName = &aiNode->mName;
   node.name = [NSString stringWithUTF8String:aiNodeName->data];
