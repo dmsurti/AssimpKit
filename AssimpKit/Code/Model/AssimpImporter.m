@@ -17,6 +17,7 @@
 
 @property(readwrite, nonatomic) NSMutableArray* boneNames;
 @property(readwrite, nonatomic) NSArray* uniqueBoneNames;
+@property(readwrite, nonatomic) NSArray* uniqueBoneNodes;
 
 @end
 
@@ -66,10 +67,19 @@
   SCNNode* scnRootNode =
       [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
   [scene.rootNode addChildNode:scnRootNode];
+  /*
+   ---------------------------------------------------------------------
+   Animations and skinning
+   ---------------------------------------------------------------------
+   */
   self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
   NSLog(@" bone names %lu: %@", self.boneNames.count, self.boneNames);
   NSLog(@" unique bone names %lu: %@", self.uniqueBoneNames.count,
         self.uniqueBoneNames);
+  self.uniqueBoneNodes =
+      [self findBoneNodesInScene:scene forBones:self.uniqueBoneNames];
+  NSLog(@" unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
+        self.uniqueBoneNodes);
   return scene;
 }
 
@@ -709,6 +719,16 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   }
 
   return boneNames;
+}
+
+- (NSArray*)findBoneNodesInScene:(SCNScene*)scene forBones:(NSArray*)boneNames {
+  NSMutableArray* boneNodes = [[NSMutableArray alloc] init];
+  for (NSString* boneName in boneNames) {
+    SCNNode* boneNode =
+        [scene.rootNode childNodeWithName:boneName recursively:YES];
+    [boneNodes addObject:boneNode];
+  }
+  return boneNodes;
 }
 
 @end
