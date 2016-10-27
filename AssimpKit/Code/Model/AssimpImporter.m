@@ -104,8 +104,11 @@
   const struct aiString* aiNodeName = &aiNode->mName;
   node.name = [NSString stringWithUTF8String:aiNodeName->data];
   NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
-  node.geometry =
-      [self makeSCNGeometryFromAssimpNode:aiNode inScene:aiScene atPath:path];
+  int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
+  node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode
+                                              inScene:aiScene
+                                         withVertices:nVertices
+                                               atPath:path];
   node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
   node.camera = [self makeSCNCameraFromAssimpNode:aiNode inScene:aiScene];
   [self.boneNames addObjectsFromArray:[self getBoneNamesForAssimpNode:aiNode
@@ -274,9 +277,9 @@ makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
 }
 
 - (NSArray*)makeGeometrySourcesForNode:(const struct aiNode*)aiNode
-                               inScene:(const struct aiScene*)aiScene {
+                               inScene:(const struct aiScene*)aiScene
+                          withVertices:(int)nVertices {
   NSMutableArray* scnGeometrySources = [[NSMutableArray alloc] init];
-  int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
   [scnGeometrySources
       addObject:[self makeVertexGeometrySourceForNode:aiNode
                                               inScene:aiScene
@@ -570,10 +573,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 - (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
                                       inScene:(const struct aiScene*)aiScene
+                                 withVertices:(int)nVertices
                                        atPath:(NSString*)path {
   // make SCNGeometry with sources, elements and materials
-  NSArray* scnGeometrySources =
-      [self makeGeometrySourcesForNode:aiNode inScene:aiScene];
+  NSArray* scnGeometrySources = [self makeGeometrySourcesForNode:aiNode
+                                                         inScene:aiScene
+                                                    withVertices:nVertices];
   if (scnGeometrySources.count > 0) {
     NSArray* scnGeometryElements =
         [self makeGeometryElementsforNode:aiNode inScene:aiScene];
