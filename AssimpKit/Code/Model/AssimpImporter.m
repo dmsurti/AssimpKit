@@ -18,6 +18,8 @@
 @property(readwrite, nonatomic) NSMutableArray* boneNames;
 @property(readwrite, nonatomic) NSArray* uniqueBoneNames;
 @property(readwrite, nonatomic) NSArray* uniqueBoneNodes;
+@property(readwrite, nonatomic) NSMutableDictionary* boneTransforms;
+@property(readwrite, nonatomic) NSArray* uniqueBoneTransforms;
 
 @end
 
@@ -27,6 +29,7 @@
   self = [super init];
   if (self) {
     self.boneNames = [[NSMutableArray alloc] init];
+    self.boneTransforms = [[NSMutableDictionary alloc] init];
     return self;
   }
   return nil;
@@ -73,13 +76,19 @@
    ---------------------------------------------------------------------
    */
   self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
-  NSLog(@" bone names %lu: %@", self.boneNames.count, self.boneNames);
-  NSLog(@" unique bone names %lu: %@", self.uniqueBoneNames.count,
+  NSLog(@" |--| bone names %lu: %@", self.boneNames.count, self.boneNames);
+  NSLog(@" |--| unique bone names %lu: %@", self.uniqueBoneNames.count,
         self.uniqueBoneNames);
   self.uniqueBoneNodes =
       [self findBoneNodesInScene:scene forBones:self.uniqueBoneNames];
-  NSLog(@" unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
+  NSLog(@" |--| unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
         self.uniqueBoneNodes);
+  self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
+                                           fromTransforms:self.boneTransforms];
+  self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
+                                           fromTransforms:self.boneTransforms];
+  NSLog(@" |--| unique bone transforms %lu: %@",
+        self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
   return scene;
 }
 
@@ -98,6 +107,9 @@
   node.camera = [self makeSCNCameraFromAssimpNode:aiNode inScene:aiScene];
   [self.boneNames addObjectsFromArray:[self getBoneNamesForAssimpNode:aiNode
                                                               inScene:aiScene]];
+  [self.boneTransforms
+      addEntriesFromDictionary:[self getBoneTransformsForAssimpNode:aiNode
+                                                            inScene:aiScene]];
 
   // ---------
   // TRANSFORM
