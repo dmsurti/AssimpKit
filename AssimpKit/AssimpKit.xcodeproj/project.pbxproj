@@ -30,6 +30,8 @@
 		770882DF1DBF27F60067790B /* SpiderTex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 770882DE1DBF27F60067790B /* SpiderTex.jpg */; };
 		770882E21DBF622D0067790B /* jeep1.3ds in Resources */ = {isa = PBXBuildFile; fileRef = 770882E01DBF622D0067790B /* jeep1.3ds */; };
 		770882E31DBF622D0067790B /* jeep1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 770882E11DBF622D0067790B /* jeep1.jpg */; };
+		77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
+		77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		770882DE1DBF27F60067790B /* SpiderTex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpiderTex.jpg; sourceTree = "<group>"; };
 		770882E01DBF622D0067790B /* jeep1.3ds */ = {isa = PBXFileReference; lastKnownFileType = file; path = jeep1.3ds; sourceTree = "<group>"; };
 		770882E11DBF622D0067790B /* jeep1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jeep1.jpg; sourceTree = "<group>"; };
+		77D769E11DC1EAD700E84F2D /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssimpImporter.h; sourceTree = "<group>"; };
+		77D769E21DC1EAD700E84F2D /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssimpImporter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 			children = (
 				770882CD1DBE2D790067790B /* SCNScene+AssimpImport.h */,
 				770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */,
+				77D769E11DC1EAD700E84F2D /* AssimpImporter.h */,
+				77D769E21DC1EAD700E84F2D /* AssimpImporter.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */,
 				770882581DBE21B50067790B /* GameViewController.m in Sources */,
 				770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 				770882551DBE21B50067790B /* GameView.m in Sources */,
@@ -301,6 +308,7 @@
 				770882D41DBE31490067790B /* GameViewController.m in Sources */,
 				7708826F1DBE21CA0067790B /* AppDelegate.m in Sources */,
 				7708826C1DBE21CA0067790B /* main.m in Sources */,
+				77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */,
 				770882D01DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
