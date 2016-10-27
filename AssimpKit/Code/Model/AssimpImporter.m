@@ -812,4 +812,140 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return depth;
 }
 
+- (int)findMaxWeightsForNode:(const struct aiNode*)aiNode
+                     inScene:(const struct aiScene*)aiScene {
+  int maxWeights = 0;
+
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    for (int j = 0; j < aiMesh->mNumBones; j++) {
+      const struct aiBone* aiBone = aiMesh->mBones[j];
+      if (aiBone->mNumWeights > maxWeights) {
+        maxWeights = aiBone->mNumWeights;
+      }
+    }
+  }
+  return maxWeights;
+}
+
+- (SCNGeometrySource*)
+makeBoneWeightsGeometrySourceAtNode:(const struct aiNode*)aiNode
+                            inScene:(const struct aiScene*)aiScene
+                       withVertices:(int)nVertices {
+  int maxWeights = [self findMaxWeightsForNode:aiNode inScene:aiScene];
+  float nodeGeometryWeights[nVertices * maxWeights];
+  int weightCounter = 0;
+
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    NSMutableDictionary* meshWeights = [[NSMutableDictionary alloc] init];
+    for (int j = 0; j < aiMesh->mNumBones; j++) {
+      const struct aiBone* aiBone = aiMesh->mBones[j];
+      for (int k = 0; k < aiBone->mNumWeights; k++) {
+        const struct aiVertexWeight* aiVertexWeight = &aiBone->mWeights[k];
+        NSNumber* vertex = [NSNumber numberWithInt:aiVertexWeight->mVertexId];
+        NSNumber* weight = [NSNumber numberWithFloat:aiVertexWeight->mWeight];
+        if ([meshWeights valueForKey:vertex] == nil) {
+          NSMutableArray* weights = [[NSMutableArray alloc] init];
+          [weights addObject:weight];
+          [meshWeights setValue:weights forKey:vertex];
+        } else {
+          NSMutableArray* weights = [meshWeights valueForKey:vertex];
+          [weights addObject:weight];
+        }
+      }
+    }
+
+    // Add weights to the weights array for the entire node geometry
+    for (int j = 0; j < aiMesh->mNumVertices; j++) {
+      NSNumber* vertex = [NSNumber numberWithInt:j];
+      NSMutableArray* weights = [meshWeights valueForKey:vertex];
+      int zeroWeights = weights.count - maxWeights;
+      for (NSNumber* weight in weights) {
+        nodeGeometryWeights[weightCounter++] = [weight floatValue];
+      }
+      for (int k = 0; k < zeroWeights; k++) {
+        nodeGeometryWeights[weightCounter++] = 0.0;
+      }
+    }
+  }
+
+  SCNGeometrySource* boneWeightsSource = [SCNGeometrySource
+      geometrySourceWithData:[NSData dataWithBytes:nodeGeometryWeights
+                                            length:nVertices * maxWeights *
+                                                   sizeof(float)]
+                    semantic:SCNGeometrySourceSemanticBoneWeights
+                 vectorCount:nVertices
+             floatComponents:YES
+         componentsPerVector:maxWeights
+           bytesPerComponent:sizeof(float)
+                  dataOffset:0
+                  dataStride:maxWeights * sizeof(float)];
+  return boneWeightsSource;
+}
+
+- (SCNGeometrySource*)
+makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
+                            inScene:(const struct aiScene*)aiScene
+                       withVertices:(int)nVertices
+                          boneNames:(NSArray*)boneNames
+                          boneNodes:(NSArray*)boneNodes {
+  int maxWeights = [self findMaxWeightsForNode:aiNode inScene:aiScene];
+  short nodeGeometryBoneIndices[nVertices * maxWeights];
+  int indexCounter = 0;
+
+  for (int i = 0; i < aiNode->mNumMeshes; i++) {
+    int aiMeshIndex = aiNode->mMeshes[i];
+    const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
+    NSMutableDictionary* meshBoneIndices = [[NSMutableDictionary alloc] init];
+    for (int j = 0; j < aiMesh->mNumBones; j++) {
+      const struct aiBone* aiBone = aiMesh->mBones[j];
+      for (int k = 0; k < aiBone->mNumWeights; k++) {
+        const struct aiVertexWeight* aiVertexWeight = &aiBone->mWeights[k];
+        NSNumber* vertex = [NSNumber numberWithInt:aiVertexWeight->mVertexId];
+        const struct aiString name = aiBone->mName;
+        NSString* boneName = [NSString stringWithUTF8String:&name.data];
+        NSNumber* boneIndex =
+            [NSNumber numberWithInteger:[boneNames indexOfObject:boneName]];
+        if ([meshBoneIndices valueForKey:vertex] == nil) {
+          NSMutableArray* boneIndices = [[NSMutableArray alloc] init];
+          [boneIndices addObject:boneIndex];
+          [meshBoneIndices setValue:boneIndices forKey:vertex];
+        } else {
+          NSMutableArray* boneIndices = [meshBoneIndices valueForKey:vertex];
+          [boneIndices addObject:boneIndex];
+        }
+      }
+    }
+
+    // Add bone indices to the indices array for the entire node geometry
+    for (int j = 0; j < aiMesh->mNumVertices; j++) {
+      NSNumber* vertex = [NSNumber numberWithInt:j];
+      NSMutableArray* boneIndices = [meshBoneIndices valueForKey:vertex];
+      int zeroIndices = boneIndices.count - maxWeights;
+      for (NSNumber* boneIndex in boneIndices) {
+        nodeGeometryBoneIndices[indexCounter++] = [boneIndex shortValue];
+      }
+      for (int k = 0; k < zeroIndices; k++) {
+        nodeGeometryBoneIndices[indexCounter++] = 0;
+      }
+    }
+  }
+
+  SCNGeometrySource* boneIndicesSource = [SCNGeometrySource
+      geometrySourceWithData:[NSData dataWithBytes:nodeGeometryBoneIndices
+                                            length:nVertices * maxWeights *
+                                                   sizeof(short)]
+                    semantic:SCNGeometrySourceSemanticBoneIndices
+                 vectorCount:nVertices
+             floatComponents:NO
+         componentsPerVector:maxWeights
+           bytesPerComponent:sizeof(short)
+                  dataOffset:0
+                  dataStride:maxWeights * sizeof(short)];
+  return boneIndicesSource;
+}
+
 @end
