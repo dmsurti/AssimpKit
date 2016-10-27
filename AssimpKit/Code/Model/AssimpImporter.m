@@ -20,6 +20,7 @@
 @property(readwrite, nonatomic) NSArray* uniqueBoneNodes;
 @property(readwrite, nonatomic) NSMutableDictionary* boneTransforms;
 @property(readwrite, nonatomic) NSArray* uniqueBoneTransforms;
+@property(readwrite, nonatomic) SCNNode* skelton;
 
 @end
 
@@ -89,6 +90,8 @@
                                            fromTransforms:self.boneTransforms];
   NSLog(@" |--| unique bone transforms %lu: %@",
         self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
+  self.skelton = [self findSkeletonNodeFromBoneNodes:self.uniqueBoneNodes];
+  NSLog(@" |--| skeleton bone is : %@", self.skelton);
   return scene;
 }
 
@@ -779,6 +782,29 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     [boneNodes addObject:boneNode];
   }
   return boneNodes;
+}
+
+- (SCNNode*)findSkeletonNodeFromBoneNodes:(NSArray*)boneNodes {
+  SCNNode* skeletonRootNode;
+  int minDepth = -1;
+  for (SCNNode* boneNode in boneNodes) {
+    int depth = [self findDepthOfNodeFromRoot:boneNode];
+    if (minDepth == -1 || (depth < minDepth)) {
+      minDepth = depth;
+      skeletonRootNode = boneNode;
+    }
+  }
+  return skeletonRootNode;
+}
+
+- (int)findDepthOfNodeFromRoot:(SCNNode*)node {
+  int depth = 0;
+  SCNNode* pNode = node;
+  while (pNode.parentNode) {
+    depth += 1;
+    pNode = pNode.parentNode;
+  }
+  return depth;
 }
 
 @end
