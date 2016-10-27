@@ -13,11 +13,18 @@
 #include "assimp/postprocess.h"  // Post processing flags
 #include "assimp/scene.h"        // Output data structure
 
+@interface AssimpImporter ()
+
+@property(readwrite, nonatomic) NSSet* boneNames;
+
+@end
+
 @implementation AssimpImporter
 
 - (id)init {
   self = [super init];
   if (self) {
+    self.boneNames = [[NSSet alloc] init];
     return self;
   }
   return nil;
