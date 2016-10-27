@@ -15,7 +15,8 @@
 
 @interface AssimpImporter ()
 
-@property(readwrite, nonatomic) NSSet* boneNames;
+@property(readwrite, nonatomic) NSMutableArray* boneNames;
+@property(readwrite, nonatomic) NSArray* uniqueBoneNames;
 
 @end
 
@@ -24,7 +25,7 @@
 - (id)init {
   self = [super init];
   if (self) {
-    self.boneNames = [[NSSet alloc] init];
+    self.boneNames = [[NSMutableArray alloc] init];
     return self;
   }
   return nil;
