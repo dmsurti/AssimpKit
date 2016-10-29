@@ -981,6 +981,17 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
 }
 
 - (void)buildSkeletonDatabaseForScene:(SCNScene*)scene {
+  NSArray* uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
+  NSArray* uniqueBoneNodes =
+      [self findBoneNodesInScene:scene forBones:uniqueBoneNames];
+  self.skelton = [self findSkeletonNodeFromBoneNodes:uniqueBoneNodes];
+  if (![self.boneNames containsObject:self.skelton.name]) {
+    [self.boneNames insertObject:self.skelton.name atIndex:0];
+    [self.boneTransforms
+        setValue:[NSValue valueWithSCNMatrix4:SCNMatrix4Identity]
+          forKey:self.skelton.name];
+  }
+
   self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
   NSLog(@" |--| bone names %lu: %@", self.boneNames.count, self.boneNames);
   NSLog(@" |--| unique bone names %lu: %@", self.uniqueBoneNames.count,
@@ -991,11 +1002,8 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         self.uniqueBoneNodes);
   self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
                                            fromTransforms:self.boneTransforms];
-  self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
-                                           fromTransforms:self.boneTransforms];
   NSLog(@" |--| unique bone transforms %lu: %@",
         self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
-  self.skelton = [self findSkeletonNodeFromBoneNodes:self.uniqueBoneNodes];
   NSLog(@" |--| skeleton bone is : %@", self.skelton);
 }
 
@@ -1031,9 +1039,9 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
                   boneInverseBindTransforms:self.uniqueBoneTransforms
                                 boneWeights:boneWeights
                                 boneIndices:boneIndices];
-    skinner.skeleton = self.skelton;
-    NSLog(@" assigned skinner %@ skeleton: %@", skinner, skinner.skeleton);
-    node.skinner = skinner;
+    // skinner.skeleton = self.skelton;
+    // NSLog(@" assigned skinner %@ skeleton: %@", skinner, skinner.skeleton);
+    // node.skinner = skinner;
   }
 
   for (int i = 0; i < aiNode->mNumChildren; i++) {
