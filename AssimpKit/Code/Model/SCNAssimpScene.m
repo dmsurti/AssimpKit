@@ -32,6 +32,10 @@
 - (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey {
   self.currentAnimation = [self.animations valueForKey:animKey];
   self.boneAnimationMats = [[NSMutableArray alloc] init];
+  for (int i = 0; i < self.boneNames.count; i++) {
+    [self.boneAnimationMats
+        addObject:[NSValue valueWithSCNMatrix4:SCNMatrix4Identity]];
+  }
 }
 
 - (void)applyAnimationAtTime:(double)animTime {
