@@ -16,6 +16,6 @@
 @property(readwrite, nonatomic) NSArray* boneTransforms;
 
 @property(readwrite, nonatomic) SCNAssimpAnimNode* animatedSkeleton;
-- (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
+- (void)storeAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
 
 @end
