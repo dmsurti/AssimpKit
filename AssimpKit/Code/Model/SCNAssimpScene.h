@@ -18,7 +18,8 @@
 
 @property(readwrite, nonatomic) SCNAssimpAnimNode* animatedSkeleton;
 - (void)storeAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
-- (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
+- (void)addAnimationForKey:(NSString*)animKey;
+- (void)applyAnimationAtTime:(double)animTime;
 - (NSArray*)animationKeys;
 - (NSArray*)getBoneAnimationMatrices;
 
