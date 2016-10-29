@@ -16,7 +16,7 @@
 
 @implementation SCNAssimpScene
 
-- (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey {
+- (void)storeAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey {
   if (self.animations == nil) {
     self.animations = [[NSMutableDictionary alloc] init];
   }
