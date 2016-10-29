@@ -8,6 +8,7 @@
 
 #import "AssimpImporter.h"
 #import "SCNAssimpAnimNode.h"
+#import "SCNAssimpScene.h"
 #include "assimp/cimport.h"      // Plain-C interface
 #include "assimp/light.h"        // Lights
 #include "assimp/material.h"     // Materials
@@ -64,7 +65,7 @@
                                   atPath:(NSString*)path {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
-  SCNScene* scene = [[SCNScene alloc] init];
+  SCNAssimpScene* scene = [[SCNAssimpScene alloc] init];
   /*
    -------------------------------------------------------------------
    Assign geometry, materials, lights and cameras to the node
