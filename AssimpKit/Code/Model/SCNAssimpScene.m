@@ -29,7 +29,7 @@
   return self.animations.allKeys;
 }
 
-- (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey {
+- (void)addAnimationForKey:(NSString*)animKey {
   self.currentAnimation = [self.animations valueForKey:animKey];
   self.boneAnimationMats = [[NSMutableArray alloc] init];
   for (int i = 0; i < self.boneNames.count; i++) {
