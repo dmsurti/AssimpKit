@@ -82,6 +82,32 @@
                       GLKVector3MultiplyScalar(posn, delta)));
     nodeT = SCNMatrix4MakeTranslation(lerped.x, lerped.y, lerped.z);
   }
+
+  SCNMatrix4 nodeR = SCNMatrix4Identity;
+  if (animNode.nRotKeys > 0) {
+    int prevKey = 0;
+    int nextKey = 0;
+    for (int i = 0; i < animNode.nRotKeys; i++) {
+      prevKey = i;
+      nextKey = i + 1;
+      double nextKeyTime =
+          [[animNode.rotKeyTimes objectAtIndex:nextKey] doubleValue];
+      if (nextKeyTime >= animTime) {
+        break;
+      }
+    }
+    float nextTime = [[animNode.rotKeyTimes objectAtIndex:nextKey] doubleValue];
+    float prevTime = [[animNode.rotKeyTimes objectAtIndex:prevKey] doubleValue];
+    float totalTime = nextTime - prevTime;
+    float delta = (animTime - prevTime) / totalTime;
+    SCNVector4 q1 = [[animNode.rotKeys objectAtIndex:prevKey] SCNVector4Value];
+    GLKQuaternion qi = GLKQuaternionMake(q1.x, q1.y, q1.z, q1.w);
+    SCNVector4 q2 = [[animNode.rotKeys objectAtIndex:nextKey] SCNVector4Value];
+    GLKQuaternion qn = GLKQuaternionMake(q2.x, q2.y, q2.z, q2.w);
+    GLKQuaternion slerped = GLKQuaternionSlerp(qi, qn, delta);
+    SCNVector4 s = SCNVector4Make(slerped.x, slerped.y, slerped.z, slerped.w);
+    nodeR = SCNMatrix4MakeRotation(s.w, s.x, s.y, s.z);
+  }
 }
 
 @end
