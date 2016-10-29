@@ -1050,4 +1050,66 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   }
 }
 
+#pragma mark - Make animations
+
+- (SCNAssimpAnimNode*)
+makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
+                    fromSkeleton:(SCNNode*)skeletonNode
+                       withBones:(NSArray*)bones
+                  boneTransforms:(NSArray*)boneTransforms {
+  NSLog(@" Making animated skeleton node: %@", skeletonNode.name);
+  SCNAssimpAnimNode* animBoneNode = [[SCNAssimpAnimNode alloc] init];
+  animBoneNode.name = skeletonNode.name;
+  if ([bones containsObject:skeletonNode.name]) {
+    NSUInteger boneIndex = [bones indexOfObject:skeletonNode.name];
+    animBoneNode.boneOffsetMat = [boneTransforms objectAtIndex:boneIndex];
+
+    for (SCNNode* childBone in skeletonNode.childNodes) {
+      SCNAssimpAnimNode* animChildBoneNode =
+          [self makeAnimatedSkeletonForAnimation:aiAnimation
+                                    fromSkeleton:childBone
+                                       withBones:bones
+                                  boneTransforms:boneTransforms];
+      [animBoneNode addChildNode:animChildBoneNode];
+    }
+  }
+  return animBoneNode;
+}
+
+- (void)loadAnimationsFromScene:(const struct aiScene*)aiScene {
+  for (int i = 0; i < aiScene->mNumAnimations; i++) {
+    const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
+    NSString* animName =
+        [NSString stringWithUTF8String:aiAnimation->mName.data];
+    NSLog(@" animation name: %@", animName);
+    NSLog(@" animation has %d node channels", aiAnimation->mNumChannels);
+    NSLog(@" animation has %d mesh channels", aiAnimation->mNumMeshChannels);
+    NSLog(@" animation duration %f ", aiAnimation->mDuration);
+    NSLog(@" ticks per second %f", aiAnimation->mTicksPerSecond);
+
+    SCNAssimpAnimNode* animatedSkeletonNode =
+        [self makeAnimatedSkeletonForAnimation:aiAnimation
+                                  fromSkeleton:self.skelton
+                                     withBones:self.uniqueBoneNames
+                                boneTransforms:self.uniqueBoneTransforms];
+    SCNScene* animatedScene = [SCNScene scene];
+    [animatedScene.rootNode addChildNode:animatedSkeletonNode];
+    for (int i = 0; i < aiAnimation->mNumChannels; i++) {
+      const struct aiNodeAnim* aiNodeAnim = aiAnimation->mChannels[i];
+      NSString* aiNodeAnimName =
+          [NSString stringWithUTF8String:aiNodeAnim->mNodeName.data];
+      SCNAssimpAnimNode* animNode = (SCNAssimpAnimNode*)[animatedScene.rootNode
+          childNodeWithName:aiNodeAnimName
+                recursively:YES];
+      if (animNode == nil) {
+        NSLog(@" WARNING: did not find node named %@ in animated skeleton.",
+              aiNodeAnimName);
+        continue;
+      }
+      animNode.nPosKeys = aiNodeAnim->mNumPositionKeys;
+    }
+    NSLog(@" Animated skeleton: %@", animatedSkeletonNode);
+  }
+}
+
 @end
