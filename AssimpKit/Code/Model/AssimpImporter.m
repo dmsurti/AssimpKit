@@ -7,6 +7,7 @@
 //
 
 #import "AssimpImporter.h"
+#import "SCNAssimpAnimNode.h"
 #include "assimp/cimport.h"      // Plain-C interface
 #include "assimp/light.h"        // Lights
 #include "assimp/material.h"     // Materials
@@ -43,7 +44,8 @@
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
   const char* pFile = [filePath UTF8String];
-  const struct aiScene* aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
+  const struct aiScene* aiScene = aiImportFile(
+      pFile, aiProcess_FlipUVs | aiProcessPreset_TargetRealtime_MaxQuality);
   // If the import failed, report it
   if (!aiScene) {
     NSLog(@" Scene importing failed for filePath %@", filePath);
@@ -78,6 +80,7 @@
    */
   [self buildSkeletonDatabaseForScene:scene];
   [self makeSkinnerForAssimpNode:aiRootNode inScene:aiScene scnScene:scene];
+  [self loadAnimationsFromScene:aiScene];
 
   return scene;
 }
