@@ -40,7 +40,7 @@
 
 #pragma mark - Import with Assimp
 
-- (SCNScene*)importScene:(NSString*)filePath {
+- (SCNAssimpScene*)importScene:(NSString*)filePath {
   // Start the import on the given file with some example postprocessing
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
@@ -53,7 +53,8 @@
     return nil;
   }
   // Now we can access the file's contents
-  SCNScene* scene = [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
+  SCNAssimpScene* scene =
+      [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
   // We're done. Release all resources associated with this import
   aiReleaseImport(aiScene);
   return scene;
@@ -61,8 +62,8 @@
 
 #pragma mark - Make SCN Scene
 
-- (SCNScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene
-                                  atPath:(NSString*)path {
+- (SCNAssimpScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene
+                                        atPath:(NSString*)path {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
   SCNAssimpScene* scene = [[SCNAssimpScene alloc] init];
