@@ -981,7 +981,10 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   return boneIndicesSource;
 }
 
-- (void)buildSkeletonDatabaseForScene:(SCNScene*)scene {
+- (void)buildSkeletonDatabaseForScene:(SCNAssimpScene*)scene {
+  // -------------------------------------------------------------------------
+  // find skeleton and add it to bones names if mesh nodes did not refer to it
+  // -------------------------------------------------------------------------
   NSArray* uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
   NSArray* uniqueBoneNodes =
       [self findBoneNodesInScene:scene forBones:uniqueBoneNames];
@@ -993,6 +996,9 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
           forKey:self.skelton.name];
   }
 
+  // -------------------------------------------------------
+  // create unique bones and corresponding offset transforms
+  // -------------------------------------------------------
   self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
   NSLog(@" |--| bone names %lu: %@", self.boneNames.count, self.boneNames);
   NSLog(@" |--| unique bone names %lu: %@", self.uniqueBoneNames.count,
@@ -1006,6 +1012,13 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   NSLog(@" |--| unique bone transforms %lu: %@",
         self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
   NSLog(@" |--| skeleton bone is : %@", self.skelton);
+
+  // ----------------------------------------
+  // setup the scene with animation meta data
+  // ----------------------------------------
+  scene.skeleton = self.skelton;
+  scene.boneNames = self.uniqueBoneNames;
+  scene.boneTransforms = self.uniqueBoneTransforms;
 }
 
 - (void)makeSkinnerForAssimpNode:(const struct aiNode*)aiNode
