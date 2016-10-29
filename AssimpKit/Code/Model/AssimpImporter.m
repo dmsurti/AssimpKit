@@ -800,7 +800,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       skeletonRootNode = boneNode;
     }
   }
-  return skeletonRootNode;
+  return skeletonRootNode.parentNode;
 }
 
 - (int)findDepthOfNodeFromRoot:(SCNNode*)node {
