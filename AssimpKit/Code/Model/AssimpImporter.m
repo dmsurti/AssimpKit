@@ -1124,6 +1124,18 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
       }
       animNode.posKeys = posKeys;
       animNode.posKeyTimes = posKeyTimes;
+
+      // -----------------
+      // add rotation keys
+      // -----------------
+      NSMutableArray* rotKeys = [[NSMutableArray alloc] init];
+      for (int j = 0; j < aiNodeAnim->mNumRotationKeys; j++) {
+        const struct aiQuatKey key = aiNodeAnim->mRotationKeys[j];
+        SCNVector4 quat = SCNVector4Make(key.mValue.x, key.mValue.y,
+                                         key.mValue.z, key.mValue.w);
+        [rotKeys addObject:[NSValue valueWithSCNVector4:quat]];
+      }
+      animNode.rotKeys = rotKeys;
     }
     NSLog(@" Animated skeleton: %@", animatedSkeletonNode);
     NSLog(@" pos keys: %lu", animatedSkeletonNode.posKeys.count);
