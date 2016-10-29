@@ -25,5 +25,7 @@
 @property(readwrite, nonatomic) NSArray* rotKeyTimes;
 // An array of NSValue SCNVector3, each is scale key
 @property(readwrite, nonatomic) NSArray* scaleKeys;
+// An array of NSNumber float, each is scale key time
+@property(readwrite, nonatomic) NSArray* scaleKeyTimes;
 
 @end
