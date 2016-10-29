@@ -30,6 +30,10 @@
 		770882DF1DBF27F60067790B /* SpiderTex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 770882DE1DBF27F60067790B /* SpiderTex.jpg */; };
 		770882E21DBF622D0067790B /* jeep1.3ds in Resources */ = {isa = PBXBuildFile; fileRef = 770882E01DBF622D0067790B /* jeep1.3ds */; };
 		770882E31DBF622D0067790B /* jeep1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 770882E11DBF622D0067790B /* jeep1.jpg */; };
+		77ADB61B1DC472F200E7ACE0 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ADB61A1DC472F200E7ACE0 /* SCNAssimpScene.m */; };
+		77ADB61C1DC472F200E7ACE0 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ADB61A1DC472F200E7ACE0 /* SCNAssimpScene.m */; };
+		77ADB61F1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */; };
+		77ADB6201DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */; };
 		77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 		77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 /* End PBXBuildFile section */
@@ -66,6 +70,10 @@
 		770882DE1DBF27F60067790B /* SpiderTex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpiderTex.jpg; sourceTree = "<group>"; };
 		770882E01DBF622D0067790B /* jeep1.3ds */ = {isa = PBXFileReference; lastKnownFileType = file; path = jeep1.3ds; sourceTree = "<group>"; };
 		770882E11DBF622D0067790B /* jeep1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jeep1.jpg; sourceTree = "<group>"; };
+		77ADB6191DC472F200E7ACE0 /* SCNAssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNAssimpScene.h; sourceTree = "<group>"; };
+		77ADB61A1DC472F200E7ACE0 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNAssimpScene.m; sourceTree = "<group>"; };
+		77ADB61D1DC4759F00E7ACE0 /* SCNAssimpAnimNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNAssimpAnimNode.h; sourceTree = "<group>"; };
+		77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNAssimpAnimNode.m; sourceTree = "<group>"; };
 		77D769E11DC1EAD700E84F2D /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssimpImporter.h; sourceTree = "<group>"; };
 		77D769E21DC1EAD700E84F2D /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssimpImporter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +189,10 @@
 				770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */,
 				77D769E11DC1EAD700E84F2D /* AssimpImporter.h */,
 				77D769E21DC1EAD700E84F2D /* AssimpImporter.m */,
+				77ADB6191DC472F200E7ACE0 /* SCNAssimpScene.h */,
+				77ADB61A1DC472F200E7ACE0 /* SCNAssimpScene.m */,
+				77ADB61D1DC4759F00E7ACE0 /* SCNAssimpAnimNode.h */,
+				77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,8 +306,10 @@
 			files = (
 				77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */,
 				770882581DBE21B50067790B /* GameViewController.m in Sources */,
+				77ADB61F1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */,
 				770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 				770882551DBE21B50067790B /* GameView.m in Sources */,
+				77ADB61B1DC472F200E7ACE0 /* SCNAssimpScene.m in Sources */,
 				770882521DBE21B50067790B /* main.m in Sources */,
 				7708824F1DBE21B50067790B /* AppDelegate.m in Sources */,
 			);
@@ -305,6 +319,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77ADB6201DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */,
+				77ADB61C1DC472F200E7ACE0 /* SCNAssimpScene.m in Sources */,
 				770882D41DBE31490067790B /* GameViewController.m in Sources */,
 				7708826F1DBE21CA0067790B /* AppDelegate.m in Sources */,
 				7708826C1DBE21CA0067790B /* main.m in Sources */,
