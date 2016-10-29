@@ -64,7 +64,7 @@
   if (animNode.nPosKeys > 0) {
     int prevKey = 0;
     int nextKey = 0;
-    for (int i = 0; i < animNode.nPosKeys; i++) {
+    for (int i = 0; i < animNode.nPosKeys - 1; i++) {
       prevKey = i;
       nextKey = i + 1;
       double nextKeyTime =
@@ -91,7 +91,7 @@
   if (animNode.nRotKeys > 0) {
     int prevKey = 0;
     int nextKey = 0;
-    for (int i = 0; i < animNode.nRotKeys; i++) {
+    for (int i = 0; i < animNode.nRotKeys - 1; i++) {
       prevKey = i;
       nextKey = i + 1;
       double nextKeyTime =
@@ -117,7 +117,7 @@
   if (animNode.nScaleKeys > 0) {
     int prevKey = 0;
     int nextKey = 0;
-    for (int i = 0; i < animNode.nScaleKeys; i++) {
+    for (int i = 0; i < animNode.nScaleKeys - 1; i++) {
       prevKey = i;
       nextKey = i + 1;
       double nextKeyTime =
