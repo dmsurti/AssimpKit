@@ -80,7 +80,6 @@
    ---------------------------------------------------------------------
    */
   [self buildSkeletonDatabaseForScene:scene];
-  [self makeSkinnerForAssimpNode:aiRootNode inScene:aiScene scnScene:scene];
   [self loadAnimationsFromScene:aiScene withScene:scene atPath:path];
 
   return scene;
@@ -1019,49 +1018,6 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   scene.skeleton = self.skelton;
   scene.boneNames = self.uniqueBoneNames;
   scene.boneTransforms = self.uniqueBoneTransforms;
-}
-
-- (void)makeSkinnerForAssimpNode:(const struct aiNode*)aiNode
-                         inScene:(const struct aiScene*)aiScene
-                        scnScene:(SCNScene*)scene {
-  int nBones = [self findNumBonesInNode:aiNode inScene:aiScene];
-  const struct aiString* aiNodeName = &aiNode->mName;
-  NSString* nodeName = [NSString stringWithUTF8String:aiNodeName->data];
-  if (nBones > 0) {
-    int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
-    int maxWeights = [self findMaxWeightsForNode:aiNode inScene:aiScene];
-    NSLog(@" |--| Making Skinner for node: %@ vertices: %d max-weights: %d "
-          @"nBones: %d",
-          nodeName, nVertices, maxWeights, nBones);
-
-    SCNGeometrySource* boneWeights =
-        [self makeBoneWeightsGeometrySourceAtNode:aiNode
-                                          inScene:aiScene
-                                     withVertices:nVertices
-                                       maxWeights:maxWeights];
-    SCNGeometrySource* boneIndices =
-        [self makeBoneIndicesGeometrySourceAtNode:aiNode
-                                          inScene:aiScene
-                                     withVertices:nVertices
-                                       maxWeights:maxWeights
-                                        boneNames:self.uniqueBoneNames];
-
-    SCNNode* node = [scene.rootNode childNodeWithName:nodeName recursively:YES];
-    SCNSkinner* skinner =
-        [SCNSkinner skinnerWithBaseGeometry:node.geometry
-                                      bones:self.uniqueBoneNodes
-                  boneInverseBindTransforms:self.uniqueBoneTransforms
-                                boneWeights:boneWeights
-                                boneIndices:boneIndices];
-    // skinner.skeleton = self.skelton;
-    // NSLog(@" assigned skinner %@ skeleton: %@", skinner, skinner.skeleton);
-    // node.skinner = skinner;
-  }
-
-  for (int i = 0; i < aiNode->mNumChildren; i++) {
-    const struct aiNode* aiChildNode = aiNode->mChildren[i];
-    [self makeSkinnerForAssimpNode:aiChildNode inScene:aiScene scnScene:scene];
-  }
 }
 
 #pragma mark - Make animations
