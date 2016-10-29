@@ -1077,86 +1077,91 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
 }
 
 - (void)loadAnimationsFromScene:(const struct aiScene*)aiScene {
-  for (int i = 0; i < aiScene->mNumAnimations; i++) {
-    const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
-    NSString* animName =
-        [NSString stringWithUTF8String:aiAnimation->mName.data];
-    NSLog(@" animation name: %@", animName);
-    NSLog(@" animation has %d node channels", aiAnimation->mNumChannels);
-    NSLog(@" animation has %d mesh channels", aiAnimation->mNumMeshChannels);
-    NSLog(@" animation duration %f ", aiAnimation->mDuration);
-    NSLog(@" ticks per second %f", aiAnimation->mTicksPerSecond);
+  if (aiScene->mNumAnimations > 0) {
+    for (int i = 0; i < aiScene->mNumAnimations; i++) {
+      const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
+      NSString* animName =
+          [NSString stringWithUTF8String:aiAnimation->mName.data];
+      NSLog(@" animation name: %@", animName);
+      NSLog(@" animation has %d node channels", aiAnimation->mNumChannels);
+      NSLog(@" animation has %d mesh channels", aiAnimation->mNumMeshChannels);
+      NSLog(@" animation duration %f ", aiAnimation->mDuration);
+      NSLog(@" ticks per second %f", aiAnimation->mTicksPerSecond);
 
-    SCNAssimpAnimNode* animatedSkeletonNode =
-        [self makeAnimatedSkeletonForAnimation:aiAnimation
-                                  fromSkeleton:self.skelton
-                                     withBones:self.uniqueBoneNames
-                                boneTransforms:self.uniqueBoneTransforms];
-    SCNScene* animatedScene = [SCNScene scene];
-    [animatedScene.rootNode addChildNode:animatedSkeletonNode];
-    for (int i = 0; i < aiAnimation->mNumChannels; i++) {
-      const struct aiNodeAnim* aiNodeAnim = aiAnimation->mChannels[i];
-      NSString* aiNodeAnimName =
-          [NSString stringWithUTF8String:aiNodeAnim->mNodeName.data];
-      SCNAssimpAnimNode* animNode = (SCNAssimpAnimNode*)[animatedScene.rootNode
-          childNodeWithName:aiNodeAnimName
-                recursively:YES];
-      if (animNode == nil) {
-        NSLog(@" WARNING: did not find node named %@ in animated skeleton.",
-              aiNodeAnimName);
-        continue;
-      }
-      animNode.nPosKeys = aiNodeAnim->mNumPositionKeys;
-      animNode.nRotKeys = aiNodeAnim->mNumRotationKeys;
-      animNode.nScaleKeys = aiNodeAnim->mNumScalingKeys;
+      SCNAssimpAnimNode* animatedSkeletonNode =
+          [self makeAnimatedSkeletonForAnimation:aiAnimation
+                                    fromSkeleton:self.skelton
+                                       withBones:self.uniqueBoneNames
+                                  boneTransforms:self.uniqueBoneTransforms];
+      SCNScene* animatedScene = [SCNScene scene];
+      [animatedScene.rootNode addChildNode:animatedSkeletonNode];
+      for (int i = 0; i < aiAnimation->mNumChannels; i++) {
+        const struct aiNodeAnim* aiNodeAnim = aiAnimation->mChannels[i];
+        NSString* aiNodeAnimName =
+            [NSString stringWithUTF8String:aiNodeAnim->mNodeName.data];
+        SCNAssimpAnimNode* animNode =
+            (SCNAssimpAnimNode*)[animatedScene.rootNode
+                childNodeWithName:aiNodeAnimName
+                      recursively:YES];
+        if (animNode == nil) {
+          NSLog(@" WARNING: did not find node named %@ in animated skeleton.",
+                aiNodeAnimName);
+          continue;
+        }
+        animNode.nPosKeys = aiNodeAnim->mNumPositionKeys;
+        animNode.nRotKeys = aiNodeAnim->mNumRotationKeys;
+        animNode.nScaleKeys = aiNodeAnim->mNumScalingKeys;
 
-      // -----------------
-      // add position keys
-      // -----------------
-      NSMutableArray* posKeys = [[NSMutableArray alloc] init];
-      NSMutableArray* posKeyTimes = [[NSMutableArray alloc] init];
-      for (int j = 0; j < aiNodeAnim->mNumPositionKeys; j++) {
-        const struct aiVectorKey key = aiNodeAnim->mPositionKeys[j];
-        SCNVector3 pos =
-            SCNVector3Make(key.mValue.x, key.mValue.y, key.mValue.z);
-        [posKeys addObject:[NSValue valueWithSCNVector3:pos]];
-        [posKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
-      }
-      animNode.posKeys = posKeys;
-      animNode.posKeyTimes = posKeyTimes;
+        // -----------------
+        // add position keys
+        // -----------------
+        NSMutableArray* posKeys = [[NSMutableArray alloc] init];
+        NSMutableArray* posKeyTimes = [[NSMutableArray alloc] init];
+        for (int j = 0; j < aiNodeAnim->mNumPositionKeys; j++) {
+          const struct aiVectorKey key = aiNodeAnim->mPositionKeys[j];
+          SCNVector3 pos =
+              SCNVector3Make(key.mValue.x, key.mValue.y, key.mValue.z);
+          [posKeys addObject:[NSValue valueWithSCNVector3:pos]];
+          [posKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
+        }
+        animNode.posKeys = posKeys;
+        animNode.posKeyTimes = posKeyTimes;
 
-      // -----------------
-      // add rotation keys
-      // -----------------
-      NSMutableArray* rotKeys = [[NSMutableArray alloc] init];
-      NSMutableArray* rotKeyTimes = [[NSMutableArray alloc] init];
-      for (int j = 0; j < aiNodeAnim->mNumRotationKeys; j++) {
-        const struct aiQuatKey key = aiNodeAnim->mRotationKeys[j];
-        SCNVector4 quat = SCNVector4Make(key.mValue.x, key.mValue.y,
-                                         key.mValue.z, key.mValue.w);
-        [rotKeys addObject:[NSValue valueWithSCNVector4:quat]];
-        [rotKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
-      }
-      animNode.rotKeys = rotKeys;
-      animNode.rotKeyTimes = rotKeyTimes;
+        // -----------------
+        // add rotation keys
+        // -----------------
+        NSMutableArray* rotKeys = [[NSMutableArray alloc] init];
+        NSMutableArray* rotKeyTimes = [[NSMutableArray alloc] init];
+        for (int j = 0; j < aiNodeAnim->mNumRotationKeys; j++) {
+          const struct aiQuatKey key = aiNodeAnim->mRotationKeys[j];
+          SCNVector4 quat = SCNVector4Make(key.mValue.x, key.mValue.y,
+                                           key.mValue.z, key.mValue.w);
+          [rotKeys addObject:[NSValue valueWithSCNVector4:quat]];
+          [rotKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
+        }
+        animNode.rotKeys = rotKeys;
+        animNode.rotKeyTimes = rotKeyTimes;
 
-      // ----------------
-      // add scaling keys
-      // ----------------
-      NSMutableArray* scaleKeys = [[NSMutableArray alloc] init];
-      NSMutableArray* scaleKeyTimes = [[NSMutableArray alloc] init];
-      for (int j = 0; j < aiNodeAnim->mNumScalingKeys; j++) {
-        const struct aiVectorKey key = aiNodeAnim->mScalingKeys[j];
-        SCNVector3 scale =
-            SCNVector3Make(key.mValue.x, key.mValue.y, key.mValue.z);
-        [scaleKeys addObject:[NSValue valueWithSCNVector3:scale]];
-        [scaleKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
+        // ----------------
+        // add scaling keys
+        // ----------------
+        NSMutableArray* scaleKeys = [[NSMutableArray alloc] init];
+        NSMutableArray* scaleKeyTimes = [[NSMutableArray alloc] init];
+        for (int j = 0; j < aiNodeAnim->mNumScalingKeys; j++) {
+          const struct aiVectorKey key = aiNodeAnim->mScalingKeys[j];
+          SCNVector3 scale =
+              SCNVector3Make(key.mValue.x, key.mValue.y, key.mValue.z);
+          [scaleKeys addObject:[NSValue valueWithSCNVector3:scale]];
+          [scaleKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
+        }
+        animNode.scaleKeys = scaleKeys;
+        animNode.scaleKeyTimes = scaleKeyTimes;
       }
-      animNode.scaleKeys = scaleKeys;
-      animNode.scaleKeyTimes = scaleKeyTimes;
+      NSLog(@" Animated skeleton: %@", animatedSkeletonNode);
+      NSLog(@" pos keys: %lu", animatedSkeletonNode.posKeys.count);
     }
-    NSLog(@" Animated skeleton: %@", animatedSkeletonNode);
-    NSLog(@" pos keys: %lu", animatedSkeletonNode.posKeys.count);
+  } else {
+    NSLog(@" INFO: No animations found in file");
   }
 }
 
