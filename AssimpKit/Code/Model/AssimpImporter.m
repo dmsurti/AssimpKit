@@ -81,7 +81,7 @@
    */
   [self buildSkeletonDatabaseForScene:scene];
   [self makeSkinnerForAssimpNode:aiRootNode inScene:aiScene scnScene:scene];
-  [self loadAnimationsFromScene:aiScene withScene:scene];
+  [self loadAnimationsFromScene:aiScene withScene:scene atPath:path];
 
   return scene;
 }
@@ -1091,12 +1091,21 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
 }
 
 - (void)loadAnimationsFromScene:(const struct aiScene*)aiScene
-                      withScene:(SCNAssimpScene*)scene {
+                      withScene:(SCNAssimpScene*)scene
+                         atPath:(NSString*)path {
   if (aiScene->mNumAnimations > 0) {
     for (int i = 0; i < aiScene->mNumAnimations; i++) {
       const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
       NSString* animName =
           [NSString stringWithUTF8String:aiAnimation->mName.data];
+      NSString* trimmedAnimName = [animName
+          stringByTrimmingCharactersInSet:[NSCharacterSet
+                                              whitespaceCharacterSet]];
+      if (animName == nil || [trimmedAnimName isEqualToString:@""]) {
+        NSLog(@" WARNING: NO Animation Name. Will Generate one.");
+        animName = [[[path lastPathComponent] stringByDeletingPathExtension]
+            stringByAppendingString:@"-1"];
+      }
       NSLog(@" animation name: %@", animName);
       NSLog(@" animation has %d node channels", aiAnimation->mNumChannels);
       NSLog(@" animation has %d mesh channels", aiAnimation->mNumMeshChannels);
