@@ -15,4 +15,7 @@
 @property(readwrite, nonatomic) NSInteger nRotKeys;
 @property(readwrite, nonatomic) NSInteger nScaleKeys;
 
+// An array of NSValue SCNVector3 pos keys
+@property(readwrite, nonatomic) NSArray* posKeys;
+
 @end
