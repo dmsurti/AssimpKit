@@ -21,5 +21,7 @@
 @property(readwrite, nonatomic) NSArray* posKeyTimes;
 // An array of NSValue SCNVector4, each is rot key, a quaternion
 @property(readwrite, nonatomic) NSArray* rotKeys;
+// An array of NSNumber float, each is rot key time
+@property(readwrite, nonatomic) NSArray* rotKeyTimes;
 
 @end
