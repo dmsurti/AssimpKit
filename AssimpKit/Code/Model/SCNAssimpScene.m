@@ -63,15 +63,16 @@
     for (int i = 0; i < animNode.nPosKeys; i++) {
       prevKey = i;
       nextKey = i + 1;
-      if ([animNode getPosKeyTimeAtPosKeyIndex:nextKey] >= animTime) {
+      double nextKeyTime =
+          [[animNode.posKeyTimes objectAtIndex:nextKey] doubleValue];
+      if (nextKeyTime >= animTime) {
         break;
       }
     }
     float nextTime = [[animNode.posKeyTimes objectAtIndex:nextKey] doubleValue];
     float prevTime = [[animNode.posKeyTimes objectAtIndex:prevKey] doubleValue];
     float totalTime = nextTime - prevTime;
-    float delta =
-        (animTime - [animNode getPosKeyTimeAtPosKeyIndex:prevKey]) / totalTime;
+    float delta = (animTime - prevTime) / totalTime;
     GLKVector3 posi = SCNVector3ToGLKVector3(
         [[animNode.posKeys objectAtIndex:prevKey] SCNVector3Value]);
     GLKVector3 posn = SCNVector3ToGLKVector3(
