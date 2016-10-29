@@ -1107,6 +1107,8 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
         continue;
       }
       animNode.nPosKeys = aiNodeAnim->mNumPositionKeys;
+      animNode.nRotKeys = aiNodeAnim->mNumRotationKeys;
+      animNode.nScaleKeys = aiNodeAnim->mNumScalingKeys;
     }
     NSLog(@" Animated skeleton: %@", animatedSkeletonNode);
   }
