@@ -20,5 +20,6 @@
 - (void)storeAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
 - (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
 - (NSArray*)animationKeys;
+- (NSArray*)getBoneAnimationMatrices;
 
 @end
