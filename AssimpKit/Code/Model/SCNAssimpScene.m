@@ -148,10 +148,12 @@
   ourMat = SCNMatrix4Mult(parentMat, localAnim);
   SCNMatrix4 boneAnimMat =
       SCNMatrix4Mult(parentMat, SCNMatrix4Mult(localAnim, boneOffsetMat));
-  NSUInteger boneIndex = [self.boneNames indexOfObject:animNode.name];
-  [self.boneAnimationMats
-      replaceObjectAtIndex:boneIndex
-                withObject:[NSValue valueWithSCNMatrix4:boneAnimMat]];
+  if ([self.boneNames containsObject:animNode.name]) {
+    NSUInteger boneIndex = [self.boneNames indexOfObject:animNode.name];
+    [self.boneAnimationMats
+        replaceObjectAtIndex:boneIndex
+                  withObject:[NSValue valueWithSCNMatrix4:boneAnimMat]];
+  }
   for (SCNAssimpAnimNode* childNode in animNode.childNodes) {
     [self animateSkeleton:childNode withParentMat:ourMat atTime:animTime];
   }
