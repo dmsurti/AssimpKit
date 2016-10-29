@@ -81,7 +81,7 @@
    */
   [self buildSkeletonDatabaseForScene:scene];
   [self makeSkinnerForAssimpNode:aiRootNode inScene:aiScene scnScene:scene];
-  [self loadAnimationsFromScene:aiScene];
+  [self loadAnimationsFromScene:aiScene withScene:scene];
 
   return scene;
 }
@@ -1090,7 +1090,8 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
   return animBoneNode;
 }
 
-- (void)loadAnimationsFromScene:(const struct aiScene*)aiScene {
+- (void)loadAnimationsFromScene:(const struct aiScene*)aiScene
+                      withScene:(SCNAssimpScene*)scene {
   if (aiScene->mNumAnimations > 0) {
     for (int i = 0; i < aiScene->mNumAnimations; i++) {
       const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
@@ -1107,16 +1108,16 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
                                     fromSkeleton:self.skelton
                                        withBones:self.uniqueBoneNames
                                   boneTransforms:self.uniqueBoneTransforms];
-      SCNScene* animatedScene = [SCNScene scene];
-      [animatedScene.rootNode addChildNode:animatedSkeletonNode];
+      SCNAssimpScene* animation = [SCNAssimpScene scene];
+      [animation.rootNode addChildNode:animatedSkeletonNode];
+      animation.animatedSkeleton = animatedSkeletonNode;
       for (int i = 0; i < aiAnimation->mNumChannels; i++) {
         const struct aiNodeAnim* aiNodeAnim = aiAnimation->mChannels[i];
         NSString* aiNodeAnimName =
             [NSString stringWithUTF8String:aiNodeAnim->mNodeName.data];
-        SCNAssimpAnimNode* animNode =
-            (SCNAssimpAnimNode*)[animatedScene.rootNode
-                childNodeWithName:aiNodeAnimName
-                      recursively:YES];
+        SCNAssimpAnimNode* animNode = (SCNAssimpAnimNode*)[animation.rootNode
+            childNodeWithName:aiNodeAnimName
+                  recursively:YES];
         if (animNode == nil) {
           NSLog(@" WARNING: did not find node named %@ in animated skeleton.",
                 aiNodeAnimName);
