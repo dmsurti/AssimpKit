@@ -6,6 +6,7 @@
 //
 //
 
+#import <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
 #import "SCNAssimpAnimNode.h"
 
@@ -17,5 +18,7 @@
 
 @property(readwrite, nonatomic) SCNAssimpAnimNode* animatedSkeleton;
 - (void)storeAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
+- (void)addAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
+- (NSArray*)animationKeys;
 
 @end
