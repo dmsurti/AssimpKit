@@ -137,6 +137,24 @@
                       GLKVector3MultiplyScalar(posn, delta)));
     nodeS = SCNMatrix4MakeScale(lerped.x, lerped.y, lerped.z);
   }
+
+  localAnim = SCNMatrix4Mult(nodeT, SCNMatrix4Mult(nodeR, nodeS));
+
+  SCNMatrix4 boneOffsetMat = [animNode.boneOffsetMat SCNMatrix4Value];
+  ourMat = SCNMatrix4Mult(parentMat, localAnim);
+  SCNMatrix4 boneAnimMat =
+      SCNMatrix4Mult(parentMat, SCNMatrix4Mult(localAnim, boneOffsetMat));
+  NSUInteger boneIndex = [self.boneNames indexOfObject:animNode.name];
+  [self.boneAnimationMats
+      replaceObjectAtIndex:boneIndex
+                withObject:[NSValue valueWithSCNMatrix4:boneAnimMat]];
+  for (SCNAssimpAnimNode* childNode in animNode.childNodes) {
+    [self animateSkeleton:childNode withParentMat:ourMat atTime:animTime];
+  }
+}
+
+- (NSArray*)getBoneAnimationMatrices {
+  return self.boneAnimationMats;
 }
 
 @end
