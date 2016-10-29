@@ -1114,13 +1114,16 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
       // add position keys
       // -----------------
       NSMutableArray* posKeys = [[NSMutableArray alloc] init];
+      NSMutableArray* posKeyTimes = [[NSMutableArray alloc] init];
       for (int j = 0; j < aiNodeAnim->mNumPositionKeys; j++) {
         const struct aiVectorKey key = aiNodeAnim->mPositionKeys[j];
         SCNVector3 pos =
             SCNVector3Make(key.mValue.x, key.mValue.y, key.mValue.z);
         [posKeys addObject:[NSValue valueWithSCNVector3:pos]];
+        [posKeyTimes addObject:[NSNumber numberWithFloat:key.mTime]];
       }
       animNode.posKeys = posKeys;
+      animNode.posKeyTimes = posKeyTimes;
     }
     NSLog(@" Animated skeleton: %@", animatedSkeletonNode);
     NSLog(@" pos keys: %lu", animatedSkeletonNode.posKeys.count);
