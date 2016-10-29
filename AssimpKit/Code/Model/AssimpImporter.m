@@ -1187,6 +1187,8 @@ makeAnimatedSkeletonForAnimation:(const struct aiAnimation*)aiAnimation
       NSLog(@" scale keys: %lu", animatedSkeletonNode.scaleKeys.count);
       [scene storeAnimation:animation forKey:animName];
     }
+    NSLog(@" Number of animations: %lu with keys: %@",
+          [scene animationKeys].count, [scene animationKeys]);
   } else {
     NSLog(@" INFO: No animations found in file");
   }
