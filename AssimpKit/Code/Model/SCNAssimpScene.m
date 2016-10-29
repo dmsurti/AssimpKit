@@ -108,6 +108,35 @@
     SCNVector4 s = SCNVector4Make(slerped.x, slerped.y, slerped.z, slerped.w);
     nodeR = SCNMatrix4MakeRotation(s.w, s.x, s.y, s.z);
   }
+
+  SCNMatrix4 nodeS = SCNMatrix4Identity;
+  if (animNode.nScaleKeys > 0) {
+    int prevKey = 0;
+    int nextKey = 0;
+    for (int i = 0; i < animNode.nScaleKeys; i++) {
+      prevKey = i;
+      nextKey = i + 1;
+      double nextKeyTime =
+          [[animNode.scaleKeyTimes objectAtIndex:nextKey] doubleValue];
+      if (nextKeyTime >= animTime) {
+        break;
+      }
+    }
+    float nextTime =
+        [[animNode.scaleKeyTimes objectAtIndex:nextKey] doubleValue];
+    float prevTime =
+        [[animNode.scaleKeyTimes objectAtIndex:prevKey] doubleValue];
+    float totalTime = nextTime - prevTime;
+    float delta = (animTime - prevTime) / totalTime;
+    GLKVector3 posi = SCNVector3ToGLKVector3(
+        [[animNode.scaleKeyTimes objectAtIndex:prevKey] SCNVector3Value]);
+    GLKVector3 posn = SCNVector3ToGLKVector3(
+        [[animNode.scaleKeyTimes objectAtIndex:nextKey] SCNVector3Value]);
+    SCNVector3 lerped = SCNVector3FromGLKVector3(
+        GLKVector3Add(GLKVector3MultiplyScalar(posi, (1.0 - delta)),
+                      GLKVector3MultiplyScalar(posn, delta)));
+    nodeS = SCNMatrix4MakeScale(lerped.x, lerped.y, lerped.z);
+  }
 }
 
 @end
