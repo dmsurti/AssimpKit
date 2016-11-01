@@ -118,7 +118,7 @@
       NSLog(@" pos i: %f %f %f", posi.x, posi.y, posi.z);
       GLKVector3 posn = SCNVector3ToGLKVector3(
           [[animNode.posKeys objectAtIndex:nextKey] SCNVector3Value]);
-      NSLog(@" pos n: %f %f %f", posi.x, posi.y, posi.z);
+      NSLog(@" pos n: %f %f %f", posn.x, posn.y, posn.z);
       SCNVector3 lerped = SCNVector3FromGLKVector3(
           GLKVector3Add(GLKVector3MultiplyScalar(posi, (1.0 - delta)),
                         GLKVector3MultiplyScalar(posn, delta)));
