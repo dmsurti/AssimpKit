@@ -36,6 +36,8 @@
 		77ADB6201DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */; };
 		77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 		77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
+		77FEC0551DC4F090007E4E0E /* SCNSkinnedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FEC0541DC4F090007E4E0E /* SCNSkinnedNode.m */; };
+		77FEC0561DC4F090007E4E0E /* SCNSkinnedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FEC0541DC4F090007E4E0E /* SCNSkinnedNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNAssimpAnimNode.m; sourceTree = "<group>"; };
 		77D769E11DC1EAD700E84F2D /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssimpImporter.h; sourceTree = "<group>"; };
 		77D769E21DC1EAD700E84F2D /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssimpImporter.m; sourceTree = "<group>"; };
+		77FEC0531DC4F090007E4E0E /* SCNSkinnedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNSkinnedNode.h; sourceTree = "<group>"; };
+		77FEC0541DC4F090007E4E0E /* SCNSkinnedNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNSkinnedNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 		770882811DBE224C0067790B /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				77FEC0491DC4BA20007E4E0E /* Shaders */,
 				770882821DBE224C0067790B /* Model */,
 			);
 			path = Code;
@@ -193,8 +198,17 @@
 				77ADB61A1DC472F200E7ACE0 /* SCNAssimpScene.m */,
 				77ADB61D1DC4759F00E7ACE0 /* SCNAssimpAnimNode.h */,
 				77ADB61E1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m */,
+				77FEC0531DC4F090007E4E0E /* SCNSkinnedNode.h */,
+				77FEC0541DC4F090007E4E0E /* SCNSkinnedNode.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		77FEC0491DC4BA20007E4E0E /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +320,7 @@
 			files = (
 				77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */,
 				770882581DBE21B50067790B /* GameViewController.m in Sources */,
+				77FEC0551DC4F090007E4E0E /* SCNSkinnedNode.m in Sources */,
 				77ADB61F1DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */,
 				770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 				770882551DBE21B50067790B /* GameView.m in Sources */,
@@ -320,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77ADB6201DC4759F00E7ACE0 /* SCNAssimpAnimNode.m in Sources */,
+				77FEC0561DC4F090007E4E0E /* SCNSkinnedNode.m in Sources */,
 				77ADB61C1DC472F200E7ACE0 /* SCNAssimpScene.m in Sources */,
 				770882D41DBE31490067790B /* GameViewController.m in Sources */,
 				7708826F1DBE21CA0067790B /* AppDelegate.m in Sources */,
