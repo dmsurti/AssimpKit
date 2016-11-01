@@ -14,7 +14,21 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  SCNScene* scene = [SCNScene assimpSceneNamed:@"jeep1.3ds"];
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask, YES);
+  NSString* docsDir = [paths objectAtIndex:0];
+  NSString* boy = [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
+  // SCNScene* scene = [SCNScene assimpSceneNamed:@"explorer_skinned.dae"];
+  // SCNScene* scene = [SCNScene sceneNamed:@"explorer_skinned.dae"];
+  SCNScene* scene = [SCNScene assimpSceneWithURL:[NSURL URLWithString:boy]];
+  // SCNScene* scene = [SCNScene assimpSceneNamed:@"jeep1.3ds"];
+  //  NSError* error;
+  //  SCNScene* scene = [SCNScene sceneWithURL:[NSURL fileURLWithPath:boy]
+  //                                   options:nil
+  //                                     error:&error];
+  //  if (error) {
+  //    NSLog(@" Could not read file from URL: %@", error.description);
+  //  }
 
   // create a new scene
   // SCNScene* scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
