@@ -13,13 +13,17 @@
 @interface SCNAssimpScene : SCNScene
 
 @property(readwrite, nonatomic) SCNNode* skeleton;
+@property(readwrite, nonatomic) NSArray* meshBoneNames;
 @property(readwrite, nonatomic) NSArray* boneNames;
 @property(readwrite, nonatomic) NSArray* boneTransforms;
+@property(readwrite, nonatomic) NSMutableArray* skinnedNodeNames;
+@property(readwrite, nonatomic) NSMutableDictionary* skinnedNodes;
 
 @property(readwrite, nonatomic) SCNAssimpAnimNode* animatedSkeleton;
 - (void)storeAnimation:(SCNAssimpScene*)animation forKey:(NSString*)animKey;
 - (void)addAnimationForKey:(NSString*)animKey;
-- (void)applyAnimationAtTime:(double)animTime;
+- (void)getAnimationForKey:(NSString*)animKey;
+- (void)applyAnimationAtTime:(NSTimeInterval)animTime;
 - (NSArray*)animationKeys;
 - (NSArray*)getBoneAnimationMatrices;
 

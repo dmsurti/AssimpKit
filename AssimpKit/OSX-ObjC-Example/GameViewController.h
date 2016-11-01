@@ -10,8 +10,8 @@
 
 #import "GameView.h"
 
-@interface GameViewController : NSViewController
+@interface GameViewController : NSViewController<SCNSceneRendererDelegate>
 
-@property (assign) IBOutlet GameView *gameView;
+@property(assign) IBOutlet GameView* gameView;
 
 @end

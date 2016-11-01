@@ -10,4 +10,11 @@
 
 @interface SCNSkinnedNode : SCNNode
 
+@property(strong, nonatomic) NSArray* vertices;
+@property(strong, nonatomic) NSArray* boneWeights;
+@property(strong, nonatomic) NSArray* boneIndices;
+@property NSInteger maxWeights;
+@property NSInteger nVertices;
+@property NSInteger nIndices;
+
 @end

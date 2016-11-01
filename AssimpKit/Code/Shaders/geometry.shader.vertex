@@ -1,0 +1,17 @@
+// 1. Custom variable declarations (optional)
+// For Metal, a pragma directive and one custom variable on each line:
+#pragma arguments
+float intensity;
+// For OpenGL, a separate uniform declaration for each custom variable
+uniform float intensity;
+
+// 2. Custom global functions (optional)
+vec2 sincos(float t) { return vec2(sin(t), cos(t)); }
+
+// 3. Pragma directives (optional)
+#pragma transparent
+#pragma body
+
+// 4. Code snippet
+_geometry.position.xy = sincos(u_time);
+_geometry.position.z = intensity;
