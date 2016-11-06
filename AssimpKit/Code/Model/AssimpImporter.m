@@ -288,33 +288,31 @@ makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
 makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                 inNode:(const struct aiNode*)aiNode
                                inScene:(const struct aiScene*)aiScene
-                       withIndexOffset:(int)indexOffset
+                       withIndexOffset:(short)indexOffset
                                 nFaces:(int)nFaces {
   int indicesCounter = 0;
   int nIndices = [self findNumIndicesInMesh:aiMeshIndex inScene:aiScene];
-  int scnIndices[nIndices];
+  short scnIndices[nIndices];
   const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
   for (int i = 0; i < aiMesh->mNumFaces; i++) {
     const struct aiFace* aiFace = &aiMesh->mFaces[i];
     for (int j = 0; j < aiFace->mNumIndices; j++) {
-      scnIndices[indicesCounter++] = indexOffset + aiFace->mIndices[j];
+      scnIndices[indicesCounter++] = (short)indexOffset + (short)aiFace->mIndices[j];
     }
   }
-  indexOffset += aiMesh->mNumVertices;
   NSData* indicesData =
       [NSData dataWithBytes:scnIndices length:sizeof(scnIndices)];
   SCNGeometryElement* indices = [SCNGeometryElement
       geometryElementWithData:indicesData
                 primitiveType:SCNGeometryPrimitiveTypeTriangles
                primitiveCount:nFaces
-                bytesPerIndex:sizeof(int)];
+                bytesPerIndex:sizeof(short)];
   return indices;
 }
 
 - (NSArray*)makeGeometryElementsforNode:(const struct aiNode*)aiNode
                                 inScene:(const struct aiScene*)aiScene {
   NSMutableArray* scnGeometryElements = [[NSMutableArray alloc] init];
-  int nFaces = [self findNumFacesInNode:aiNode inScene:aiScene];
   int indexOffset = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
