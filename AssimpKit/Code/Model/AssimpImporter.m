@@ -322,7 +322,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                               inNode:aiNode
                                              inScene:aiScene
                                      withIndexOffset:indexOffset
-                                              nFaces:nFaces];
+                                              nFaces:aiMesh->mNumFaces];
     [scnGeometryElements addObject:indices];
     indexOffset += aiMesh->mNumVertices;
   }
