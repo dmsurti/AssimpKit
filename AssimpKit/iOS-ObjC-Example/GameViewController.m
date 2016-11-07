@@ -8,45 +8,44 @@
 
 #import "GameViewController.h"
 #import "SCNScene+AssimpImport.h"
+#import "AssimpImporter.h"
 
 @implementation GameViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                        NSUserDomainMask, YES);
   NSString* docsDir = [paths objectAtIndex:0];
   NSString* boy = [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
-  // SCNScene* scene = [SCNScene assimpSceneNamed:@"explorer_skinned.dae"];
-  // SCNScene* scene = [SCNScene sceneNamed:@"explorer_skinned.dae"];
-  SCNScene* scene = [SCNScene assimpSceneWithURL:[NSURL URLWithString:boy]];
-  // SCNScene* scene = [SCNScene assimpSceneNamed:@"jeep1.3ds"];
-  //  NSError* error;
-  //  SCNScene* scene = [SCNScene sceneWithURL:[NSURL fileURLWithPath:boy]
-  //                                   options:nil
-  //                                     error:&error];
-  //  if (error) {
-  //    NSLog(@" Could not read file from URL: %@", error.description);
-  //  }
-
-  // create a new scene
-  // SCNScene* scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
-
+  NSString* bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
+  SCNAssimpScene* scene = [SCNScene assimpSceneWithURL:[NSURL URLWithString:boy]];
+  
+  // Now we can access the file's contents
+  NSString* runAnim = [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
+  NSString* bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
+  AssimpImporter* assimpImporter = [[AssimpImporter alloc] init];
+  SCNAssimpScene* jumpStartScene = [assimpImporter importScene:runAnim];
+  SCNAssimpAnimation* jumpStartAnim = [jumpStartScene animationForKey:@"jump_start-1"];
+  [scene addAnimation:jumpStartAnim];
+  
   // retrieve the SCNView
   SCNView* scnView = (SCNView*)self.view;
-
+  
   // set the scene to the view
   scnView.scene = scene;
-
+  
   // allows the user to manipulate the camera
   scnView.allowsCameraControl = YES;
-
+  
   // show statistics such as fps and timing information
   scnView.showsStatistics = YES;
-
+  
   // configure the view
-  scnView.backgroundColor = [UIColor whiteColor];
+  scnView.backgroundColor = [UIColor blackColor];
+  
+  scnView.playing = YES;
 }
 
 - (BOOL)shouldAutorotate {
