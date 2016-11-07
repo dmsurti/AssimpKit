@@ -788,16 +788,33 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 }
 
 - (SCNNode*)findSkeletonNodeFromBoneNodes:(NSArray*)boneNodes {
-  SCNNode* skeletonRootNode;
+  NSMutableDictionary* nodeDepths = [[NSMutableDictionary alloc] init];
   int minDepth = -1;
   for (SCNNode* boneNode in boneNodes) {
     int depth = [self findDepthOfNodeFromRoot:boneNode];
-    if (minDepth == -1 || (depth < minDepth)) {
+    NSLog(@" bone with depth is (min depth): %@ -> %d ( %d )", boneNode.name, depth, minDepth);
+    if (minDepth == -1 || (depth <= minDepth)) {
       minDepth = depth;
-      skeletonRootNode = boneNode;
+      NSString* key = [NSNumber numberWithInt:minDepth].stringValue;
+      NSMutableArray* minDepthNodes = [nodeDepths valueForKey:key];
+      if(minDepthNodes == nil) {
+        minDepthNodes = [[NSMutableArray alloc] init];
+        [nodeDepths setValue:minDepthNodes
+                      forKey:key];
+      }
+      [minDepthNodes addObject:boneNode];
     }
   }
-  return skeletonRootNode;
+  NSString* minDepthKey = [NSNumber numberWithInt:minDepth].stringValue;
+  NSArray* minDepthNodes = [nodeDepths valueForKey:minDepthKey];
+  NSLog(@" min depth nodes are: %@", minDepthNodes);
+  assert(minDepthNodes.count > 0);
+  SCNNode* skeletonRootNode = [minDepthNodes objectAtIndex:0];
+  if(minDepthNodes.count > 1) {
+    return skeletonRootNode.parentNode;
+  } else {
+    return skeletonRootNode;
+  }
 }
 
 - (int)findDepthOfNodeFromRoot:(SCNNode*)node {
