@@ -1089,7 +1089,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         &aiNodeAnim->mPositionKeys[k];
         double keyTime = aiTranslationKey->mTime;
         const struct aiVector3D aiTranslation = aiTranslationKey->mValue;
-        [translationTimes addObject:[NSNumber numberWithDouble:keyTime]];
+        [translationTimes addObject:[NSNumber numberWithFloat:keyTime]];
         SCNVector3 pos = SCNVector3Make(aiTranslation.x, aiTranslation.y,
                                         aiTranslation.z);
         [translationValues addObject:[NSValue valueWithSCNVector3:pos]];
@@ -1108,7 +1108,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         const struct aiQuatKey* aiQuatKey = &aiNodeAnim->mRotationKeys[k];
         double keyTime = aiQuatKey->mTime;
         const struct aiQuaternion aiQuaternion = aiQuatKey->mValue;
-        [rotationTimes addObject:[NSNumber numberWithDouble:keyTime]];
+        [rotationTimes addObject:[NSNumber numberWithFloat:keyTime]];
         SCNVector4 quat = SCNVector4Make(aiQuaternion.x, aiQuaternion.y, aiQuaternion.z, aiQuaternion.w);
         [rotationValues addObject:[NSValue valueWithSCNVector4:quat]];
       }
@@ -1127,7 +1127,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         const struct aiVectorKey* aiScaleKey = &aiNodeAnim->mScalingKeys[k];
         double keyTime = aiScaleKey->mTime;
         const struct aiVector3D aiScale = aiScaleKey->mValue;
-        [scaleTimes addObject:[NSNumber numberWithDouble:keyTime]];
+        [scaleTimes addObject:[NSNumber numberWithFloat:keyTime]];
         SCNVector3 scale = SCNVector3Make(aiScale.x, aiScale.y, aiScale.z);
         [scaleValues addObject:[NSValue valueWithSCNVector3:scale]];
       }
