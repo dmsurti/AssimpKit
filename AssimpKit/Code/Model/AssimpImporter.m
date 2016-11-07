@@ -12,6 +12,7 @@
 #include "assimp/material.h"     // Materials
 #include "assimp/postprocess.h"  // Post processing flags
 #include "assimp/scene.h"        // Output data structure
+#import "SCNAssimpAnimation.h"
 
 @interface AssimpImporter ()
 
@@ -38,19 +39,19 @@
 
 #pragma mark - Import with Assimp
 
-- (SCNScene*)importScene:(NSString*)filePath {
+- (SCNAssimpScene*)importScene:(NSString*)filePath {
   // Start the import on the given file with some example postprocessing
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
   const char* pFile = [filePath UTF8String];
-  const struct aiScene* aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
+  const struct aiScene* aiScene = aiImportFile(pFile, aiProcess_FlipUVs | aiProcess_Triangulate);
   // If the import failed, report it
   if (!aiScene) {
     NSLog(@" Scene importing failed for filePath %@", filePath);
     return nil;
   }
   // Now we can access the file's contents
-  SCNScene* scene = [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
+  SCNAssimpScene* scene = [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
   // We're done. Release all resources associated with this import
   aiReleaseImport(aiScene);
   return scene;
@@ -58,11 +59,11 @@
 
 #pragma mark - Make SCN Scene
 
-- (SCNScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene
+- (SCNAssimpScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene
                                   atPath:(NSString*)path {
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
-  SCNScene* scene = [[SCNScene alloc] init];
+  SCNAssimpScene* scene = [[SCNAssimpScene alloc] init];
   /*
    -------------------------------------------------------------------
    Assign geometry, materials, lights and cameras to the node
@@ -78,7 +79,8 @@
    */
   [self buildSkeletonDatabaseForScene:scene];
   [self makeSkinnerForAssimpNode:aiRootNode inScene:aiScene scnScene:scene];
-
+  [self createAnimationsFromScene:aiScene withScene:scene atPath:path];
+  
   return scene;
 }
 

@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
+#import "SCNAssimpScene.h"
 
 @interface AssimpImporter : NSObject
 
-- (SCNScene*)importScene:(NSString*)filePath;
+- (SCNAssimpScene*)importScene:(NSString*)filePath;
 
 @end
