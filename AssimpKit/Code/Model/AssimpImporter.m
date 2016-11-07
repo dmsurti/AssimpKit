@@ -1100,6 +1100,8 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       translationKeyFrameAnim.keyTimes = translationTimes;
       translationKeyFrameAnim.speed = 1;
       translationKeyFrameAnim.repeatCount = 10;
+      translationKeyFrameAnim.duration = aiAnimation->mDuration;
+      [channelKeys setValue:translationKeyFrameAnim forKey:@"position"];
       
       // create rotation animation
       NSMutableArray* rotationValues = [[NSMutableArray alloc] init];
