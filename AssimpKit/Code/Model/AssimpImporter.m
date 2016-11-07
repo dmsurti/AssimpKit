@@ -808,7 +808,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   NSString* minDepthKey = [NSNumber numberWithInt:minDepth].stringValue;
   NSArray* minDepthNodes = [nodeDepths valueForKey:minDepthKey];
   NSLog(@" min depth nodes are: %@", minDepthNodes);
-  assert(minDepthNodes.count > 0);
   SCNNode* skeletonRootNode = [minDepthNodes objectAtIndex:0];
   if(minDepthNodes.count > 1) {
     return skeletonRootNode.parentNode;
