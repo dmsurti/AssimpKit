@@ -7,17 +7,34 @@
 //
 
 #import "GameViewController.h"
+#import "AssimpImporter.h"
 #import "SCNScene+AssimpImport.h"
 
 @implementation GameViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
 
-  SCNScene* scene = [SCNScene assimpSceneNamed:@"jeep1.3ds"];
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask, YES);
+  NSString* docsDir = [paths objectAtIndex:0];
+  NSString* explorer =
+    [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
+  NSString* bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
+  SCNAssimpScene* scene =
+    [SCNScene assimpSceneWithURL:[NSURL URLWithString:bob]];
 
-  // create a new scene
-  // SCNScene* scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
+  // Now we can access the file's contents
+  NSString* runAnim =
+    [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
+  NSString* bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
+  AssimpImporter* assimpImporter = [[AssimpImporter alloc] init];
+  SCNAssimpScene* jumpStartScene = [assimpImporter importScene:bobAnim];
+  NSString* bobId = @"Bob-1";
+  NSString* jumpId = @"jump_start-1";
+  SCNAssimpAnimation* jumpStartAnim = [jumpStartScene animationForKey:bobId];
+  [scene addAnimation:jumpStartAnim];
 
   // retrieve the SCNView
   SCNView* scnView = (SCNView*)self.view;
@@ -32,18 +49,23 @@
   scnView.showsStatistics = YES;
 
   // configure the view
-  scnView.backgroundColor = [UIColor whiteColor];
+  scnView.backgroundColor = [UIColor blackColor];
+
+  scnView.playing = YES;
 }
 
-- (BOOL)shouldAutorotate {
+- (BOOL)shouldAutorotate
+{
   return YES;
 }
 
-- (BOOL)prefersStatusBarHidden {
+- (BOOL)prefersStatusBarHidden
+{
   return YES;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
   if ([[UIDevice currentDevice] userInterfaceIdiom] ==
       UIUserInterfaceIdiomPhone) {
     return UIInterfaceOrientationMaskAllButUpsideDown;
@@ -52,7 +74,8 @@
   }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
   [super didReceiveMemoryWarning];
   // Release any cached data, images, etc that aren't in use.
 }
