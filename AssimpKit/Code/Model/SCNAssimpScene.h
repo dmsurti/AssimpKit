@@ -7,7 +7,13 @@
 //
 
 #import <SceneKit/SceneKit.h>
+#import "SCNAssimpAnimation.h"
 
 @interface SCNAssimpScene : SCNScene
+
+@property(readonly, nonatomic) NSMutableDictionary* animations;
+
+-(void)addAnimation:(SCNAssimpAnimation*)assimpAnimation;
+-(SCNAssimpAnimation*)animationForKey:(NSString*)key;
 
 @end
