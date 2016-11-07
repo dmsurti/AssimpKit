@@ -6,10 +6,9 @@
 //
 //
 
+#import "SCNAssimpScene.h"
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
-#import "SCNAssimpScene.h"
-
 
 @interface SCNScene (AssimpImport)
 

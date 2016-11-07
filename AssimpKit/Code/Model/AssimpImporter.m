@@ -7,27 +7,29 @@
 //
 
 #import "AssimpImporter.h"
-#include "assimp/cimport.h"      // Plain-C interface
-#include "assimp/light.h"        // Lights
-#include "assimp/material.h"     // Materials
-#include "assimp/postprocess.h"  // Post processing flags
-#include "assimp/scene.h"        // Output data structure
 #import "SCNAssimpAnimation.h"
+#include "assimp/cimport.h"     // Plain-C interface
+#include "assimp/light.h"       // Lights
+#include "assimp/material.h"    // Materials
+#include "assimp/postprocess.h" // Post processing flags
+#include "assimp/scene.h"       // Output data structure
 
-@interface AssimpImporter ()
+@interface
+AssimpImporter ()
 
-@property(readwrite, nonatomic) NSMutableArray* boneNames;
-@property(readwrite, nonatomic) NSArray* uniqueBoneNames;
-@property(readwrite, nonatomic) NSArray* uniqueBoneNodes;
-@property(readwrite, nonatomic) NSMutableDictionary* boneTransforms;
-@property(readwrite, nonatomic) NSArray* uniqueBoneTransforms;
-@property(readwrite, nonatomic) SCNNode* skelton;
+@property (readwrite, nonatomic) NSMutableArray* boneNames;
+@property (readwrite, nonatomic) NSArray* uniqueBoneNames;
+@property (readwrite, nonatomic) NSArray* uniqueBoneNodes;
+@property (readwrite, nonatomic) NSMutableDictionary* boneTransforms;
+@property (readwrite, nonatomic) NSArray* uniqueBoneTransforms;
+@property (readwrite, nonatomic) SCNNode* skelton;
 
 @end
 
 @implementation AssimpImporter
 
-- (id)init {
+- (id)init
+{
   self = [super init];
   if (self) {
     self.boneNames = [[NSMutableArray alloc] init];
@@ -39,19 +41,22 @@
 
 #pragma mark - Import with Assimp
 
-- (SCNAssimpScene*)importScene:(NSString*)filePath {
+- (SCNAssimpScene*)importScene:(NSString*)filePath
+{
   // Start the import on the given file with some example postprocessing
   // Usually - if speed is not the most important aspect for you - you'll t
   // probably to request more postprocessing than we do in this example.
   const char* pFile = [filePath UTF8String];
-  const struct aiScene* aiScene = aiImportFile(pFile, aiProcess_FlipUVs | aiProcess_Triangulate);
+  const struct aiScene* aiScene =
+    aiImportFile(pFile, aiProcess_FlipUVs | aiProcess_Triangulate);
   // If the import failed, report it
   if (!aiScene) {
     NSLog(@" Scene importing failed for filePath %@", filePath);
     return nil;
   }
   // Now we can access the file's contents
-  SCNAssimpScene* scene = [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
+  SCNAssimpScene* scene =
+    [self makeSCNSceneFromAssimpScene:aiScene atPath:filePath];
   // We're done. Release all resources associated with this import
   aiReleaseImport(aiScene);
   return scene;
@@ -60,7 +65,8 @@
 #pragma mark - Make SCN Scene
 
 - (SCNAssimpScene*)makeSCNSceneFromAssimpScene:(const struct aiScene*)aiScene
-                                  atPath:(NSString*)path {
+                                        atPath:(NSString*)path
+{
   NSLog(@" Make an SCNScene");
   const struct aiNode* aiRootNode = aiScene->mRootNode;
   SCNAssimpScene* scene = [[SCNAssimpScene alloc] init];
@@ -70,7 +76,7 @@
    ---------------------------------------------------------------------
    */
   SCNNode* scnRootNode =
-      [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
+    [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
   [scene.rootNode addChildNode:scnRootNode];
   /*
    ---------------------------------------------------------------------
@@ -80,7 +86,7 @@
   [self buildSkeletonDatabaseForScene:scene];
   [self makeSkinnerForAssimpNode:aiRootNode inScene:aiScene scnScene:scene];
   [self createAnimationsFromScene:aiScene withScene:scene atPath:path];
-  
+
   return scene;
 }
 
@@ -88,7 +94,8 @@
 
 - (SCNNode*)makeSCNNodeFromAssimpNode:(const struct aiNode*)aiNode
                               inScene:(const struct aiScene*)aiScene
-                               atPath:(NSString*)path {
+                               atPath:(NSString*)path
+{
   SCNNode* node = [[SCNNode alloc] init];
   const struct aiString* aiNodeName = &aiNode->mName;
   node.name = [NSString stringWithUTF8String:aiNodeName->data];
@@ -103,18 +110,18 @@
   [self.boneNames addObjectsFromArray:[self getBoneNamesForAssimpNode:aiNode
                                                               inScene:aiScene]];
   [self.boneTransforms
-      addEntriesFromDictionary:[self getBoneTransformsForAssimpNode:aiNode
-                                                            inScene:aiScene]];
+    addEntriesFromDictionary:[self getBoneTransformsForAssimpNode:aiNode
+                                                          inScene:aiScene]];
 
   // ---------
   // TRANSFORM
   // ---------
   const struct aiMatrix4x4 aiNodeMatrix = aiNode->mTransformation;
   GLKMatrix4 glkNodeMatrix = GLKMatrix4Make(
-      aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
-      aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
-      aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
-      aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
+    aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
+    aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
+    aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
+    aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
 
   SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
   node.transform = scnMatrix;
@@ -123,9 +130,8 @@
 
   for (int i = 0; i < aiNode->mNumChildren; i++) {
     const struct aiNode* aiChildNode = aiNode->mChildren[i];
-    SCNNode* childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
-                                                 inScene:aiScene
-                                                  atPath:path];
+    SCNNode* childNode =
+      [self makeSCNNodeFromAssimpNode:aiChildNode inScene:aiScene atPath:path];
     [node addChildNode:childNode];
   }
   return node;
@@ -134,7 +140,8 @@
 #pragma mark - Number of vertices, faces and indices
 
 - (int)findNumVerticesInNode:(const struct aiNode*)aiNode
-                     inScene:(const struct aiScene*)aiScene {
+                     inScene:(const struct aiScene*)aiScene
+{
   int nVertices = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
@@ -145,7 +152,8 @@
 }
 
 - (int)findNumFacesInNode:(const struct aiNode*)aiNode
-                  inScene:(const struct aiScene*)aiScene {
+                  inScene:(const struct aiScene*)aiScene
+{
   int nFaces = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
@@ -156,7 +164,8 @@
 }
 
 - (int)findNumIndicesInMesh:(int)aiMeshIndex
-                    inScene:(const struct aiScene*)aiScene {
+                    inScene:(const struct aiScene*)aiScene
+{
   int nIndices = 0;
   const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
   for (int j = 0; j < aiMesh->mNumFaces; j++) {
@@ -171,7 +180,8 @@
 - (SCNGeometrySource*)
 makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
                         inScene:(const struct aiScene*)aiScene
-                  withNVertices:(int)nVertices {
+                  withNVertices:(int)nVertices
+{
   float scnVertices[nVertices * 3];
   int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
@@ -187,23 +197,23 @@ makeVertexGeometrySourceForNode:(const struct aiNode*)aiNode
     }
   }
   SCNGeometrySource* vertexSource = [SCNGeometrySource
-      geometrySourceWithData:[NSData
-                                 dataWithBytes:scnVertices
-                                        length:nVertices * 3 * sizeof(float)]
-                    semantic:SCNGeometrySourceSemanticVertex
-                 vectorCount:nVertices
-             floatComponents:YES
-         componentsPerVector:3
-           bytesPerComponent:sizeof(float)
-                  dataOffset:0
-                  dataStride:3 * sizeof(float)];
+    geometrySourceWithData:[NSData dataWithBytes:scnVertices
+                                          length:nVertices * 3 * sizeof(float)]
+                  semantic:SCNGeometrySourceSemanticVertex
+               vectorCount:nVertices
+           floatComponents:YES
+       componentsPerVector:3
+         bytesPerComponent:sizeof(float)
+                dataOffset:0
+                dataStride:3 * sizeof(float)];
   return vertexSource;
 }
 
 - (SCNGeometrySource*)
 makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
                         inScene:(const struct aiScene*)aiScene
-                  withNVertices:(int)nVertices {
+                  withNVertices:(int)nVertices
+{
   float scnNormals[nVertices * 3];
   int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
@@ -219,23 +229,23 @@ makeNormalGeometrySourceForNode:(const struct aiNode*)aiNode
     }
   }
   SCNGeometrySource* normalSource = [SCNGeometrySource
-      geometrySourceWithData:[NSData
-                                 dataWithBytes:scnNormals
-                                        length:nVertices * 3 * sizeof(float)]
-                    semantic:SCNGeometrySourceSemanticNormal
-                 vectorCount:nVertices
-             floatComponents:YES
-         componentsPerVector:3
-           bytesPerComponent:sizeof(float)
-                  dataOffset:0
-                  dataStride:3 * sizeof(float)];
+    geometrySourceWithData:[NSData dataWithBytes:scnNormals
+                                          length:nVertices * 3 * sizeof(float)]
+                  semantic:SCNGeometrySourceSemanticNormal
+               vectorCount:nVertices
+           floatComponents:YES
+       componentsPerVector:3
+         bytesPerComponent:sizeof(float)
+                dataOffset:0
+                dataStride:3 * sizeof(float)];
   return normalSource;
 }
 
 - (SCNGeometrySource*)
 makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
                          inScene:(const struct aiScene*)aiScene
-                   withNVertices:(int)nVertices {
+                   withNVertices:(int)nVertices
+{
   float scnTextures[nVertices * 2];
   int verticesCounter = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
@@ -252,35 +262,35 @@ makeTextureGeometrySourceForNode:(const struct aiNode*)aiNode
     }
   }
   SCNGeometrySource* textureSource = [SCNGeometrySource
-      geometrySourceWithData:[NSData
-                                 dataWithBytes:scnTextures
-                                        length:nVertices * 2 * sizeof(float)]
-                    semantic:SCNGeometrySourceSemanticTexcoord
-                 vectorCount:nVertices
-             floatComponents:YES
-         componentsPerVector:2
-           bytesPerComponent:sizeof(float)
-                  dataOffset:0
-                  dataStride:2 * sizeof(float)];
+    geometrySourceWithData:[NSData dataWithBytes:scnTextures
+                                          length:nVertices * 2 * sizeof(float)]
+                  semantic:SCNGeometrySourceSemanticTexcoord
+               vectorCount:nVertices
+           floatComponents:YES
+       componentsPerVector:2
+         bytesPerComponent:sizeof(float)
+                dataOffset:0
+                dataStride:2 * sizeof(float)];
   return textureSource;
 }
 
 - (NSArray*)makeGeometrySourcesForNode:(const struct aiNode*)aiNode
                                inScene:(const struct aiScene*)aiScene
-                          withVertices:(int)nVertices {
+                          withVertices:(int)nVertices
+{
   NSMutableArray* scnGeometrySources = [[NSMutableArray alloc] init];
   [scnGeometrySources
-      addObject:[self makeVertexGeometrySourceForNode:aiNode
-                                              inScene:aiScene
-                                        withNVertices:nVertices]];
+    addObject:[self makeVertexGeometrySourceForNode:aiNode
+                                            inScene:aiScene
+                                      withNVertices:nVertices]];
   [scnGeometrySources
-      addObject:[self makeNormalGeometrySourceForNode:aiNode
-                                              inScene:aiScene
-                                        withNVertices:nVertices]];
+    addObject:[self makeNormalGeometrySourceForNode:aiNode
+                                            inScene:aiScene
+                                      withNVertices:nVertices]];
   [scnGeometrySources
-      addObject:[self makeTextureGeometrySourceForNode:aiNode
-                                               inScene:aiScene
-                                         withNVertices:nVertices]];
+    addObject:[self makeTextureGeometrySourceForNode:aiNode
+                                             inScene:aiScene
+                                       withNVertices:nVertices]];
   return scnGeometrySources;
 }
 
@@ -291,7 +301,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                 inNode:(const struct aiNode*)aiNode
                                inScene:(const struct aiScene*)aiScene
                        withIndexOffset:(short)indexOffset
-                                nFaces:(int)nFaces {
+                                nFaces:(int)nFaces
+{
   int indicesCounter = 0;
   int nIndices = [self findNumIndicesInMesh:aiMeshIndex inScene:aiScene];
   short scnIndices[nIndices];
@@ -299,32 +310,34 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   for (int i = 0; i < aiMesh->mNumFaces; i++) {
     const struct aiFace* aiFace = &aiMesh->mFaces[i];
     for (int j = 0; j < aiFace->mNumIndices; j++) {
-      scnIndices[indicesCounter++] = (short)indexOffset + (short)aiFace->mIndices[j];
+      scnIndices[indicesCounter++] =
+        (short)indexOffset + (short)aiFace->mIndices[j];
     }
   }
   NSData* indicesData =
-      [NSData dataWithBytes:scnIndices length:sizeof(scnIndices)];
+    [NSData dataWithBytes:scnIndices length:sizeof(scnIndices)];
   SCNGeometryElement* indices = [SCNGeometryElement
-      geometryElementWithData:indicesData
-                primitiveType:SCNGeometryPrimitiveTypeTriangles
-               primitiveCount:nFaces
-                bytesPerIndex:sizeof(short)];
+    geometryElementWithData:indicesData
+              primitiveType:SCNGeometryPrimitiveTypeTriangles
+             primitiveCount:nFaces
+              bytesPerIndex:sizeof(short)];
   return indices;
 }
 
 - (NSArray*)makeGeometryElementsforNode:(const struct aiNode*)aiNode
-                                inScene:(const struct aiScene*)aiScene {
+                                inScene:(const struct aiScene*)aiScene
+{
   NSMutableArray* scnGeometryElements = [[NSMutableArray alloc] init];
   int indexOffset = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
     SCNGeometryElement* indices =
-        [self makeIndicesGeometryElementForMeshIndex:aiMeshIndex
-                                              inNode:aiNode
-                                             inScene:aiScene
-                                     withIndexOffset:indexOffset
-                                              nFaces:aiMesh->mNumFaces];
+      [self makeIndicesGeometryElementForMeshIndex:aiMeshIndex
+                                            inNode:aiNode
+                                           inScene:aiScene
+                                   withIndexOffset:indexOffset
+                                            nFaces:aiMesh->mNumFaces];
     [scnGeometryElements addObject:indices];
     indexOffset += aiMesh->mNumVertices;
   }
@@ -337,7 +350,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 - (void)makeMaterialPropertyForMaterial:(const struct aiMaterial*)aiMaterial
                         withTextureType:(enum aiTextureType)aiTextureType
                         withSCNMaterial:(SCNMaterial*)material
-                                 atPath:(NSString*)path {
+                                 atPath:(NSString*)path
+{
   int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
   if (nTextures > 0) {
     NSLog(@" has %d textures", nTextures);
@@ -346,9 +360,9 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                          NULL, NULL, NULL, NULL);
     NSString* texFileName = [NSString stringWithUTF8String:&aiPath.data];
     NSString* sceneDir =
-        [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
+      [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
     NSString* texPath = [sceneDir
-        stringByAppendingString:[NSString stringWithUTF8String:&aiPath.data]];
+      stringByAppendingString:[NSString stringWithUTF8String:&aiPath.data]];
     NSLog(@"  tex path is %@", texPath);
 
     NSString* channel = @".mappingChannel";
@@ -411,32 +425,32 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     NSString* key = @"";
     if (aiTextureType == aiTextureType_DIFFUSE) {
       matColor =
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color);
+        aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_DIFFUSE, &color);
       key = @"diffuse.contents";
     } else if (aiTextureType == aiTextureType_SPECULAR) {
       matColor =
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_SPECULAR, &color);
+        aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_SPECULAR, &color);
       key = @"specular.contents";
     } else if (aiTextureType == aiTextureType_AMBIENT) {
       matColor =
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, &color);
+        aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, &color);
       key = @"ambient.contents";
     } else if (aiTextureType == aiTextureType_REFLECTION) {
       matColor =
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_REFLECTIVE, &color);
+        aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_REFLECTIVE, &color);
       key = @"reflective.contents";
     } else if (aiTextureType == aiTextureType_EMISSIVE) {
       matColor =
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_EMISSIVE, &color);
+        aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_EMISSIVE, &color);
       key = @"emissive.contents";
     } else if (aiTextureType == aiTextureType_OPACITY) {
       matColor =
-          aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
+        aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
       key = @"transparent.contents";
     }
     if (AI_SUCCESS == matColor) {
       CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-      CGFloat components[4] = {color.r, color.g, color.b, color.a};
+      CGFloat components[4] = { color.r, color.g, color.b, color.a };
       CGColorRef color = CGColorCreate(space, components);
       [material setValue:(__bridge id _Nullable)color forKey:key];
       CGColorSpaceRelease(space);
@@ -447,19 +461,20 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 - (void)applyMultiplyPropertyForMaterial:(const struct aiMaterial*)aiMaterial
                          withSCNMaterial:(SCNMaterial*)material
-                                  atPath:(NSString*)path {
+                                  atPath:(NSString*)path
+{
   struct aiColor4D color;
   color.r = 0.0f;
   color.g = 0.0f;
   color.b = 0.0f;
   int matColor = -100;
   matColor =
-      aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
+    aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
   NSString* key = @"multiply.contents";
   if (AI_SUCCESS == matColor) {
     if (color.r != 0 && color.g != 0 && color.b != 0) {
       CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-      CGFloat components[4] = {color.r, color.g, color.b, color.a};
+      CGFloat components[4] = { color.r, color.g, color.b, color.a };
       CGColorRef color = CGColorCreate(space, components);
       material.multiply.contents = (__bridge id _Nullable)(color);
       CGColorSpaceRelease(space);
@@ -470,13 +485,14 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 - (NSMutableArray*)makeMaterialsForNode:(const struct aiNode*)aiNode
                                 inScene:(const struct aiScene*)aiScene
-                                 atPath:(NSString*)path {
+                                 atPath:(NSString*)path
+{
   NSMutableArray* scnMaterials = [[NSMutableArray alloc] init];
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
     const struct aiMesh* aiMesh = aiScene->mMeshes[aiMeshIndex];
     const struct aiMaterial* aiMaterial =
-        aiScene->mMaterials[aiMesh->mMaterialIndex];
+      aiScene->mMaterials[aiMesh->mMaterialIndex];
     struct aiString name;
     aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
     NSLog(@" Material name is %@", [NSString stringWithUTF8String:&name.data]);
@@ -561,19 +577,20 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 - (SCNGeometry*)makeSCNGeometryFromAssimpNode:(const struct aiNode*)aiNode
                                       inScene:(const struct aiScene*)aiScene
                                  withVertices:(int)nVertices
-                                       atPath:(NSString*)path {
+                                       atPath:(NSString*)path
+{
   // make SCNGeometry with sources, elements and materials
   NSArray* scnGeometrySources = [self makeGeometrySourcesForNode:aiNode
                                                          inScene:aiScene
                                                     withVertices:nVertices];
   if (scnGeometrySources.count > 0) {
     NSArray* scnGeometryElements =
-        [self makeGeometryElementsforNode:aiNode inScene:aiScene];
+      [self makeGeometryElementsforNode:aiNode inScene:aiScene];
     SCNGeometry* scnGeometry =
-        [SCNGeometry geometryWithSources:scnGeometrySources
-                                elements:scnGeometryElements];
+      [SCNGeometry geometryWithSources:scnGeometrySources
+                              elements:scnGeometryElements];
     NSArray* scnMaterials =
-        [self makeMaterialsForNode:aiNode inScene:aiScene atPath:path];
+      [self makeMaterialsForNode:aiNode inScene:aiScene atPath:path];
     if (scnMaterials.count > 0) {
       scnGeometry.materials = scnMaterials;
       scnGeometry.firstMaterial = [scnMaterials objectAtIndex:0];
@@ -586,14 +603,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 #pragma mark - Make Lights
 
 - (SCNLight*)makeSCNLightTypeDirectionalForAssimpLight:
-    (const struct aiLight*)aiLight {
+  (const struct aiLight*)aiLight
+{
   SCNLight* light = [SCNLight light];
   light.type = SCNLightTypeDirectional;
   const struct aiColor3D aiColor = aiLight->mColorSpecular;
   if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0) {
     NSLog(@" Setting color: %f %f %f", aiColor.r, aiColor.g, aiColor.b);
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-    CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+    CGFloat components[4] = { aiColor.r, aiColor.g, aiColor.b, 1.0 };
     CGColorRef cgGolor = CGColorCreate(space, components);
     light.color = (__bridge id _Nullable)(cgGolor);
     CGColorSpaceRelease(space);
@@ -602,15 +620,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return light;
 }
 
-- (SCNLight*)makeSCNLightTypePointForAssimpLight:
-    (const struct aiLight*)aiLight {
+- (SCNLight*)makeSCNLightTypePointForAssimpLight:(const struct aiLight*)aiLight
+{
   SCNLight* light = [SCNLight light];
   light.type = SCNLightTypeOmni;
   const struct aiColor3D aiColor = aiLight->mColorSpecular;
   if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0) {
     NSLog(@" Setting color: %f %f %f", aiColor.r, aiColor.g, aiColor.b);
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-    CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+    CGFloat components[4] = { aiColor.r, aiColor.g, aiColor.b, 1.0 };
     CGColorRef cgGolor = CGColorCreate(space, components);
     light.color = (__bridge id _Nullable)(cgGolor);
     CGColorSpaceRelease(space);
@@ -624,14 +642,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return light;
 }
 
-- (SCNLight*)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight*)aiLight {
+- (SCNLight*)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight*)aiLight
+{
   SCNLight* light = [SCNLight light];
   light.type = SCNLightTypeOmni;
   const struct aiColor3D aiColor = aiLight->mColorSpecular;
   if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0) {
     NSLog(@" Setting color: %f %f %f", aiColor.r, aiColor.g, aiColor.b);
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-    CGFloat components[4] = {aiColor.r, aiColor.g, aiColor.b, 1.0};
+    CGFloat components[4] = { aiColor.r, aiColor.g, aiColor.b, 1.0 };
     CGColorRef cgGolor = CGColorCreate(space, components);
     light.color = (__bridge id _Nullable)(cgGolor);
     CGColorSpaceRelease(space);
@@ -650,14 +669,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 }
 
 - (SCNLight*)makeSCNLightFromAssimpNode:(const struct aiNode*)aiNode
-                                inScene:(const struct aiScene*)aiScene {
+                                inScene:(const struct aiScene*)aiScene
+{
   const struct aiString aiNodeName = aiNode->mName;
   NSString* nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
   for (int i = 0; i < aiScene->mNumLights; i++) {
     const struct aiLight* aiLight = aiScene->mLights[i];
     const struct aiString aiLightNodeName = aiLight->mName;
     NSString* lightNodeName =
-        [NSString stringWithUTF8String:&aiLightNodeName.data];
+      [NSString stringWithUTF8String:&aiLightNodeName.data];
     if ([nodeName isEqualToString:lightNodeName]) {
       NSLog(@"### Creating light for node %@", nodeName);
       NSLog(@"    ambient     %f %f %f ", aiLight->mColorAmbient.r,
@@ -690,14 +710,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 #pragma mark - Make Cameras
 - (SCNCamera*)makeSCNCameraFromAssimpNode:(const struct aiNode*)aiNode
-                                  inScene:(const struct aiScene*)aiScene {
+                                  inScene:(const struct aiScene*)aiScene
+{
   const struct aiString aiNodeName = aiNode->mName;
   NSString* nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
   for (int i = 0; i < aiScene->mNumCameras; i++) {
     const struct aiCamera* aiCamera = aiScene->mCameras[i];
     const struct aiString aiCameraName = aiCamera->mName;
     NSString* cameraNodeName =
-        [NSString stringWithUTF8String:&aiCameraName.data];
+      [NSString stringWithUTF8String:&aiCameraName.data];
     if ([nodeName isEqualToString:cameraNodeName]) {
       SCNCamera* camera = [SCNCamera camera];
       camera.xFov = aiCamera->mHorizontalFOV;
@@ -712,7 +733,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 #pragma mark - Make Skinner
 
 - (int)findNumBonesInNode:(const struct aiNode*)aiNode
-                  inScene:(const struct aiScene*)aiScene {
+                  inScene:(const struct aiScene*)aiScene
+{
   int nBones = 0;
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
     int aiMeshIndex = aiNode->mMeshes[i];
@@ -723,7 +745,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 }
 
 - (NSArray*)getBoneNamesForAssimpNode:(const struct aiNode*)aiNode
-                              inScene:(const struct aiScene*)aiScene {
+                              inScene:(const struct aiScene*)aiScene
+{
   NSMutableArray* boneNames = [[NSMutableArray alloc] init];
 
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
@@ -740,7 +763,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 }
 
 - (NSDictionary*)getBoneTransformsForAssimpNode:(const struct aiNode*)aiNode
-                                        inScene:(const struct aiScene*)aiScene {
+                                        inScene:(const struct aiScene*)aiScene
+{
   NSMutableDictionary* boneTransforms = [[NSMutableDictionary alloc] init];
 
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
@@ -753,10 +777,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
       if ([boneTransforms valueForKey:key] == nil) {
         const struct aiMatrix4x4 aiNodeMatrix = aiBone->mOffsetMatrix;
         GLKMatrix4 glkBoneMatrix = GLKMatrix4Make(
-            aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
-            aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
-            aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
-            aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
+          aiNodeMatrix.a1, aiNodeMatrix.b1, aiNodeMatrix.c1, aiNodeMatrix.d1,
+          aiNodeMatrix.a2, aiNodeMatrix.b2, aiNodeMatrix.c2, aiNodeMatrix.d2,
+          aiNodeMatrix.a3, aiNodeMatrix.b3, aiNodeMatrix.c3, aiNodeMatrix.d3,
+          aiNodeMatrix.a4, aiNodeMatrix.b4, aiNodeMatrix.c4, aiNodeMatrix.d4);
 
         SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkBoneMatrix);
         [boneTransforms setValue:[NSValue valueWithSCNMatrix4:scnMatrix]
@@ -769,7 +793,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 }
 
 - (NSArray*)getTransformsForBones:(NSArray*)boneNames
-                   fromTransforms:(NSDictionary*)boneTransforms {
+                   fromTransforms:(NSDictionary*)boneTransforms
+{
   NSMutableArray* transforms = [[NSMutableArray alloc] init];
   for (NSString* boneName in boneNames) {
     [transforms addObject:[boneTransforms valueForKey:boneName]];
@@ -777,30 +802,32 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   return transforms;
 }
 
-- (NSArray*)findBoneNodesInScene:(SCNScene*)scene forBones:(NSArray*)boneNames {
+- (NSArray*)findBoneNodesInScene:(SCNScene*)scene forBones:(NSArray*)boneNames
+{
   NSMutableArray* boneNodes = [[NSMutableArray alloc] init];
   for (NSString* boneName in boneNames) {
     SCNNode* boneNode =
-        [scene.rootNode childNodeWithName:boneName recursively:YES];
+      [scene.rootNode childNodeWithName:boneName recursively:YES];
     [boneNodes addObject:boneNode];
   }
   return boneNodes;
 }
 
-- (SCNNode*)findSkeletonNodeFromBoneNodes:(NSArray*)boneNodes {
+- (SCNNode*)findSkeletonNodeFromBoneNodes:(NSArray*)boneNodes
+{
   NSMutableDictionary* nodeDepths = [[NSMutableDictionary alloc] init];
   int minDepth = -1;
   for (SCNNode* boneNode in boneNodes) {
     int depth = [self findDepthOfNodeFromRoot:boneNode];
-    NSLog(@" bone with depth is (min depth): %@ -> %d ( %d )", boneNode.name, depth, minDepth);
+    NSLog(@" bone with depth is (min depth): %@ -> %d ( %d )", boneNode.name,
+          depth, minDepth);
     if (minDepth == -1 || (depth <= minDepth)) {
       minDepth = depth;
       NSString* key = [NSNumber numberWithInt:minDepth].stringValue;
       NSMutableArray* minDepthNodes = [nodeDepths valueForKey:key];
-      if(minDepthNodes == nil) {
+      if (minDepthNodes == nil) {
         minDepthNodes = [[NSMutableArray alloc] init];
-        [nodeDepths setValue:minDepthNodes
-                      forKey:key];
+        [nodeDepths setValue:minDepthNodes forKey:key];
       }
       [minDepthNodes addObject:boneNode];
     }
@@ -809,14 +836,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
   NSArray* minDepthNodes = [nodeDepths valueForKey:minDepthKey];
   NSLog(@" min depth nodes are: %@", minDepthNodes);
   SCNNode* skeletonRootNode = [minDepthNodes objectAtIndex:0];
-  if(minDepthNodes.count > 1) {
+  if (minDepthNodes.count > 1) {
     return skeletonRootNode.parentNode;
   } else {
     return skeletonRootNode;
   }
 }
 
-- (int)findDepthOfNodeFromRoot:(SCNNode*)node {
+- (int)findDepthOfNodeFromRoot:(SCNNode*)node
+{
   int depth = 0;
   SCNNode* pNode = node;
   while (pNode.parentNode) {
@@ -827,7 +855,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 }
 
 - (int)findMaxWeightsForNode:(const struct aiNode*)aiNode
-                     inScene:(const struct aiScene*)aiScene {
+                     inScene:(const struct aiScene*)aiScene
+{
   int maxWeights = 0;
 
   for (int i = 0; i < aiNode->mNumMeshes; i++) {
@@ -845,8 +874,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         } else {
           NSNumber* weightCounts = [meshWeights valueForKey:vertex.stringValue];
           [meshWeights
-              setValue:[NSNumber numberWithInt:(weightCounts.intValue + 1)]
-                forKey:vertex.stringValue];
+            setValue:[NSNumber numberWithInt:(weightCounts.intValue + 1)]
+              forKey:vertex.stringValue];
         }
       }
     }
@@ -868,7 +897,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 makeBoneWeightsGeometrySourceAtNode:(const struct aiNode*)aiNode
                             inScene:(const struct aiScene*)aiScene
                        withVertices:(int)nVertices
-                         maxWeights:(int)maxWeights {
+                         maxWeights:(int)maxWeights
+{
   float nodeGeometryWeights[nVertices * maxWeights];
   int weightCounter = 0;
 
@@ -888,7 +918,7 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode*)aiNode
           [meshWeights setValue:weights forKey:vertex.stringValue];
         } else {
           NSMutableArray* weights =
-              [meshWeights valueForKey:vertex.stringValue];
+            [meshWeights valueForKey:vertex.stringValue];
           [weights addObject:weight];
         }
       }
@@ -913,16 +943,16 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode*)aiNode
   assert(weightCounter == nVertices * maxWeights);
 
   SCNGeometrySource* boneWeightsSource = [SCNGeometrySource
-      geometrySourceWithData:[NSData dataWithBytes:nodeGeometryWeights
-                                            length:nVertices * maxWeights *
-                                                   sizeof(float)]
-                    semantic:SCNGeometrySourceSemanticBoneWeights
-                 vectorCount:nVertices
-             floatComponents:YES
-         componentsPerVector:maxWeights
-           bytesPerComponent:sizeof(float)
-                  dataOffset:0
-                  dataStride:maxWeights * sizeof(float)];
+    geometrySourceWithData:[NSData dataWithBytes:nodeGeometryWeights
+                                          length:nVertices * maxWeights *
+                                                 sizeof(float)]
+                  semantic:SCNGeometrySourceSemanticBoneWeights
+               vectorCount:nVertices
+           floatComponents:YES
+       componentsPerVector:maxWeights
+         bytesPerComponent:sizeof(float)
+                dataOffset:0
+                dataStride:maxWeights * sizeof(float)];
   return boneWeightsSource;
 }
 
@@ -931,7 +961,8 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
                             inScene:(const struct aiScene*)aiScene
                        withVertices:(int)nVertices
                          maxWeights:(int)maxWeights
-                          boneNames:(NSArray*)boneNames {
+                          boneNames:(NSArray*)boneNames
+{
   NSLog(@" |--| Making bone indices geometry source: %@", boneNames);
   short nodeGeometryBoneIndices[nVertices * maxWeights];
   int indexCounter = 0;
@@ -948,14 +979,14 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         const struct aiString name = aiBone->mName;
         NSString* boneName = [NSString stringWithUTF8String:&name.data];
         NSNumber* boneIndex =
-            [NSNumber numberWithInteger:[boneNames indexOfObject:boneName]];
+          [NSNumber numberWithInteger:[boneNames indexOfObject:boneName]];
         if ([meshBoneIndices valueForKey:vertex.stringValue] == nil) {
           NSMutableArray* boneIndices = [[NSMutableArray alloc] init];
           [boneIndices addObject:boneIndex];
           [meshBoneIndices setValue:boneIndices forKey:vertex.stringValue];
         } else {
           NSMutableArray* boneIndices =
-              [meshBoneIndices valueForKey:vertex.stringValue];
+            [meshBoneIndices valueForKey:vertex.stringValue];
           [boneIndices addObject:boneIndex];
         }
       }
@@ -965,7 +996,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
     for (int j = 0; j < aiMesh->mNumVertices; j++) {
       NSNumber* vertex = [NSNumber numberWithInt:j];
       NSMutableArray* boneIndices =
-          [meshBoneIndices valueForKey:vertex.stringValue];
+        [meshBoneIndices valueForKey:vertex.stringValue];
       int zeroIndices = maxWeights - boneIndices.count;
       for (NSNumber* boneIndex in boneIndices) {
         nodeGeometryBoneIndices[indexCounter++] = [boneIndex shortValue];
@@ -980,26 +1011,27 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   assert(indexCounter == nVertices * maxWeights);
 
   SCNGeometrySource* boneIndicesSource = [SCNGeometrySource
-      geometrySourceWithData:[NSData dataWithBytes:nodeGeometryBoneIndices
-                                            length:nVertices * maxWeights *
-                                                   sizeof(short)]
-                    semantic:SCNGeometrySourceSemanticBoneIndices
-                 vectorCount:nVertices
-             floatComponents:NO
-         componentsPerVector:maxWeights
-           bytesPerComponent:sizeof(short)
-                  dataOffset:0
-                  dataStride:maxWeights * sizeof(short)];
+    geometrySourceWithData:[NSData dataWithBytes:nodeGeometryBoneIndices
+                                          length:nVertices * maxWeights *
+                                                 sizeof(short)]
+                  semantic:SCNGeometrySourceSemanticBoneIndices
+               vectorCount:nVertices
+           floatComponents:NO
+       componentsPerVector:maxWeights
+         bytesPerComponent:sizeof(short)
+                dataOffset:0
+                dataStride:maxWeights * sizeof(short)];
   return boneIndicesSource;
 }
 
-- (void)buildSkeletonDatabaseForScene:(SCNScene*)scene {
+- (void)buildSkeletonDatabaseForScene:(SCNScene*)scene
+{
   self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
   NSLog(@" |--| bone names %lu: %@", self.boneNames.count, self.boneNames);
   NSLog(@" |--| unique bone names %lu: %@", self.uniqueBoneNames.count,
         self.uniqueBoneNames);
   self.uniqueBoneNodes =
-      [self findBoneNodesInScene:scene forBones:self.uniqueBoneNames];
+    [self findBoneNodesInScene:scene forBones:self.uniqueBoneNames];
   NSLog(@" |--| unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
         self.uniqueBoneNodes);
   self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
@@ -1012,7 +1044,8 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
 
 - (void)makeSkinnerForAssimpNode:(const struct aiNode*)aiNode
                          inScene:(const struct aiScene*)aiScene
-                        scnScene:(SCNScene*)scene {
+                        scnScene:(SCNScene*)scene
+{
   int nBones = [self findNumBonesInNode:aiNode inScene:aiScene];
   const struct aiString* aiNodeName = &aiNode->mName;
   NSString* nodeName = [NSString stringWithUTF8String:aiNodeName->data];
@@ -1024,24 +1057,24 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
           nodeName, nVertices, maxWeights, nBones);
 
     SCNGeometrySource* boneWeights =
-        [self makeBoneWeightsGeometrySourceAtNode:aiNode
-                                          inScene:aiScene
-                                     withVertices:nVertices
-                                       maxWeights:maxWeights];
+      [self makeBoneWeightsGeometrySourceAtNode:aiNode
+                                        inScene:aiScene
+                                   withVertices:nVertices
+                                     maxWeights:maxWeights];
     SCNGeometrySource* boneIndices =
-        [self makeBoneIndicesGeometrySourceAtNode:aiNode
-                                          inScene:aiScene
-                                     withVertices:nVertices
-                                       maxWeights:maxWeights
-                                        boneNames:self.uniqueBoneNames];
+      [self makeBoneIndicesGeometrySourceAtNode:aiNode
+                                        inScene:aiScene
+                                   withVertices:nVertices
+                                     maxWeights:maxWeights
+                                      boneNames:self.uniqueBoneNames];
 
     SCNNode* node = [scene.rootNode childNodeWithName:nodeName recursively:YES];
     SCNSkinner* skinner =
-        [SCNSkinner skinnerWithBaseGeometry:node.geometry
-                                      bones:self.uniqueBoneNodes
-                  boneInverseBindTransforms:self.uniqueBoneTransforms
-                                boneWeights:boneWeights
-                                boneIndices:boneIndices];
+      [SCNSkinner skinnerWithBaseGeometry:node.geometry
+                                    bones:self.uniqueBoneNodes
+                boneInverseBindTransforms:self.uniqueBoneTransforms
+                              boneWeights:boneWeights
+                              boneIndices:boneIndices];
     skinner.skeleton = self.skelton;
     NSLog(@" assigned skinner %@ skeleton: %@", skinner, skinner.skeleton);
     node.skinner = skinner;
@@ -1053,22 +1086,25 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   }
 }
 
-# pragma mark - Animations
+#pragma mark - Animations
 
 - (void)createAnimationsFromScene:(const struct aiScene*)aiScene
                         withScene:(SCNAssimpScene*)scene
-                           atPath:(NSString*)path {
-  NSLog(@" ========= Number of animations in scene: %d", aiScene->mNumAnimations);
+                           atPath:(NSString*)path
+{
+  NSLog(@" ========= Number of animations in scene: %d",
+        aiScene->mNumAnimations);
   for (int i = 0; i < aiScene->mNumAnimations; i++) {
     NSLog(@"--- Animation data for animation at index: %d", i);
     const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
-    NSString* animName = [[[path lastPathComponent] stringByDeletingPathExtension]
-                stringByAppendingString:@"-1"];
+    NSString* animName = [[[path lastPathComponent]
+      stringByDeletingPathExtension] stringByAppendingString:@"-1"];
     NSLog(@" Generated animation name: %@", animName);
     NSMutableDictionary* currentAnimation = [[NSMutableDictionary alloc] init];
-    NSLog(@" This animation %@ has %d channels with duration %f ticks per sec: %f", animName,
-          aiAnimation->mNumChannels, aiAnimation->mDuration,
-          aiAnimation->mTicksPerSecond);
+    NSLog(
+      @" This animation %@ has %d channels with duration %f ticks per sec: %f",
+      animName, aiAnimation->mNumChannels, aiAnimation->mDuration,
+      aiAnimation->mTicksPerSecond);
     float duration;
     if (aiAnimation->mTicksPerSecond != 0) {
       duration = aiAnimation->mDuration / aiAnimation->mTicksPerSecond;
@@ -1083,32 +1119,32 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
             @"keyframes",
             name, aiNodeAnim->mNumPositionKeys, aiNodeAnim->mNumRotationKeys,
             aiNodeAnim->mNumScalingKeys);
-      
+
       // create a lookup for all animation keys
       NSMutableDictionary* channelKeys = [[NSMutableDictionary alloc] init];
-      
+
       // create translation animation
       NSMutableArray* translationValues = [[NSMutableArray alloc] init];
       NSMutableArray* translationTimes = [[NSMutableArray alloc] init];
       for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++) {
         const struct aiVectorKey* aiTranslationKey =
-        &aiNodeAnim->mPositionKeys[k];
+          &aiNodeAnim->mPositionKeys[k];
         double keyTime = aiTranslationKey->mTime;
         const struct aiVector3D aiTranslation = aiTranslationKey->mValue;
         [translationTimes addObject:[NSNumber numberWithFloat:keyTime]];
-        SCNVector3 pos = SCNVector3Make(aiTranslation.x, aiTranslation.y,
-                                        aiTranslation.z);
+        SCNVector3 pos =
+          SCNVector3Make(aiTranslation.x, aiTranslation.y, aiTranslation.z);
         [translationValues addObject:[NSValue valueWithSCNVector3:pos]];
       }
       CAKeyframeAnimation* translationKeyFrameAnim =
-      [CAKeyframeAnimation animationWithKeyPath:@"position"];
+        [CAKeyframeAnimation animationWithKeyPath:@"position"];
       translationKeyFrameAnim.values = translationValues;
       translationKeyFrameAnim.keyTimes = translationTimes;
       translationKeyFrameAnim.speed = 1;
       translationKeyFrameAnim.repeatCount = 10;
       translationKeyFrameAnim.duration = duration;
       [channelKeys setValue:translationKeyFrameAnim forKey:@"position"];
-      
+
       // create rotation animation
       NSMutableArray* rotationValues = [[NSMutableArray alloc] init];
       NSMutableArray* rotationTimes = [[NSMutableArray alloc] init];
@@ -1117,18 +1153,19 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         double keyTime = aiQuatKey->mTime;
         const struct aiQuaternion aiQuaternion = aiQuatKey->mValue;
         [rotationTimes addObject:[NSNumber numberWithFloat:keyTime]];
-        SCNVector4 quat = SCNVector4Make(aiQuaternion.x, aiQuaternion.y, aiQuaternion.z, aiQuaternion.w);
+        SCNVector4 quat = SCNVector4Make(aiQuaternion.x, aiQuaternion.y,
+                                         aiQuaternion.z, aiQuaternion.w);
         [rotationValues addObject:[NSValue valueWithSCNVector4:quat]];
       }
       CAKeyframeAnimation* rotationKeyFrameAnim =
-      [CAKeyframeAnimation animationWithKeyPath:@"orientation"];
+        [CAKeyframeAnimation animationWithKeyPath:@"orientation"];
       rotationKeyFrameAnim.values = rotationValues;
       rotationKeyFrameAnim.keyTimes = rotationTimes;
       rotationKeyFrameAnim.speed = 1;
       rotationKeyFrameAnim.repeatCount = 10;
       rotationKeyFrameAnim.duration = duration;
       [channelKeys setValue:rotationKeyFrameAnim forKey:@"orientation"];
-      
+
       // create scale animation
       NSMutableArray* scaleValues = [[NSMutableArray alloc] init];
       NSMutableArray* scaleTimes = [[NSMutableArray alloc] init];
@@ -1141,18 +1178,20 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         [scaleValues addObject:[NSValue valueWithSCNVector3:scale]];
       }
       CAKeyframeAnimation* scaleKeyFrameAnim =
-      [CAKeyframeAnimation animationWithKeyPath:@"scale"];
+        [CAKeyframeAnimation animationWithKeyPath:@"scale"];
       scaleKeyFrameAnim.values = scaleValues;
       scaleKeyFrameAnim.keyTimes = scaleTimes;
       scaleKeyFrameAnim.speed = 1;
       scaleKeyFrameAnim.repeatCount = 10;
       scaleKeyFrameAnim.duration = duration;
       [channelKeys setValue:scaleKeyFrameAnim forKey:@"scale"];
-      
+
       [currentAnimation setValue:channelKeys forKey:name];
     }
-    
-    SCNAssimpAnimation* animation = [[SCNAssimpAnimation alloc] initWithKey:animName frameAnims:currentAnimation];
+
+    SCNAssimpAnimation* animation =
+      [[SCNAssimpAnimation alloc] initWithKey:animName
+                                   frameAnims:currentAnimation];
     [scene.animations setValue:animation forKey:animName];
   }
 }

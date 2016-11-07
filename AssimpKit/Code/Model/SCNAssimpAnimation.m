@@ -8,16 +8,18 @@
 
 #import "SCNAssimpAnimation.h"
 
-@interface SCNAssimpAnimation ()
+@interface
+SCNAssimpAnimation ()
 
-@property(readwrite, nonatomic) NSString* key;
-@property(readwrite, nonatomic) NSDictionary* frameAnims;
+@property (readwrite, nonatomic) NSString* key;
+@property (readwrite, nonatomic) NSDictionary* frameAnims;
 
 @end
 
 @implementation SCNAssimpAnimation
 
--(id)initWithKey:(NSString*)key frameAnims:(NSDictionary*)anims {
+- (id)initWithKey:(NSString*)key frameAnims:(NSDictionary*)anims
+{
   self = [super init];
   if (self) {
     self.key = key;

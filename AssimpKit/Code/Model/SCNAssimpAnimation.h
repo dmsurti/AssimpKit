@@ -10,10 +10,9 @@
 
 @interface SCNAssimpAnimation : SCNScene
 
-@property(readonly, nonatomic) NSString* key;
-@property(readonly, nonatomic) NSDictionary* frameAnims;
+@property (readonly, nonatomic) NSString* key;
+@property (readonly, nonatomic) NSDictionary* frameAnims;
 
--(id)initWithKey:(NSString*)key frameAnims:(NSDictionary*)anims;
-
+- (id)initWithKey:(NSString*)key frameAnims:(NSDictionary*)anims;
 
 @end

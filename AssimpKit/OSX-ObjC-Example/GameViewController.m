@@ -11,13 +11,14 @@
 
 @implementation GameViewController
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
   //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
   // @"models-nonbsd/3DS/jeep1.3ds";
   NSString* filePath =
-      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
+    @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
   SCNAssimpScene* scene =
-      [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
+    [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
   // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
   SCNAssimpAnimation* walkAnim = [scene animationForKey:@"astroBoy_walk-1"];
   [scene addAnimation:walkAnim];
@@ -32,7 +33,7 @@
 
   // configure the view
   self.gameView.backgroundColor = [NSColor whiteColor];
-  
+
   self.gameView.playing = YES;
 }
 

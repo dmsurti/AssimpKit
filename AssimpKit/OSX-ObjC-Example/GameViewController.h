@@ -12,6 +12,6 @@
 
 @interface GameViewController : NSViewController
 
-@property (assign) IBOutlet GameView *gameView;
+@property (assign) IBOutlet GameView* gameView;
 
 @end

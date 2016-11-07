@@ -6,8 +6,8 @@
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <SceneKit/SceneKit.h>
+#import <UIKit/UIKit.h>
 
 @interface GameViewController : UIViewController
 
