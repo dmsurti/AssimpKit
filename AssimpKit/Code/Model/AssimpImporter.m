@@ -1135,12 +1135,12 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
         [scaleValues addObject:[NSValue valueWithSCNVector3:scale]];
       }
       CAKeyframeAnimation* scaleKeyFrameAnim =
-      [[CAKeyframeAnimation alloc] init];
-      scaleKeyFrameAnim.keyPath = @"scale";
-      scaleKeyFrameAnim.speed = 1;
-      scaleKeyFrameAnim.repeatCount = 10;
+      [CAKeyframeAnimation animationWithKeyPath:@"scale"];
       scaleKeyFrameAnim.values = scaleValues;
       scaleKeyFrameAnim.keyTimes = scaleTimes;
+      scaleKeyFrameAnim.speed = 1;
+      scaleKeyFrameAnim.repeatCount = 10;
+      scaleKeyFrameAnim.duration = aiAnimation->mDuration;
       [channelKeys setValue:scaleKeyFrameAnim forKey:@"scale"];
       
       [currentAnimation setValue:channelKeys forKey:name];
