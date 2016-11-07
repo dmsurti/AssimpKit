@@ -1116,10 +1116,11 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       }
       CAKeyframeAnimation* rotationKeyFrameAnim =
       [CAKeyframeAnimation animationWithKeyPath:@"orientation"];
-      rotationKeyFrameAnim.speed = 1;
-      rotationKeyFrameAnim.repeatCount = 10;
       rotationKeyFrameAnim.values = rotationValues;
       rotationKeyFrameAnim.keyTimes = rotationTimes;
+      rotationKeyFrameAnim.speed = 1;
+      rotationKeyFrameAnim.repeatCount = 10;
+      rotationKeyFrameAnim.duration = aiAnimation->mDuration;
       [channelKeys setValue:rotationKeyFrameAnim forKey:@"orientation"];
       
       // create scale animation
