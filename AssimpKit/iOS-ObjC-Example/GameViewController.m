@@ -18,16 +18,18 @@
   NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                        NSUserDomainMask, YES);
   NSString* docsDir = [paths objectAtIndex:0];
-  NSString* boy = [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
+  NSString* explorer = [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
   NSString* bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
-  SCNAssimpScene* scene = [SCNScene assimpSceneWithURL:[NSURL URLWithString:boy]];
+  SCNAssimpScene* scene = [SCNScene assimpSceneWithURL:[NSURL URLWithString:bob]];
   
   // Now we can access the file's contents
   NSString* runAnim = [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
   NSString* bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
   AssimpImporter* assimpImporter = [[AssimpImporter alloc] init];
-  SCNAssimpScene* jumpStartScene = [assimpImporter importScene:runAnim];
-  SCNAssimpAnimation* jumpStartAnim = [jumpStartScene animationForKey:@"jump_start-1"];
+  SCNAssimpScene* jumpStartScene = [assimpImporter importScene:bobAnim];
+  NSString* bobId = @"Bob-1";
+  NSString* jumpId = @"jump_start-1";
+  SCNAssimpAnimation* jumpStartAnim = [jumpStartScene animationForKey:bobId];
   [scene addAnimation:jumpStartAnim];
   
   // retrieve the SCNView
