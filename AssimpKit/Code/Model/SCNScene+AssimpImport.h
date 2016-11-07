@@ -8,10 +8,12 @@
 
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
+#import "SCNAssimpScene.h"
+
 
 @interface SCNScene (AssimpImport)
 
-+ (instancetype)assimpSceneNamed:(NSString*)name;
-+ (instancetype)assimpSceneWithURL:(NSURL*)url;
++ (SCNAssimpScene*)assimpSceneNamed:(NSString*)name;
++ (SCNAssimpScene*)assimpSceneWithURL:(NSURL*)url;
 
 @end
