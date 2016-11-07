@@ -1054,4 +1054,98 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
   }
 }
 
+# pragma mark - Animations
+
+- (void)createAnimationsFromScene:(const struct aiScene*)aiScene
+                        withScene:(SCNAssimpScene*)scene
+                           atPath:(NSString*)path {
+  NSLog(@" ========= Number of animations in scene: %d", aiScene->mNumAnimations);
+  for (int i = 0; i < aiScene->mNumAnimations; i++) {
+    NSLog(@"--- Animation data for animation at index: %d", i);
+    const struct aiAnimation* aiAnimation = aiScene->mAnimations[i];
+    NSString* animName = [[[path lastPathComponent] stringByDeletingPathExtension]
+                stringByAppendingString:@"-1"];
+    NSLog(@" Generated animation name: %@", animName);
+    NSMutableDictionary* currentAnimation = [[NSMutableDictionary alloc] init];
+    NSLog(@" This animation %@ has %d channels", animName,
+          aiAnimation->mNumChannels);
+    for (int j = 0; j < aiAnimation->mNumChannels; j++) {
+      const struct aiNodeAnim* aiNodeAnim = aiAnimation->mChannels[j];
+      const struct aiString* aiNodeName = &aiNodeAnim->mNodeName;
+      NSString* name = [NSString stringWithUTF8String:aiNodeName->data];
+      NSLog(@" The channel %@ has data for %d position, %d rotation, %d scale "
+            @"keyframes",
+            name, aiNodeAnim->mNumPositionKeys, aiNodeAnim->mNumRotationKeys,
+            aiNodeAnim->mNumScalingKeys);
+      
+      // create a lookup for all animation keys
+      NSMutableDictionary* channelKeys = [[NSMutableDictionary alloc] init];
+      
+      // create translation animation
+      NSMutableArray* translationValues = [[NSMutableArray alloc] init];
+      NSMutableArray* translationTimes = [[NSMutableArray alloc] init];
+      for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++) {
+        const struct aiVectorKey* aiTranslationKey =
+        &aiNodeAnim->mPositionKeys[k];
+        double keyTime = aiTranslationKey->mTime;
+        const struct aiVector3D aiTranslation = aiTranslationKey->mValue;
+        [translationTimes addObject:[NSNumber numberWithDouble:keyTime]];
+        SCNVector3 pos = SCNVector3Make(aiTranslation.x, aiTranslation.y,
+                                        aiTranslation.z);
+        [translationValues addObject:[NSValue valueWithSCNVector3:pos]];
+      }
+      CAKeyframeAnimation* translationKeyFrameAnim =
+      [CAKeyframeAnimation animationWithKeyPath:@"position"];
+      translationKeyFrameAnim.values = translationValues;
+      translationKeyFrameAnim.keyTimes = translationTimes;
+      translationKeyFrameAnim.speed = 1;
+      translationKeyFrameAnim.repeatCount = 10;
+      
+      // create rotation animation
+      NSMutableArray* rotationValues = [[NSMutableArray alloc] init];
+      NSMutableArray* rotationTimes = [[NSMutableArray alloc] init];
+      for (int k = 0; k < aiNodeAnim->mNumRotationKeys; k++) {
+        const struct aiQuatKey* aiQuatKey = &aiNodeAnim->mRotationKeys[k];
+        double keyTime = aiQuatKey->mTime;
+        const struct aiQuaternion aiQuaternion = aiQuatKey->mValue;
+        [rotationTimes addObject:[NSNumber numberWithDouble:keyTime]];
+        SCNVector4 quat = SCNVector4Make(aiQuaternion.x, aiQuaternion.y, aiQuaternion.z, aiQuaternion.w);
+        [rotationValues addObject:[NSValue valueWithSCNVector4:quat]];
+      }
+      CAKeyframeAnimation* rotationKeyFrameAnim =
+      [CAKeyframeAnimation animationWithKeyPath:@"orientation"];
+      rotationKeyFrameAnim.speed = 1;
+      rotationKeyFrameAnim.repeatCount = 10;
+      rotationKeyFrameAnim.values = rotationValues;
+      rotationKeyFrameAnim.keyTimes = rotationTimes;
+      [channelKeys setValue:rotationKeyFrameAnim forKey:@"orientation"];
+      
+      // create scale animation
+      NSMutableArray* scaleValues = [[NSMutableArray alloc] init];
+      NSMutableArray* scaleTimes = [[NSMutableArray alloc] init];
+      for (int k = 0; k < aiNodeAnim->mNumScalingKeys; k++) {
+        const struct aiVectorKey* aiScaleKey = &aiNodeAnim->mScalingKeys[k];
+        double keyTime = aiScaleKey->mTime;
+        const struct aiVector3D aiScale = aiScaleKey->mValue;
+        [scaleTimes addObject:[NSNumber numberWithDouble:keyTime]];
+        SCNVector3 scale = SCNVector3Make(aiScale.x, aiScale.y, aiScale.z);
+        [scaleValues addObject:[NSValue valueWithSCNVector3:scale]];
+      }
+      CAKeyframeAnimation* scaleKeyFrameAnim =
+      [[CAKeyframeAnimation alloc] init];
+      scaleKeyFrameAnim.keyPath = @"scale";
+      scaleKeyFrameAnim.speed = 1;
+      scaleKeyFrameAnim.repeatCount = 10;
+      scaleKeyFrameAnim.values = scaleValues;
+      scaleKeyFrameAnim.keyTimes = scaleTimes;
+      [channelKeys setValue:scaleKeyFrameAnim forKey:@"scale"];
+      
+      [currentAnimation setValue:channelKeys forKey:name];
+    }
+    
+    SCNAssimpAnimation* animation = [[SCNAssimpAnimation alloc] initWithKey:animName frameAnims:currentAnimation];
+    [scene.animations setValue:animation forKey:animName];
+  }
+}
+
 @end
