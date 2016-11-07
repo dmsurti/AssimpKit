@@ -902,7 +902,7 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode*)aiNode
       int zeroWeights = maxWeights - weights.count;
       for (NSNumber* weight in weights) {
         nodeGeometryWeights[weightCounter++] = [weight floatValue];
-        NSLog(@" adding weight: %f", weight.floatValue);
+        // NSLog(@" adding weight: %f", weight.floatValue);
       }
       for (int k = 0; k < zeroWeights; k++) {
         nodeGeometryWeights[weightCounter++] = 0.0;
@@ -970,7 +970,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       int zeroIndices = maxWeights - boneIndices.count;
       for (NSNumber* boneIndex in boneIndices) {
         nodeGeometryBoneIndices[indexCounter++] = [boneIndex shortValue];
-        NSLog(@"  adding bone index: %d", boneIndex.shortValue);
+        // NSLog(@"  adding bone index: %d", boneIndex.shortValue);
       }
       for (int k = 0; k < zeroIndices; k++) {
         nodeGeometryBoneIndices[indexCounter++] = 0;
@@ -1003,8 +1003,6 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       [self findBoneNodesInScene:scene forBones:self.uniqueBoneNames];
   NSLog(@" |--| unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
         self.uniqueBoneNodes);
-  self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
-                                           fromTransforms:self.boneTransforms];
   self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
                                            fromTransforms:self.boneTransforms];
   NSLog(@" |--| unique bone transforms %lu: %@",
