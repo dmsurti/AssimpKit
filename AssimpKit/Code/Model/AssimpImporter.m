@@ -1067,8 +1067,15 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
                 stringByAppendingString:@"-1"];
     NSLog(@" Generated animation name: %@", animName);
     NSMutableDictionary* currentAnimation = [[NSMutableDictionary alloc] init];
-    NSLog(@" This animation %@ has %d channels", animName,
-          aiAnimation->mNumChannels);
+    NSLog(@" This animation %@ has %d channels with duration %f ticks per sec: %f", animName,
+          aiAnimation->mNumChannels, aiAnimation->mDuration,
+          aiAnimation->mTicksPerSecond);
+    float duration;
+    if (aiAnimation->mTicksPerSecond != 0) {
+      duration = aiAnimation->mDuration / aiAnimation->mTicksPerSecond;
+    } else {
+      duration = aiAnimation->mDuration;
+    }
     for (int j = 0; j < aiAnimation->mNumChannels; j++) {
       const struct aiNodeAnim* aiNodeAnim = aiAnimation->mChannels[j];
       const struct aiString* aiNodeName = &aiNodeAnim->mNodeName;
@@ -1100,7 +1107,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       translationKeyFrameAnim.keyTimes = translationTimes;
       translationKeyFrameAnim.speed = 1;
       translationKeyFrameAnim.repeatCount = 10;
-      translationKeyFrameAnim.duration = aiAnimation->mDuration;
+      translationKeyFrameAnim.duration = duration;
       [channelKeys setValue:translationKeyFrameAnim forKey:@"position"];
       
       // create rotation animation
@@ -1120,7 +1127,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       rotationKeyFrameAnim.keyTimes = rotationTimes;
       rotationKeyFrameAnim.speed = 1;
       rotationKeyFrameAnim.repeatCount = 10;
-      rotationKeyFrameAnim.duration = aiAnimation->mDuration;
+      rotationKeyFrameAnim.duration = duration;
       [channelKeys setValue:rotationKeyFrameAnim forKey:@"orientation"];
       
       // create scale animation
@@ -1140,7 +1147,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode*)aiNode
       scaleKeyFrameAnim.keyTimes = scaleTimes;
       scaleKeyFrameAnim.speed = 1;
       scaleKeyFrameAnim.repeatCount = 10;
-      scaleKeyFrameAnim.duration = aiAnimation->mDuration;
+      scaleKeyFrameAnim.duration = duration;
       [channelKeys setValue:scaleKeyFrameAnim forKey:@"scale"];
       
       [currentAnimation setValue:channelKeys forKey:name];
