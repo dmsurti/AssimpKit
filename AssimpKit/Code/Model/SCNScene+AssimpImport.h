@@ -12,7 +12,7 @@
 
 @interface SCNScene (AssimpImport)
 
-+ (SCNAssimpScene*)assimpSceneNamed:(NSString*)name;
-+ (SCNAssimpScene*)assimpSceneWithURL:(NSURL*)url;
++ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name;
++ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url;
 
 @end

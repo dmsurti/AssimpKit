@@ -11,9 +11,9 @@
 
 @interface SCNAssimpScene : SCNScene
 
-@property (readonly, nonatomic) NSMutableDictionary* animations;
+@property (readonly, nonatomic) NSMutableDictionary *animations;
 
-- (void)addAnimation:(SCNAssimpAnimation*)assimpAnimation;
-- (SCNAssimpAnimation*)animationForKey:(NSString*)key;
+- (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation;
+- (SCNAssimpAnimation *)animationForKey:(NSString *)key;
 
 @end

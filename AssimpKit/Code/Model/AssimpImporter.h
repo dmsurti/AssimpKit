@@ -13,6 +13,6 @@
 
 @interface AssimpImporter : NSObject
 
-- (SCNAssimpScene*)importScene:(NSString*)filePath;
+- (SCNAssimpScene *)importScene:(NSString *)filePath;
 
 @end

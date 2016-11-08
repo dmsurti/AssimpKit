@@ -8,10 +8,9 @@
 
 #import "SCNAssimpScene.h"
 
-@interface
-SCNAssimpScene ()
+@interface SCNAssimpScene ()
 
-@property (readwrite, nonatomic) NSMutableDictionary* animations;
+@property (readwrite, nonatomic) NSMutableDictionary *animations;
 
 @end
 
@@ -20,40 +19,46 @@ SCNAssimpScene ()
 - (id)init
 {
   self = [super init];
-  if (self) {
+  if (self)
+  {
     self.animations = [[NSMutableDictionary alloc] init];
   }
   return self;
 }
 
-- (void)addAnimation:(SCNAssimpAnimation*)assimpAnimation
+- (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation
 {
-  NSDictionary* frameAnims = assimpAnimation.frameAnims;
-  for (NSString* nodeName in frameAnims.allKeys) {
-    SCNNode* boneNode =
-      [self.rootNode childNodeWithName:nodeName recursively:YES];
-    NSDictionary* channelKeys = [frameAnims valueForKey:nodeName];
-    CAKeyframeAnimation* posAnim = [channelKeys valueForKey:@"position"];
-    CAKeyframeAnimation* quatAnim = [channelKeys valueForKey:@"orientation"];
-    CAKeyframeAnimation* scaleAnim = [channelKeys valueForKey:@"scale"];
+  NSDictionary *frameAnims = assimpAnimation.frameAnims;
+  for (NSString *nodeName in frameAnims.allKeys)
+  {
+    SCNNode *boneNode =
+        [self.rootNode childNodeWithName:nodeName
+                             recursively:YES];
+    NSDictionary *channelKeys = [frameAnims valueForKey:nodeName];
+    CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
+    CAKeyframeAnimation *quatAnim = [channelKeys valueForKey:@"orientation"];
+    CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"scale"];
     NSLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
           quatAnim);
-    if (posAnim) {
+    if (posAnim)
+    {
       [boneNode addAnimation:posAnim
                       forKey:[nodeName stringByAppendingString:@"-pos"]];
     }
-    if (quatAnim) {
+    if (quatAnim)
+    {
       [boneNode addAnimation:quatAnim
                       forKey:[nodeName stringByAppendingString:@"-quat"]];
     }
-    if (scaleAnim) {
+    if (scaleAnim)
+    {
       [boneNode addAnimation:scaleAnim
                       forKey:[nodeName stringByAppendingString:@"-scale"]];
     }
   }
 }
 
-- (SCNAssimpAnimation*)animationForKey:(NSString*)key
+- (SCNAssimpAnimation *)animationForKey:(NSString *)key
 {
   return [self.animations valueForKey:key];
 }
