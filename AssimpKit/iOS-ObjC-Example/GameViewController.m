@@ -16,28 +16,28 @@
 {
   [super viewDidLoad];
 
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                        NSUserDomainMask, YES);
-  NSString* docsDir = [paths objectAtIndex:0];
-  NSString* explorer =
-    [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
-  NSString* bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
-  SCNAssimpScene* scene =
-    [SCNScene assimpSceneWithURL:[NSURL URLWithString:bob]];
+  NSString *docsDir = [paths objectAtIndex:0];
+  NSString *explorer =
+      [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
+  NSString *bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
+  SCNAssimpScene *scene =
+      [SCNScene assimpSceneWithURL:[NSURL URLWithString:bob]];
 
   // Now we can access the file's contents
-  NSString* runAnim =
-    [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
-  NSString* bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
-  AssimpImporter* assimpImporter = [[AssimpImporter alloc] init];
-  SCNAssimpScene* jumpStartScene = [assimpImporter importScene:bobAnim];
-  NSString* bobId = @"Bob-1";
-  NSString* jumpId = @"jump_start-1";
-  SCNAssimpAnimation* jumpStartAnim = [jumpStartScene animationForKey:bobId];
+  NSString *runAnim =
+      [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
+  NSString *bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
+  AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
+  SCNAssimpScene *jumpStartScene = [assimpImporter importScene:bobAnim];
+  NSString *bobId = @"Bob-1";
+  NSString *jumpId = @"jump_start-1";
+  SCNAssimpAnimation *jumpStartAnim = [jumpStartScene animationForKey:bobId];
   [scene addAnimation:jumpStartAnim];
 
   // retrieve the SCNView
-  SCNView* scnView = (SCNView*)self.view;
+  SCNView *scnView = (SCNView *)self.view;
 
   // set the scene to the view
   scnView.scene = scene;
@@ -67,9 +67,12 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
   if ([[UIDevice currentDevice] userInterfaceIdiom] ==
-      UIUserInterfaceIdiomPhone) {
+      UIUserInterfaceIdiomPhone)
+  {
     return UIInterfaceOrientationMaskAllButUpsideDown;
-  } else {
+  }
+  else
+  {
     return UIInterfaceOrientationMaskAll;
   }
 }
