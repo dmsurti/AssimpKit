@@ -1,0 +1,6 @@
+{
+  "name": "Assimpkit",
+  "tagline": "A cross platform library (OS X, iOS) that coverts the files supported by Assimp to Scene Kit (.scn) format.",
+  "body": "### AssimpKit\r\nA library that uses Assimp to import 3D model files and convert them into SceneKit scenes. \r\n\r\n### Supported features\r\n* Geometry\r\n* Materials (colors and textures)\r\n* Lights\r\n* Cameras\r\n* Skeletal Animations \r\n \r\n### Gallery\r\n\r\n![AssimpKit iOS](http://imgur.com/2wcj8XU)\r\n![AssimpKit OSX](http://imgur.com/DgDMEpR)\r\n\r\n### Authors\r\n@dmsurti\r\n\r\n### License\r\n\r\nAssimpKit's license is based on the modified, 3-clause BSD-License.\r\n\r\nAn informal summary is: do whatever you want, but include Assimp Kit's license text with your product - and don't sue me if the code doesn't work. For the legal details, see the LICENSE file.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
