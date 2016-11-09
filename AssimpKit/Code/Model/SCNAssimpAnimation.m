@@ -46,13 +46,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (id)initWithKey:(NSString *)key frameAnims:(NSDictionary *)anims
 {
-  self = [super init];
-  if (self)
-  {
-    self.key = key;
-    self.frameAnims = anims;
-  }
-  return self;
+    self = [super init];
+    if (self)
+    {
+        self.key = key;
+        self.frameAnims = anims;
+    }
+    return self;
 }
 
 @end

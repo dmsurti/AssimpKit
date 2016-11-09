@@ -42,15 +42,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
 {
-  AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
-  NSString *file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-  return [assimpImporter importScene:file];
+    AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
+    NSString *file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
+    return [assimpImporter importScene:file];
 }
 
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
 {
-  AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
-  return [assimpImporter importScene:url.path];
+    AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
+    return [assimpImporter importScene:url.path];
 }
 
 @end

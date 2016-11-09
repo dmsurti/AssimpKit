@@ -40,28 +40,28 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (void)awakeFromNib
 {
-  //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
-  // @"models-nonbsd/3DS/jeep1.3ds";
-  NSString *filePath =
-      @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
-  SCNAssimpScene *scene =
-      [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
-  // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
-  SCNAssimpAnimation *walkAnim = [scene animationForKey:@"astroBoy_walk-1"];
-  [scene addAnimation:walkAnim];
+    //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
+    // @"models-nonbsd/3DS/jeep1.3ds";
+    NSString *filePath =
+        @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
+    SCNAssimpScene *scene =
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
+    // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
+    SCNAssimpAnimation *walkAnim = [scene animationForKey:@"astroBoy_walk-1"];
+    [scene addAnimation:walkAnim];
 
-  self.gameView.scene = scene;
+    self.gameView.scene = scene;
 
-  // allows the user to manipulate the camera
-  self.gameView.allowsCameraControl = YES;
+    // allows the user to manipulate the camera
+    self.gameView.allowsCameraControl = YES;
 
-  // show statistics such as fps and timing information
-  self.gameView.showsStatistics = YES;
+    // show statistics such as fps and timing information
+    self.gameView.showsStatistics = YES;
 
-  // configure the view
-  self.gameView.backgroundColor = [NSColor whiteColor];
+    // configure the view
+    self.gameView.backgroundColor = [NSColor whiteColor];
 
-  self.gameView.playing = YES;
+    self.gameView.playing = YES;
 }
 
 @end
