@@ -2,7 +2,7 @@ BasedOnStyle: Chromium
 AlignTrailingComments: true
 BreakBeforeBraces: Allman
 ColumnLimit: 0
-IndentWidth: 2
+IndentWidth: 4
 KeepEmptyLinesAtTheStartOfBlocks: false
 ObjCSpaceAfterProperty: true
 ObjCSpaceBeforeProtocolList: true
