@@ -48,19 +48,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NSString *docsDir = [paths objectAtIndex:0];
     NSString *explorer =
         [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
+    NSString *soldier =
+            [docsDir stringByAppendingString:@"/attack.dae"];
     NSString *bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:bob]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]];
 
     // Now we can access the file's contents
-    NSString *runAnim =
+    NSString *jumpAnim =
         [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
     NSString *bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
-    SCNAssimpScene *jumpStartScene = [assimpImporter importScene:bobAnim];
+    SCNAssimpScene *jumpStartScene = [assimpImporter importScene:jumpAnim];
     NSString *bobId = @"Bob-1";
     NSString *jumpId = @"jump_start-1";
-    SCNAssimpAnimation *jumpStartAnim = [jumpStartScene animationForKey:bobId];
+    NSString *attackId = @"attack-1";
+    SCNAssimpAnimation *jumpStartAnim = [jumpStartScene animationForKey:jumpId];
     [scene addAnimation:jumpStartAnim];
 
     // retrieve the SCNView

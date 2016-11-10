@@ -42,13 +42,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {
     //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
     // @"models-nonbsd/3DS/jeep1.3ds";
-    NSString *filePath =
+    NSString *boyPath =
         @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
+    NSString *soldierPath =
+            @"/Users/deepaksurti/ios-osx/assimp/demo/assets/attack.dae";
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:filePath]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]];
     // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
-    SCNAssimpAnimation *walkAnim = [scene animationForKey:@"astroBoy_walk-1"];
-    [scene addAnimation:walkAnim];
+    SCNAssimpAnimation *anim = [scene animationForKey:@"attack-1"];
+    [scene addAnimation:anim];
 
     self.gameView.scene = scene;
 
