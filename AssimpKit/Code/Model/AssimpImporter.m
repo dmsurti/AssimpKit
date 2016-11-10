@@ -89,7 +89,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
     // If the import failed, report it
     if (!aiScene)
     {
-        NSString * errorString = [NSString stringWithUTF8String:aiGetErrorString()];
+        NSString *errorString = [NSString stringWithUTF8String:aiGetErrorString()];
         DDLogError(@" Scene importing failed for filePath %@", filePath);
         DDLogError(@" Scene importing failed with error %@", errorString);
         return nil;
@@ -169,7 +169,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
     SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
     node.transform = scnMatrix;
     DDLogInfo(@" Node %@ position %f %f %f", node.name, aiNodeMatrix.a4,
-          aiNodeMatrix.b4, aiNodeMatrix.c4);
+              aiNodeMatrix.b4, aiNodeMatrix.c4);
 
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
@@ -421,7 +421,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         aiGetMaterialTexture(aiMaterial, aiTextureType, 0, &aiPath, NULL, NULL,
                              NULL, NULL, NULL, NULL);
         NSString *texFilePath = [NSString stringWithUTF8String:&aiPath.data];
-        NSString* texFileName = [texFilePath lastPathComponent];
+        NSString *texFileName = [texFilePath lastPathComponent];
         NSString *sceneDir =
             [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
         NSString *texPath = [sceneDir
@@ -795,18 +795,18 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         {
             DDLogInfo(@"### Creating light for node %@", nodeName);
             DDLogInfo(@"    ambient     %f %f %f ", aiLight->mColorAmbient.r,
-                  aiLight->mColorAmbient.g, aiLight->mColorAmbient.b);
+                      aiLight->mColorAmbient.g, aiLight->mColorAmbient.b);
             DDLogInfo(@"    diffuse     %f %f %f ", aiLight->mColorDiffuse.r,
-                  aiLight->mColorDiffuse.g, aiLight->mColorDiffuse.b);
+                      aiLight->mColorDiffuse.g, aiLight->mColorDiffuse.b);
             DDLogInfo(@"    specular    %f %f %f ", aiLight->mColorSpecular.r,
-                  aiLight->mColorSpecular.g, aiLight->mColorSpecular.b);
+                      aiLight->mColorSpecular.g, aiLight->mColorSpecular.b);
             DDLogInfo(@"    inner angle %f", aiLight->mAngleInnerCone);
             DDLogInfo(@"    outer angle %f", aiLight->mAngleOuterCone);
             DDLogInfo(@"    att const   %f", aiLight->mAttenuationConstant);
             DDLogInfo(@"    att linear  %f", aiLight->mAttenuationLinear);
             DDLogInfo(@"    att quad    %f", aiLight->mAttenuationQuadratic);
             DDLogInfo(@"    position    %f %f %f", aiLight->mPosition.x,
-                  aiLight->mPosition.y, aiLight->mPosition.z);
+                      aiLight->mPosition.y, aiLight->mPosition.z);
             if (aiLight->mType == aiLightSource_DIRECTIONAL)
             {
                 DDLogInfo(@"    type        Directional");
@@ -951,7 +951,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     {
         int depth = [self findDepthOfNodeFromRoot:boneNode];
         DDLogInfo(@" bone with depth is (min depth): %@ -> %d ( %d )", boneNode.name,
-              depth, minDepth);
+                  depth, minDepth);
         if (minDepth == -1 || (depth <= minDepth))
         {
             minDepth = depth;
@@ -1192,16 +1192,16 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
     DDLogInfo(@" |--| bone names %lu: %@", self.boneNames.count, self.boneNames);
     DDLogInfo(@" |--| unique bone names %lu: %@", self.uniqueBoneNames.count,
-          self.uniqueBoneNames);
+              self.uniqueBoneNames);
     self.uniqueBoneNodes =
         [self findBoneNodesInScene:scene
                           forBones:self.uniqueBoneNames];
     DDLogInfo(@" |--| unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
-          self.uniqueBoneNodes);
+              self.uniqueBoneNodes);
     self.uniqueBoneTransforms = [self getTransformsForBones:self.uniqueBoneNames
                                              fromTransforms:self.boneTransforms];
     DDLogInfo(@" |--| unique bone transforms %lu: %@",
-          self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
+              self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
     self.skelton = [self findSkeletonNodeFromBoneNodes:self.uniqueBoneNodes];
     DDLogInfo(@" |--| skeleton bone is : %@", self.skelton);
 }
@@ -1218,8 +1218,8 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
         int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
         int maxWeights = [self findMaxWeightsForNode:aiNode inScene:aiScene];
         DDLogInfo(@" |--| Making Skinner for node: %@ vertices: %d max-weights: %d "
-              @"nBones: %d",
-              nodeName, nVertices, maxWeights, nBones);
+                  @"nBones: %d",
+                  nodeName, nVertices, maxWeights, nBones);
 
         SCNGeometrySource *boneWeights =
             [self makeBoneWeightsGeometrySourceAtNode:aiNode
@@ -1259,7 +1259,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                            atPath:(NSString *)path
 {
     DDLogInfo(@" ========= Number of animations in scene: %d",
-          aiScene->mNumAnimations);
+              aiScene->mNumAnimations);
     for (int i = 0; i < aiScene->mNumAnimations; i++)
     {
         DDLogInfo(@"--- Animation data for animation at index: %d", i);
@@ -1287,9 +1287,9 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
             const struct aiString *aiNodeName = &aiNodeAnim->mNodeName;
             NSString *name = [NSString stringWithUTF8String:aiNodeName->data];
             DDLogInfo(@" The channel %@ has data for %d position, %d rotation, %d scale "
-                  @"keyframes",
-                  name, aiNodeAnim->mNumPositionKeys, aiNodeAnim->mNumRotationKeys,
-                  aiNodeAnim->mNumScalingKeys);
+                      @"keyframes",
+                      name, aiNodeAnim->mNumPositionKeys, aiNodeAnim->mNumRotationKeys,
+                      aiNodeAnim->mNumScalingKeys);
 
             // create a lookup for all animation keys
             NSMutableDictionary *channelKeys = [[NSMutableDictionary alloc] init];
