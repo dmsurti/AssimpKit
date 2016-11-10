@@ -67,7 +67,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
         CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
         CAKeyframeAnimation *quatAnim = [channelKeys valueForKey:@"orientation"];
         CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"scale"];
-        NSLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
+        DDLogInfo(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
               quatAnim);
         if (posAnim)
         {
