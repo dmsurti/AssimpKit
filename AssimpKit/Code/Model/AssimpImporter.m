@@ -33,6 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 
+#define LOG_LEVEL_DEF ddLogLevel
+
 #import "AssimpImporter.h"
 #import "SCNAssimpAnimation.h"
 #include "assimp/cimport.h"     // Plain-C interface
@@ -40,6 +42,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "assimp/material.h"    // Materials
 #include "assimp/postprocess.h" // Post processing flags
 #include "assimp/scene.h"       // Output data structure
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 @interface AssimpImporter ()
 
@@ -52,6 +55,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+static const DDLogLevel ddLogLevel = DDLogLevelDebug;
+
 @implementation AssimpImporter
 
 - (id)init
@@ -61,6 +66,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     {
         self.boneNames = [[NSMutableArray alloc] init];
         self.boneTransforms = [[NSMutableDictionary alloc] init];
+
+        // initialize loggers
+        [DDLog addLogger:[DDASLLogger sharedInstance]];
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
         return self;
     }
     return nil;
