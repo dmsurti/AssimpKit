@@ -79,7 +79,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     // If the import failed, report it
     if (!aiScene)
     {
+        NSString * errorString = [NSString stringWithUTF8String:aiGetErrorString()];
         NSLog(@" Scene importing failed for filePath %@", filePath);
+        NSLog(@" Scene importing failed with error %@", errorString);
         return nil;
     }
     // Now we can access the file's contents
