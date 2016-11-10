@@ -33,12 +33,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 #import "SCNAssimpScene.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 @interface SCNAssimpScene ()
 
 @property (readwrite, nonatomic) NSMutableDictionary *animations;
 
 @end
+
+static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
 @implementation SCNAssimpScene
 
