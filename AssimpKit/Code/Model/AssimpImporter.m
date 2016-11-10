@@ -420,7 +420,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         struct aiString aiPath;
         aiGetMaterialTexture(aiMaterial, aiTextureType, 0, &aiPath, NULL, NULL,
                              NULL, NULL, NULL, NULL);
-        NSString *texFilePath = [NSString stringWithUTF8String:&aiPath.data];
+        NSString *texFilePath = [NSString stringWithUTF8String:(const char *_Nonnull) & aiPath.data];
         NSString *texFileName = [texFilePath lastPathComponent];
         NSString *sceneDir =
             [[path stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
@@ -562,7 +562,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     int matColor = -100;
     matColor =
         aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
-    NSString *key = @"multiply.contents";
     if (AI_SUCCESS == matColor)
     {
         if (color.r != 0 && color.g != 0 && color.b != 0)
@@ -590,7 +589,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             aiScene->mMaterials[aiMesh->mMaterialIndex];
         struct aiString name;
         aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
-        DDLogInfo(@" Material name is %@", [NSString stringWithUTF8String:&name.data]);
+        DDLogInfo(@" Material name is %@", [NSString stringWithUTF8String:(const char *_Nonnull) & name.data]);
         SCNMaterial *material = [SCNMaterial material];
         DDLogInfo(@"+++ Loading diffuse");
         [self makeMaterialPropertyForMaterial:aiMaterial
@@ -632,8 +631,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                withSCNMaterial:material
                                         atPath:path];
         DDLogInfo(@"+++ Loading blend mode");
-        int blendMode = 0;
-        int *max;
+        unsigned int blendMode = 0;
+        unsigned int *max;
         aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
                                   (int *)&blendMode, max);
         if (blendMode == aiBlendMode_Default)
@@ -654,10 +653,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
      */
         material.cullMode = SCNCullBack;
         DDLogInfo(@"+++ Loading shininess");
-        float shininess = 0.0;
+        int shininess;
         aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
-                                  (float *)&shininess, max);
-        DDLogInfo(@"   shininess: %f", shininess);
+                                  (int *)&shininess, max);
+        DDLogInfo(@"   shininess: %d", shininess);
         material.shininess = shininess;
         DDLogInfo(@"+++ Loading shading model");
         /**
@@ -784,13 +783,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                  inScene:(const struct aiScene *)aiScene
 {
     const struct aiString aiNodeName = aiNode->mName;
-    NSString *nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
+    NSString *nodeName = [NSString stringWithUTF8String:(const char *_Nonnull) & aiNodeName.data];
     for (int i = 0; i < aiScene->mNumLights; i++)
     {
         const struct aiLight *aiLight = aiScene->mLights[i];
         const struct aiString aiLightNodeName = aiLight->mName;
         NSString *lightNodeName =
-            [NSString stringWithUTF8String:&aiLightNodeName.data];
+            [NSString stringWithUTF8String:(const char *_Nonnull) & aiLightNodeName.data];
         if ([nodeName isEqualToString:lightNodeName])
         {
             DDLogInfo(@"### Creating light for node %@", nodeName);
@@ -832,13 +831,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                    inScene:(const struct aiScene *)aiScene
 {
     const struct aiString aiNodeName = aiNode->mName;
-    NSString *nodeName = [NSString stringWithUTF8String:&aiNodeName.data];
+    NSString *nodeName = [NSString stringWithUTF8String:(const char *_Nonnull) & aiNodeName.data];
     for (int i = 0; i < aiScene->mNumCameras; i++)
     {
         const struct aiCamera *aiCamera = aiScene->mCameras[i];
         const struct aiString aiCameraName = aiCamera->mName;
         NSString *cameraNodeName =
-            [NSString stringWithUTF8String:&aiCameraName.data];
+            [NSString stringWithUTF8String:(const char *_Nonnull) & aiCameraName.data];
         if ([nodeName isEqualToString:cameraNodeName])
         {
             SCNCamera *camera = [SCNCamera camera];
@@ -879,7 +878,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         {
             const struct aiBone *aiBone = aiMesh->mBones[j];
             const struct aiString name = aiBone->mName;
-            [boneNames addObject:[NSString stringWithUTF8String:&name.data]];
+            [boneNames addObject:[NSString stringWithUTF8String:(const char *_Nonnull) & name.data]];
         }
     }
 
@@ -899,7 +898,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         {
             const struct aiBone *aiBone = aiMesh->mBones[j];
             const struct aiString name = aiBone->mName;
-            NSString *key = [NSString stringWithUTF8String:&name.data];
+            NSString *key = [NSString stringWithUTF8String:(const char *_Nonnull) & name.data];
             if ([boneTransforms valueForKey:key] == nil)
             {
                 const struct aiMatrix4x4 aiNodeMatrix = aiBone->mOffsetMatrix;
@@ -1080,7 +1079,7 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
         {
             NSNumber *vertex = [NSNumber numberWithInt:j];
             NSMutableArray *weights = [meshWeights valueForKey:vertex.stringValue];
-            int zeroWeights = maxWeights - weights.count;
+            int zeroWeights = maxWeights - (int)weights.count;
             for (NSNumber *weight in weights)
             {
                 nodeGeometryWeights[weightCounter++] = [weight floatValue];
@@ -1134,7 +1133,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                 const struct aiVertexWeight *aiVertexWeight = &aiBone->mWeights[k];
                 NSNumber *vertex = [NSNumber numberWithInt:aiVertexWeight->mVertexId];
                 const struct aiString name = aiBone->mName;
-                NSString *boneName = [NSString stringWithUTF8String:&name.data];
+                NSString *boneName = [NSString stringWithUTF8String:(const char *_Nonnull) & name.data];
                 NSNumber *boneIndex =
                     [NSNumber numberWithInteger:[boneNames indexOfObject:boneName]];
                 if ([meshBoneIndices valueForKey:vertex.stringValue] == nil)
@@ -1158,7 +1157,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
             NSNumber *vertex = [NSNumber numberWithInt:j];
             NSMutableArray *boneIndices =
                 [meshBoneIndices valueForKey:vertex.stringValue];
-            int zeroIndices = maxWeights - boneIndices.count;
+            int zeroIndices = maxWeights - (int)boneIndices.count;
             for (NSNumber *boneIndex in boneIndices)
             {
                 nodeGeometryBoneIndices[indexCounter++] = [boneIndex shortValue];
