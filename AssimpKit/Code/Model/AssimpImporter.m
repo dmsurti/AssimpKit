@@ -752,7 +752,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 - (SCNLight *)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight *)aiLight
 {
     SCNLight *light = [SCNLight light];
-    light.type = SCNLightTypeOmni;
+    light.type = SCNLightTypeSpot;
     const struct aiColor3D aiColor = aiLight->mColorSpecular;
     if (aiColor.r != 0 && aiColor.g != 0 && aiColor.b != 0)
     {
