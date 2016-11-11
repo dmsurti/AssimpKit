@@ -373,9 +373,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
             int expectedAnimations = aiScene->mNumAnimations;
             XCTAssertEqual(
                 actualAnimations, expectedAnimations,
-                @"The scene contains %d animations instead of expected "
-                @"%d animations",
-                actualAnimations, expectedAnimations);
+                           @"The scene contains %ld animations instead of expected "
+                           @"%d animations",
+                           (long)actualAnimations, expectedAnimations);
             const struct aiAnimation *aiAnimation = aiScene->mAnimations[i];
             NSString *animKey = [[[modelPath lastPathComponent]
                 stringByDeletingPathExtension] stringByAppendingString:@"-1"];
@@ -431,15 +431,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
                             [[posAnim.values objectAtIndex:k] SCNVector3Value];
                         XCTAssertEqual(posKey.x, aiTranslation.x,
                                        @"The channel num %d key has pos.x "
-                                       @"value %lu instead of %d",
+                                       @"value %f instead of %f",
                                        k, posKey.x, aiTranslation.x);
                         XCTAssertEqual(posKey.y, aiTranslation.y,
                                        @"The channel num %d key has pos.y "
-                                       @"value %lu instead of %d",
+                                       @"value %f instead of %f",
                                        k, posKey.y, aiTranslation.y);
                         XCTAssertEqual(posKey.z, aiTranslation.z,
                                        @"The channel num %d key has pos.z "
-                                       @"value %lu instead of %d",
+                                       @"value %f instead of %f",
                                        k, posKey.z, aiTranslation.z);
                         NSNumber *keyTime = [posAnim.keyTimes objectAtIndex:k];
                         XCTAssertEqual(
@@ -543,15 +543,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
                             [scaleAnim.values objectAtIndex:k] SCNVector3Value];
                         XCTAssertEqual(scaleKey.x, aiScale.x,
                                        @"The channel num %d key has scale.x "
-                                       @"value %lu instead of %d",
+                                       @"value %f instead of %f",
                                        k, scaleKey.x, aiScale.x);
                         XCTAssertEqual(scaleKey.y, aiScale.y,
                                        @"The channel num %d key has scale.y "
-                                       @"value %lu instead of %d",
+                                       @"value %f instead of %f",
                                        k, scaleKey.y, aiScale.y);
                         XCTAssertEqual(scaleKey.z, aiScale.z,
                                        @"The channel num %d key has scale.z "
-                                       @"value %lu instead of %d",
+                                       @"value %f instead of %f",
                                        k, scaleKey.z, aiScale.z);
                         NSNumber *keyTime =
                             [scaleAnim.keyTimes objectAtIndex:k];
