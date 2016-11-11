@@ -280,34 +280,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
                           sceneNode.name);
     if (aiNode->mNumMeshes > 0)
     {
-        int nVertices = 0;
-        for (int i = 0; i < aiNode->mNumMeshes; i++)
-        {
-            int aiMeshIndex = aiNode->mMeshes[i];
-            const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
-            nVertices += aiMesh->mNumVertices;
-        }
-        DDLogInfo(@" Checking node geometry vertices");
-        SCNGeometrySource *vertexSource =
-            [sceneNode.geometry.geometrySources objectAtIndex:0];
-        XCTAssertEqual(
-            nVertices, vertexSource.vectorCount,
-            "Scene node %@ geometry does not have expected %d vertices",
-            nodeName, nVertices);
-        DDLogInfo(@" Checking node geometry normals");
-        SCNGeometrySource *normalSource =
-            [sceneNode.geometry.geometrySources objectAtIndex:1];
-        XCTAssertEqual(
-            nVertices, normalSource.vectorCount,
-            "Scene node %@ geometry does not have expected %d normals",
-            nodeName, nVertices);
-        DDLogInfo(@" Checking node geometry tex coords");
-        SCNGeometrySource *texSource =
-            [sceneNode.geometry.geometrySources objectAtIndex:2];
-        XCTAssertEqual(
-            nVertices, texSource.vectorCount,
-            "Scene node %@ geometry does not have expected %d texCoords",
-            nodeName, nVertices);
+        [self checkNodeGeometry:aiNode
+                       nodeName:nodeName
+                  withSceneNode:sceneNode
+                        aiScene:aiScene];
+        [self checkNodeMaterials:aiNode
+                        nodeName:nodeName
+                   withSceneNode:sceneNode
+                         aiScene:aiScene
+                       modelPath:modelPath];
     }
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
@@ -315,9 +296,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
         SCNNode *sceneChildNode = [sceneNode.childNodes objectAtIndex:i];
         [self checkNode:aiChildNode
             withSceneNode:sceneChildNode
-                  aiScene:aiScene];
+                  aiScene:aiScene
+                modelPath:modelPath];
     }
 }
+
+# pragma mark - Check model
 
 - (BOOL)checkModel:(NSString *)path
 {
@@ -338,10 +322,13 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
     [self checkNode:aiScene->mRootNode
         withSceneNode:[scene.rootNode.childNodes objectAtIndex:0]
-              aiScene:aiScene];
+              aiScene:aiScene
+            modelPath:path];
 
     return YES;
 }
+
+# pragma mark - Test all models
 
 - (void)testAssimpModelFormats
 {
