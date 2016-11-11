@@ -336,6 +336,29 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
     }
 }
 
+#pragma mark - Check cameras
+
+- (void)checkCameras:(const struct aiScene *)aiScene
+           withScene:(SCNAssimpScene *)scene
+{
+    for (int i = 0; i < aiScene->mNumCameras; i++)
+    {
+        const struct aiCamera *aiCamera = aiScene->mCameras[i];
+        const struct aiString aiCameraName = aiCamera->mName;
+        NSString *cameraNodeName = [NSString
+            stringWithUTF8String:(const char *_Nonnull) & aiCameraName.data];
+        DDLogInfo(@" Check camera node %@", cameraNodeName);
+        SCNNode *cameraNode =
+            [scene.rootNode childNodeWithName:cameraNodeName recursively:YES];
+        XCTAssert(cameraNode, @"The camera node does not exist");
+        SCNCamera *camera = cameraNode.camera;
+        XCTAssert(camera, @"The camera node does not have a camera");
+        XCTAssertNotEqual(camera.xFov, 0, @"The camera xFov is zero");
+        XCTAssertNotEqual(camera.yFov, 0, @"The camera yFov is zero");
+        XCTAssertNotEqual(camera.zNear, 0, @"The camera zNear is zero");
+    }
+}
+
 #pragma mark - Check model
 
 - (BOOL)checkModel:(NSString *)path
@@ -360,7 +383,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
               aiScene:aiScene
             modelPath:path];
     [self checkLights:aiScene withScene:scene];
-
+    [self checkCameras:aiScene withScene:scene];
     return YES;
 }
 
