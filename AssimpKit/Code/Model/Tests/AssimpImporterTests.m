@@ -610,11 +610,69 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     NSString *ofAssets = [self.testAssetsPath stringByAppendingString:@"/of"];
     NSString *assimpAssets =
         [self.testAssetsPath stringByAppendingString:@"/assimp"];
+    NSArray *assetDirs =
+        [NSArray arrayWithObjects:appleAssets, ofAssets, assimpAssets, nil];
 
-    NSString *modelPath =
-        [ofAssets stringByAppendingString:@"/models/Collada/astroBoy_walk.dae"];
-    DDLogInfo(@" Initial test model: %@", modelPath);
-    [self checkModel:modelPath];
+    NSArray *subDirs =
+        [NSArray arrayWithObjects:@"/models", @"/models-proprietary", nil];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSString *validExtsFile =
+        [self.testAssetsPath stringByAppendingString:@"/valid-extensions.txt"];
+    NSArray *validExts = [[NSString
+        stringWithContentsOfFile:validExtsFile
+                        encoding:NSUTF8StringEncoding
+                           error:nil] componentsSeparatedByString:@"\n"];
+
+    DDLogInfo(@" %lu file formats are supported: %@", validExts.count);
+
+    int numFilesTested = 0;
+    int numFilesPassed = 0;
+    for (NSString *assetDir in assetDirs)
+    {
+        for (NSString *subDir in subDirs)
+        {
+            NSString *assetSubDir = [assetDir stringByAppendingString:subDir];
+            NSLog(@"========== Scanning asset dir: %@", assetSubDir);
+            NSArray *modelFiles =
+                [fileManager subpathsOfDirectoryAtPath:assetSubDir error:nil];
+            for (NSString *modelFile in modelFiles)
+            {
+                BOOL isDir = NO;
+                NSString *modelFilePath =
+                    [[assetSubDir stringByAppendingString:@"/"]
+                        stringByAppendingString:modelFile];
+
+                if ([fileManager fileExistsAtPath:modelFilePath
+                                      isDirectory:&isDir])
+                {
+                    if (!isDir)
+                    {
+                        NSString *fileExt =
+                            [[modelFilePath lastPathComponent] pathExtension];
+                        if (![fileExt isEqualToString:@""] &&
+                            ([validExts
+                                 containsObject:fileExt.uppercaseString] ||
+                             [validExts
+                                 containsObject:fileExt.lowercaseString]))
+                        {
+                            NSLog(@"$$$$$$$$$$$ TESTING %@ file",
+                                  modelFilePath);
+                            BOOL testResult = [self checkModel:modelFilePath];
+                            ++numFilesTested;
+                            if (testResult)
+                            {
+                                ++numFilesPassed;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    NSLog(@" NUM OF FILES TESTED: %d", numFilesTested);
+    NSLog(@" NUM OF FILES PASSED: %d", numFilesPassed);
+    NSLog(@" PASS PERCENT: %f", numFilesPassed * 100.0 / numFilesTested);
 }
 
 @end
