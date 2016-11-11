@@ -107,7 +107,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
                    nodeName, nVertices);
 }
 
-# pragma mark - Check node materials
+#pragma mark - Check node materials
 
 - (void)checkNode:(const struct aiNode *)aiNode
          material:(const struct aiMaterial *)aiMaterial
@@ -161,7 +161,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
     }
     else
     {
-        CGColorRef  color;
+        CGColorRef color;
         if (aiTextureType == aiTextureType_DIFFUSE)
         {
             color = (__bridge CGColorRef)[scnMaterial diffuse].contents;
@@ -214,57 +214,93 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
                 modelPath:modelPath];
         DDLogInfo(@" Checking specular");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_SPECULAR
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_SPECULAR
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
         DDLogInfo(@" Checking ambient");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_AMBIENT
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_AMBIENT
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
         DDLogInfo(@" Checking reflective");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_REFLECTION
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_REFLECTION
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
         DDLogInfo(@" Checking emssive");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_EMISSIVE
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_EMISSIVE
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
         DDLogInfo(@" Checking opacity");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_OPACITY
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_OPACITY
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
         DDLogInfo(@" Checking normals");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_NORMALS
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_NORMALS
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
         DDLogInfo(@" Checking lightmap");
         [self checkNode:aiNode
-               material:aiMaterial
-            textureType:aiTextureType_LIGHTMAP
-          withSceneNode:sceneNode
-            scnMaterial:material
-              modelPath:modelPath];
+                 material:aiMaterial
+              textureType:aiTextureType_LIGHTMAP
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
     }
 }
 
-# pragma mark - Check node
+#pragma mark - Check lights
+
+- (void)checkLights:(const struct aiScene *)aiScene
+          withScene:(SCNAssimpScene *)scene
+{
+    for (int i = 0; i < aiScene->mNumLights; i++)
+    {
+        const struct aiLight *aiLight = aiScene->mLights[i];
+        const struct aiString aiLightNodeName = aiLight->mName;
+        NSString *lightNodeName = [NSString
+            stringWithUTF8String:(const char *_Nonnull) & aiLightNodeName.data];
+        DDLogInfo(@" Check light node %@", lightNodeName);
+        SCNNode *lightNode =
+            [scene.rootNode childNodeWithName:lightNodeName recursively:YES];
+        XCTAssert(lightNode, @"The light node does not exist");
+        SCNLight* light = lightNode.light;
+        XCTAssert(light, @"The light node does not have a light");
+        if (aiLight->mType == aiLightSource_DIRECTIONAL)
+        {
+            XCTAssertEqualObjects(light.type, SCNLightTypeDirectional,
+            @" The light type is not directional");
+        }
+        else if (aiLight->mType == aiLightSource_POINT)
+        {
+            XCTAssertEqualObjects(light.type, SCNLightTypeOmni,
+                    @" The light type is not point");
+        }
+        else if (aiLight->mType == aiLightSource_SPOT)
+        {
+            XCTAssertEqualObjects(light.type, SCNLightTypeSpot,
+                    @" The light type is not directional");
+        }
+
+    }
+}
+
+#pragma mark - Check node
 
 - (void)checkNode:(const struct aiNode *)aiNode
     withSceneNode:(SCNNode *)sceneNode
@@ -301,7 +337,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
     }
 }
 
-# pragma mark - Check model
+#pragma mark - Check model
 
 - (BOOL)checkModel:(NSString *)path
 {
@@ -324,11 +360,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
         withSceneNode:[scene.rootNode.childNodes objectAtIndex:0]
               aiScene:aiScene
             modelPath:path];
+    [self checkLights:aiScene withScene:scene];
 
     return YES;
 }
 
-# pragma mark - Test all models
+#pragma mark - Test all models
 
 - (void)testAssimpModelFormats
 {
