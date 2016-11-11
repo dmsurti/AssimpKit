@@ -279,24 +279,23 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
         SCNNode *lightNode =
             [scene.rootNode childNodeWithName:lightNodeName recursively:YES];
         XCTAssert(lightNode, @"The light node does not exist");
-        SCNLight* light = lightNode.light;
+        SCNLight *light = lightNode.light;
         XCTAssert(light, @"The light node does not have a light");
         if (aiLight->mType == aiLightSource_DIRECTIONAL)
         {
             XCTAssertEqualObjects(light.type, SCNLightTypeDirectional,
-            @" The light type is not directional");
+                                  @" The light type is not directional");
         }
         else if (aiLight->mType == aiLightSource_POINT)
         {
             XCTAssertEqualObjects(light.type, SCNLightTypeOmni,
-                    @" The light type is not point");
+                                  @" The light type is not point");
         }
         else if (aiLight->mType == aiLightSource_SPOT)
         {
             XCTAssertEqualObjects(light.type, SCNLightTypeSpot,
-                    @" The light type is not directional");
+                                  @" The light type is not directional");
         }
-
     }
 }
 
