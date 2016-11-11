@@ -52,7 +52,7 @@
 
 @end
 
-static const DDLogLevel ddLogLevel = DDLogLevelDebug;
+static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 @implementation AssimpImporterTests
 
@@ -373,9 +373,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
             int expectedAnimations = aiScene->mNumAnimations;
             XCTAssertEqual(
                 actualAnimations, expectedAnimations,
-                           @"The scene contains %ld animations instead of expected "
-                           @"%d animations",
-                           (long)actualAnimations, expectedAnimations);
+                @"The scene contains %ld animations instead of expected "
+                @"%d animations",
+                (long)actualAnimations, expectedAnimations);
             const struct aiAnimation *aiAnimation = aiScene->mAnimations[i];
             NSString *animKey = [[[modelPath lastPathComponent]
                 stringByDeletingPathExtension] stringByAppendingString:@"-1"];
