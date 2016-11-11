@@ -37,10 +37,25 @@
 		77A35A951DD453E3003E89C2 /* CocoaLumberjack.framework.dSYM in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 77A35A941DD453E3003E89C2 /* CocoaLumberjack.framework.dSYM */; };
 		77A35A971DD45412003E89C2 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A35A961DD45412003E89C2 /* CocoaLumberjack.framework */; };
 		77A35A981DD45412003E89C2 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 77A35A961DD45412003E89C2 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		77A35AAC1DD475A7003E89C2 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A35AAB1DD475A7003E89C2 /* AssimpImporterTests.m */; };
+		77A35AAD1DD475AC003E89C2 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
+		77A35AAE1DD475B1003E89C2 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C54181DD0915800FE209C /* SCNAssimpScene.m */; };
+		77A35AAF1DD475B4003E89C2 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C541C1DD0947800FE209C /* SCNAssimpAnimation.m */; };
+		77A35AB01DD475B6003E89C2 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */; };
 		77AE2AC61DD4530500E52CE1 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AE2AC51DD4530500E52CE1 /* CocoaLumberjack.framework */; };
 		77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 		77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		77A35AA61DD4753C003E89C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7708821B1DBE21540067790B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 770882491DBE21B50067790B;
+			remoteInfo = "OSX-ObjC-Example";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		77AE2ABD1DD4518F00E52CE1 /* Embed Frameworks */ = {
@@ -105,6 +120,9 @@
 		778C541C1DD0947800FE209C /* SCNAssimpAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNAssimpAnimation.m; sourceTree = "<group>"; };
 		77A35A941DD453E3003E89C2 /* CocoaLumberjack.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CocoaLumberjack.framework.dSYM; path = Carthage/Build/Mac/CocoaLumberjack.framework.dSYM; sourceTree = "<group>"; };
 		77A35A961DD45412003E89C2 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		77A35AA11DD4753C003E89C2 /* OSX-AssimpKit-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OSX-AssimpKit-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A35AA51DD4753C003E89C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77A35AAB1DD475A7003E89C2 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssimpImporterTests.m; sourceTree = "<group>"; };
 		77AE2AC21DD451CA00E52CE1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = ../Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		77AE2AC51DD4530500E52CE1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		77AE2AC71DD4537F00E52CE1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
@@ -131,6 +149,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77A35A9E1DD4753C003E89C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -142,6 +167,7 @@
 				770882811DBE224C0067790B /* Code */,
 				7708824C1DBE21B50067790B /* OSX-ObjC-Example */,
 				770882691DBE21CA0067790B /* iOS-ObjC-Example */,
+				77A35AA21DD4753C003E89C2 /* OSX-AssimpKit-Tests */,
 				7708824B1DBE21B50067790B /* Products */,
 				77AE2AC11DD451CA00E52CE1 /* Frameworks */,
 			);
@@ -152,6 +178,7 @@
 			children = (
 				7708824A1DBE21B50067790B /* OSX-ObjC-Example.app */,
 				770882681DBE21CA0067790B /* iOS-ObjC-Example.app */,
+				77A35AA11DD4753C003E89C2 /* OSX-AssimpKit-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -224,6 +251,7 @@
 		770882821DBE224C0067790B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				77A35A9C1DD474E9003E89C2 /* Tests */,
 				770882CD1DBE2D790067790B /* SCNScene+AssimpImport.h */,
 				770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */,
 				77D769E11DC1EAD700E84F2D /* AssimpImporter.h */,
@@ -234,6 +262,22 @@
 				778C541C1DD0947800FE209C /* SCNAssimpAnimation.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		77A35A9C1DD474E9003E89C2 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				77A35AAB1DD475A7003E89C2 /* AssimpImporterTests.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		77A35AA21DD4753C003E89C2 /* OSX-AssimpKit-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				77A35AA51DD4753C003E89C2 /* Info.plist */,
+			);
+			path = "OSX-AssimpKit-Tests";
 			sourceTree = "<group>";
 		};
 		77AE2AC11DD451CA00E52CE1 /* Frameworks */ = {
@@ -286,6 +330,24 @@
 			productReference = 770882681DBE21CA0067790B /* iOS-ObjC-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		77A35AA01DD4753C003E89C2 /* OSX-AssimpKit-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77A35AA81DD4753C003E89C2 /* Build configuration list for PBXNativeTarget "OSX-AssimpKit-Tests" */;
+			buildPhases = (
+				77A35A9D1DD4753C003E89C2 /* Sources */,
+				77A35A9E1DD4753C003E89C2 /* Frameworks */,
+				77A35A9F1DD4753C003E89C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				77A35AA71DD4753C003E89C2 /* PBXTargetDependency */,
+			);
+			name = "OSX-AssimpKit-Tests";
+			productName = "OSX-AssimpKit-Tests";
+			productReference = 77A35AA11DD4753C003E89C2 /* OSX-AssimpKit-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -300,6 +362,11 @@
 					770882671DBE21CA0067790B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = PRJ5CHFB5D;
+					};
+					77A35AA01DD4753C003E89C2 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 770882491DBE21B50067790B;
 					};
 				};
 			};
@@ -318,6 +385,7 @@
 			targets = (
 				770882491DBE21B50067790B /* OSX-ObjC-Example */,
 				770882671DBE21CA0067790B /* iOS-ObjC-Example */,
+				77A35AA01DD4753C003E89C2 /* OSX-AssimpKit-Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -346,6 +414,13 @@
 				770882791DBE21CA0067790B /* Assets.xcassets in Resources */,
 				770882771DBE21CA0067790B /* Main.storyboard in Resources */,
 				770882CA1DBE27510067790B /* spider.obj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77A35A9F1DD4753C003E89C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +473,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77A35A9D1DD4753C003E89C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77A35AAD1DD475AC003E89C2 /* AssimpImporter.m in Sources */,
+				77A35AB01DD475B6003E89C2 /* SCNScene+AssimpImport.m in Sources */,
+				77A35AAF1DD475B4003E89C2 /* SCNAssimpAnimation.m in Sources */,
+				77A35AAC1DD475A7003E89C2 /* AssimpImporterTests.m in Sources */,
+				77A35AAE1DD475B1003E89C2 /* SCNAssimpScene.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		77A35AA71DD4753C003E89C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 770882491DBE21B50067790B /* OSX-ObjC-Example */;
+			targetProxy = 77A35AA61DD4753C003E89C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7708825D1DBE21B50067790B /* MainMenu.xib */ = {
@@ -715,6 +810,84 @@
 			};
 			name = Release;
 		};
+		77A35AA91DD4753C003E89C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/assets\\\"",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "OSX-AssimpKit-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/Assimp/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.OSX-AssimpKit-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OSX-ObjC-Example.app/Contents/MacOS/OSX-ObjC-Example";
+				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Assimp/include";
+			};
+			name = Debug;
+		};
+		77A35AAA1DD4753C003E89C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "OSX-AssimpKit-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/Assimp/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.OSX-AssimpKit-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OSX-ObjC-Example.app/Contents/MacOS/OSX-ObjC-Example";
+				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Assimp/include";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -741,6 +914,15 @@
 			buildConfigurations = (
 				7708827F1DBE21CA0067790B /* Debug */,
 				770882801DBE21CA0067790B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77A35AA81DD4753C003E89C2 /* Build configuration list for PBXNativeTarget "OSX-AssimpKit-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77A35AA91DD4753C003E89C2 /* Debug */,
+				77A35AAA1DD4753C003E89C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
