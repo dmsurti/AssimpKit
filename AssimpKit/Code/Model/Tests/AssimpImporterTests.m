@@ -186,7 +186,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
         {
             color = (__bridge CGColorRef)[scnMaterial transparent].contents;
         }
-        XCTAssert(color, @"The texture color does not exist");
+        XCTAssert(color, @"The material color does not exist");
     }
 }
 
