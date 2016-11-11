@@ -1,7 +1,7 @@
 BasedOnStyle: Chromium
 AlignTrailingComments: true
 BreakBeforeBraces: Allman
-ColumnLimit: 0
+ColumnLimit: 80
 IndentWidth: 4
 KeepEmptyLinesAtTheStartOfBlocks: false
 ObjCSpaceAfterProperty: true
