@@ -73,9 +73,203 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
     [super tearDown];
 }
 
+#pragma mark - Check node geometry
+
+- (void)checkNodeGeometry:(const struct aiNode *)aiNode
+                 nodeName:(NSString *)nodeName
+            withSceneNode:(SCNNode *)sceneNode
+                  aiScene:(const struct aiScene *)aiScene
+{
+    int nVertices = 0;
+    for (int i = 0; i < aiNode->mNumMeshes; i++)
+    {
+        int aiMeshIndex = aiNode->mMeshes[i];
+        const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
+        nVertices += aiMesh->mNumVertices;
+    }
+    DDLogInfo(@" Checking node geometry vertices");
+    SCNGeometrySource *vertexSource =
+        [sceneNode.geometry.geometrySources objectAtIndex:0];
+    XCTAssertEqual(nVertices, vertexSource.vectorCount,
+                   "Scene node %@ geometry does not have expected %d vertices",
+                   nodeName, nVertices);
+    DDLogInfo(@" Checking node geometry normals");
+    SCNGeometrySource *normalSource =
+        [sceneNode.geometry.geometrySources objectAtIndex:1];
+    XCTAssertEqual(nVertices, normalSource.vectorCount,
+                   "Scene node %@ geometry does not have expected %d normals",
+                   nodeName, nVertices);
+    DDLogInfo(@" Checking node geometry tex coords");
+    SCNGeometrySource *texSource =
+        [sceneNode.geometry.geometrySources objectAtIndex:2];
+    XCTAssertEqual(nVertices, texSource.vectorCount,
+                   "Scene node %@ geometry does not have expected %d texCoords",
+                   nodeName, nVertices);
+}
+
+# pragma mark - Check node materials
+
+- (void)checkNode:(const struct aiNode *)aiNode
+         material:(const struct aiMaterial *)aiMaterial
+      textureType:(enum aiTextureType)aiTextureType
+    withSceneNode:(SCNNode *)sceneNode
+      scnMaterial:(SCNMaterial *)scnMaterial
+        modelPath:(NSString *)modelPath
+{
+    int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
+    if (nTextures > 0)
+    {
+        DDLogInfo(@" has %d textures", nTextures);
+        NSString *texFileName;
+        if (aiTextureType == aiTextureType_DIFFUSE)
+        {
+            texFileName = scnMaterial.diffuse.contents;
+        }
+        else if (aiTextureType == aiTextureType_SPECULAR)
+        {
+            texFileName = scnMaterial.specular.contents;
+        }
+        else if (aiTextureType == aiTextureType_AMBIENT)
+        {
+            texFileName = scnMaterial.ambient.contents;
+        }
+        else if (aiTextureType == aiTextureType_REFLECTION)
+        {
+            texFileName = scnMaterial.reflective.contents;
+        }
+        else if (aiTextureType == aiTextureType_EMISSIVE)
+        {
+            texFileName = scnMaterial.emission.contents;
+        }
+        else if (aiTextureType == aiTextureType_OPACITY)
+        {
+            texFileName = scnMaterial.transparent.contents;
+        }
+        else if (aiTextureType == aiTextureType_NORMALS)
+        {
+            texFileName = scnMaterial.normal.contents;
+        }
+        else if (aiTextureType == aiTextureType_LIGHTMAP)
+        {
+            texFileName = scnMaterial.ambientOcclusion.contents;
+        }
+        DDLogInfo(@" Texture: file name: %@", texFileName);
+        XCTAssertEqualObjects(
+            [texFileName stringByDeletingLastPathComponent],
+            [modelPath stringByDeletingLastPathComponent],
+            @"The texture file name is not a file under the model path");
+    }
+    else
+    {
+        CGColorRef  color;
+        if (aiTextureType == aiTextureType_DIFFUSE)
+        {
+            color = (__bridge CGColorRef)[scnMaterial diffuse].contents;
+        }
+        else if (aiTextureType == aiTextureType_SPECULAR)
+        {
+            color = (__bridge CGColorRef)[scnMaterial specular].contents;
+        }
+        else if (aiTextureType == aiTextureType_AMBIENT)
+        {
+            color = (__bridge CGColorRef)[scnMaterial ambient].contents;
+        }
+        else if (aiTextureType == aiTextureType_REFLECTION)
+        {
+            color = (__bridge CGColorRef)[scnMaterial reflective].contents;
+        }
+        else if (aiTextureType == aiTextureType_EMISSIVE)
+        {
+            color = (__bridge CGColorRef)[scnMaterial emission].contents;
+        }
+        else if (aiTextureType == aiTextureType_OPACITY)
+        {
+            color = (__bridge CGColorRef)[scnMaterial transparent].contents;
+        }
+        XCTAssert(color, @"The texture color does not exist");
+    }
+}
+
+- (void)checkNodeMaterials:(const struct aiNode *)aiNode
+                  nodeName:(NSString *)nodeName
+             withSceneNode:(SCNNode *)sceneNode
+                   aiScene:(const struct aiScene *)aiScene
+                 modelPath:(NSString *)modelPath
+{
+    DDLogInfo(@" Checking materials with model path prefix: %@",
+              [modelPath stringByDeletingLastPathComponent]);
+    for (int i = 0; i < aiNode->mNumMeshes; i++)
+    {
+        int aiMeshIndex = aiNode->mMeshes[i];
+        const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
+        const struct aiMaterial *aiMaterial =
+            aiScene->mMaterials[aiMesh->mMaterialIndex];
+        SCNMaterial *material = [sceneNode.geometry.materials objectAtIndex:i];
+        DDLogInfo(@" Checking diffuse");
+        [self checkNode:aiNode
+                 material:aiMaterial
+              textureType:aiTextureType_DIFFUSE
+            withSceneNode:sceneNode
+              scnMaterial:material
+                modelPath:modelPath];
+        DDLogInfo(@" Checking specular");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_SPECULAR
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+        DDLogInfo(@" Checking ambient");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_AMBIENT
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+        DDLogInfo(@" Checking reflective");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_REFLECTION
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+        DDLogInfo(@" Checking emssive");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_EMISSIVE
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+        DDLogInfo(@" Checking opacity");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_OPACITY
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+        DDLogInfo(@" Checking normals");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_NORMALS
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+        DDLogInfo(@" Checking lightmap");
+        [self checkNode:aiNode
+               material:aiMaterial
+            textureType:aiTextureType_LIGHTMAP
+          withSceneNode:sceneNode
+            scnMaterial:material
+              modelPath:modelPath];
+    }
+}
+
+# pragma mark - Check node
+
 - (void)checkNode:(const struct aiNode *)aiNode
     withSceneNode:(SCNNode *)sceneNode
           aiScene:(const struct aiScene *)aiScene
+        modelPath:(NSString *)modelPath
 {
     const struct aiString *aiNodeName = &aiNode->mName;
     NSString *nodeName =
