@@ -448,32 +448,32 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         }
         else if (aiTextureType == aiTextureType_AMBIENT)
         {
-            material.specular.contents = texPath;
+            material.ambient.contents = texPath;
             keyPrefix = @"ambient";
         }
         else if (aiTextureType == aiTextureType_REFLECTION)
         {
-            material.specular.contents = texPath;
+            material.reflective.contents = texPath;
             keyPrefix = @"reflective";
         }
         else if (aiTextureType == aiTextureType_EMISSIVE)
         {
-            material.specular.contents = texPath;
+            material.emission.contents = texPath;
             keyPrefix = @"emissive";
         }
         else if (aiTextureType == aiTextureType_OPACITY)
         {
-            material.specular.contents = texPath;
+            material.transparent.contents = texPath;
             keyPrefix = @"transparent";
         }
         else if (aiTextureType == aiTextureType_NORMALS)
         {
-            material.specular.contents = texPath;
+            material.normal.contents = texPath;
             keyPrefix = @"normal";
         }
         else if (aiTextureType == aiTextureType_LIGHTMAP)
         {
-            material.specular.contents = texPath;
+            material.ambientOcclusion.contents = texPath;
             keyPrefix = @"ambientOcclusion";
         }
 
