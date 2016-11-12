@@ -33,15 +33,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 #import "SCNAssimpScene.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
 
 @interface SCNAssimpScene ()
 
 @property (readwrite, nonatomic) NSMutableDictionary *animations;
 
 @end
-
-static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
 @implementation SCNAssimpScene
 
@@ -67,7 +64,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
         CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
         CAKeyframeAnimation *quatAnim = [channelKeys valueForKey:@"orientation"];
         CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"scale"];
-        DDLogInfo(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
+        NSLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
                   quatAnim);
         if (posAnim)
         {
