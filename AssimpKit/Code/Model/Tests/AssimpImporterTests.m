@@ -44,6 +44,7 @@
 #include "assimp/material.h"    // Materials
 #include "assimp/postprocess.h" // Post processing flags
 #include "assimp/scene.h"       // Output data structure
+#import "ModelTestLog.h"
 
 @interface AssimpImporterTests : XCTestCase
 
@@ -79,6 +80,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                  nodeName:(NSString *)nodeName
             withSceneNode:(SCNNode *)sceneNode
                   aiScene:(const struct aiScene *)aiScene
+                  testLog:(ModelTestLog *)testLog
 {
     int nVertices = 0;
     for (int i = 0; i < aiNode->mNumMeshes; i++)
@@ -90,21 +92,41 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     DDLogInfo(@" Checking node geometry vertices");
     SCNGeometrySource *vertexSource =
         [sceneNode.geometry.geometrySources objectAtIndex:0];
-    XCTAssertEqual(nVertices, vertexSource.vectorCount,
-                   "Scene node %@ geometry does not have expected %d vertices",
-                   nodeName, nVertices);
+    if (nVertices != vertexSource.vectorCount)
+    {
+        NSString *errorLog = [NSString
+            stringWithFormat:
+                @"Scene node %@ geometry does not have expected %d vertices",
+                nodeName, nVertices];
+        DDLogError(errorLog);
+        [testLog addErrorLog:errorLog];
+    }
     DDLogInfo(@" Checking node geometry normals");
     SCNGeometrySource *normalSource =
         [sceneNode.geometry.geometrySources objectAtIndex:1];
-    XCTAssertEqual(nVertices, normalSource.vectorCount,
-                   "Scene node %@ geometry does not have expected %d normals",
-                   nodeName, nVertices);
+    if (nVertices != normalSource.vectorCount)
+    {
+        NSString *errorLog = [NSString
+            stringWithFormat:
+                @"Scene node %@ geometry does not have expected %d normals",
+                nodeName, nVertices];
+        DDLogError(errorLog);
+        [testLog addErrorLog:errorLog];
+    }
     DDLogInfo(@" Checking node geometry tex coords");
     SCNGeometrySource *texSource =
         [sceneNode.geometry.geometrySources objectAtIndex:2];
-    XCTAssertEqual(nVertices, texSource.vectorCount,
-                   "Scene node %@ geometry does not have expected %d texCoords",
-                   nodeName, nVertices);
+    if (nVertices != texSource.vectorCount)
+    {
+        {
+            NSString *errorLog = [NSString
+                stringWithFormat:@"Scene node %@ geometry does not have "
+                                 @"expected %d tex coords",
+                                 nodeName, nVertices];
+            DDLogError(errorLog);
+            [testLog addErrorLog:errorLog];
+        }
+    }
 }
 
 #pragma mark - Check node materials
@@ -115,6 +137,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     withSceneNode:(SCNNode *)sceneNode
       scnMaterial:(SCNMaterial *)scnMaterial
         modelPath:(NSString *)modelPath
+          testLog:(ModelTestLog *)testLog
 {
     int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
     if (nTextures > 0)
@@ -154,39 +177,58 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
             texFileName = scnMaterial.ambientOcclusion.contents;
         }
         DDLogInfo(@" Texture: file name: %@", texFileName);
-        XCTAssertEqualObjects(
-            [texFileName stringByDeletingLastPathComponent],
-            [modelPath stringByDeletingLastPathComponent],
-            @"The texture file name is not a file under the model path");
+        if (![[texFileName stringByDeletingLastPathComponent]
+                isEqualToString:[modelPath stringByDeletingLastPathComponent]])
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The texture file name %@ is not a "
+                                           @"file under the model path %@",
+                                [texFileName stringByDeletingLastPathComponent],
+                                [modelPath stringByDeletingLastPathComponent]];
+            [testLog addErrorLog:errorLog];
+        }
     }
     else
     {
         CGColorRef color;
+        NSString *materialType;
         if (aiTextureType == aiTextureType_DIFFUSE)
         {
             color = (__bridge CGColorRef)[scnMaterial diffuse].contents;
+            materialType = @"Diffuse";
         }
         else if (aiTextureType == aiTextureType_SPECULAR)
         {
             color = (__bridge CGColorRef)[scnMaterial specular].contents;
+            materialType = @"Specular";
         }
         else if (aiTextureType == aiTextureType_AMBIENT)
         {
             color = (__bridge CGColorRef)[scnMaterial ambient].contents;
+            materialType = @"Ambient";
         }
         else if (aiTextureType == aiTextureType_REFLECTION)
         {
             color = (__bridge CGColorRef)[scnMaterial reflective].contents;
+            materialType = @"Reflective";
         }
         else if (aiTextureType == aiTextureType_EMISSIVE)
         {
             color = (__bridge CGColorRef)[scnMaterial emission].contents;
+            materialType = @"Emission";
         }
         else if (aiTextureType == aiTextureType_OPACITY)
         {
             color = (__bridge CGColorRef)[scnMaterial transparent].contents;
+            materialType = @"Transparent";
         }
-        XCTAssert(color, @"The material color does not exist");
+        if (color == nil)
+        {
+            NSString *errorLog = [NSString
+                stringWithFormat:@"The material color for %@ does not exist",
+                                 materialType];
+            [testLog addErrorLog:errorLog];
+        }
     }
 }
 
@@ -195,6 +237,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
              withSceneNode:(SCNNode *)sceneNode
                    aiScene:(const struct aiScene *)aiScene
                  modelPath:(NSString *)modelPath
+                   testLog:(ModelTestLog *)testLog
 {
     DDLogInfo(@" Checking materials with model path prefix: %@",
               [modelPath stringByDeletingLastPathComponent]);
@@ -211,56 +254,64 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               textureType:aiTextureType_DIFFUSE
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking specular");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_SPECULAR
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking ambient");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_AMBIENT
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking reflective");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_REFLECTION
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking emssive");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_EMISSIVE
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking opacity");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_OPACITY
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking normals");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_NORMALS
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
         DDLogInfo(@" Checking lightmap");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_LIGHTMAP
             withSceneNode:sceneNode
               scnMaterial:material
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
     }
 }
 
@@ -268,6 +319,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)checkLights:(const struct aiScene *)aiScene
           withScene:(SCNAssimpScene *)scene
+            testLog:(ModelTestLog *)testLog
 {
     for (int i = 0; i < aiScene->mNumLights; i++)
     {
@@ -278,23 +330,43 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         DDLogInfo(@" Check light node %@", lightNodeName);
         SCNNode *lightNode =
             [scene.rootNode childNodeWithName:lightNodeName recursively:YES];
-        XCTAssert(lightNode, @"The light node does not exist");
+        if (lightNode == nil)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The light node %@ does not exist",
+                                           lightNodeName];
+            [testLog addErrorLog:errorLog];
+        }
         SCNLight *light = lightNode.light;
-        XCTAssert(light, @"The light node does not have a light");
+        if (light == nil)
+        {
+            NSString *errorLog = [NSString
+                stringWithFormat:@"The light node does not have light"];
+            [testLog addErrorLog:errorLog];
+        }
         if (aiLight->mType == aiLightSource_DIRECTIONAL)
         {
-            XCTAssertEqualObjects(light.type, SCNLightTypeDirectional,
-                                  @" The light type is not directional");
+            if (![light.type isEqualToString:SCNLightTypeDirectional])
+            {
+                NSString *errorLog = @"The light type is not directional light";
+                [testLog addErrorLog:errorLog];
+            }
         }
         else if (aiLight->mType == aiLightSource_POINT)
         {
-            XCTAssertEqualObjects(light.type, SCNLightTypeOmni,
-                                  @" The light type is not point");
+            if (![light.type isEqualToString:SCNLightTypeOmni])
+            {
+                NSString *errorLog = @"The light type is not point light";
+                [testLog addErrorLog:errorLog];
+            }
         }
         else if (aiLight->mType == aiLightSource_SPOT)
         {
-            XCTAssertEqualObjects(light.type, SCNLightTypeSpot,
-                                  @" The light type is not directional");
+            if (![light.type isEqualToString:SCNLightTypeSpot])
+            {
+                NSString *errorLog = @"The light type is not spot light";
+                [testLog addErrorLog:errorLog];
+            }
         }
     }
 }
@@ -305,25 +377,32 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     withSceneNode:(SCNNode *)sceneNode
           aiScene:(const struct aiScene *)aiScene
         modelPath:(NSString *)modelPath
+          testLog:(ModelTestLog *)testLog
 {
     const struct aiString *aiNodeName = &aiNode->mName;
     NSString *nodeName =
         [NSString stringWithUTF8String:(const char *)&aiNodeName->data];
     DDLogInfo(@"--- Checking node %@", nodeName);
-    XCTAssertEqualObjects(nodeName, sceneNode.name,
-                          @"aiNode %@ does not match SCNNode %@", nodeName,
-                          sceneNode.name);
+    if (![nodeName isEqualToString:sceneNode.name])
+    {
+        NSString *errorLog =
+            [NSString stringWithFormat:@"aiNode %@ does not match SCNNode %@",
+                                       nodeName, sceneNode.name];
+        [testLog addErrorLog:errorLog];
+    }
     if (aiNode->mNumMeshes > 0)
     {
         [self checkNodeGeometry:aiNode
                        nodeName:nodeName
                   withSceneNode:sceneNode
-                        aiScene:aiScene];
+                        aiScene:aiScene
+                        testLog:testLog];
         [self checkNodeMaterials:aiNode
                         nodeName:nodeName
                    withSceneNode:sceneNode
                          aiScene:aiScene
-                       modelPath:modelPath];
+                       modelPath:modelPath
+                         testLog:testLog];
     }
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
@@ -332,7 +411,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         [self checkNode:aiChildNode
             withSceneNode:sceneChildNode
                   aiScene:aiScene
-                modelPath:modelPath];
+                modelPath:modelPath
+                  testLog:testLog];
     }
 }
 
@@ -340,6 +420,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)checkCameras:(const struct aiScene *)aiScene
            withScene:(SCNAssimpScene *)scene
+             testLog:(ModelTestLog *)testLog
 {
     for (int i = 0; i < aiScene->mNumCameras; i++)
     {
@@ -350,19 +431,300 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         DDLogInfo(@" Check camera node %@", cameraNodeName);
         SCNNode *cameraNode =
             [scene.rootNode childNodeWithName:cameraNodeName recursively:YES];
-        XCTAssert(cameraNode, @"The camera node does not exist");
+        if (cameraNode == nil)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The camera node %@ does not exist",
+                                           cameraNode];
+            [testLog addErrorLog:errorLog];
+        }
         SCNCamera *camera = cameraNode.camera;
-        XCTAssert(camera, @"The camera node does not have a camera");
-        XCTAssertNotEqual(camera.xFov, 0, @"The camera xFov is zero");
-        XCTAssertNotEqual(camera.yFov, 0, @"The camera yFov is zero");
-        XCTAssertNotEqual(camera.zNear, 0, @"The camera zNear is zero");
+        if (camera == nil)
+        {
+            NSString *errorLog = @"The camera node does not have a camera";
+            [testLog addErrorLog:errorLog];
+        }
     }
 }
 
 #pragma mark - Check animations
+
+- (void)checkPositionChannels:(const struct aiNodeAnim *)aiNodeAnim
+                  aiAnimation:(const struct aiAnimation *)aiAnimation
+                  channelKeys:(NSDictionary *)channelKeys
+                     duration:(float)duration
+                      testLog:(ModelTestLog *)testLog
+{
+    if (aiNodeAnim->mNumPositionKeys > 0)
+    {
+        CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
+        if (posAnim.keyTimes.count != aiNodeAnim->mNumPositionKeys)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The position animation contains "
+                                           @"%lu channel key "
+                                           @"times "
+                                           @"instead of %d key times",
+                                           posAnim.keyTimes.count,
+                                           aiNodeAnim->mNumPositionKeys];
+            [testLog addErrorLog:errorLog];
+        }
+        if (posAnim.values.count != aiNodeAnim->mNumPositionKeys)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The position animation contains "
+                                           @"%lu channel key "
+                                           @"values "
+                                           @"instead of %d key values",
+                                           posAnim.values.count,
+                                           aiNodeAnim->mNumPositionKeys];
+            [testLog addErrorLog:errorLog];
+        }
+        if (posAnim.speed != 1)
+        {
+            NSString *errorLog = @"The position animation speed is not 1";
+            [testLog addErrorLog:errorLog];
+        }
+        if (posAnim.duration != duration)
+        {
+            NSString *errorLog = [NSString
+                stringWithFormat:@"The position animation duration is not %f",
+                                 duration];
+            [testLog addErrorLog:errorLog];
+        }
+        for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++)
+        {
+            const struct aiVectorKey *aiTranslationKey =
+                &aiNodeAnim->mPositionKeys[k];
+            const struct aiVector3D aiTranslation = aiTranslationKey->mValue;
+            SCNVector3 posKey =
+                [[posAnim.values objectAtIndex:k] SCNVector3Value];
+            if (posKey.x != aiTranslation.x)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has pos.x "
+                                     @"value %f instead of %f",
+                                     k, posKey.x, aiTranslation.x];
+                [testLog addErrorLog:errorLog];
+            }
+            if (posKey.y != aiTranslation.y)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has pos.y "
+                                     @"value %f instead of %f",
+                                     k, posKey.y, aiTranslation.y];
+                [testLog addErrorLog:errorLog];
+            }
+            if (posKey.z != aiTranslation.z)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has pos.z "
+                                     @"value %f instead of %f",
+                                     k, posKey.z, aiTranslation.z];
+                [testLog addErrorLog:errorLog];
+            }
+            NSNumber *keyTime = [posAnim.keyTimes objectAtIndex:k];
+            if (keyTime.floatValue != aiTranslationKey->mTime)
+            {
+                NSString *errorLog =
+                    [NSString stringWithFormat:@"The channel num %d key has %f "
+                                               @"key time instead "
+                                               @"of %f",
+                                               k, keyTime.floatValue,
+                                               aiTranslationKey->mTime];
+                [testLog addErrorLog:errorLog];
+            }
+        }
+    }
+}
+
+- (void)checkRotationChannels:(const struct aiNodeAnim *)aiNodeAnim
+                  aiAnimation:(const struct aiAnimation *)aiAnimation
+                  channelKeys:(NSDictionary *)channelKeys
+                     duration:(float)duration
+                      testLog:(ModelTestLog *)testLog
+{
+    if (aiNodeAnim->mNumRotationKeys > 0)
+    {
+        CAKeyframeAnimation *rotationAnim =
+            [channelKeys valueForKey:@"orientation"];
+        if (rotationAnim.keyTimes.count != aiNodeAnim->mNumRotationKeys)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The position animation contains "
+                                           @"%lu channel key "
+                                           @"times "
+                                           @"instead of %d key times",
+                                           rotationAnim.keyTimes.count,
+                                           aiNodeAnim->mNumRotationKeys];
+            [testLog addErrorLog:testLog];
+        }
+        if (rotationAnim.values.count != aiNodeAnim->mNumRotationKeys)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The position animation contains "
+                                           @"%lu channel key "
+                                           @"values "
+                                           @"instead of %d key values",
+                                           rotationAnim.values.count,
+                                           aiNodeAnim->mNumRotationKeys];
+            [testLog addErrorLog:errorLog];
+        }
+        if (rotationAnim.speed != 1)
+        {
+            NSString *errorLog = @"The position animation speed is not 1";
+            [testLog addErrorLog:errorLog];
+        }
+        if (rotationAnim.duration != duration)
+        {
+            NSString *errorLog = [NSString
+                stringWithFormat:@"The position animation duration is not %f",
+                                 duration];
+            [testLog addErrorLog:errorLog];
+        }
+        for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++)
+        {
+            const struct aiQuatKey *aiQuatKey = &aiNodeAnim->mRotationKeys[k];
+            const struct aiQuaternion aiQuaternion = aiQuatKey->mValue;
+            SCNVector4 quatKey =
+                [[rotationAnim.values objectAtIndex:k] SCNVector4Value];
+            if (quatKey.x != aiQuaternion.x)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has quat.x "
+                                     @"value %f instead of %f",
+                                     k, quatKey.x, aiQuaternion.x];
+                [testLog addErrorLog:errorLog];
+            }
+            if (quatKey.y != aiQuaternion.y)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has quat.y "
+                                     @"value %f instead of %f",
+                                     k, quatKey.y, aiQuaternion.y];
+                [testLog addErrorLog:errorLog];
+            }
+            if (quatKey.z != aiQuaternion.z)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has quat.z "
+                                     @"value %f instead of %f",
+                                     k, quatKey.z, aiQuaternion.z];
+                [testLog addErrorLog:errorLog];
+            }
+            if (quatKey.w != aiQuaternion.w)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has quat.w "
+                                     @"value %f instead of %f",
+                                     k, quatKey.w, aiQuaternion.w];
+                [testLog addErrorLog:errorLog];
+            }
+            NSNumber *keyTime = [rotationAnim.keyTimes objectAtIndex:k];
+            if (keyTime.floatValue != aiQuatKey->mTime)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has %f "
+                                     @"key time instead "
+                                     @"of %f",
+                                     k, keyTime.floatValue, aiQuatKey->mTime];
+                [testLog addErrorLog:errorLog];
+            }
+        }
+    }
+}
+
+- (void)checkScalingChannels:(const struct aiNodeAnim *)aiNodeAnim
+                 aiAnimation:(const struct aiAnimation *)aiAnimation
+                 channelKeys:(NSDictionary *)channelKeys
+                    duration:(float)duration
+                     testLog:(ModelTestLog *)testLog
+{
+    if (aiNodeAnim->mNumScalingKeys > 0)
+    {
+        CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"position"];
+        if (scaleAnim.keyTimes.count != aiNodeAnim->mNumPositionKeys)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The position animation contains "
+                                           @"%lu channel key "
+                                           @"times "
+                                           @"instead of %d key times",
+                                           scaleAnim.keyTimes.count,
+                                           aiNodeAnim->mNumPositionKeys];
+            [testLog addErrorLog:errorLog];
+        }
+        if (scaleAnim.values.count != aiNodeAnim->mNumPositionKeys)
+        {
+            NSString *errorLog =
+                [NSString stringWithFormat:@"The position animation contains "
+                                           @"%lu channel key "
+                                           @"values "
+                                           @"instead of %d key values",
+                                           scaleAnim.values.count,
+                                           aiNodeAnim->mNumPositionKeys];
+            [testLog addErrorLog:errorLog];
+        }
+        if (scaleAnim.speed != 1)
+        {
+            NSString *errorLog = @"The position animation speed is not 1";
+            [testLog addErrorLog:errorLog];
+        }
+        if (scaleAnim.duration != duration)
+        {
+            NSString *errorLog = [NSString
+                stringWithFormat:@"The position animation duration is not %f",
+                                 duration];
+            [testLog addErrorLog:errorLog];
+        }
+        for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++)
+        {
+            const struct aiVectorKey *aiScaleKey =
+                &aiNodeAnim->mPositionKeys[k];
+            const struct aiVector3D aiScale = aiScaleKey->mValue;
+            SCNVector3 scaleKey =
+                [[scaleAnim.values objectAtIndex:k] SCNVector3Value];
+            if (scaleKey.x != aiScale.x)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has pos.x "
+                                     @"value %f instead of %f",
+                                     k, scaleKey.x, aiScale.x];
+                [testLog addErrorLog:errorLog];
+            }
+            if (scaleKey.y != aiScale.y)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has pos.y "
+                                     @"value %f instead of %f",
+                                     k, scaleKey.y, aiScale.y];
+                [testLog addErrorLog:errorLog];
+            }
+            if (scaleKey.z != aiScale.z)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has pos.z "
+                                     @"value %f instead of %f",
+                                     k, scaleKey.z, aiScale.z];
+                [testLog addErrorLog:errorLog];
+            }
+            NSNumber *keyTime = [scaleAnim.keyTimes objectAtIndex:k];
+            if (keyTime.floatValue != aiScaleKey->mTime)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The channel num %d key has %f "
+                                     @"key time instead "
+                                     @"of %f",
+                                     k, keyTime.floatValue, aiScaleKey->mTime];
+                [testLog addErrorLog:errorLog];
+            }
+        }
+    }
+}
 - (void)checkAnimations:(const struct aiScene *)aiScene
               withScene:(SCNAssimpScene *)scene
               modelPath:(NSString *)modelPath
+                testLog:(ModelTestLog *)testLog
 {
     if (aiScene->mNumAnimations > 0)
     {
@@ -371,21 +733,35 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         {
             NSInteger actualAnimations = scene.animations.allKeys.count;
             int expectedAnimations = aiScene->mNumAnimations;
-            XCTAssertEqual(
-                actualAnimations, expectedAnimations,
-                @"The scene contains %ld animations instead of expected "
-                @"%d animations",
-                (long)actualAnimations, expectedAnimations);
+            if (actualAnimations != expectedAnimations)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:@"The scene contains %ld animations "
+                                     @"instead of expected %d animations",
+                                     (long)actualAnimations,
+                                     expectedAnimations];
+                [testLog addErrorLog:errorLog];
+            }
             const struct aiAnimation *aiAnimation = aiScene->mAnimations[i];
             NSString *animKey = [[[modelPath lastPathComponent]
                 stringByDeletingPathExtension] stringByAppendingString:@"-1"];
             SCNAssimpAnimation *animation = [scene animationForKey:animKey];
-            XCTAssert(animation,
-                      @"The scene does not contain animation with key %@",
-                      animKey);
-            XCTAssertEqualObjects(
-                animation.key, animKey,
-                @"The animation does not have the correct %@ key", animKey);
+            if (animation == nil)
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:
+                        @"The scene does not contain animation with key %@",
+                        animKey];
+                [testLog addErrorLog:errorLog];
+            }
+            if (![animation.key isEqualToString:animKey])
+            {
+                NSString *errorLog = [NSString
+                    stringWithFormat:
+                        @"The animation does not have the correct key %@",
+                        animKey];
+                [testLog addErrorLog:errorLog];
+            }
             for (int j = 0; j < aiAnimation->mNumChannels; j++)
             {
                 const struct aiNodeAnim *aiNodeAnim = aiAnimation->mChannels[j];
@@ -395,173 +771,43 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                 NSDictionary *channelKeys =
                     [animation.frameAnims valueForKey:name];
                 DDLogInfo(@" Checking channel keys for bone %@", name);
-                XCTAssert(channelKeys, @"The channel keys for bone node "
-                                       @"channel %@ does not exist",
-                          name);
-                if (aiNodeAnim->mNumPositionKeys > 0)
+                if (channelKeys == nil)
                 {
-                    DDLogInfo(@" Checking position channel keys for bone %@",
-                              name);
-                    CAKeyframeAnimation *posAnim =
-                        [channelKeys valueForKey:@"position"];
-                    XCTAssertEqual(
-                        posAnim.keyTimes.count, aiNodeAnim->mNumPositionKeys,
-                        @"The position animation contains %lu channel key "
-                        @"times "
-                        @"instead of %d key times",
-                        posAnim.keyTimes.count, aiNodeAnim->mNumPositionKeys);
-                    XCTAssertEqual(
-                        posAnim.values.count, aiNodeAnim->mNumPositionKeys,
-                        @"The position animation contains %lu channel key "
-                        @"values "
-                        @"instead of %d key values",
-                        posAnim.values.count, aiNodeAnim->mNumPositionKeys);
-                    XCTAssertEqual(posAnim.speed, 1,
-                                   @"The position animation speed is not 1");
-                    XCTAssertEqual(posAnim.duration, aiAnimation->mDuration,
-                                   @"The position animation duration is not %f",
-                                   aiAnimation->mDuration);
-                    for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++)
-                    {
-                        const struct aiVectorKey *aiTranslationKey =
-                            &aiNodeAnim->mPositionKeys[k];
-                        const struct aiVector3D aiTranslation =
-                            aiTranslationKey->mValue;
-                        SCNVector3 posKey =
-                            [[posAnim.values objectAtIndex:k] SCNVector3Value];
-                        XCTAssertEqual(posKey.x, aiTranslation.x,
-                                       @"The channel num %d key has pos.x "
-                                       @"value %f instead of %f",
-                                       k, posKey.x, aiTranslation.x);
-                        XCTAssertEqual(posKey.y, aiTranslation.y,
-                                       @"The channel num %d key has pos.y "
-                                       @"value %f instead of %f",
-                                       k, posKey.y, aiTranslation.y);
-                        XCTAssertEqual(posKey.z, aiTranslation.z,
-                                       @"The channel num %d key has pos.z "
-                                       @"value %f instead of %f",
-                                       k, posKey.z, aiTranslation.z);
-                        NSNumber *keyTime = [posAnim.keyTimes objectAtIndex:k];
-                        XCTAssertEqual(
-                            keyTime.floatValue, aiTranslationKey->mTime,
-                            @"The channel num %d key has %f key time instead "
-                            @"of %f",
-                            k, keyTime.floatValue, aiTranslationKey->mTime);
-                    }
+                    NSString *errorLog = [NSString
+                        stringWithFormat:@"The channel keys for bone %@ "
+                                         @"channel does not exist",
+                                         name];
+                    [testLog addErrorLog:errorLog];
                 }
 
-                if (aiNodeAnim->mNumRotationKeys > 0)
+                float duration;
+                if (aiAnimation->mTicksPerSecond != 0)
                 {
-                    DDLogInfo(@" Checking rotation channel keys for bone %@",
-                              name);
-                    CAKeyframeAnimation *rotationAnim =
-                        [channelKeys valueForKey:@"orientation"];
-                    XCTAssertEqual(
-                        rotationAnim.keyTimes.count,
-                        aiNodeAnim->mNumRotationKeys,
-                        @"The position animation contains %lu channel key "
-                        @"times "
-                        @"instead of %d key times",
-                        rotationAnim.keyTimes.count,
-                        aiNodeAnim->mNumRotationKeys);
-                    XCTAssertEqual(
-                        rotationAnim.values.count, aiNodeAnim->mNumRotationKeys,
-                        @"The position animation contains %lu channel key "
-                        @"values "
-                        @"instead of %d key values",
-                        rotationAnim.values.count,
-                        aiNodeAnim->mNumRotationKeys);
-                    XCTAssertEqual(rotationAnim.speed, 1,
-                                   @"The position animation speed is not 1");
-                    XCTAssertEqual(rotationAnim.duration,
-                                   aiAnimation->mDuration,
-                                   @"The position animation duration is not %f",
-                                   aiAnimation->mDuration);
-                    for (int k = 0; k < aiNodeAnim->mNumPositionKeys; k++)
-                    {
-                        const struct aiQuatKey *aiQuatKey =
-                            &aiNodeAnim->mRotationKeys[k];
-                        const struct aiQuaternion aiQuaternion =
-                            aiQuatKey->mValue;
-                        SCNVector4 quatKey = [[rotationAnim.values
-                            objectAtIndex:k] SCNVector4Value];
-                        XCTAssertEqual(quatKey.x, aiQuaternion.x,
-                                       @"The channel num %d key has quat.x "
-                                       @"value %f instead of %f",
-                                       k, quatKey.x, aiQuaternion.x);
-                        XCTAssertEqual(quatKey.y, aiQuaternion.y,
-                                       @"The channel num %d key has quat.y "
-                                       @"value %f instead of %f",
-                                       k, quatKey.y, aiQuaternion.y);
-                        XCTAssertEqual(quatKey.z, aiQuaternion.z,
-                                       @"The channel num %d key has quat.z "
-                                       @"value %f instead of %f",
-                                       k, quatKey.z, aiQuaternion.z);
-                        XCTAssertEqual(quatKey.w, aiQuaternion.w,
-                                       @"The channel num %d key has quat.w "
-                                       @"value %f instead of %f",
-                                       k, quatKey.w, aiQuaternion.w);
-                        NSNumber *keyTime =
-                            [rotationAnim.keyTimes objectAtIndex:k];
-                        XCTAssertEqual(
-                            keyTime.floatValue, aiQuatKey->mTime,
-                            @"The channel num %d key has %f key time instead "
-                            @"of %f",
-                            k, keyTime.floatValue, aiQuatKey->mTime);
-                    }
+                    duration =
+                        aiAnimation->mDuration / aiAnimation->mTicksPerSecond;
+                }
+                else
+                {
+                    duration = aiAnimation->mDuration;
                 }
 
-                if (aiNodeAnim->mNumScalingKeys > 0)
-                {
-                    DDLogInfo(@" Checking scale channel keys for bone %@",
-                              name);
-                    CAKeyframeAnimation *scaleAnim =
-                        [channelKeys valueForKey:@"scale"];
-                    XCTAssertEqual(
-                        scaleAnim.keyTimes.count, aiNodeAnim->mNumScalingKeys,
-                        @"The scale animation contains %lu channel key "
-                        @"times "
-                        @"instead of %d key times",
-                        scaleAnim.keyTimes.count, aiNodeAnim->mNumScalingKeys);
-                    XCTAssertEqual(
-                        scaleAnim.values.count, aiNodeAnim->mNumScalingKeys,
-                        @"The scale animation contains %lu channel key "
-                        @"values "
-                        @"instead of %d key values",
-                        scaleAnim.values.count, aiNodeAnim->mNumScalingKeys);
-                    XCTAssertEqual(scaleAnim.speed, 1,
-                                   @"The scale animation speed is not 1");
-                    XCTAssertEqual(scaleAnim.duration, aiAnimation->mDuration,
-                                   @"The scale animation duration is not %f",
-                                   aiAnimation->mDuration);
-                    for (int k = 0; k < aiNodeAnim->mNumScalingKeys; k++)
-                    {
-                        const struct aiVectorKey *aiScaleKey =
-                            &aiNodeAnim->mScalingKeys[k];
-                        const struct aiVector3D aiScale = aiScaleKey->mValue;
-                        SCNVector3 scaleKey = [
-                            [scaleAnim.values objectAtIndex:k] SCNVector3Value];
-                        XCTAssertEqual(scaleKey.x, aiScale.x,
-                                       @"The channel num %d key has scale.x "
-                                       @"value %f instead of %f",
-                                       k, scaleKey.x, aiScale.x);
-                        XCTAssertEqual(scaleKey.y, aiScale.y,
-                                       @"The channel num %d key has scale.y "
-                                       @"value %f instead of %f",
-                                       k, scaleKey.y, aiScale.y);
-                        XCTAssertEqual(scaleKey.z, aiScale.z,
-                                       @"The channel num %d key has scale.z "
-                                       @"value %f instead of %f",
-                                       k, scaleKey.z, aiScale.z);
-                        NSNumber *keyTime =
-                            [scaleAnim.keyTimes objectAtIndex:k];
-                        XCTAssertEqual(
-                            keyTime.floatValue, aiScaleKey->mTime,
-                            @"The channel num %d key has %f key time instead "
-                            @"of %f",
-                            k, keyTime.floatValue, aiScaleKey->mTime);
-                    }
-                }
+                [self checkPositionChannels:aiNodeAnim
+                                aiAnimation:aiAnimation
+                                channelKeys:channelKeys
+                                   duration:duration
+                                    testLog:testLog];
+
+                [self checkRotationChannels:aiNodeAnim
+                                aiAnimation:aiAnimation
+                                channelKeys:channelKeys
+                                   duration:duration
+                                    testLog:testLog];
+
+                [self checkScalingChannels:aiNodeAnim
+                               aiAnimation:aiAnimation
+                               channelKeys:channelKeys
+                                  duration:duration
+                                   testLog:testLog];
             }
         }
     }
@@ -569,7 +815,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 #pragma mark - Check model
 
-- (BOOL)checkModel:(NSString *)path
+- (void)checkModel:(NSString *)path testLog:(ModelTestLog *)testLog
 {
     const char *pFile = [path UTF8String];
     const struct aiScene *aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
@@ -580,7 +826,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
             [NSString stringWithUTF8String:aiGetErrorString()];
         DDLogError(@" Scene importing failed for filePath %@", path);
         DDLogError(@" Scene importing failed with error %@", errorString);
-        return NO;
+        [testLog addErrorLog:errorString];
+        return;
     }
 
     AssimpImporter *importer = [[AssimpImporter alloc] init];
@@ -591,14 +838,17 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     [self checkNode:aiScene->mRootNode
         withSceneNode:[scene.rootNode.childNodes objectAtIndex:0]
               aiScene:aiScene
-            modelPath:path];
+            modelPath:path
+              testLog:testLog];
     DDLogInfo(@"********* Checking lights ");
-    [self checkLights:aiScene withScene:scene];
+    [self checkLights:aiScene withScene:scene testLog:testLog];
     DDLogInfo(@"********* Checking cameras ");
-    [self checkCameras:aiScene withScene:scene];
+    [self checkCameras:aiScene withScene:scene testLog:testLog];
     DDLogInfo(@"********* Checking animations ");
-    [self checkAnimations:aiScene withScene:scene modelPath:path];
-    return YES;
+    [self checkAnimations:aiScene
+                withScene:scene
+                modelPath:path
+                  testLog:testLog];
 }
 
 #pragma mark - Test all models
@@ -658,11 +908,18 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                         {
                             NSLog(@"$$$$$$$$$$$ TESTING %@ file",
                                   modelFilePath);
-                            BOOL testResult = [self checkModel:modelFilePath];
+                            ModelTestLog *testLog = [[ModelTestLog alloc] init];
+                            [self checkModel:modelFilePath testLog:testLog];
                             ++numFilesTested;
-                            if (testResult)
+                            if ([testLog testPassed])
                             {
                                 ++numFilesPassed;
+                            }
+                            else
+                            {
+                                DDLogError(@" The model testing failed with "
+                                           @"errors: %@",
+                                           [testLog getErrors]);
                             }
                         }
                     }
