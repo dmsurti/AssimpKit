@@ -180,11 +180,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         if (![[texFileName stringByDeletingLastPathComponent]
                 isEqualToString:[modelPath stringByDeletingLastPathComponent]])
         {
-            NSString *errorLog =
-                [NSString stringWithFormat:@"The texture file name %@ is not a "
-                                           @"file under the model path %@",
-                                [texFileName stringByDeletingLastPathComponent],
-                                [modelPath stringByDeletingLastPathComponent]];
+            NSString *errorLog = [NSString
+                stringWithFormat:@"The texture file name %@ is not a "
+                                 @"file under the model path %@",
+                                 [texFileName
+                                     stringByDeletingLastPathComponent],
+                                 [modelPath stringByDeletingLastPathComponent]];
             [testLog addErrorLog:errorLog];
         }
     }
