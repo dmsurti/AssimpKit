@@ -1,0 +1,14 @@
+assets/assimp/models/3DS/CameraRollAnimWithChildObject.3ds
+assets/assimp/models/3DS/TargetCameraAnim.3ds
+assets/assimp/models/ASE/*.ase
+assets/assimp/models/BLEND/*
+assets/assimp/models/CSM/ThomasFechten.csm
+assets/assimp/models/invalid/*
+assets/assimp/models/LWO/**/*
+assets/assimp/models/LWS/**/*
+/assets/assimp/models/OBJ/regr01.obj
+assets/assimp/models/TER/*
+assets/assimp/models/X/*
+assets/assimp/models-proprietary/MD3/q3root/models/mapobjects/kt_kubalwagon/european_fnt_v2.md3
+assets/assimp/models-proprietary/PK3/*
+assets/assimp/models-proprietary/BLEND/*

@@ -46,12 +46,14 @@
 		77CDAA231DD6D4CF00B7E342 /* ModelTestLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */; };
 		77CDAA241DD6D4CF00B7E342 /* ModelTestLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */; };
 		77CDAA251DD6D4CF00B7E342 /* ModelTestLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */; };
+		77CDAA261DD70E0A00B7E342 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 770882C21DBE22BD0067790B /* libassimp.a */; };
+		77CDAA291DD70FD600B7E342 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AE2AC71DD4537F00E52CE1 /* CocoaLumberjack.framework */; };
 		77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 		77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		77A35AA61DD4753C003E89C2 /* PBXContainerItemProxy */ = {
+		77CDAA2A1DD70FF900B7E342 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7708821B1DBE21540067790B /* Project object */;
 			proxyType = 1;
@@ -158,6 +160,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77CDAA261DD70E0A00B7E342 /* libassimp.a in Frameworks */,
+				77CDAA291DD70FD600B7E342 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +352,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				77A35AA71DD4753C003E89C2 /* PBXTargetDependency */,
+				77CDAA2B1DD70FF900B7E342 /* PBXTargetDependency */,
 			);
 			name = "OSX-AssimpKit-Tests";
 			productName = "OSX-AssimpKit-Tests";
@@ -498,10 +502,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		77A35AA71DD4753C003E89C2 /* PBXTargetDependency */ = {
+		77CDAA2B1DD70FF900B7E342 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 770882491DBE21B50067790B /* OSX-ObjC-Example */;
-			targetProxy = 77A35AA61DD4753C003E89C2 /* PBXContainerItemProxy */;
+			targetProxy = 77CDAA2A1DD70FF900B7E342 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -824,7 +828,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -851,9 +854,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "OSX-AssimpKit-Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/Assimp/include";
+				LIBRARY_SEARCH_PATHS = (
+					"${PROJECT_DIR}/Assimp/include",
+					"$(PROJECT_DIR)/Assimp/lib/osx",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.OSX-AssimpKit-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -866,7 +876,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -887,9 +896,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "OSX-AssimpKit-Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/Assimp/include";
+				LIBRARY_SEARCH_PATHS = (
+					"${PROJECT_DIR}/Assimp/include",
+					"$(PROJECT_DIR)/Assimp/lib/osx",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.OSX-AssimpKit-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

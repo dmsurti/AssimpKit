@@ -33,18 +33,15 @@
  ---------------------------------------------------------------------------
  */
 
-#define LOG_LEVEL_DEF ddLogLevel
-
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import <XCTest/XCTest.h>
 #import "AssimpImporter.h"
+#import "ModelLog.h"
 #import "SCNAssimpAnimation.h"
 #include "assimp/cimport.h"     // Plain-C interface
 #include "assimp/light.h"       // Lights
 #include "assimp/material.h"    // Materials
 #include "assimp/postprocess.h" // Post processing flags
 #include "assimp/scene.h"       // Output data structure
-#import "ModelTestLog.h"
 
 @interface AssimpImporterTests : XCTestCase
 
@@ -52,8 +49,6 @@
 @property (strong, nonatomic) NSString *testAssetsPath;
 
 @end
-
-static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 @implementation AssimpImporterTests
 
@@ -63,7 +58,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     // Put setup code here. This method is called before the invocation of each
     // test method in the class.
     self.modelLogs = [[NSMutableDictionary alloc] init];
-    DDLogInfo(@" Asset models path: %@", TEST_ASSETS_PATH);
+
     self.testAssetsPath = TEST_ASSETS_PATH;
 }
 
@@ -80,7 +75,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                  nodeName:(NSString *)nodeName
             withSceneNode:(SCNNode *)sceneNode
                   aiScene:(const struct aiScene *)aiScene
-                  testLog:(ModelTestLog *)testLog
+                  testLog:(ModelLog *)testLog
 {
     int nVertices = 0;
     for (int i = 0; i < aiNode->mNumMeshes; i++)
@@ -89,7 +84,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
         nVertices += aiMesh->mNumVertices;
     }
-    DDLogInfo(@" Checking node geometry vertices");
+
     SCNGeometrySource *vertexSource =
         [sceneNode.geometry.geometrySources objectAtIndex:0];
     if (nVertices != vertexSource.vectorCount)
@@ -98,10 +93,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
             stringWithFormat:
                 @"Scene node %@ geometry does not have expected %d vertices",
                 nodeName, nVertices];
-        DDLogError(errorLog);
+
         [testLog addErrorLog:errorLog];
     }
-    DDLogInfo(@" Checking node geometry normals");
     SCNGeometrySource *normalSource =
         [sceneNode.geometry.geometrySources objectAtIndex:1];
     if (nVertices != normalSource.vectorCount)
@@ -110,10 +104,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
             stringWithFormat:
                 @"Scene node %@ geometry does not have expected %d normals",
                 nodeName, nVertices];
-        DDLogError(errorLog);
         [testLog addErrorLog:errorLog];
     }
-    DDLogInfo(@" Checking node geometry tex coords");
+
     SCNGeometrySource *texSource =
         [sceneNode.geometry.geometrySources objectAtIndex:2];
     if (nVertices != texSource.vectorCount)
@@ -123,7 +116,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                 stringWithFormat:@"Scene node %@ geometry does not have "
                                  @"expected %d tex coords",
                                  nodeName, nVertices];
-            DDLogError(errorLog);
             [testLog addErrorLog:errorLog];
         }
     }
@@ -137,12 +129,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     withSceneNode:(SCNNode *)sceneNode
       scnMaterial:(SCNMaterial *)scnMaterial
         modelPath:(NSString *)modelPath
-          testLog:(ModelTestLog *)testLog
+          testLog:(ModelLog *)testLog
 {
     int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
     if (nTextures > 0)
     {
-        DDLogInfo(@" has %d textures", nTextures);
         NSString *texFileName;
         if (aiTextureType == aiTextureType_DIFFUSE)
         {
@@ -176,7 +167,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         {
             texFileName = scnMaterial.ambientOcclusion.contents;
         }
-        DDLogInfo(@" Texture: file name: %@", texFileName);
         if (![[texFileName stringByDeletingLastPathComponent]
                 isEqualToString:[modelPath stringByDeletingLastPathComponent]])
         {
@@ -238,10 +228,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
              withSceneNode:(SCNNode *)sceneNode
                    aiScene:(const struct aiScene *)aiScene
                  modelPath:(NSString *)modelPath
-                   testLog:(ModelTestLog *)testLog
+                   testLog:(ModelLog *)testLog
 {
-    DDLogInfo(@" Checking materials with model path prefix: %@",
-              [modelPath stringByDeletingLastPathComponent]);
     for (int i = 0; i < aiNode->mNumMeshes; i++)
     {
         int aiMeshIndex = aiNode->mMeshes[i];
@@ -249,7 +237,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         const struct aiMaterial *aiMaterial =
             aiScene->mMaterials[aiMesh->mMaterialIndex];
         SCNMaterial *material = [sceneNode.geometry.materials objectAtIndex:i];
-        DDLogInfo(@" Checking diffuse");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_DIFFUSE
@@ -257,7 +244,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking specular");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_SPECULAR
@@ -265,7 +251,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking ambient");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_AMBIENT
@@ -273,7 +258,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking reflective");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_REFLECTION
@@ -281,7 +265,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking emssive");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_EMISSIVE
@@ -289,7 +272,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking opacity");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_OPACITY
@@ -297,7 +279,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking normals");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_NORMALS
@@ -305,7 +286,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
               scnMaterial:material
                 modelPath:modelPath
                   testLog:testLog];
-        DDLogInfo(@" Checking lightmap");
         [self checkNode:aiNode
                  material:aiMaterial
               textureType:aiTextureType_LIGHTMAP
@@ -320,7 +300,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)checkLights:(const struct aiScene *)aiScene
           withScene:(SCNAssimpScene *)scene
-            testLog:(ModelTestLog *)testLog
+            testLog:(ModelLog *)testLog
 {
     for (int i = 0; i < aiScene->mNumLights; i++)
     {
@@ -328,7 +308,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         const struct aiString aiLightNodeName = aiLight->mName;
         NSString *lightNodeName = [NSString
             stringWithUTF8String:(const char *_Nonnull) & aiLightNodeName.data];
-        DDLogInfo(@" Check light node %@", lightNodeName);
         SCNNode *lightNode =
             [scene.rootNode childNodeWithName:lightNodeName recursively:YES];
         if (lightNode == nil)
@@ -378,12 +357,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     withSceneNode:(SCNNode *)sceneNode
           aiScene:(const struct aiScene *)aiScene
         modelPath:(NSString *)modelPath
-          testLog:(ModelTestLog *)testLog
+          testLog:(ModelLog *)testLog
 {
     const struct aiString *aiNodeName = &aiNode->mName;
     NSString *nodeName =
         [NSString stringWithUTF8String:(const char *)&aiNodeName->data];
-    DDLogInfo(@"--- Checking node %@", nodeName);
     if (![nodeName isEqualToString:sceneNode.name])
     {
         NSString *errorLog =
@@ -421,7 +399,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)checkCameras:(const struct aiScene *)aiScene
            withScene:(SCNAssimpScene *)scene
-             testLog:(ModelTestLog *)testLog
+             testLog:(ModelLog *)testLog
 {
     for (int i = 0; i < aiScene->mNumCameras; i++)
     {
@@ -429,7 +407,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         const struct aiString aiCameraName = aiCamera->mName;
         NSString *cameraNodeName = [NSString
             stringWithUTF8String:(const char *_Nonnull) & aiCameraName.data];
-        DDLogInfo(@" Check camera node %@", cameraNodeName);
         SCNNode *cameraNode =
             [scene.rootNode childNodeWithName:cameraNodeName recursively:YES];
         if (cameraNode == nil)
@@ -454,7 +431,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                   aiAnimation:(const struct aiAnimation *)aiAnimation
                   channelKeys:(NSDictionary *)channelKeys
                      duration:(float)duration
-                      testLog:(ModelTestLog *)testLog
+                      testLog:(ModelLog *)testLog
 {
     if (aiNodeAnim->mNumPositionKeys > 0)
     {
@@ -543,7 +520,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                   aiAnimation:(const struct aiAnimation *)aiAnimation
                   channelKeys:(NSDictionary *)channelKeys
                      duration:(float)duration
-                      testLog:(ModelTestLog *)testLog
+                      testLog:(ModelLog *)testLog
 {
     if (aiNodeAnim->mNumRotationKeys > 0)
     {
@@ -639,7 +616,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                  aiAnimation:(const struct aiAnimation *)aiAnimation
                  channelKeys:(NSDictionary *)channelKeys
                     duration:(float)duration
-                     testLog:(ModelTestLog *)testLog
+                     testLog:(ModelLog *)testLog
 {
     if (aiNodeAnim->mNumScalingKeys > 0)
     {
@@ -725,11 +702,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 - (void)checkAnimations:(const struct aiScene *)aiScene
               withScene:(SCNAssimpScene *)scene
               modelPath:(NSString *)modelPath
-                testLog:(ModelTestLog *)testLog
+                testLog:(ModelLog *)testLog
 {
     if (aiScene->mNumAnimations > 0)
     {
-        DDLogInfo(@" Checking %d animations", aiScene->mNumAnimations);
         for (int i = 0; i < aiScene->mNumAnimations; i++)
         {
             NSInteger actualAnimations = scene.animations.allKeys.count;
@@ -771,7 +747,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                     [NSString stringWithUTF8String:aiNodeName->data];
                 NSDictionary *channelKeys =
                     [animation.frameAnims valueForKey:name];
-                DDLogInfo(@" Checking channel keys for bone %@", name);
                 if (channelKeys == nil)
                 {
                     NSString *errorLog = [NSString
@@ -816,7 +791,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 #pragma mark - Check model
 
-- (void)checkModel:(NSString *)path testLog:(ModelTestLog *)testLog
+- (void)checkModel:(NSString *)path testLog:(ModelLog *)testLog
 {
     const char *pFile = [path UTF8String];
     const struct aiScene *aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
@@ -825,8 +800,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     {
         NSString *errorString =
             [NSString stringWithUTF8String:aiGetErrorString()];
-        DDLogError(@" Scene importing failed for filePath %@", path);
-        DDLogError(@" Scene importing failed with error %@", errorString);
         [testLog addErrorLog:errorString];
         return;
     }
@@ -834,18 +807,16 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     AssimpImporter *importer = [[AssimpImporter alloc] init];
     SCNAssimpScene *scene = [importer importScene:path];
 
-    DDLogInfo(@"========= CHECKING MODEL at %@", path);
-    DDLogInfo(@"********* Checking node hierarchy");
     [self checkNode:aiScene->mRootNode
         withSceneNode:[scene.rootNode.childNodes objectAtIndex:0]
               aiScene:aiScene
             modelPath:path
               testLog:testLog];
-    DDLogInfo(@"********* Checking lights ");
+
     [self checkLights:aiScene withScene:scene testLog:testLog];
-    DDLogInfo(@"********* Checking cameras ");
+
     [self checkCameras:aiScene withScene:scene testLog:testLog];
-    DDLogInfo(@"********* Checking animations ");
+
     [self checkAnimations:aiScene
                 withScene:scene
                 modelPath:path
@@ -882,7 +853,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         stringWithContentsOfFile:validExtsFile
                         encoding:NSUTF8StringEncoding
                            error:nil] componentsSeparatedByString:@"\n"];
-    DDLogInfo(@" %lu file formats are supported: %@", validExts.count);
 
     // -----------------------------------------------
     // Generate a list of model files that we can test
@@ -933,11 +903,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 {
     int numFilesTested = 0;
     int numFilesPassed = 0;
-    NSArray* modelFiles = [self getModelFiles];
+    NSArray *modelFiles = [self getModelFiles];
     for (NSString *modelFilePath in modelFiles)
     {
         NSLog(@"$$$$$$$$$$$ TESTING %@ file", modelFilePath);
-        ModelTestLog *testLog = [[ModelTestLog alloc] init];
+        ModelLog *testLog = [[ModelLog alloc] init];
         [self checkModel:modelFilePath testLog:testLog];
         ++numFilesTested;
         if ([testLog testPassed])
@@ -946,9 +916,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         }
         else
         {
-            DDLogError(@" The model testing failed with "
-                       @"errors: %@",
-                       [testLog getErrors]);
+            NSLog(@" The model testing failed with "
+                  @"errors: %@",
+                  [testLog getErrors]);
         }
     }
     float passPercent = numFilesPassed * 100.0 / numFilesTested;
