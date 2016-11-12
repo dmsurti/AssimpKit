@@ -43,6 +43,9 @@
 		77A35AAF1DD475B4003E89C2 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C541C1DD0947800FE209C /* SCNAssimpAnimation.m */; };
 		77A35AB01DD475B6003E89C2 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 770882CE1DBE2D790067790B /* SCNScene+AssimpImport.m */; };
 		77AE2AC61DD4530500E52CE1 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AE2AC51DD4530500E52CE1 /* CocoaLumberjack.framework */; };
+		77CDAA231DD6D4CF00B7E342 /* ModelTestLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */; };
+		77CDAA241DD6D4CF00B7E342 /* ModelTestLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */; };
+		77CDAA251DD6D4CF00B7E342 /* ModelTestLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */; };
 		77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 		77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D769E21DC1EAD700E84F2D /* AssimpImporter.m */; };
 /* End PBXBuildFile section */
@@ -126,6 +129,8 @@
 		77AE2AC21DD451CA00E52CE1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = ../Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		77AE2AC51DD4530500E52CE1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		77AE2AC71DD4537F00E52CE1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		77CDAA211DD6D4CF00B7E342 /* ModelTestLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelTestLog.h; sourceTree = "<group>"; };
+		77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTestLog.m; sourceTree = "<group>"; };
 		77D769E11DC1EAD700E84F2D /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssimpImporter.h; sourceTree = "<group>"; };
 		77D769E21DC1EAD700E84F2D /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssimpImporter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,6 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				77A35AAB1DD475A7003E89C2 /* AssimpImporterTests.m */,
+				77CDAA211DD6D4CF00B7E342 /* ModelTestLog.h */,
+				77CDAA221DD6D4CF00B7E342 /* ModelTestLog.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -451,6 +458,7 @@
 				778C541D1DD0947800FE209C /* SCNAssimpAnimation.m in Sources */,
 				77D769E31DC1EAD700E84F2D /* AssimpImporter.m in Sources */,
 				770882581DBE21B50067790B /* GameViewController.m in Sources */,
+				77CDAA231DD6D4CF00B7E342 /* ModelTestLog.m in Sources */,
 				770882CF1DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
 				770882551DBE21B50067790B /* GameView.m in Sources */,
 				778C54191DD0915800FE209C /* SCNAssimpScene.m in Sources */,
@@ -467,6 +475,7 @@
 				770882D41DBE31490067790B /* GameViewController.m in Sources */,
 				7708826F1DBE21CA0067790B /* AppDelegate.m in Sources */,
 				7708826C1DBE21CA0067790B /* main.m in Sources */,
+				77CDAA241DD6D4CF00B7E342 /* ModelTestLog.m in Sources */,
 				778C541E1DD0947800FE209C /* SCNAssimpAnimation.m in Sources */,
 				77D769E41DC1EAD700E84F2D /* AssimpImporter.m in Sources */,
 				770882D01DBE2D790067790B /* SCNScene+AssimpImport.m in Sources */,
@@ -477,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77CDAA251DD6D4CF00B7E342 /* ModelTestLog.m in Sources */,
 				77A35AAD1DD475AC003E89C2 /* AssimpImporter.m in Sources */,
 				77A35AB01DD475B6003E89C2 /* SCNScene+AssimpImport.m in Sources */,
 				77A35AAF1DD475B4003E89C2 /* SCNAssimpAnimation.m in Sources */,
