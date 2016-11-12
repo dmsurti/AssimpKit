@@ -28,7 +28,6 @@
 		77CDAAD61DD71EF600B7E342 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAACE1DD71EF600B7E342 /* SCNScene+AssimpImport.m */; };
 		77CDAADC1DD71F3000B7E342 /* libAssimpSceneKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */; };
 		77CDAADD1DD7258700B7E342 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAAC51DD71D0C00B7E342 /* libassimp.a */; };
-		77CDAB1A1DD733E800B7E342 /* AssimpSceneKit_LogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB191DD733E800B7E342 /* AssimpSceneKit_LogicTests.m */; };
 		77CDAB1C1DD733E800B7E342 /* libAssimpSceneKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */; };
 		77CDAB251DD7341000B7E342 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB221DD7341000B7E342 /* AssimpImporterTests.m */; };
 		77CDAB261DD7341000B7E342 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB241DD7341000B7E342 /* ModelLog.m */; };
@@ -104,7 +103,6 @@
 		77CDAACD1DD71EF600B7E342 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
 		77CDAACE1DD71EF600B7E342 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
 		77CDAB171DD733E800B7E342 /* AssimpSceneKit_LogicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssimpSceneKit_LogicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		77CDAB191DD733E800B7E342 /* AssimpSceneKit_LogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssimpSceneKit_LogicTests.m; sourceTree = "<group>"; };
 		77CDAB1B1DD733E800B7E342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77CDAB221DD7341000B7E342 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporterTests.m; path = ../../Code/Model/Tests/AssimpImporterTests.m; sourceTree = "<group>"; };
 		77CDAB231DD7341000B7E342 /* ModelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLog.h; path = ../../Code/Model/Tests/ModelLog.h; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 				77CDAB221DD7341000B7E342 /* AssimpImporterTests.m */,
 				77CDAB231DD7341000B7E342 /* ModelLog.h */,
 				77CDAB241DD7341000B7E342 /* ModelLog.m */,
-				77CDAB191DD733E800B7E342 /* AssimpSceneKit_LogicTests.m */,
 				77CDAB1B1DD733E800B7E342 /* Info.plist */,
 			);
 			path = AssimpSceneKit_LogicTests;
@@ -395,7 +392,6 @@
 			files = (
 				77CDAB261DD7341000B7E342 /* ModelLog.m in Sources */,
 				77CDAB251DD7341000B7E342 /* AssimpImporterTests.m in Sources */,
-				77CDAB1A1DD733E800B7E342 /* AssimpSceneKit_LogicTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +665,7 @@
 				77CDAB211DD733E800B7E342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
