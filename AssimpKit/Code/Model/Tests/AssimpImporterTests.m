@@ -854,8 +854,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 #pragma mark - Test all models
 
-- (void)testAssimpModelFormats
+- (NSArray *)getModelFiles
 {
+    // -------------------------------------------------------------
+    // All asset directories by owner: Apple, OpenFrameworks, Assimp
+    // -------------------------------------------------------------
     NSString *appleAssets =
         [self.testAssetsPath stringByAppendingString:@"/apple"];
     NSString *ofAssets = [self.testAssetsPath stringByAppendingString:@"/of"];
@@ -864,28 +867,36 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     NSArray *assetDirs =
         [NSArray arrayWithObjects:appleAssets, ofAssets, assimpAssets, nil];
 
+    // ---------------------------------------------------------
+    // Asset subdirectories sorted by open and proprietary files
+    // ---------------------------------------------------------
     NSArray *subDirs =
         [NSArray arrayWithObjects:@"/models", @"/models-proprietary", nil];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
 
+    // ------------------------------------------------------
+    // Read the valid extensions that are currently supported
+    // ------------------------------------------------------
     NSString *validExtsFile =
         [self.testAssetsPath stringByAppendingString:@"/valid-extensions.txt"];
     NSArray *validExts = [[NSString
         stringWithContentsOfFile:validExtsFile
                         encoding:NSUTF8StringEncoding
                            error:nil] componentsSeparatedByString:@"\n"];
-
     DDLogInfo(@" %lu file formats are supported: %@", validExts.count);
 
-    int numFilesTested = 0;
-    int numFilesPassed = 0;
+    // -----------------------------------------------
+    // Generate a list of model files that we can test
+    // -----------------------------------------------
+    NSMutableArray *modelFilePaths = [[NSMutableArray alloc] init];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
     for (NSString *assetDir in assetDirs)
     {
         for (NSString *subDir in subDirs)
         {
             NSString *assetSubDir = [assetDir stringByAppendingString:subDir];
             NSLog(@"========== Scanning asset dir: %@", assetSubDir);
-            NSArray *modelFiles =
+            NSMutableArray *modelFiles =
                 [fileManager subpathsOfDirectoryAtPath:assetSubDir error:nil];
             for (NSString *modelFile in modelFiles)
             {
@@ -907,30 +918,47 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                              [validExts
                                  containsObject:fileExt.lowercaseString]))
                         {
-                            NSLog(@"$$$$$$$$$$$ TESTING %@ file",
-                                  modelFilePath);
-                            ModelTestLog *testLog = [[ModelTestLog alloc] init];
-                            [self checkModel:modelFilePath testLog:testLog];
-                            ++numFilesTested;
-                            if ([testLog testPassed])
-                            {
-                                ++numFilesPassed;
-                            }
-                            else
-                            {
-                                DDLogError(@" The model testing failed with "
-                                           @"errors: %@",
-                                           [testLog getErrors]);
-                            }
+                            [modelFilePaths addObject:modelFilePath];
                         }
                     }
                 }
             }
         }
     }
-    NSLog(@" NUM OF FILES TESTED: %d", numFilesTested);
-    NSLog(@" NUM OF FILES PASSED: %d", numFilesPassed);
-    NSLog(@" PASS PERCENT: %f", numFilesPassed * 100.0 / numFilesTested);
+
+    return modelFilePaths;
+}
+
+- (void)testAssimpModelFormats
+{
+    int numFilesTested = 0;
+    int numFilesPassed = 0;
+    NSArray* modelFiles = [self getModelFiles];
+    for (NSString *modelFilePath in modelFiles)
+    {
+        NSLog(@"$$$$$$$$$$$ TESTING %@ file", modelFilePath);
+        ModelTestLog *testLog = [[ModelTestLog alloc] init];
+        [self checkModel:modelFilePath testLog:testLog];
+        ++numFilesTested;
+        if ([testLog testPassed])
+        {
+            ++numFilesPassed;
+        }
+        else
+        {
+            DDLogError(@" The model testing failed with "
+                       @"errors: %@",
+                       [testLog getErrors]);
+        }
+    }
+    float passPercent = numFilesPassed * 100.0 / numFilesTested;
+    NSLog(@" NUM OF FILES TESTED             : %d", numFilesTested);
+    NSLog(@" NUM OF FILES PASSED VERIFICATION: %d", numFilesPassed);
+    NSLog(@" PASS PERCENT                    : %f", passPercent);
+    XCTAssertGreaterThan(passPercent, 90,
+                         @"The 3D file format model test verification is %f "
+                         @"instead of the expected > 90 percent",
+                         passPercent);
 }
 
 @end
