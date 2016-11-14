@@ -14,10 +14,10 @@ before_install:
 
 script:
   - echo Test the AssimpSceneKit static library for macOS
-  - xcodebuild -project AssimpKit/OSX-Example/OSX-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=OS X,arch=x86_64' clean test
+  - xctool -project AssimpKit/OSX-Example/OSX-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=OS X,arch=x86_64' clean test
 
   - echo Test the AssimpSceneKit static library for iOS
-  - xcodebuild -project AssimpKit/iOS-Example/iOS-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=iOS Simulator,OS=9.3,name=iPhone 6' clean test
+  - xctool -project AssimpKit/iOS-Example/iOS-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=iOS Simulator,OS=9.3,name=iPhone 6' clean test
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
