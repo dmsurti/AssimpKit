@@ -521,6 +521,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -534,6 +536,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

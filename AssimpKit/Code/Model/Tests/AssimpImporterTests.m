@@ -906,7 +906,7 @@
     NSArray *modelFiles = [self getModelFiles];
     for (NSString *modelFilePath in modelFiles)
     {
-        NSLog(@"$$$$$$$$$$$ TESTING %@ file", modelFilePath);
+        NSLog(@"=== TESTING %@ file ===", modelFilePath);
         ModelLog *testLog = [[ModelLog alloc] init];
         [self checkModel:modelFilePath testLog:testLog];
         ++numFilesTested;
