@@ -479,6 +479,7 @@
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				OTHER_LDFLAGS = (
@@ -500,6 +501,7 @@
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				OTHER_LDFLAGS = (
@@ -618,6 +620,7 @@
 				77CDAB831DD745D800B7E342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
