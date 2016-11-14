@@ -1,4 +1,4 @@
 language: objective-c
 script:
   - xcodebuild test -project AssimpKit/OSX-Example/OSX-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=OS X,arch=x86_64'
-  - xcodebuild test -project AssimpKit/iOS-Example/iOS-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.1'
+  - xcodebuild test -project AssimpKit/iOS-Example/iOS-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0'
