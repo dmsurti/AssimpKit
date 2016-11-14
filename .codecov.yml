@@ -1,0 +1,6 @@
+codecov:
+  ignore:
+    - "assets/*"
+    - "iOS-Example/*"
+    - "OSX-Example/*"
+    - "Assimp/*"
