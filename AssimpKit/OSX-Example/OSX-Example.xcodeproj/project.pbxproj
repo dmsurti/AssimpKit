@@ -15,9 +15,6 @@
 		77CDAA761DD715FE00B7E342 /* spider.obj in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA6F1DD715FE00B7E342 /* spider.obj */; };
 		77CDAA771DD715FE00B7E342 /* SpiderTex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA701DD715FE00B7E342 /* SpiderTex.jpg */; };
 		77CDAA7A1DD716F100B7E342 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA781DD716F100B7E342 /* MainMenu.xib */; };
-		77CDAA7C1DD7172400B7E342 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAA7B1DD7172400B7E342 /* CocoaLumberjack.framework */; };
-		77CDAA7D1DD7172400B7E342 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAA7B1DD7172400B7E342 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		77CDAABD1DD71A4F00B7E342 /* CocoaLumberjack.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77CDAABC1DD71A4F00B7E342 /* CocoaLumberjack.framework.dSYM */; };
 		77CDAACF1DD71EF600B7E342 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 77CDAAC71DD71EF600B7E342 /* AssimpImporter.h */; };
 		77CDAAD01DD71EF600B7E342 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAAC81DD71EF600B7E342 /* AssimpImporter.m */; };
 		77CDAAD11DD71EF600B7E342 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 77CDAAC91DD71EF600B7E342 /* SCNAssimpAnimation.h */; };
@@ -58,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				77CDAA7D1DD7172400B7E342 /* CocoaLumberjack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,7 +65,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				77CDAABD1DD71A4F00B7E342 /* CocoaLumberjack.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,10 +84,8 @@
 		77CDAA6F1DD715FE00B7E342 /* spider.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spider.obj; sourceTree = "<group>"; };
 		77CDAA701DD715FE00B7E342 /* SpiderTex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpiderTex.jpg; sourceTree = "<group>"; };
 		77CDAA791DD716F100B7E342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		77CDAA7B1DD7172400B7E342 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = ../Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		77CDAA801DD7172F00B7E342 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
 		77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAssimpSceneKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		77CDAABC1DD71A4F00B7E342 /* CocoaLumberjack.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CocoaLumberjack.framework.dSYM; path = ../Carthage/Build/Mac/CocoaLumberjack.framework.dSYM; sourceTree = "<group>"; };
 		77CDAAC51DD71D0C00B7E342 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
 		77CDAAC71DD71EF600B7E342 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
 		77CDAAC81DD71EF600B7E342 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
@@ -114,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77CDAA7C1DD7172400B7E342 /* CocoaLumberjack.framework in Frameworks */,
 				77CDAADC1DD71F3000B7E342 /* libAssimpSceneKit.a in Frameworks */,
 				77CDAADD1DD7258700B7E342 /* libassimp.a in Frameworks */,
 			);
@@ -143,8 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				77CDAAC51DD71D0C00B7E342 /* libassimp.a */,
-				77CDAABC1DD71A4F00B7E342 /* CocoaLumberjack.framework.dSYM */,
-				77CDAA7B1DD7172400B7E342 /* CocoaLumberjack.framework */,
 				77CDAA541DD715C300B7E342 /* OSX-Example */,
 				77CDAA871DD717FD00B7E342 /* AssimpSceneKit */,
 				77CDAB181DD733E800B7E342 /* AssimpSceneKit_LogicTests */,
