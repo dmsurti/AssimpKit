@@ -1,13 +1,32 @@
 language: objective-c
 osx_image: xcode8
+
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+
+before_install:
+    - env
+    - locale
+    - xcpretty --version
+    - xcodebuild -version
+    - xcodebuild -showsdks
+
 script:
+  - echo Test the AssimpSceneKit static library for macOS
   - xcodebuild \
       -project AssimpKit/OSX-Example/OSX-Example.xcodeproj \
       -scheme AssimpSceneKit_LogicTests \
       -destination 'platform=OS X,arch=x86_64'
       clean build test | xcpretty -c --test --color 
+
+  - echo Test the AssimpSceneKit static library for iOS
   - xcodebuild \
       -project AssimpKit/iOS-Example/iOS-Example.xcodeproj \
       -scheme AssimpSceneKit_LogicTests \
       -destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6' \
       clean build test | xcpretty -c --test --color 
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
