@@ -535,7 +535,7 @@
                                            @"instead of %d key times",
                                            rotationAnim.keyTimes.count,
                                            aiNodeAnim->mNumRotationKeys];
-            [testLog addErrorLog:testLog];
+            [testLog addErrorLog:errorLog];
         }
         if (rotationAnim.values.count != aiNodeAnim->mNumRotationKeys)
         {
@@ -866,7 +866,7 @@
         {
             NSString *assetSubDir = [assetDir stringByAppendingString:subDir];
             NSLog(@"========== Scanning asset dir: %@", assetSubDir);
-            NSMutableArray *modelFiles =
+            NSArray *modelFiles =
                 [fileManager subpathsOfDirectoryAtPath:assetSubDir error:nil];
             for (NSString *modelFile in modelFiles)
             {
