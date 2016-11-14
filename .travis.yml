@@ -15,7 +15,7 @@ before_install:
 
 script:
   - echo Test the AssimpSceneKit static library for macOS
-  - xcodebuild -project AssimpKit/OSX-Example/OSX-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=OS X,arch=x86_64' clean test
+  - xcodebuild -project AssimpKit/OSX-Example/OSX-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=OS X,arch=x86_64' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean test
 
   - echo Test the AssimpSceneKit static library for iOS
   - xcodebuild -project AssimpKit/iOS-Example/iOS-Example.xcodeproj -scheme AssimpSceneKit_LogicTests -destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6' clean test
