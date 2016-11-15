@@ -38,8 +38,33 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
 
+
+/**
+ An importer that imports the files with formats supported by Assimp and
+ converts the assimp scene graph into a scenekit scene graph.
+ */
 @interface AssimpImporter : NSObject
 
+#pragma mark - Creating an importer
+
+/**
+ @name Creating an importer
+ */
+
+/**
+ Creates an importer to import files supported by AssimpKit.
+
+ @return A new importer.
+ */
+- (id)init;
+
+#pragma mark - Loading a scene
+/**
+ Loads a scene from the specified file path.
+
+ @param filePath The path to the scene file to load.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
 - (SCNAssimpScene *)importScene:(NSString *)filePath;
 
 @end
