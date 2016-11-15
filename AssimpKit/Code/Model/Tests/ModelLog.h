@@ -35,10 +35,55 @@
 
 #import <Foundation/Foundation.h>
 
+
+/**
+ An object that stores the test error logs intercepted when testing a model file 
+ with AssimpImporterTests.
+ */
 @interface ModelLog : NSObject
 
+#pragma mark - Creating a model test log
+/**
+ @name Creating a model test log
+ */
+
+/**
+ Creates a new model test log object.
+ 
+ @return A new model test log object.
+ */
+- (id)init;
+
+#pragma mark - Add, fetch error logs
+
+/**
+ @name Add, fetch error logs
+ */
+
+/**
+ Add an error log for a test assertion in AssimpImporterTests checks.
+
+ @param errorLog The string error log.
+ */
 - (void)addErrorLog:(NSString *)errorLog;
-- (BOOL)testPassed;
+
+/**
+ Returns the array of error logs for each error intercepted in testing.
+ 
+ @return The array of error logs.
+ */
 - (NSArray *)getErrors;
+
+#pragma mark - Pass or Fail
+/**
+ Returns the model test as passed verification if there were no errors during
+ testing.
+
+ @return Whether the test passed or failed.
+ */
+- (BOOL)testPassed;
+
+
+
 
 @end

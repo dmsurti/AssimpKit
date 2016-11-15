@@ -43,6 +43,16 @@
 
 @implementation ModelLog
 
+#pragma mark - Creating a model test log
+/**
+ @name Creating a model test log
+ */
+
+/**
+ Creates a new model test log object.
+
+ @return A new model test log object.
+ */
 - (id)init
 {
     self = [super init];
@@ -53,19 +63,37 @@
     return self;
 }
 
+#pragma mark - Add, fetch error logs
+
+/**
+ @name Add, fetch error logs
+ */
+
+/**
+ Add an error log for a test assertion in AssimpImporterTests checks.
+ 
+ @param errorLog The string error log.
+ */
 - (void)addErrorLog:(NSString *)errorLog
 {
     [self.errors addObject:errorLog];
 }
 
-- (BOOL)testPassed
-{
-    return self.errors.count == 0;
-}
-
 - (NSArray *)getErrors
 {
     return self.errors;
+}
+
+#pragma mark - Pass or Fail
+/**
+ Returns the model test as passed verification if there were no errors during
+ testing.
+ 
+ @return Whether the test passed or failed.
+ */
+- (BOOL)testPassed
+{
+    return self.errors.count == 0;
 }
 
 @end
