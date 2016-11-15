@@ -36,12 +36,31 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface SCNAssimpScene ()
 
+#pragma mark - Animation data
+
+/**
+ @name Animation data
+ */
+
+/**
+ The dictionary of SCNAssimpAnimation objects, for each animation in the scene.
+ */
 @property (readwrite, nonatomic) NSMutableDictionary *animations;
 
 @end
 
 @implementation SCNAssimpScene
 
+#pragma mark - Creating a new scene animation
+/**
+ @name Creating a new scene animation
+ */
+
+/**
+ Creates a new scene animation, without any animation data.
+ 
+ @return A new scene animation object.
+ */
 - (id)init
 {
     self = [super init];
@@ -52,6 +71,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return self;
 }
 
+#pragma mark - Add, fetch scene animations
+
+/**
+ @name Add, fetch scene animations
+ */
+
+/**
+ Adds an SCNAssimpAnimation object.
+ 
+ @param assimpAnimation The scene animation object created from animation data.
+ */
 - (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation
 {
     NSDictionary *frameAnims = assimpAnimation.frameAnims;
@@ -84,6 +114,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     }
 }
 
+/**
+ Return the SCNAssimpAnimation object for the specified animation key.
+ 
+ @param key The unique scene animation key.
+ @return The scene animation object.
+ */
 - (SCNAssimpAnimation *)animationForKey:(NSString *)key
 {
     return [self.animations valueForKey:key];
