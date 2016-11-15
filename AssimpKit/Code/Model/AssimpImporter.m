@@ -43,17 +43,51 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface AssimpImporter ()
 
+/**
+ The array of bone names across all meshes in all nodes.
+ */
 @property (readwrite, nonatomic) NSMutableArray *boneNames;
+
+/**
+ The array of unique bone names across all meshes in all nodes.
+ */
 @property (readwrite, nonatomic) NSArray *uniqueBoneNames;
+
+/**
+ The array of unique bone nodes across all meshes in all nodes.
+ */
 @property (readwrite, nonatomic) NSArray *uniqueBoneNodes;
+
+/**
+ The dictionary of bone inverse bind transforms, where key is the bone name.
+ */
 @property (readwrite, nonatomic) NSMutableDictionary *boneTransforms;
+
+/**
+ The array of unique bone transforms for all unique bone nodes.
+ */
 @property (readwrite, nonatomic) NSArray *uniqueBoneTransforms;
+
+/**
+ The root node of the skeleton in the scene.
+ */
 @property (readwrite, nonatomic) SCNNode *skelton;
 
 @end
 
 @implementation AssimpImporter
 
+#pragma mark - Creating an importer
+
+/**
+ @name Creating an importer
+ */
+
+/**
+ Creates an importer to import files supported by AssimpKit.
+
+ @return A new importer.
+ */
 - (id)init
 {
     self = [super init];
@@ -67,8 +101,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return nil;
 }
 
-#pragma mark - Import with Assimp
+#pragma mark - Loading a scene
 
+/**
+ @name Loading a scene
+ */
+
+/**
+ Loads a scene from the specified file path.
+
+ @param filePath The path to the scene file to load.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
 {
     // Start the import on the given file with some example postprocessing
@@ -94,8 +138,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return scene;
 }
 
-#pragma mark - Make SCN Scene
+#pragma mark - Make scenekit scene
 
+/**
+ @name Make scenekit scene
+ */
+
+/**
+ Creates a scenekit scene from the scene representing the file at a given path.
+
+ @param aiScene The assimp scene.
+ @param path The path to the scene file to load.
+ @return A new scene object.
+ */
 - (SCNAssimpScene *)makeSCNSceneFromAssimpScene:(const struct aiScene *)aiScene
                                          atPath:(NSString *)path
 {
@@ -122,8 +177,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return scene;
 }
 
-#pragma mark - Make SCN Node
+#pragma mark - Make scenekit node
 
+/**
+ @name Make a scenekit node
+ */
+
+/**
+ Creates a new scenekit node from the assimp scene node
+
+ @param aiNode The assimp scene node.
+ @param aiScene The assimp scene.
+ @param path The path to the scene file to load.
+ @return A new scene node.
+ */
 - (SCNNode *)makeSCNNodeFromAssimpNode:(const struct aiNode *)aiNode
                                inScene:(const struct aiScene *)aiScene
                                 atPath:(NSString *)path
@@ -173,8 +240,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return node;
 }
 
-#pragma mark - Number of vertices, faces and indices
+#pragma mark - Find the number of vertices, faces and indices of a geometry
 
+/**
+ @name Find the number of vertices, faces and indices of a geometry
+ */
+
+/**
+ Finds the total number of vertices in the meshes of the specified node.
+
+ @param aiNode The assimp scene node.
+ @param aiScene The assimp scene.
+ @return The number of vertices.
+ */
 - (int)findNumVerticesInNode:(const struct aiNode *)aiNode
                      inScene:(const struct aiScene *)aiScene
 {
@@ -188,6 +266,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return nVertices;
 }
 
+
+/**
+ Finds the total number of faces in the meshes of the specified node.
+
+ @param aiNode The assimp scene node.
+ @param aiScene The assimp scene.
+ @return The number of faces.
+ */
 - (int)findNumFacesInNode:(const struct aiNode *)aiNode
                   inScene:(const struct aiScene *)aiScene
 {
@@ -201,6 +287,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return nFaces;
 }
 
+
+/**
+ Finds the total number of indices in the specified mesh by index.
+
+ @param aiMeshIndex The assimp mesh index.
+ @param aiScene The assimp scene.
+ @return The total number of indices.
+ */
 - (int)findNumIndicesInMesh:(int)aiMeshIndex
                     inScene:(const struct aiScene *)aiScene
 {
@@ -214,8 +308,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return nIndices;
 }
 
-#pragma mark - Make SCN Geometry sources
+#pragma mark - Make scenekit geometry sources
 
+/**
+ @name Make scenekit geometry sources 
+ */
+
+/**
+ Creates a scenekit geometry source from the vertices of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The total number of vertices in the meshes of the aiNode.
+ @return A new geometry source whose semantic property is vertex.
+ */
 - (SCNGeometrySource *)
 makeVertexGeometrySourceForNode:(const struct aiNode *)aiNode
                         inScene:(const struct aiScene *)aiScene
@@ -251,6 +357,15 @@ makeVertexGeometrySourceForNode:(const struct aiNode *)aiNode
     return vertexSource;
 }
 
+
+/**
+ Creates a scenekit geometry source from the normals of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The number of vertices in the meshes of the aiNode.
+ @return A new geometry source whose semantic property is normal.
+ */
 - (SCNGeometrySource *)
 makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
                         inScene:(const struct aiScene *)aiScene
@@ -287,6 +402,16 @@ makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
     return normalSource;
 }
 
+
+/**
+ Creates a scenekit geometry source from the texture coordinates of the
+ specified node.
+ 
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The number of vertices in the meshes of the node.
+ @return A new geometry source whose semantic property is texcoord.
+ */
 - (SCNGeometrySource *)
 makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
                          inScene:(const struct aiScene *)aiScene
@@ -324,6 +449,16 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
     return textureSource;
 }
 
+
+/**
+ Creates an array of geometry sources for the specifed node describing 
+ the vertices in the geometry and their attributes.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The number of vertices in the meshes of the node.
+ @return An array of geometry sources.
+ */
 - (NSArray *)makeGeometrySourcesForNode:(const struct aiNode *)aiNode
                                 inScene:(const struct aiScene *)aiScene
                            withVertices:(int)nVertices
@@ -344,8 +479,23 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
     return scnGeometrySources;
 }
 
-#pragma mark - Make SCN Geometry elements
+#pragma mark - Make scenekit geometry elements
 
+/**
+ @name Make scenekit geometry elements
+ */
+
+/**
+ Creates a scenekit geometry element describing how vertices connect to define
+ a three-dimensional object, or geometry for the specified mesh of a node.
+
+ @param aiMeshIndex The assimp mesh index.
+ @param aiNode The assimp node of the mesh.
+ @param aiScene The assimp scene.
+ @param indexOffset The total number of indices for the previous meshes.
+ @param nFaces The number of faces in the geometry of the mesh.
+ @return A new geometry element object.
+ */
 - (SCNGeometryElement *)
 makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                 inNode:(const struct aiNode *)aiNode
@@ -376,6 +526,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return indices;
 }
 
+
+/**
+ Creates an array of scenekit geometry element obejcts describing how to 
+ connect the geometry's vertices of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return An array of geometry elements.
+ */
 - (NSArray *)makeGeometryElementsforNode:(const struct aiNode *)aiNode
                                  inScene:(const struct aiScene *)aiScene
 {
@@ -398,8 +557,21 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return scnGeometryElements;
 }
 
-#pragma mark - Make Materials
+#pragma mark - Make scenekit materials
 
+/**
+ @name Make scenekit materials
+ */
+
+/**
+ Updates a scenekit material property with the texture file path or the color
+ if no texture is specifed.
+
+ @param aiMaterial The assimp material.
+ @param aiTextureType The texture type which is diffuse, specular etc.
+ @param material The scenekit material.
+ @param path The path to the scene file to load.
+ */
 - (void)makeMaterialPropertyForMaterial:(const struct aiMaterial *)aiMaterial
                         withTextureType:(enum aiTextureType)aiTextureType
                         withSCNMaterial:(SCNMaterial *)material
@@ -545,9 +717,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
 }
 
+
+/**
+ Updates a scenekit material's multiply property
+
+ @param aiMaterial The assimp material
+ @param material The scenekit material.
+ */
 - (void)applyMultiplyPropertyForMaterial:(const struct aiMaterial *)aiMaterial
                          withSCNMaterial:(SCNMaterial *)material
-                                  atPath:(NSString *)path
 {
     struct aiColor4D color;
     color.r = 0.0f;
@@ -570,6 +748,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
 }
 
+
+/**
+ Creates an array of scenekit materials one for each mesh of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param path The path to the scene file to load.
+ @return An array of scenekit materials.
+ */
 - (NSMutableArray *)makeMaterialsForNode:(const struct aiNode *)aiNode
                                  inScene:(const struct aiScene *)aiScene
                                   atPath:(NSString *)path
@@ -624,8 +811,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                        atPath:path];
         NSLog(@"+++ Loading multiply color");
         [self applyMultiplyPropertyForMaterial:aiMaterial
-                               withSCNMaterial:material
-                                        atPath:path];
+                               withSCNMaterial:material];
         NSLog(@"+++ Loading blend mode");
         unsigned int blendMode = 0;
         unsigned int *max;
@@ -667,6 +853,16 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return scnMaterials;
 }
 
+
+/**
+ Creates a scenekit geometry to attach at the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The total number of vertices in the meshes of the node.
+ @param path The path to the scene file to load.
+ @return A new geometry.
+ */
 - (SCNGeometry *)makeSCNGeometryFromAssimpNode:(const struct aiNode *)aiNode
                                        inScene:(const struct aiScene *)aiScene
                                   withVertices:(int)nVertices
@@ -695,8 +891,18 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return nil;
 }
 
-#pragma mark - Make Lights
+#pragma mark - Make scenekit lights
 
+/**
+ @name Make scenekit lights
+ */
+
+/**
+ Creates a scenekit directional light from an assimp directional light.
+
+ @param aiLight The assimp directional light.
+ @return A new scenekit directional light.
+ */
 - (SCNLight *)makeSCNLightTypeDirectionalForAssimpLight:
     (const struct aiLight *)aiLight
 {
@@ -716,6 +922,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return light;
 }
 
+/**
+ Creates a scenekit omni light from an assimp omni light.
+ 
+ @param aiLight The assimp omni light.
+ @return A new scenekit omni light.
+ */
 - (SCNLight *)makeSCNLightTypePointForAssimpLight:
     (const struct aiLight *)aiLight
 {
@@ -743,6 +955,12 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return light;
 }
 
+/**
+ Creates a scenekit spot light from an assimp spot light.
+ 
+ @param aiLight The assimp spot light.
+ @return A new scenekit spot light.
+ */
 - (SCNLight *)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight *)aiLight
 {
     SCNLight *light = [SCNLight light];
@@ -773,6 +991,14 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return light;
 }
 
+
+/**
+ Creates a scenekit light to attach at the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return A new scenekit light.
+ */
 - (SCNLight *)makeSCNLightFromAssimpNode:(const struct aiNode *)aiNode
                                  inScene:(const struct aiScene *)aiScene
 {
@@ -821,7 +1047,19 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return nil;
 }
 
-#pragma mark - Make Cameras
+#pragma mark - Make scenekit cameras
+
+/**
+ @name Make scenekit cameras
+ */
+
+/**
+ Creates a scenekit camera to attach at the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return A new scenekit camera.
+ */
 - (SCNCamera *)makeSCNCameraFromAssimpNode:(const struct aiNode *)aiNode
                                    inScene:(const struct aiScene *)aiScene
 {
@@ -846,8 +1084,19 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return nil;
 }
 
-#pragma mark - Make Skinner
+#pragma mark - Make scenekit skinner
 
+/**
+ @name Make scenekit skinner
+ */
+
+/**
+ Finds the number of bones in the meshes of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return The number of bones.
+ */
 - (int)findNumBonesInNode:(const struct aiNode *)aiNode
                   inScene:(const struct aiScene *)aiScene
 {
@@ -861,6 +1110,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return nBones;
 }
 
+/**
+ Creates an array of bone names in the meshes of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return An array of bone names.
+ */
 - (NSArray *)getBoneNamesForAssimpNode:(const struct aiNode *)aiNode
                                inScene:(const struct aiScene *)aiScene
 {
@@ -884,6 +1140,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return boneNames;
 }
 
+
+/**
+ Creates a dictionary of bone transforms where bone name is the key, for the
+ meshes of the specified node.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return A dictionary of bone transforms where bone name is the key.
+ */
 - (NSDictionary *)getBoneTransformsForAssimpNode:(const struct aiNode *)aiNode
                                          inScene:(const struct aiScene *)aiScene
 {
@@ -920,6 +1185,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return boneTransforms;
 }
 
+
+/**
+ Creates an array of bone transforms from a dictionary of bone transforms where
+ bone name is the key.
+
+ @param boneNames The array of bone names.
+ @param boneTransforms The dictionary of bone transforms.
+ @return An array of bone transforms
+ */
 - (NSArray *)getTransformsForBones:(NSArray *)boneNames
                     fromTransforms:(NSDictionary *)boneTransforms
 {
@@ -931,6 +1205,14 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return transforms;
 }
 
+
+/**
+ Creates an array of scenekit bone nodes for the specified bone names.
+
+ @param scene The scenekit scene.
+ @param boneNames The array of bone names.
+ @return An array of scenekit bone nodes.
+ */
 - (NSArray *)findBoneNodesInScene:(SCNScene *)scene
                          forBones:(NSArray *)boneNames
 {
@@ -944,6 +1226,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return boneNodes;
 }
 
+
+/**
+ Find the root node of the skeleton from the specified bone nodes.
+
+ @param boneNodes The array of bone nodes.
+ @return The root node of the skeleton.
+ */
 - (SCNNode *)findSkeletonNodeFromBoneNodes:(NSArray *)boneNodes
 {
     NSMutableDictionary *nodeDepths = [[NSMutableDictionary alloc] init];
@@ -980,6 +1269,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
 }
 
+
+/**
+ Finds the depth of the specified node from the scene's root node.
+
+ @param node The scene node.
+ @return The depth from the scene's root node.
+ */
 - (int)findDepthOfNodeFromRoot:(SCNNode *)node
 {
     int depth = 0;
@@ -992,6 +1288,15 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return depth;
 }
 
+
+/**
+ Finds the maximum number of weights that influence the vertices in the meshes
+ of the specified node.
+ 
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @return The maximum influences or weights.
+ */
 - (int)findMaxWeightsForNode:(const struct aiNode *)aiNode
                      inScene:(const struct aiScene *)aiScene
 {
@@ -1044,6 +1349,17 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return maxWeights;
 }
 
+
+/**
+ Creates a scenekit geometry source defining the influence of each bone on the 
+ positions of vertices in the geometry
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The number of vertices in the meshes of the node.
+ @param maxWeights The maximum number of weights influencing each vertex.
+ @return A new geometry source whose semantic property is boneWeights.
+ */
 - (SCNGeometrySource *)
 makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
                             inScene:(const struct aiScene *)aiScene
@@ -1120,6 +1436,18 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
     return boneWeightsSource;
 }
 
+
+/**
+ Creates a scenekit geometry source defining the mapping from bone indices in 
+ skeleton data to the skinner’s bones array
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param nVertices The number of vertices in the meshes of the node.
+ @param maxWeights The maximum number of weights influencing each vertex.
+ @param boneNames The array of unique bone names.
+ @return A new geometry source whose semantic property is boneIndices.
+ */
 - (SCNGeometrySource *)
 makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                             inScene:(const struct aiScene *)aiScene
@@ -1203,6 +1531,17 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     return boneIndicesSource;
 }
 
+
+/**
+ Builds a skeleton database of unique bone names and inverse bind bone 
+ transforms.
+ 
+ When the scenekit scene is created from the assimp scene, a list of all bone
+ names and a dictionary of bone transforms where each key is the bone name,
+ is generated when parsing each node of the assimp scene.
+
+ @param scene The scenekit scene.
+ */
 - (void)buildSkeletonDatabaseForScene:(SCNScene *)scene
 {
     self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
@@ -1223,6 +1562,15 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     NSLog(@" |--| skeleton bone is : %@", self.skelton);
 }
 
+
+/**
+ Creates a scenekit skinner for the specified node with visible geometry and 
+ skeleton information.
+
+ @param aiNode The assimp node.
+ @param aiScene The assimp scene.
+ @param scene The scenekit scene.
+ */
 - (void)makeSkinnerForAssimpNode:(const struct aiNode *)aiNode
                          inScene:(const struct aiScene *)aiScene
                         scnScene:(SCNScene *)scene
@@ -1274,8 +1622,29 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     }
 }
 
-#pragma mark - Animations
+#pragma mark - Make scenekit animations
 
+/**
+ @name Make scenekit animations
+ */
+
+/**
+ Creates a dictionary of animations where each animation is a 
+ SCNAssimpAnimation, from each animation in the assimp scene.
+ 
+ For each animation's channel which is a bone node, a CAKeyframeAnimation is 
+ created for each of position, orientation and scale. These animations are 
+ then stored in an SCNAssimpAnimation object, which holds the animation name and 
+ the keyframe animations.
+ 
+ The animation name is generated by appending the file name with an animation
+ index. The example of an animation name is walk-1 for the first animation in a
+ file named walk.
+
+ @param aiScene The assimp scene.
+ @param scene The scenekit scene.
+ @param path The path to the scene file to load.
+ */
 - (void)createAnimationsFromScene:(const struct aiScene *)aiScene
                         withScene:(SCNAssimpScene *)scene
                            atPath:(NSString *)path
