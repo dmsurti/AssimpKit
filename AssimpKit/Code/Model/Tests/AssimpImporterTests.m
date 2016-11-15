@@ -15,10 +15,10 @@
  copyright notice, this list of conditions and the
  following disclaimer in the documentation and/or other
  materials provided with the distribution.
- * Neither the name of the assimp team, nor the names of its
+ * Neither the name of the AssimpKit team, nor the names of its
  contributors may be used to endorse or promote products
  derived from this software without specific prior
- written permission of the assimp team.
+ written permission of the AssimpKit team.
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -43,6 +43,23 @@
 #include "assimp/postprocess.h" // Post processing flags
 #include "assimp/scene.h"       // Output data structure
 
+/**
+ The test class for AssimpImporter.
+ 
+ This class tests the model files placed in a directory named assets, which
+ has subdirectories: apple, of and assimp; which are the owners of the model
+ files. (Note: of represents open frameworks).
+ 
+ Each asset owner subdirectory is further classified into:
+ * models - which contain open source model files
+ * models-properietary - which contain properietary model files.
+ 
+ Each model directory categorized by license has a subdirectory for each file
+ format that AssimpKit supports.
+ 
+ The list of file formats that AssimpKit supports is in valid-extensions.txt
+ file under assets directory.
+ */
 @interface AssimpImporterTests : XCTestCase
 
 @property (strong, nonatomic) NSMutableDictionary *modelLogs;
@@ -50,8 +67,23 @@
 
 @end
 
+
 @implementation AssimpImporterTests
 
+#pragma mark - Set up and tear down
+
+/**
+ @name Set up and tear down
+ */
+
+
+/**
+ The common initialization for each test method.
+ 
+ This method initializes the assets path from the TEST_ASSETS_PATH which is
+ a processor macro defined in the AssimpSceneKit_LogicTests target defined in 
+ both OSX-Example and iOS-Example projects.
+ */
 - (void)setUp
 {
     [super setUp];
@@ -62,6 +94,9 @@
     self.testAssetsPath = TEST_ASSETS_PATH;
 }
 
+/**
+ The common clean up for each test method.
+ */
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of
@@ -71,6 +106,20 @@
 
 #pragma mark - Check node geometry
 
+/**
+ @name Check node geometry
+ */
+
+/**
+ Checks the scenekit node geometry has the correct vertex, normal and texture
+ coordinate geometry sources for the specifed assimp node.
+
+ @param aiNode The assimp node.
+ @param nodeName The node name.
+ @param sceneNode The scenekit node, whose geometry is tested.
+ @param aiScene The assimp scene.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkNodeGeometry:(const struct aiNode *)aiNode
                  nodeName:(NSString *)nodeName
             withSceneNode:(SCNNode *)sceneNode
@@ -123,6 +172,25 @@
 
 #pragma mark - Check node materials
 
+/**
+ @name Check node materials
+ */
+
+/**
+ Check the scenekit node's materials property from the corrersponding material
+ property of the material for a mesh of the specified node.
+ 
+ This checks that the material texture file has the correct path. 
+ If no texture is defined, it checks the material color exists.
+
+ @param aiNode The assimp node.
+ @param aiMaterial The assimp material for a mesh of the assimp  node.
+ @param aiTextureType The material property type.
+ @param sceneNode The scenekit node.
+ @param scnMaterial The scenekit material.
+ @param modelPath The path to the file being tested.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkNode:(const struct aiNode *)aiNode
          material:(const struct aiMaterial *)aiMaterial
       textureType:(enum aiTextureType)aiTextureType
@@ -223,6 +291,33 @@
     }
 }
 
+/**
+ Check the scenekit node's materials from the corrersponding material
+ materials of the specified node.
+ 
+ This checks that the material texture file has the correct path.
+ If no texture is defined, it checks the material color exists.
+ 
+ @param aiNode The assimp node.
+ @param sceneNode The scenekit node.
+ @param modelPath The path to the file being tested.
+ @param testLog The log for the file being tested.
+ */
+
+
+/**
+ Check the scenekit node's materials from the corrersponding material
+ materials of the specified node.
+ 
+ This checks each material property of the material.
+
+ @param aiNode The assimp node.
+ @param nodeName The node name.
+ @param sceneNode The scenekit node.
+ @param aiScene The assimp scene.
+ @param modelPath The path to the file being tested.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkNodeMaterials:(const struct aiNode *)aiNode
                   nodeName:(NSString *)nodeName
              withSceneNode:(SCNNode *)sceneNode
@@ -298,6 +393,18 @@
 
 #pragma mark - Check lights
 
+/**
+ @name Check lights
+ */
+
+/**
+ Checks the lights in the scenekit scene correspond to the lights in the assimp
+ scene.
+
+ @param aiScene The assimp. scene.
+ @param scene The scenekit scene.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkLights:(const struct aiScene *)aiScene
           withScene:(SCNAssimpScene *)scene
             testLog:(ModelLog *)testLog
@@ -353,6 +460,20 @@
 
 #pragma mark - Check node
 
+/**
+ @name Check node
+ */
+
+/**
+ Checks the scenekit node corresponds to the assimp node and has the correct
+ geometry and materials.
+
+ @param aiNode The assimp node.
+ @param sceneNode The scenekit node.
+ @param aiScene The scenekit scene.
+ @param modelPath The path to the file being tested.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkNode:(const struct aiNode *)aiNode
     withSceneNode:(SCNNode *)sceneNode
           aiScene:(const struct aiScene *)aiScene
@@ -397,6 +518,19 @@
 
 #pragma mark - Check cameras
 
+/**
+ @name Check cameras.
+ */
+
+/**
+ Checks the cameras in the scenekit scene correspond to the cameras in the 
+ assimp scene.
+ 
+ @param aiScene The assimp. scene.
+ @param scene The scenekit scene.
+ @param testLog The log for the file being tested.
+ */
+
 - (void)checkCameras:(const struct aiScene *)aiScene
            withScene:(SCNAssimpScene *)scene
              testLog:(ModelLog *)testLog
@@ -427,6 +561,20 @@
 
 #pragma mark - Check animations
 
+/**
+ @name Check animations
+ */
+
+/**
+ Checks the animation data for bone positions in scenekit scene contains 
+ the animation data from the assimp scene for each bone in the animation.
+
+ @param aiNodeAnim The assimp node.
+ @param aiAnimation The assimp animation.
+ @param channelKeys The bone channels in the assimp animation.
+ @param duration The duration of the assimp animation.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkPositionChannels:(const struct aiNodeAnim *)aiNodeAnim
                   aiAnimation:(const struct aiAnimation *)aiAnimation
                   channelKeys:(NSDictionary *)channelKeys
@@ -516,6 +664,16 @@
     }
 }
 
+/**
+ Checks the animation data for bone orientations in scenekit scene contains
+ the animation data from the assimp scene for each bone in the animation.
+ 
+ @param aiNodeAnim The assimp node.
+ @param aiAnimation The assimp animation.
+ @param channelKeys The bone channels in the assimp animation.
+ @param duration The duration of the assimp animation.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkRotationChannels:(const struct aiNodeAnim *)aiNodeAnim
                   aiAnimation:(const struct aiAnimation *)aiAnimation
                   channelKeys:(NSDictionary *)channelKeys
@@ -612,6 +770,16 @@
     }
 }
 
+/**
+ Checks the animation data for bone scales in scenekit scene contains
+ the animation data from the assimp scene for each bone in the animation.
+ 
+ @param aiNodeAnim The assimp node.
+ @param aiAnimation The assimp animation.
+ @param channelKeys The bone channels in the assimp animation.
+ @param duration The duration of the assimp animation.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkScalingChannels:(const struct aiNodeAnim *)aiNodeAnim
                  aiAnimation:(const struct aiAnimation *)aiAnimation
                  channelKeys:(NSDictionary *)channelKeys
@@ -699,6 +867,17 @@
         }
     }
 }
+
+
+/**
+ Checks the animation data for bones in scenekit scene contains
+ the animation data from the assimp scene for each bone in the animation.
+
+ @param aiScene The assimp scene.
+ @param scene The scenekit scene.
+ @param modelPath The path to the file being tested.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkAnimations:(const struct aiScene *)aiScene
               withScene:(SCNAssimpScene *)scene
               modelPath:(NSString *)modelPath
@@ -791,6 +970,24 @@
 
 #pragma mark - Check model
 
+/**
+ Checks the scene kit scene corresponds to the assimp scene.
+ 
+ This is the entry point check method for each model file that is tested.
+ 
+ This verifies that:
+ 1. The scenekit scene has the same node hierarchy as the assimp scene where
+ each node has the correct geometry with geometry sources, elements and
+ textures.
+ 2. The scenekit has the correct lights.
+ 3. The scenekit scene has the correct cameras.
+ 4. If the scenekit scene has animations, it checks that the key frames created
+ for the animation data are correct for values, timing, duration and the bone
+ channel to which the key frame belongs.
+
+ @param path The path to the model file being tested.
+ @param testLog The log for the file being tested.
+ */
 - (void)checkModel:(NSString *)path testLog:(ModelLog *)testLog
 {
     const char *pFile = [path UTF8String];
@@ -825,6 +1022,23 @@
 
 #pragma mark - Test all models
 
+/**
+ @name Test all models
+ */
+
+
+/**
+ Creates an array of the model files that can be tested.
+ 
+ This filters the assets directory for the file formats that are supported
+ by AssimpKit. 
+ 
+ The list of valid file formats is stored in assets/valid-extensions.txt.
+ 
+ See: The test class description for more details about the assets directory.
+
+ @return The array of model files that can be tested.
+ */
 - (NSArray *)getModelFiles
 {
     // -------------------------------------------------------------
@@ -899,6 +1113,10 @@
     return modelFilePaths;
 }
 
+
+/**
+ The test method that tests all the testable models specifed by getModelFiles
+ */
 - (void)testAssimpModelFormats
 {
     int numFilesTested = 0;

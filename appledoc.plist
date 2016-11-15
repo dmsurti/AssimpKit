@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>--project-name</key>
+    <string>AssimpKit</string>
+    <key>--project-company</key>
+    <string>Deepak Surti, Ison Apps, AssimpKit team</string>
+    <key>--company-id</key>
+    <string>com.isonapps</string>
+
+    <key>--output</key>
+    <string>appledocs</string>
+
+    <key>--create-docset</key>
+    <false/>
+
+    <key>--ignore</key>
+    <array>
+        <string>AssimpKit/Assimp</string>
+        <string>AssimpKit/assets</string>
+        <string>AssimpKit/OSX-Example</string>
+        <string>AssimpKit/iOS-Example</string>
+        <string>*.framework</string>
+    </array>
+
+    <key>index-desc</key>
+    <string>appledoc.md</string>
+
+</dict>
+</plist>
