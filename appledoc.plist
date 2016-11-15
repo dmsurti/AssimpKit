@@ -6,7 +6,7 @@
     <key>--project-name</key>
     <string>AssimpKit</string>
     <key>--project-company</key>
-    <string>Deepak Surti, Ison Apps</string>
+    <string>Deepak Surti, Ison Apps, AssimpKit team</string>
     <key>--company-id</key>
     <string>com.isonapps</string>
 
@@ -24,6 +24,9 @@
         <string>AssimpKit/iOS-Example</string>
         <string>*.framework</string>
     </array>
+
+    <key>index-desc</key>
+    <string>appledoc.md</string>
 
 </dict>
 </plist>
