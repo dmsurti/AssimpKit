@@ -35,11 +35,40 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <SceneKit/SceneKit.h>
 
+
+/**
+ An object that contains the skeletal key frame animations for the bones which
+ are a part of the animation.
+ */
 @interface SCNAssimpAnimation : SCNScene
 
+#pragma mark - Animation data
+
+/**
+ @name Animation data
+ */
+
 @property (readonly, nonatomic) NSString *key;
+
+/**
+ The dictionary of CAKeyframeAnimation objects, where each key is a bone name.
+ */
 @property (readonly, nonatomic) NSDictionary *frameAnims;
 
+#pragma mark - Creating a scene animation
+
+/**
+ @name Creating a scene animation
+ */
+
+/**
+ Create a scene animation with a name and a dictionary of key frame animations
+ for the bones in the animation.
+
+ @param key The animation key.
+ @param anims The dictionary of key frame animations.
+ @return A new scene animation object.
+ */
 - (id)initWithKey:(NSString *)key frameAnims:(NSDictionary *)anims;
 
 @end

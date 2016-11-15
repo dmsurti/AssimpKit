@@ -37,13 +37,40 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface SCNAssimpAnimation ()
 
+#pragma mark - Animation data
+
+/**
+ @name Animation data
+ */
+
+/**
+ The animation key.
+ */
 @property (readwrite, nonatomic) NSString *key;
+
+/**
+ The dictionary of CAKeyframeAnimation objects, where each key is a bone name.
+ */
 @property (readwrite, nonatomic) NSDictionary *frameAnims;
 
 @end
 
 @implementation SCNAssimpAnimation
 
+#pragma mark - Creating a scene animation
+
+/**
+ @name Creating a scene animation
+ */
+
+/**
+ Create a scene animation with a name and a dictionary of key frame animations
+ for the bones in the animation.
+ 
+ @param key The animation key.
+ @param anims The dictionary of key frame animations.
+ @return A new scene animation object.
+ */
 - (id)initWithKey:(NSString *)key frameAnims:(NSDictionary *)anims
 {
     self = [super init];

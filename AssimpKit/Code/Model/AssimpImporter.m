@@ -43,6 +43,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface AssimpImporter ()
 
+#pragma mark - Bone data
+
+/**
+ @name Bone data
+ */
+
 /**
  The array of bone names across all meshes in all nodes.
  */
