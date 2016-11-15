@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>AssimpImporterTests Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">AssimpKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Deepak Surti, Ison Apps, AssimpKit team</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/checkAnimations:withScene:modelPath:testLog:">- checkAnimations:withScene:modelPath:testLog:</option>
+		
+		<option value="//api/name/checkCameras:withScene:testLog:">- checkCameras:withScene:testLog:</option>
+		
+		<option value="//api/name/checkLights:withScene:testLog:">- checkLights:withScene:testLog:</option>
+		
+		<option value="//api/name/checkModel:testLog:">- checkModel:testLog:</option>
+		
+		<option value="//api/name/checkNode:material:textureType:withSceneNode:scnMaterial:modelPath:testLog:">- checkNode:material:textureType:withSceneNode:scnMaterial:modelPath:testLog:</option>
+		
+		<option value="//api/name/checkNode:withSceneNode:aiScene:modelPath:testLog:">- checkNode:withSceneNode:aiScene:modelPath:testLog:</option>
+		
+		<option value="//api/name/checkNodeGeometry:nodeName:withSceneNode:aiScene:testLog:">- checkNodeGeometry:nodeName:withSceneNode:aiScene:testLog:</option>
+		
+		<option value="//api/name/checkNodeMaterials:nodeName:withSceneNode:aiScene:modelPath:testLog:">- checkNodeMaterials:nodeName:withSceneNode:aiScene:modelPath:testLog:</option>
+		
+		<option value="//api/name/checkPositionChannels:aiAnimation:channelKeys:duration:testLog:">- checkPositionChannels:aiAnimation:channelKeys:duration:testLog:</option>
+		
+		<option value="//api/name/checkRotationChannels:aiAnimation:channelKeys:duration:testLog:">- checkRotationChannels:aiAnimation:channelKeys:duration:testLog:</option>
+		
+		<option value="//api/name/checkScalingChannels:aiAnimation:channelKeys:duration:testLog:">- checkScalingChannels:aiAnimation:channelKeys:duration:testLog:</option>
+		
+		<option value="//api/name/getModelFiles">- getModelFiles</option>
+		
+		<option value="//api/name/setUp">- setUp</option>
+		
+		<option value="//api/name/tearDown">- tearDown</option>
+		
+		<option value="//api/name/testAssimpModelFormats">- testAssimpModelFormats</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">AssimpImporterTests Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>XCTestCase</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>AssimpImporterTests.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The test class for <a href="../Classes/AssimpImporter.html">AssimpImporter</a>.</p>
+
+<p>This class tests the model files placed in a directory named assets, which
+has subdirectories: apple, of and assimp; which are the owners of the model
+files. (Note: of represents open frameworks).</p>
+
+<p>Each asset owner subdirectory is further classified into:
+* models - which contain open source model files
+* models-properietary - which contain properietary model files.</p>
+
+<p>Each model directory categorized by license has a subdirectory for each file
+format that AssimpKit supports.</p>
+
+<p>The list of file formats that AssimpKit supports is in valid-extensions.txt
+file under assets directory.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						<a title="Set up and tear down" name="task_Set up and tear down"></a>
+						<h2 class="task-title">Set up and tear down</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/setUp" title="setUp"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setUp">&ndash;&nbsp;setUp</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The common initialization for each test method.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setUp</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The common initialization for each test method.</p>
+
+<p>This method initializes the assets path from the TEST_ASSETS_PATH which is
+a processor macro defined in the AssimpSceneKit_LogicTests target defined in
+both OSX-Example and iOS-Example projects.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/tearDown" title="tearDown"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tearDown">&ndash;&nbsp;tearDown</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The common clean up for each test method.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)tearDown</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The common clean up for each test method.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Check node geometry" name="task_Check node geometry"></a>
+						<h2 class="task-title">Check node geometry</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkNodeGeometry:nodeName:withSceneNode:aiScene:testLog:" title="checkNodeGeometry:nodeName:withSceneNode:aiScene:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkNodeGeometry:nodeName:withSceneNode:aiScene:testLog:">&ndash;&nbsp;checkNodeGeometry:nodeName:withSceneNode:aiScene:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the scenekit node geometry has the correct vertex, normal and texture
+coordinate geometry sources for the specifed assimp node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkNodeGeometry:(const struct aiNode *)<em>aiNode</em> nodeName:(NSString *)<em>nodeName</em> withSceneNode:(SCNNode *)<em>sceneNode</em> aiScene:(const struct aiScene *)<em>aiScene</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nodeName</code></th>
+						<td><p>The node name.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sceneNode</code></th>
+						<td><p>The scenekit node, whose geometry is tested.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the scenekit node geometry has the correct vertex, normal and texture
+coordinate geometry sources for the specifed assimp node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Check node materials" name="task_Check node materials"></a>
+						<h2 class="task-title">Check node materials</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkNode:material:textureType:withSceneNode:scnMaterial:modelPath:testLog:" title="checkNode:material:textureType:withSceneNode:scnMaterial:modelPath:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkNode:material:textureType:withSceneNode:scnMaterial:modelPath:testLog:">&ndash;&nbsp;checkNode:material:textureType:withSceneNode:scnMaterial:modelPath:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Check the scenekit node&rsquo;s materials property from the corrersponding material
+property of the material for a mesh of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkNode:(const struct aiNode *)<em>aiNode</em> material:(const struct aiMaterial *)<em>aiMaterial</em> textureType:(enum aiTextureType)<em>aiTextureType</em> withSceneNode:(SCNNode *)<em>sceneNode</em> scnMaterial:(SCNMaterial *)<em>scnMaterial</em> modelPath:(NSString *)<em>modelPath</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMaterial</code></th>
+						<td><p>The assimp material for a mesh of the assimp  node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiTextureType</code></th>
+						<td><p>The material property type.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sceneNode</code></th>
+						<td><p>The scenekit node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scnMaterial</code></th>
+						<td><p>The scenekit material.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>modelPath</code></th>
+						<td><p>The path to the file being tested.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Check the scenekit node&rsquo;s materials property from the corrersponding material
+property of the material for a mesh of the specified node.</p>
+
+<p>This checks that the material texture file has the correct path.
+If no texture is defined, it checks the material color exists.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/checkNodeMaterials:nodeName:withSceneNode:aiScene:modelPath:testLog:" title="checkNodeMaterials:nodeName:withSceneNode:aiScene:modelPath:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkNodeMaterials:nodeName:withSceneNode:aiScene:modelPath:testLog:">&ndash;&nbsp;checkNodeMaterials:nodeName:withSceneNode:aiScene:modelPath:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Check the scenekit node&rsquo;s materials from the corrersponding material
+materials of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkNodeMaterials:(const struct aiNode *)<em>aiNode</em> nodeName:(NSString *)<em>nodeName</em> withSceneNode:(SCNNode *)<em>sceneNode</em> aiScene:(const struct aiScene *)<em>aiScene</em> modelPath:(NSString *)<em>modelPath</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nodeName</code></th>
+						<td><p>The node name.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sceneNode</code></th>
+						<td><p>The scenekit node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>modelPath</code></th>
+						<td><p>The path to the file being tested.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Check the scenekit node&rsquo;s materials from the corrersponding material
+materials of the specified node.</p>
+
+<p>This checks each material property of the material.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Check lights" name="task_Check lights"></a>
+						<h2 class="task-title">Check lights</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkLights:withScene:testLog:" title="checkLights:withScene:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkLights:withScene:testLog:">&ndash;&nbsp;checkLights:withScene:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the lights in the scenekit scene correspond to the lights in the assimp
+scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkLights:(const struct aiScene *)<em>aiScene</em> withScene:(SCNAssimpScene *)<em>scene</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp. scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the lights in the scenekit scene correspond to the lights in the assimp
+scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Check node" name="task_Check node"></a>
+						<h2 class="task-title">Check node</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkNode:withSceneNode:aiScene:modelPath:testLog:" title="checkNode:withSceneNode:aiScene:modelPath:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkNode:withSceneNode:aiScene:modelPath:testLog:">&ndash;&nbsp;checkNode:withSceneNode:aiScene:modelPath:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the scenekit node corresponds to the assimp node and has the correct
+geometry and materials.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkNode:(const struct aiNode *)<em>aiNode</em> withSceneNode:(SCNNode *)<em>sceneNode</em> aiScene:(const struct aiScene *)<em>aiScene</em> modelPath:(NSString *)<em>modelPath</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sceneNode</code></th>
+						<td><p>The scenekit node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>modelPath</code></th>
+						<td><p>The path to the file being tested.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the scenekit node corresponds to the assimp node and has the correct
+geometry and materials.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Check cameras." name="task_Check cameras."></a>
+						<h2 class="task-title">Check cameras.</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkCameras:withScene:testLog:" title="checkCameras:withScene:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkCameras:withScene:testLog:">&ndash;&nbsp;checkCameras:withScene:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the cameras in the scenekit scene correspond to the cameras in the
+assimp scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkCameras:(const struct aiScene *)<em>aiScene</em> withScene:(SCNAssimpScene *)<em>scene</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp. scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the cameras in the scenekit scene correspond to the cameras in the
+assimp scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Check animations" name="task_Check animations"></a>
+						<h2 class="task-title">Check animations</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkPositionChannels:aiAnimation:channelKeys:duration:testLog:" title="checkPositionChannels:aiAnimation:channelKeys:duration:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkPositionChannels:aiAnimation:channelKeys:duration:testLog:">&ndash;&nbsp;checkPositionChannels:aiAnimation:channelKeys:duration:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the animation data for bone positions in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkPositionChannels:(const struct aiNodeAnim *)<em>aiNodeAnim</em> aiAnimation:(const struct aiAnimation *)<em>aiAnimation</em> channelKeys:(NSDictionary *)<em>channelKeys</em> duration:(float)<em>duration</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNodeAnim</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiAnimation</code></th>
+						<td><p>The assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>channelKeys</code></th>
+						<td><p>The bone channels in the assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>duration</code></th>
+						<td><p>The duration of the assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the animation data for bone positions in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/checkRotationChannels:aiAnimation:channelKeys:duration:testLog:" title="checkRotationChannels:aiAnimation:channelKeys:duration:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkRotationChannels:aiAnimation:channelKeys:duration:testLog:">&ndash;&nbsp;checkRotationChannels:aiAnimation:channelKeys:duration:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the animation data for bone orientations in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkRotationChannels:(const struct aiNodeAnim *)<em>aiNodeAnim</em> aiAnimation:(const struct aiAnimation *)<em>aiAnimation</em> channelKeys:(NSDictionary *)<em>channelKeys</em> duration:(float)<em>duration</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNodeAnim</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiAnimation</code></th>
+						<td><p>The assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>channelKeys</code></th>
+						<td><p>The bone channels in the assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>duration</code></th>
+						<td><p>The duration of the assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the animation data for bone orientations in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/checkScalingChannels:aiAnimation:channelKeys:duration:testLog:" title="checkScalingChannels:aiAnimation:channelKeys:duration:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkScalingChannels:aiAnimation:channelKeys:duration:testLog:">&ndash;&nbsp;checkScalingChannels:aiAnimation:channelKeys:duration:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the animation data for bone scales in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkScalingChannels:(const struct aiNodeAnim *)<em>aiNodeAnim</em> aiAnimation:(const struct aiAnimation *)<em>aiAnimation</em> channelKeys:(NSDictionary *)<em>channelKeys</em> duration:(float)<em>duration</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNodeAnim</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiAnimation</code></th>
+						<td><p>The assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>channelKeys</code></th>
+						<td><p>The bone channels in the assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>duration</code></th>
+						<td><p>The duration of the assimp animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the animation data for bone scales in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/checkAnimations:withScene:modelPath:testLog:" title="checkAnimations:withScene:modelPath:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkAnimations:withScene:modelPath:testLog:">&ndash;&nbsp;checkAnimations:withScene:modelPath:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the animation data for bones in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkAnimations:(const struct aiScene *)<em>aiScene</em> withScene:(SCNAssimpScene *)<em>scene</em> modelPath:(NSString *)<em>modelPath</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>modelPath</code></th>
+						<td><p>The path to the file being tested.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the animation data for bones in scenekit scene contains
+the animation data from the assimp scene for each bone in the animation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/checkModel:testLog:" title="checkModel:testLog:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkModel:testLog:">&ndash;&nbsp;checkModel:testLog:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the scene kit scene corresponds to the assimp scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkModel:(NSString *)<em>path</em> testLog:(ModelLog *)<em>testLog</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the model file being tested.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>testLog</code></th>
+						<td><p>The log for the file being tested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Checks the scene kit scene corresponds to the assimp scene.</p>
+
+<p>This is the entry point check method for each model file that is tested.</p>
+
+<p>This verifies that:
+1. The scenekit scene has the same node hierarchy as the assimp scene where
+each node has the correct geometry with geometry sources, elements and
+textures.
+2. The scenekit has the correct lights.
+3. The scenekit scene has the correct cameras.
+4. If the scenekit scene has animations, it checks that the key frames created
+for the animation data are correct for values, timing, duration and the bone
+channel to which the key frame belongs.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Test all models" name="task_Test all models"></a>
+						<h2 class="task-title">Test all models</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/getModelFiles" title="getModelFiles"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getModelFiles">&ndash;&nbsp;getModelFiles</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of the model files that can be tested.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)getModelFiles</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The array of model files that can be tested.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of the model files that can be tested.</p>
+
+<p>This filters the assets directory for the file formats that are supported
+by AssimpKit.</p>
+
+<p>The list of valid file formats is stored in assets/valid-extensions.txt.</p>
+
+<p>See: The test class description for more details about the assets directory.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/testAssimpModelFormats" title="testAssimpModelFormats"></a>
+	<h3 class="method-title"><code><a href="#//api/name/testAssimpModelFormats">&ndash;&nbsp;testAssimpModelFormats</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The test method that tests all the testable models specifed by <a href="#//api/name/getModelFiles">getModelFiles</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)testAssimpModelFormats</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The test method that tests all the testable models specifed by <a href="#//api/name/getModelFiles">getModelFiles</a></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporterTests.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-11-15</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

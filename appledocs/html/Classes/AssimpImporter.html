@@ -1,0 +1,3033 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>AssimpImporter Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">AssimpKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Deepak Surti, Ison Apps, AssimpKit team</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/boneNames">boneNames</option>
+		
+		<option value="//api/name/boneTransforms">boneTransforms</option>
+		
+		<option value="//api/name/skelton">skelton</option>
+		
+		<option value="//api/name/uniqueBoneNames">uniqueBoneNames</option>
+		
+		<option value="//api/name/uniqueBoneNodes">uniqueBoneNodes</option>
+		
+		<option value="//api/name/uniqueBoneTransforms">uniqueBoneTransforms</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/applyMultiplyPropertyForMaterial:withSCNMaterial:">- applyMultiplyPropertyForMaterial:withSCNMaterial:</option>
+		
+		<option value="//api/name/buildSkeletonDatabaseForScene:">- buildSkeletonDatabaseForScene:</option>
+		
+		<option value="//api/name/createAnimationsFromScene:withScene:atPath:">- createAnimationsFromScene:withScene:atPath:</option>
+		
+		<option value="//api/name/findBoneNodesInScene:forBones:">- findBoneNodesInScene:forBones:</option>
+		
+		<option value="//api/name/findDepthOfNodeFromRoot:">- findDepthOfNodeFromRoot:</option>
+		
+		<option value="//api/name/findMaxWeightsForNode:inScene:">- findMaxWeightsForNode:inScene:</option>
+		
+		<option value="//api/name/findNumBonesInNode:inScene:">- findNumBonesInNode:inScene:</option>
+		
+		<option value="//api/name/findNumFacesInNode:inScene:">- findNumFacesInNode:inScene:</option>
+		
+		<option value="//api/name/findNumIndicesInMesh:inScene:">- findNumIndicesInMesh:inScene:</option>
+		
+		<option value="//api/name/findNumVerticesInNode:inScene:">- findNumVerticesInNode:inScene:</option>
+		
+		<option value="//api/name/findSkeletonNodeFromBoneNodes:">- findSkeletonNodeFromBoneNodes:</option>
+		
+		<option value="//api/name/getBoneNamesForAssimpNode:inScene:">- getBoneNamesForAssimpNode:inScene:</option>
+		
+		<option value="//api/name/getBoneTransformsForAssimpNode:inScene:">- getBoneTransformsForAssimpNode:inScene:</option>
+		
+		<option value="//api/name/getTransformsForBones:fromTransforms:">- getTransformsForBones:fromTransforms:</option>
+		
+		<option value="//api/name/importScene:">- importScene:</option>
+		
+		<option value="//api/name/init">- init</option>
+		
+		<option value="//api/name/makeBoneIndicesGeometrySourceAtNode:inScene:withVertices:maxWeights:boneNames:">- makeBoneIndicesGeometrySourceAtNode:inScene:withVertices:maxWeights:boneNames:</option>
+		
+		<option value="//api/name/makeBoneWeightsGeometrySourceAtNode:inScene:withVertices:maxWeights:">- makeBoneWeightsGeometrySourceAtNode:inScene:withVertices:maxWeights:</option>
+		
+		<option value="//api/name/makeGeometryElementsforNode:inScene:">- makeGeometryElementsforNode:inScene:</option>
+		
+		<option value="//api/name/makeGeometrySourcesForNode:inScene:withVertices:">- makeGeometrySourcesForNode:inScene:withVertices:</option>
+		
+		<option value="//api/name/makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:">- makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:</option>
+		
+		<option value="//api/name/makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:">- makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:</option>
+		
+		<option value="//api/name/makeMaterialsForNode:inScene:atPath:">- makeMaterialsForNode:inScene:atPath:</option>
+		
+		<option value="//api/name/makeNormalGeometrySourceForNode:inScene:withNVertices:">- makeNormalGeometrySourceForNode:inScene:withNVertices:</option>
+		
+		<option value="//api/name/makeSCNCameraFromAssimpNode:inScene:">- makeSCNCameraFromAssimpNode:inScene:</option>
+		
+		<option value="//api/name/makeSCNGeometryFromAssimpNode:inScene:withVertices:atPath:">- makeSCNGeometryFromAssimpNode:inScene:withVertices:atPath:</option>
+		
+		<option value="//api/name/makeSCNLightFromAssimpNode:inScene:">- makeSCNLightFromAssimpNode:inScene:</option>
+		
+		<option value="//api/name/makeSCNLightTypeDirectionalForAssimpLight:">- makeSCNLightTypeDirectionalForAssimpLight:</option>
+		
+		<option value="//api/name/makeSCNLightTypePointForAssimpLight:">- makeSCNLightTypePointForAssimpLight:</option>
+		
+		<option value="//api/name/makeSCNLightTypeSpotForAssimpLight:">- makeSCNLightTypeSpotForAssimpLight:</option>
+		
+		<option value="//api/name/makeSCNNodeFromAssimpNode:inScene:atPath:">- makeSCNNodeFromAssimpNode:inScene:atPath:</option>
+		
+		<option value="//api/name/makeSCNSceneFromAssimpScene:atPath:">- makeSCNSceneFromAssimpScene:atPath:</option>
+		
+		<option value="//api/name/makeSkinnerForAssimpNode:inScene:scnScene:">- makeSkinnerForAssimpNode:inScene:scnScene:</option>
+		
+		<option value="//api/name/makeTextureGeometrySourceForNode:inScene:withNVertices:">- makeTextureGeometrySourceForNode:inScene:withNVertices:</option>
+		
+		<option value="//api/name/makeVertexGeometrySourceForNode:inScene:withNVertices:">- makeVertexGeometrySourceForNode:inScene:withNVertices:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">AssimpImporter Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>AssimpImporter.h<br />AssimpImporter.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>An importer that imports the files with formats supported by Assimp and
+converts the assimp scene graph into a scenekit scene graph.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						<a title="Creating an importer" name="task_Creating an importer"></a>
+						<h2 class="task-title">Creating an importer</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/init" title="init"></a>
+	<h3 class="method-title"><code><a href="#//api/name/init">&ndash;&nbsp;init</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an importer to import files supported by AssimpKit.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (id)init</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new importer.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an importer to import files supported by AssimpKit.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/importScene:" title="importScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/importScene:">&ndash;&nbsp;importScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Loads a scene from the specified file path.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNAssimpScene *)importScene:(NSString *)<em>filePath</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>filePath</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scene object, or nil if no scene could be loaded.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Loads a scene from the specified file path.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit scene" name="task_Make scenekit scene"></a>
+						<h2 class="task-title">Make scenekit scene</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeSCNSceneFromAssimpScene:atPath:" title="makeSCNSceneFromAssimpScene:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNSceneFromAssimpScene:atPath:">&ndash;&nbsp;makeSCNSceneFromAssimpScene:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit scene from the scene representing the file at a given path.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNAssimpScene *)makeSCNSceneFromAssimpScene:(const struct aiScene *)<em>aiScene</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scene object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit scene from the scene representing the file at a given path.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make a scenekit node" name="task_Make a scenekit node"></a>
+						<h2 class="task-title">Make a scenekit node</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeSCNNodeFromAssimpNode:inScene:atPath:" title="makeSCNNodeFromAssimpNode:inScene:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNNodeFromAssimpNode:inScene:atPath:">&ndash;&nbsp;makeSCNNodeFromAssimpNode:inScene:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a new scenekit node from the assimp scene node</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNNode *)makeSCNNodeFromAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp scene node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scene node.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a new scenekit node from the assimp scene node</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Find the number of vertices, faces and indices of a geometry" name="task_Find the number of vertices, faces and indices of a geometry"></a>
+						<h2 class="task-title">Find the number of vertices, faces and indices of a geometry</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/findNumVerticesInNode:inScene:" title="findNumVerticesInNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findNumVerticesInNode:inScene:">&ndash;&nbsp;findNumVerticesInNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the total number of vertices in the meshes of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (int)findNumVerticesInNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp scene node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of vertices.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the total number of vertices in the meshes of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/findNumFacesInNode:inScene:" title="findNumFacesInNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findNumFacesInNode:inScene:">&ndash;&nbsp;findNumFacesInNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the total number of faces in the meshes of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (int)findNumFacesInNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp scene node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of faces.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the total number of faces in the meshes of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/findNumIndicesInMesh:inScene:" title="findNumIndicesInMesh:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findNumIndicesInMesh:inScene:">&ndash;&nbsp;findNumIndicesInMesh:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the total number of indices in the specified mesh by index.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (int)findNumIndicesInMesh:(int)<em>aiMeshIndex</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMeshIndex</code></th>
+						<td><p>The assimp mesh index.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The total number of indices.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the total number of indices in the specified mesh by index.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit geometry sources" name="task_Make scenekit geometry sources"></a>
+						<h2 class="task-title">Make scenekit geometry sources</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeVertexGeometrySourceForNode:inScene:withNVertices:" title="makeVertexGeometrySourceForNode:inScene:withNVertices:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeVertexGeometrySourceForNode:inScene:withNVertices:">&ndash;&nbsp;makeVertexGeometrySourceForNode:inScene:withNVertices:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry source from the vertices of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometrySource *)makeVertexGeometrySourceForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withNVertices:(int)<em>nVertices</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The total number of vertices in the meshes of the aiNode.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry source whose semantic property is vertex.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry source from the vertices of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeNormalGeometrySourceForNode:inScene:withNVertices:" title="makeNormalGeometrySourceForNode:inScene:withNVertices:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeNormalGeometrySourceForNode:inScene:withNVertices:">&ndash;&nbsp;makeNormalGeometrySourceForNode:inScene:withNVertices:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry source from the normals of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometrySource *)makeNormalGeometrySourceForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withNVertices:(int)<em>nVertices</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The number of vertices in the meshes of the aiNode.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry source whose semantic property is normal.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry source from the normals of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeTextureGeometrySourceForNode:inScene:withNVertices:" title="makeTextureGeometrySourceForNode:inScene:withNVertices:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeTextureGeometrySourceForNode:inScene:withNVertices:">&ndash;&nbsp;makeTextureGeometrySourceForNode:inScene:withNVertices:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry source from the texture coordinates of the
+specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometrySource *)makeTextureGeometrySourceForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withNVertices:(int)<em>nVertices</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The number of vertices in the meshes of the node.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry source whose semantic property is texcoord.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry source from the texture coordinates of the
+specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeGeometrySourcesForNode:inScene:withVertices:" title="makeGeometrySourcesForNode:inScene:withVertices:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeGeometrySourcesForNode:inScene:withVertices:">&ndash;&nbsp;makeGeometrySourcesForNode:inScene:withVertices:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of geometry sources for the specifed node describing
+the vertices in the geometry and their attributes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)makeGeometrySourcesForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withVertices:(int)<em>nVertices</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The number of vertices in the meshes of the node.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An array of geometry sources.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of geometry sources for the specifed node describing
+the vertices in the geometry and their attributes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit geometry elements" name="task_Make scenekit geometry elements"></a>
+						<h2 class="task-title">Make scenekit geometry elements</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:" title="makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:">&ndash;&nbsp;makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry element describing how vertices connect to define
+a three-dimensional object, or geometry for the specified mesh of a node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometryElement *)makeIndicesGeometryElementForMeshIndex:(int)<em>aiMeshIndex</em> inNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withIndexOffset:(short)<em>indexOffset</em> nFaces:(int)<em>nFaces</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMeshIndex</code></th>
+						<td><p>The assimp mesh index.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node of the mesh.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>indexOffset</code></th>
+						<td><p>The total number of indices for the previous meshes.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nFaces</code></th>
+						<td><p>The number of faces in the geometry of the mesh.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry element object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry element describing how vertices connect to define
+a three-dimensional object, or geometry for the specified mesh of a node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeGeometryElementsforNode:inScene:" title="makeGeometryElementsforNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeGeometryElementsforNode:inScene:">&ndash;&nbsp;makeGeometryElementsforNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of scenekit geometry element obejcts describing how to
+connect the geometry&rsquo;s vertices of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)makeGeometryElementsforNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An array of geometry elements.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of scenekit geometry element obejcts describing how to
+connect the geometry&rsquo;s vertices of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit materials" name="task_Make scenekit materials"></a>
+						<h2 class="task-title">Make scenekit materials</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:" title="makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:">&ndash;&nbsp;makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Updates a scenekit material property with the texture file path or the color
+if no texture is specifed.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)makeMaterialPropertyForMaterial:(const struct aiMaterial *)<em>aiMaterial</em> withTextureType:(enum aiTextureType)<em>aiTextureType</em> withSCNMaterial:(SCNMaterial *)<em>material</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMaterial</code></th>
+						<td><p>The assimp material.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiTextureType</code></th>
+						<td><p>The texture type which is diffuse, specular etc.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>material</code></th>
+						<td><p>The scenekit material.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Updates a scenekit material property with the texture file path or the color
+if no texture is specifed.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyMultiplyPropertyForMaterial:withSCNMaterial:" title="applyMultiplyPropertyForMaterial:withSCNMaterial:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyMultiplyPropertyForMaterial:withSCNMaterial:">&ndash;&nbsp;applyMultiplyPropertyForMaterial:withSCNMaterial:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Updates a scenekit material&rsquo;s multiply property</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)applyMultiplyPropertyForMaterial:(const struct aiMaterial *)<em>aiMaterial</em> withSCNMaterial:(SCNMaterial *)<em>material</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMaterial</code></th>
+						<td><p>The assimp material</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>material</code></th>
+						<td><p>The scenekit material.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Updates a scenekit material&rsquo;s multiply property</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeMaterialsForNode:inScene:atPath:" title="makeMaterialsForNode:inScene:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeMaterialsForNode:inScene:atPath:">&ndash;&nbsp;makeMaterialsForNode:inScene:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of scenekit materials one for each mesh of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSMutableArray *)makeMaterialsForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An array of scenekit materials.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of scenekit materials one for each mesh of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeSCNGeometryFromAssimpNode:inScene:withVertices:atPath:" title="makeSCNGeometryFromAssimpNode:inScene:withVertices:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNGeometryFromAssimpNode:inScene:withVertices:atPath:">&ndash;&nbsp;makeSCNGeometryFromAssimpNode:inScene:withVertices:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry to attach at the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometry *)makeSCNGeometryFromAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withVertices:(int)<em>nVertices</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The total number of vertices in the meshes of the node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry to attach at the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit lights" name="task_Make scenekit lights"></a>
+						<h2 class="task-title">Make scenekit lights</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeSCNLightTypeDirectionalForAssimpLight:" title="makeSCNLightTypeDirectionalForAssimpLight:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNLightTypeDirectionalForAssimpLight:">&ndash;&nbsp;makeSCNLightTypeDirectionalForAssimpLight:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit directional light from an assimp directional light.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNLight *)makeSCNLightTypeDirectionalForAssimpLight:(const struct aiLight *)<em>aiLight</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiLight</code></th>
+						<td><p>The assimp directional light.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scenekit directional light.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit directional light from an assimp directional light.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeSCNLightTypePointForAssimpLight:" title="makeSCNLightTypePointForAssimpLight:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNLightTypePointForAssimpLight:">&ndash;&nbsp;makeSCNLightTypePointForAssimpLight:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit omni light from an assimp omni light.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNLight *)makeSCNLightTypePointForAssimpLight:(const struct aiLight *)<em>aiLight</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiLight</code></th>
+						<td><p>The assimp omni light.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scenekit omni light.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit omni light from an assimp omni light.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeSCNLightTypeSpotForAssimpLight:" title="makeSCNLightTypeSpotForAssimpLight:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNLightTypeSpotForAssimpLight:">&ndash;&nbsp;makeSCNLightTypeSpotForAssimpLight:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit spot light from an assimp spot light.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNLight *)makeSCNLightTypeSpotForAssimpLight:(const struct aiLight *)<em>aiLight</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiLight</code></th>
+						<td><p>The assimp spot light.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scenekit spot light.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit spot light from an assimp spot light.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeSCNLightFromAssimpNode:inScene:" title="makeSCNLightFromAssimpNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNLightFromAssimpNode:inScene:">&ndash;&nbsp;makeSCNLightFromAssimpNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit light to attach at the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNLight *)makeSCNLightFromAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scenekit light.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit light to attach at the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit cameras" name="task_Make scenekit cameras"></a>
+						<h2 class="task-title">Make scenekit cameras</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/makeSCNCameraFromAssimpNode:inScene:" title="makeSCNCameraFromAssimpNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSCNCameraFromAssimpNode:inScene:">&ndash;&nbsp;makeSCNCameraFromAssimpNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit camera to attach at the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNCamera *)makeSCNCameraFromAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new scenekit camera.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit camera to attach at the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit skinner" name="task_Make scenekit skinner"></a>
+						<h2 class="task-title">Make scenekit skinner</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/findNumBonesInNode:inScene:" title="findNumBonesInNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findNumBonesInNode:inScene:">&ndash;&nbsp;findNumBonesInNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the number of bones in the meshes of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (int)findNumBonesInNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of bones.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the number of bones in the meshes of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getBoneNamesForAssimpNode:inScene:" title="getBoneNamesForAssimpNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getBoneNamesForAssimpNode:inScene:">&ndash;&nbsp;getBoneNamesForAssimpNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of bone names in the meshes of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)getBoneNamesForAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An array of bone names.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of bone names in the meshes of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getBoneTransformsForAssimpNode:inScene:" title="getBoneTransformsForAssimpNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getBoneTransformsForAssimpNode:inScene:">&ndash;&nbsp;getBoneTransformsForAssimpNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a dictionary of bone transforms where bone name is the key, for the
+meshes of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSDictionary *)getBoneTransformsForAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A dictionary of bone transforms where bone name is the key.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a dictionary of bone transforms where bone name is the key, for the
+meshes of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getTransformsForBones:fromTransforms:" title="getTransformsForBones:fromTransforms:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getTransformsForBones:fromTransforms:">&ndash;&nbsp;getTransformsForBones:fromTransforms:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of bone transforms from a dictionary of bone transforms where
+bone name is the key.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)getTransformsForBones:(NSArray *)<em>boneNames</em> fromTransforms:(NSDictionary *)<em>boneTransforms</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>boneNames</code></th>
+						<td><p>The array of bone names.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>boneTransforms</code></th>
+						<td><p>The dictionary of bone transforms.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An array of bone transforms</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of bone transforms from a dictionary of bone transforms where
+bone name is the key.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/findBoneNodesInScene:forBones:" title="findBoneNodesInScene:forBones:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findBoneNodesInScene:forBones:">&ndash;&nbsp;findBoneNodesInScene:forBones:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates an array of scenekit bone nodes for the specified bone names.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)findBoneNodesInScene:(SCNScene *)<em>scene</em> forBones:(NSArray *)<em>boneNames</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>boneNames</code></th>
+						<td><p>The array of bone names.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An array of scenekit bone nodes.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates an array of scenekit bone nodes for the specified bone names.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/findSkeletonNodeFromBoneNodes:" title="findSkeletonNodeFromBoneNodes:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findSkeletonNodeFromBoneNodes:">&ndash;&nbsp;findSkeletonNodeFromBoneNodes:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Find the root node of the skeleton from the specified bone nodes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNNode *)findSkeletonNodeFromBoneNodes:(NSArray *)<em>boneNodes</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>boneNodes</code></th>
+						<td><p>The array of bone nodes.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The root node of the skeleton.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Find the root node of the skeleton from the specified bone nodes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/findDepthOfNodeFromRoot:" title="findDepthOfNodeFromRoot:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findDepthOfNodeFromRoot:">&ndash;&nbsp;findDepthOfNodeFromRoot:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the depth of the specified node from the scene&rsquo;s root node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (int)findDepthOfNodeFromRoot:(SCNNode *)<em>node</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>node</code></th>
+						<td><p>The scene node.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The depth from the scene&rsquo;s root node.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the depth of the specified node from the scene&rsquo;s root node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/findMaxWeightsForNode:inScene:" title="findMaxWeightsForNode:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findMaxWeightsForNode:inScene:">&ndash;&nbsp;findMaxWeightsForNode:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the maximum number of weights that influence the vertices in the meshes
+of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (int)findMaxWeightsForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The maximum influences or weights.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the maximum number of weights that influence the vertices in the meshes
+of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeBoneWeightsGeometrySourceAtNode:inScene:withVertices:maxWeights:" title="makeBoneWeightsGeometrySourceAtNode:inScene:withVertices:maxWeights:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeBoneWeightsGeometrySourceAtNode:inScene:withVertices:maxWeights:">&ndash;&nbsp;makeBoneWeightsGeometrySourceAtNode:inScene:withVertices:maxWeights:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry source defining the influence of each bone on the
+positions of vertices in the geometry</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometrySource *)makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withVertices:(int)<em>nVertices</em> maxWeights:(int)<em>maxWeights</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The number of vertices in the meshes of the node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maxWeights</code></th>
+						<td><p>The maximum number of weights influencing each vertex.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry source whose semantic property is boneWeights.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry source defining the influence of each bone on the
+positions of vertices in the geometry</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeBoneIndicesGeometrySourceAtNode:inScene:withVertices:maxWeights:boneNames:" title="makeBoneIndicesGeometrySourceAtNode:inScene:withVertices:maxWeights:boneNames:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeBoneIndicesGeometrySourceAtNode:inScene:withVertices:maxWeights:boneNames:">&ndash;&nbsp;makeBoneIndicesGeometrySourceAtNode:inScene:withVertices:maxWeights:boneNames:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry source defining the mapping from bone indices in
+skeleton data to the skinner’s bones array</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometrySource *)makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withVertices:(int)<em>nVertices</em> maxWeights:(int)<em>maxWeights</em> boneNames:(NSArray *)<em>boneNames</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The number of vertices in the meshes of the node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maxWeights</code></th>
+						<td><p>The maximum number of weights influencing each vertex.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>boneNames</code></th>
+						<td><p>The array of unique bone names.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry source whose semantic property is boneIndices.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry source defining the mapping from bone indices in
+skeleton data to the skinner’s bones array</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/buildSkeletonDatabaseForScene:" title="buildSkeletonDatabaseForScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/buildSkeletonDatabaseForScene:">&ndash;&nbsp;buildSkeletonDatabaseForScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Builds a skeleton database of unique bone names and inverse bind bone
+transforms.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)buildSkeletonDatabaseForScene:(SCNScene *)<em>scene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Builds a skeleton database of unique bone names and inverse bind bone
+transforms.</p>
+
+<p>When the scenekit scene is created from the assimp scene, a list of all bone
+names and a dictionary of bone transforms where each key is the bone name,
+is generated when parsing each node of the assimp scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeSkinnerForAssimpNode:inScene:scnScene:" title="makeSkinnerForAssimpNode:inScene:scnScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeSkinnerForAssimpNode:inScene:scnScene:">&ndash;&nbsp;makeSkinnerForAssimpNode:inScene:scnScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit skinner for the specified node with visible geometry and
+skeleton information.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)makeSkinnerForAssimpNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> scnScene:(SCNScene *)<em>scene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit skinner for the specified node with visible geometry and
+skeleton information.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Make scenekit animations" name="task_Make scenekit animations"></a>
+						<h2 class="task-title">Make scenekit animations</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/createAnimationsFromScene:withScene:atPath:" title="createAnimationsFromScene:withScene:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createAnimationsFromScene:withScene:atPath:">&ndash;&nbsp;createAnimationsFromScene:withScene:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a dictionary of animations where each animation is a
+<a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a>, from each animation in the assimp scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)createAnimationsFromScene:(const struct aiScene *)<em>aiScene</em> withScene:(SCNAssimpScene *)<em>scene</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scene</code></th>
+						<td><p>The scenekit scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a dictionary of animations where each animation is a
+<a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a>, from each animation in the assimp scene.</p>
+
+<p>For each animation&rsquo;s channel which is a bone node, a CAKeyframeAnimation is
+created for each of position, orientation and scale. These animations are
+then stored in an <a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a> object, which holds the animation name and
+the keyframe animations.</p>
+
+<p>The animation name is generated by appending the file name with an animation
+index. The example of an animation name is walk-1 for the first animation in a
+file named walk.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/boneNames" title="boneNames"></a>
+	<h3 class="method-title"><code><a href="#//api/name/boneNames">&nbsp;&nbsp;boneNames</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of bone names across all meshes in all nodes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) NSMutableArray *boneNames</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The array of bone names across all meshes in all nodes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/uniqueBoneNames" title="uniqueBoneNames"></a>
+	<h3 class="method-title"><code><a href="#//api/name/uniqueBoneNames">&nbsp;&nbsp;uniqueBoneNames</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of unique bone names across all meshes in all nodes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) NSArray *uniqueBoneNames</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The array of unique bone names across all meshes in all nodes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/uniqueBoneNodes" title="uniqueBoneNodes"></a>
+	<h3 class="method-title"><code><a href="#//api/name/uniqueBoneNodes">&nbsp;&nbsp;uniqueBoneNodes</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of unique bone nodes across all meshes in all nodes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) NSArray *uniqueBoneNodes</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The array of unique bone nodes across all meshes in all nodes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/boneTransforms" title="boneTransforms"></a>
+	<h3 class="method-title"><code><a href="#//api/name/boneTransforms">&nbsp;&nbsp;boneTransforms</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The dictionary of bone inverse bind transforms, where key is the bone name.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) NSMutableDictionary *boneTransforms</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The dictionary of bone inverse bind transforms, where key is the bone name.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/uniqueBoneTransforms" title="uniqueBoneTransforms"></a>
+	<h3 class="method-title"><code><a href="#//api/name/uniqueBoneTransforms">&nbsp;&nbsp;uniqueBoneTransforms</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of unique bone transforms for all unique bone nodes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) NSArray *uniqueBoneTransforms</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The array of unique bone transforms for all unique bone nodes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/skelton" title="skelton"></a>
+	<h3 class="method-title"><code><a href="#//api/name/skelton">&nbsp;&nbsp;skelton</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The root node of the skeleton in the scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) SCNNode *skelton</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The root node of the skeleton in the scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-11-15</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
