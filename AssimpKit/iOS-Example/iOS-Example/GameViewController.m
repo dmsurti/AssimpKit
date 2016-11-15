@@ -58,8 +58,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NSString *jumpAnim =
         [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
     NSString *bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
-    AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
-    SCNAssimpScene *jumpStartScene = [assimpImporter importScene:jumpAnim];
+    SCNAssimpScene *jumpStartScene = [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]];
     NSString *bobId = @"Bob-1";
     NSString *jumpId = @"jump_start-1";
     NSString *attackId = @"attack-1";
