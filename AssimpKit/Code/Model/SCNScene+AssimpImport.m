@@ -38,8 +38,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation SCNScene (AssimpImport)
 
-#pragma mark - Loading a Scene
+#pragma mark - Loading scenes using assimp
 
+/**
+ @name Loading scenes using assimp
+ */
+
+/**
+ Loads a scene from a file with the specified name in the app’s main bundle.
+ 
+ @param name The name of a scene file in the app bundle’s resources directory.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
@@ -47,6 +57,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return [assimpImporter importScene:file];
 }
 
+/**
+ Loads a scene from the specified NSString URL.
+ 
+ @param url The NSString URL to the scene file to load.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
