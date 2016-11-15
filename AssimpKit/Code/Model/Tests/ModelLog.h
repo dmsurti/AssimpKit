@@ -75,6 +75,11 @@
 - (NSArray *)getErrors;
 
 #pragma mark - Pass or Fail
+
+/**
+ @name Pass or Fail
+ */
+
 /**
  Returns the model test as passed verification if there were no errors during
  testing.
