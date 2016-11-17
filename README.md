@@ -48,7 +48,7 @@ animations, please refer to the API docs.
 
 ### AssimpKit License
 
-AssimpKit's license is based on the modified, 3-clause BSD-License.
+[AssimpKit's license](LICENSE.md) is based on the modified, 3-clause BSD-License.
 
 An informal summary is: do whatever you want, but include Assimp Kit's license text with your product - and don't sue me if the code doesn't work. For the legal details, see the LICENSE file.
 
@@ -57,14 +57,14 @@ An informal summary is: do whatever you want, but include Assimp Kit's license t
 AssimpKit uses many model files placed under `assets` directory for testing purpose.
 
 These model files are classified by owner:
-* `assets/apple` --> asset files reused from Apple sample code projects, `Bananas` and `SceneKitAnimations`.
-* `assets/of` --> The `astroBoy_walk.dae` file reused from the openframeworks example proejct, `examples/ios/assimpExample`.
-* `assets/assimp` --> The model files reused from the `assimp/models`.
+* `assets/apple` --> asset files reused from Apple sample code projects, [Bananas](https://github.com/master-nevi/WWDC-2014/tree/master/Bananas%20A%20simple%20SceneKit%20platforming%20game) and [SceneKitAnimations](https://developer.apple.com/library/content/samplecode/SceneKitAnimations/Introduction/Intro.html#//apple_ref/doc/uid/DTS40012569).
+* `assets/of` --> The `astroBoy_walk.dae` file reused from the openframeworks example proejct, [examples/ios/assimpExample](https://github.com/openframeworks/openFrameworks/tree/master/examples/ios/assimpExample).
+* `assets/assimp` --> The model files reused from the [assimpl/test/models-*](https://github.com/assimp/assimp/tree/master/test).
 
 Please note that the copyright of these model files belongs to the respective owners and
 AssimpKit utilizes these only for testing purpose.
 
-Please refer to `licenses` directory for more information. 
+Please refer to [licensesr](licenses/) directory for more information.
 
 So, if you re-package AssimpKit for use in a 'clean' OSS package, consider removing the model files which are proprietary.
 
