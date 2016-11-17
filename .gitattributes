@@ -1,1 +1,2 @@
-**/*.hpp linguist-language=objc
+AssimpKit/assets/* linguist-vendored=false
+AssimpKit/Assimp/* linguist-vendored=false
