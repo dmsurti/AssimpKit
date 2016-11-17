@@ -64,7 +64,7 @@ These model files are classified by owner:
 Please note that the copyright of these model files belongs to the respective owners and
 AssimpKit utilizes these only for testing purpose.
 
-Please refer to [licensesr](licenses/) directory for more information.
+Please refer to [licenses](licenses/) directory for more information.
 
 So, if you re-package AssimpKit for use in a 'clean' OSS package, consider removing the model files which are proprietary.
 
