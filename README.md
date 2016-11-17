@@ -79,3 +79,4 @@ To contribute to AssimpKit:
 * Please open an issue describing the bug, enhancement or any other improvement.
 * If valid, please supply the sample model file that can help demonstrate the issue.
 * After discussion on the issue, you can submit a Pull Request by forking this project.
+* Please ensure you format the code using [clang-format](http://clang.llvm.org/docs/ClangFormat.html), there exists a [.clang-format](.clang-format) for this project.
