@@ -70,7 +70,7 @@ So, if you re-package AssimpKit for use in a 'clean' OSS package, consider remov
 
 ### Author
 
-@dmsurti
+[Deepak Surti](https://github.com/dmsurti)
 
 ### Contributing Guide
 
