@@ -57,9 +57,9 @@ An informal summary is: do whatever you want, but include Assimp Kit's license t
 AssimpKit uses many model files placed under `assets` directory for testing purpose.
 
 These model files are classified by owner:
-* `assets/apple` --> asset files reused from Apple sample code projects.
-* `assets/of` --> The astroBoy_walk.dae file reused from the openframeworks projects.
-* `assets/assimp` --> The model files reused from the `assimp` project.
+* `assets/apple` --> asset files reused from Apple sample code projects, `Bananas` and `SceneKitAnimations`.
+* `assets/of` --> The `astroBoy_walk.dae` file reused from the openframeworks example proejct, `examples/ios/assimpExample`.
+* `assets/assimp` --> The model files reused from the `assimp/models`.
 
 Please note that the copyright of these model files belongs to the respective owners and
 AssimpKit utilizes these only for testing purpose.
