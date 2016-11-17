@@ -46,6 +46,14 @@ animations, please refer to the API docs.
 
 ### [API Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
 
+### Requirements
+
+- Xcode 8.0 or later
+- ObjC 2.0
+- iOS 10.0 or later
+- OS X 10.11 or later
+
+
 ### AssimpKit License
 
 [AssimpKit's license](LICENSE.md) is based on the modified, 3-clause BSD-License.
