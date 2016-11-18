@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
-		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; };
+		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
-		779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */; };
-		779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */; };
+		779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1E11DDF2A5700DED366 /* SCNAssimpAnimation.m */; };
-		779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E21DDF2A5700DED366 /* SCNAssimpScene.h */; };
+		779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E21DDF2A5700DED366 /* SCNAssimpScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1E31DDF2A5700DED366 /* SCNAssimpScene.m */; };
-		779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E41DDF2A5700DED366 /* SCNScene+AssimpImport.h */; };
+		779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E41DDF2A5700DED366 /* SCNScene+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1EE1DDF2A5700DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1E51DDF2A5700DED366 /* SCNScene+AssimpImport.m */; };
 		779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF2031DDF2BB000DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF20D1DDF2BB000DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2041DDF2BB000DED366 /* AssimpImporter.m */; };
@@ -580,7 +580,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "AssimpKit-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -648,7 +648,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "AssimpKit-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				MTL_ENABLE_DEBUG_INFO = NO;
