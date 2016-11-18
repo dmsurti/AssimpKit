@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Library">
+      <Group
+         location = "group:Code"
+         name = "Code">
+         <Group
+            location = "group:Model"
+            name = "Model">
+            <FileRef
+               location = "group:AssimpImporter.h">
+            </FileRef>
+            <FileRef
+               location = "group:AssimpImporter.m">
+            </FileRef>
+            <FileRef
+               location = "group:AssimpSceneKit-Prefix.pch">
+            </FileRef>
+            <FileRef
+               location = "group:SCNAssimpAnimation.h">
+            </FileRef>
+            <FileRef
+               location = "group:SCNAssimpAnimation.m">
+            </FileRef>
+            <FileRef
+               location = "group:SCNAssimpScene.h">
+            </FileRef>
+            <FileRef
+               location = "group:SCNAssimpScene.m">
+            </FileRef>
+            <FileRef
+               location = "group:SCNScene+AssimpImport.h">
+            </FileRef>
+            <FileRef
+               location = "group:SCNScene+AssimpImport.m">
+            </FileRef>
+            <Group
+               location = "group:Tests"
+               name = "Tests">
+               <FileRef
+                  location = "group:AssimpImporterTests.m">
+               </FileRef>
+               <FileRef
+                  location = "group:ModelLog.h">
+               </FileRef>
+               <FileRef
+                  location = "group:ModelLog.m">
+               </FileRef>
+            </Group>
+         </Group>
+      </Group>
+   </Group>
    <FileRef
       location = "group:iOS-Example/iOS-Example.xcodeproj">
    </FileRef>
