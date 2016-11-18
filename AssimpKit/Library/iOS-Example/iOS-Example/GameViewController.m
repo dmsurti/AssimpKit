@@ -34,36 +34,81 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import "GameViewController.h"
-#import "SCNScene+AssimpImport.h"
+#import <AssimpKit/SCNScene+AssimpImport.h>
 
 @implementation GameViewController
 
-- (void)awakeFromNib
+- (void)viewDidLoad
 {
-    //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
-    // @"models-nonbsd/3DS/jeep1.3ds";
-    NSString *boyPath =
-        @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
-    NSString *soldierPath =
-            @"/Users/deepaksurti/ios-osx/assimp/demo/assets/attack.dae";
-    SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]];
-    // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
-    SCNAssimpAnimation *anim = [scene animationForKey:@"attack-1"];
-    [scene addAnimation:anim];
+    [super viewDidLoad];
 
-    self.gameView.scene = scene;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *docsDir = [paths objectAtIndex:0];
+    NSString *explorer =
+        [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
+    NSString *soldier =
+            [docsDir stringByAppendingString:@"/attack.dae"];
+    NSString *bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
+    SCNAssimpScene *scene =
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]];
+
+    // Now we can access the file's contents
+    NSString *jumpAnim =
+        [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
+    NSString *bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
+    SCNAssimpScene *jumpStartScene = [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]];
+    NSString *bobId = @"Bob-1";
+    NSString *jumpId = @"jump_start-1";
+    NSString *attackId = @"attack-1";
+    SCNAssimpAnimation *jumpStartAnim = [jumpStartScene animationForKey:jumpId];
+    [scene addAnimation:jumpStartAnim];
+
+    // retrieve the SCNView
+    SCNView *scnView = (SCNView *)self.view;
+
+    // set the scene to the view
+    scnView.scene = scene;
 
     // allows the user to manipulate the camera
-    self.gameView.allowsCameraControl = YES;
+    scnView.allowsCameraControl = YES;
 
     // show statistics such as fps and timing information
-    self.gameView.showsStatistics = YES;
+    scnView.showsStatistics = YES;
 
     // configure the view
-    self.gameView.backgroundColor = [NSColor whiteColor];
+    scnView.backgroundColor = [UIColor blackColor];
 
-    self.gameView.playing = YES;
+    scnView.playing = YES;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] ==
+        UIUserInterfaceIdiomPhone)
+    {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+    else
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Release any cached data, images, etc that aren't in use.
 }
 
 @end

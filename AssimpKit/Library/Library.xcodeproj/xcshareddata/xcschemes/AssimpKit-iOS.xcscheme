@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77CDAB161DD733E800B7E342"
-               BuildableName = "AssimpSceneKit_LogicTests.xctest"
-               BlueprintName = "AssimpSceneKit_LogicTests"
-               ReferencedContainer = "container:OSX-Example.xcodeproj">
+               BlueprintIdentifier = "779DF1D21DDF29F200DED366"
+               BuildableName = "AssimpKit.framework"
+               BlueprintName = "AssimpKit-iOS"
+               ReferencedContainer = "container:Library.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77CDAB161DD733E800B7E342"
-               BuildableName = "AssimpSceneKit_LogicTests.xctest"
-               BlueprintName = "AssimpSceneKit_LogicTests"
-               ReferencedContainer = "container:OSX-Example.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -55,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77CDAB161DD733E800B7E342"
-            BuildableName = "AssimpSceneKit_LogicTests.xctest"
-            BlueprintName = "AssimpSceneKit_LogicTests"
-            ReferencedContainer = "container:OSX-Example.xcodeproj">
+            BlueprintIdentifier = "779DF1D21DDF29F200DED366"
+            BuildableName = "AssimpKit.framework"
+            BlueprintName = "AssimpKit-iOS"
+            ReferencedContainer = "container:Library.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -70,6 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "779DF1D21DDF29F200DED366"
+            BuildableName = "AssimpKit.framework"
+            BlueprintName = "AssimpKit-iOS"
+            ReferencedContainer = "container:Library.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

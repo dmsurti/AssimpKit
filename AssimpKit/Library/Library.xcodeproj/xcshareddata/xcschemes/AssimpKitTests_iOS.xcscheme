@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77CDAB781DD745D800B7E342"
-               BuildableName = "AssimpSceneKit_LogicTests.xctest"
-               BlueprintName = "AssimpSceneKit_LogicTests"
-               ReferencedContainer = "container:iOS-Example.xcodeproj">
+               BlueprintIdentifier = "779DF25F1DDF2F9800DED366"
+               BuildableName = "AssimpKitTests_iOS.xctest"
+               BlueprintName = "AssimpKitTests_iOS"
+               ReferencedContainer = "container:Library.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,20 +32,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77CDAB781DD745D800B7E342"
-               BuildableName = "AssimpSceneKit_LogicTests.xctest"
-               BlueprintName = "AssimpSceneKit_LogicTests"
-               ReferencedContainer = "container:iOS-Example.xcodeproj">
+               BlueprintIdentifier = "779DF25F1DDF2F9800DED366"
+               BuildableName = "AssimpKitTests_iOS.xctest"
+               BlueprintName = "AssimpKitTests_iOS"
+               ReferencedContainer = "container:Library.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77CDAB781DD745D800B7E342"
-            BuildableName = "AssimpSceneKit_LogicTests.xctest"
-            BlueprintName = "AssimpSceneKit_LogicTests"
-            ReferencedContainer = "container:iOS-Example.xcodeproj">
+            BlueprintIdentifier = "779DF25F1DDF2F9800DED366"
+            BuildableName = "AssimpKitTests_iOS.xctest"
+            BlueprintName = "AssimpKitTests_iOS"
+            ReferencedContainer = "container:Library.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,10 +64,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77CDAB781DD745D800B7E342"
-            BuildableName = "AssimpSceneKit_LogicTests.xctest"
-            BlueprintName = "AssimpSceneKit_LogicTests"
-            ReferencedContainer = "container:iOS-Example.xcodeproj">
+            BlueprintIdentifier = "779DF25F1DDF2F9800DED366"
+            BuildableName = "AssimpKitTests_iOS.xctest"
+            BlueprintName = "AssimpKitTests_iOS"
+            ReferencedContainer = "container:Library.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,10 +82,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77CDAB781DD745D800B7E342"
-            BuildableName = "AssimpSceneKit_LogicTests.xctest"
-            BlueprintName = "AssimpSceneKit_LogicTests"
-            ReferencedContainer = "container:iOS-Example.xcodeproj">
+            BlueprintIdentifier = "779DF25F1DDF2F9800DED366"
+            BuildableName = "AssimpKitTests_iOS.xctest"
+            BlueprintName = "AssimpKitTests_iOS"
+            ReferencedContainer = "container:Library.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
