@@ -30,6 +30,32 @@ Currently AssimpKit supports the following file formats:
 m3sd, nff, obj, off, mesh.xml, ply, q3o, q3s, raw, smd, stl, wrl, xgl, zgl, fbx,
 md3***
 
+### Requirements
+
+- Xcode 8.0 or later
+- ObjC 2.0
+- iOS 10.0 or later
+- OS X 10.11 or later
+
+### Installation with Carthage (iOS 10.0+)
+
+[Carthage](https://github.com/Carthage/Carthage) is a lightweight dependency
+manager for Swift and Objective-C. It leverages CocoaTouch modules and is less
+invasive than CocoaPods.
+
+To install with Carthage, follow the instructions on
+[Carthage](https://github.com/Carthage/Carthage).
+
+##### Your application Cartfile should have the following entry for AssimpKit:
+
+```
+github "dmsurti/AssimpKit"
+```
+
+After `carthage update`, add the appropriate platform framework (iOS, macOS) to
+your project. The frameworks are placed in `iOS` and `Mac` subdirectories under
+the `Carthage/Build` directory of your project.
+
 ### Getting Started with AssimpKit
 
 Table below lists the important classes in AssimpKit.
@@ -45,14 +71,6 @@ For more details on how to use AssimpKit to load scenes, including those with sk
 animations, please refer to the API docs.
 
 ### [API Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
-
-### Requirements
-
-- Xcode 8.0 or later
-- ObjC 2.0
-- iOS 10.0 or later
-- OS X 10.11 or later
-
 
 ### AssimpKit License
 
