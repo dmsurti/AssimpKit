@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import "GameViewController.h"
-#import "SCNScene+AssimpImport.h"
+#import <AssimpKit/SCNScene+AssimpImport.h>
 
 @implementation GameViewController
 

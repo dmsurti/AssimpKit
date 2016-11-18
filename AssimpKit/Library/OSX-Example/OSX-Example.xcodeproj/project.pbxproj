@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		771E8EF61DDF42690081FD6C /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF51DDF42690081FD6C /* AssimpKit.framework */; };
+		771E8EF71DDF42690081FD6C /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF51DDF42690081FD6C /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		77CDAA571DD715C300B7E342 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA561DD715C300B7E342 /* AppDelegate.m */; };
 		77CDAA5A1DD715C300B7E342 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA591DD715C300B7E342 /* main.m */; };
 		77CDAA711DD715FE00B7E342 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA661DD715FE00B7E342 /* art.scnassets */; };
@@ -24,6 +26,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				771E8EF71DDF42690081FD6C /* AssimpKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		771E8EF51DDF42690081FD6C /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAA521DD715C300B7E342 /* OSX-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAA551DD715C300B7E342 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		77CDAA561DD715C300B7E342 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -61,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				771E8EF61DDF42690081FD6C /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +75,7 @@
 		77CDAA491DD715C300B7E342 = {
 			isa = PBXGroup;
 			children = (
+				771E8EF51DDF42690081FD6C /* AssimpKit.framework */,
 				77CDAA541DD715C300B7E342 /* OSX-Example */,
 				77CDAA531DD715C300B7E342 /* Products */,
 				77CDAA7F1DD7172F00B7E342 /* Frameworks */,
