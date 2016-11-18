@@ -39,7 +39,7 @@ You can load a scene which is a part of your app bundle, as in Listing I-1 below
 
 ***Listing I-1*** Load a scene which is part of your app bundle
 
-    #import "SCNScene+AssimpImport.h"
+    #import <AssimpKit/SCNScene+AssimpImport.h>
 
     NSString *spider = @"spider.obj";
 
@@ -55,7 +55,7 @@ You can load a scene by specifying a file URL, as in Listing I-2 below.
 
 ***Listing I-2*** Load a scene with a file URL
 
-    #import "SCNScene+AssimpImport.h"
+    #import <AssimpKit/SCNScene+AssimpImport.h>
 
     // The path to the file path must not be a relative path
     NSString *soldierPath = @"/assets/apple/attack.dae";
@@ -87,7 +87,7 @@ animating, using the listing I-3 below.
 
 ***Listing I-3*** Load and play an animation which is defined in the same file
 
-    #import "SCNScene+AssimpImport.h"
+    #import <AssimpKit/SCNScene+AssimpImport.h>
 
     // The path to the file path must not be a relative path
     NSString *boyPath = @"/of/assets/astroBoy_walk.dae";
@@ -113,6 +113,9 @@ are animating, using the listing I-5 below.
 
 ***Listing I-4*** Load and play an animation which is defined in a separate file
 
+    #import <AssimpKit/SCNScene+AssimpImport.h>
+
+    // The path to the file path must not be a relative path
     NSString *explorer = @"/assets/apple/explorer_skinned.dae";
     SCNAssimpScene *scene =
         [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]];
