@@ -1,0 +1,1060 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
+		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; };
+		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
+		779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */; };
+		779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */; };
+		779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1E11DDF2A5700DED366 /* SCNAssimpAnimation.m */; };
+		779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E21DDF2A5700DED366 /* SCNAssimpScene.h */; };
+		779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1E31DDF2A5700DED366 /* SCNAssimpScene.m */; };
+		779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E41DDF2A5700DED366 /* SCNScene+AssimpImport.h */; };
+		779DF1EE1DDF2A5700DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1E51DDF2A5700DED366 /* SCNScene+AssimpImport.m */; };
+		779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF2031DDF2BB000DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF20D1DDF2BB000DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2041DDF2BB000DED366 /* AssimpImporter.m */; };
+		779DF20E1DDF2BB000DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF2051DDF2BB000DED366 /* AssimpSceneKit-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF20F1DDF2BB000DED366 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF2061DDF2BB000DED366 /* SCNAssimpAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2071DDF2BB000DED366 /* SCNAssimpAnimation.m */; };
+		779DF2111DDF2BB000DED366 /* SCNAssimpScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF2081DDF2BB000DED366 /* SCNAssimpScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2091DDF2BB000DED366 /* SCNAssimpScene.m */; };
+		779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF2141DDF2BB000DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */; };
+		779DF2151DDF2BEE00DED366 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1A71DDF262500DED366 /* libassimp.a */; };
+		779DF2651DDF2F9800DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1D31DDF29F200DED366 /* AssimpKit.framework */; };
+		779DF26E1DDF2FD500DED366 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */; };
+		779DF26F1DDF2FD500DED366 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF26D1DDF2FD500DED366 /* ModelLog.m */; };
+		779DF2791DDF30B200DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */; };
+		779DF2821DDF30E700DED366 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF27F1DDF30E700DED366 /* AssimpImporterTests.m */; };
+		779DF2831DDF30E700DED366 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2811DDF30E700DED366 /* ModelLog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		779DF2361DDF2D7B00DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 77CDAA521DD715C300B7E342;
+			remoteInfo = "OSX-Example";
+		};
+		779DF2421DDF2D8400DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 77CDAB3A1DD7421500B7E342;
+			remoteInfo = "iOS-Example";
+		};
+		779DF2661DDF2F9800DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 779DF1801DDF257A00DED366 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 779DF1D21DDF29F200DED366;
+			remoteInfo = "AssimpKit-iOS";
+		};
+		779DF27A1DDF30B200DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 779DF1801DDF257A00DED366 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 779DF1FA1DDF2B8700DED366;
+			remoteInfo = "AssimpKit-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		779DF1A71DDF262500DED366 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
+		779DF1D31DDF29F200DED366 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		779DF1D61DDF29F200DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "../Assimp/lib/ios/libassimp-fat.a"; sourceTree = "<group>"; };
+		779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
+		779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
+		779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssimpSceneKit-Prefix.pch"; path = "../../Code/Model/AssimpSceneKit-Prefix.pch"; sourceTree = "<group>"; };
+		779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimation.h; path = ../../Code/Model/SCNAssimpAnimation.h; sourceTree = "<group>"; };
+		779DF1E11DDF2A5700DED366 /* SCNAssimpAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimation.m; path = ../../Code/Model/SCNAssimpAnimation.m; sourceTree = "<group>"; };
+		779DF1E21DDF2A5700DED366 /* SCNAssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpScene.h; path = ../../Code/Model/SCNAssimpScene.h; sourceTree = "<group>"; };
+		779DF1E31DDF2A5700DED366 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpScene.m; path = ../../Code/Model/SCNAssimpScene.m; sourceTree = "<group>"; };
+		779DF1E41DDF2A5700DED366 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
+		779DF1E51DDF2A5700DED366 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
+		779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		779DF1FE1DDF2B8700DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779DF2031DDF2BB000DED366 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
+		779DF2041DDF2BB000DED366 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
+		779DF2051DDF2BB000DED366 /* AssimpSceneKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssimpSceneKit-Prefix.pch"; path = "../../Code/Model/AssimpSceneKit-Prefix.pch"; sourceTree = "<group>"; };
+		779DF2061DDF2BB000DED366 /* SCNAssimpAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimation.h; path = ../../Code/Model/SCNAssimpAnimation.h; sourceTree = "<group>"; };
+		779DF2071DDF2BB000DED366 /* SCNAssimpAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimation.m; path = ../../Code/Model/SCNAssimpAnimation.m; sourceTree = "<group>"; };
+		779DF2081DDF2BB000DED366 /* SCNAssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpScene.h; path = ../../Code/Model/SCNAssimpScene.h; sourceTree = "<group>"; };
+		779DF2091DDF2BB000DED366 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpScene.m; path = ../../Code/Model/SCNAssimpScene.m; sourceTree = "<group>"; };
+		779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
+		779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
+		779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OSX-Example.xcodeproj"; path = "OSX-Example/OSX-Example.xcodeproj"; sourceTree = "<group>"; };
+		779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "iOS-Example.xcodeproj"; path = "iOS-Example/iOS-Example.xcodeproj"; sourceTree = "<group>"; };
+		779DF2601DDF2F9800DED366 /* AssimpKitTests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssimpKitTests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		779DF2641DDF2F9800DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporterTests.m; path = ../../Code/Model/Tests/AssimpImporterTests.m; sourceTree = "<group>"; };
+		779DF26C1DDF2FD500DED366 /* ModelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLog.h; path = ../../Code/Model/Tests/ModelLog.h; sourceTree = "<group>"; };
+		779DF26D1DDF2FD500DED366 /* ModelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelLog.m; path = ../../Code/Model/Tests/ModelLog.m; sourceTree = "<group>"; };
+		779DF2741DDF30B200DED366 /* AssimpKitTests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssimpKitTests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		779DF2781DDF30B200DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779DF27F1DDF30E700DED366 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporterTests.m; path = ../../Code/Model/Tests/AssimpImporterTests.m; sourceTree = "<group>"; };
+		779DF2801DDF30E700DED366 /* ModelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLog.h; path = ../../Code/Model/Tests/ModelLog.h; sourceTree = "<group>"; };
+		779DF2811DDF30E700DED366 /* ModelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelLog.m; path = ../../Code/Model/Tests/ModelLog.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		779DF1CF1DDF29F200DED366 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF1F71DDF2B8700DED366 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF2151DDF2BEE00DED366 /* libassimp.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF25D1DDF2F9800DED366 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF2651DDF2F9800DED366 /* AssimpKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF2711DDF30B200DED366 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF2791DDF30B200DED366 /* AssimpKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		779DF17F1DDF257A00DED366 = {
+			isa = PBXGroup;
+			children = (
+				779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */,
+				779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */,
+				779DF1D41DDF29F200DED366 /* AssimpKit-iOS */,
+				779DF1FC1DDF2B8700DED366 /* AssimpKit-macOS */,
+				779DF2611DDF2F9800DED366 /* AssimpKitTests_iOS */,
+				779DF2751DDF30B200DED366 /* AssimpKitTests_macOS */,
+				779DF18C1DDF25C500DED366 /* Products */,
+				779DF1A61DDF262400DED366 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		779DF18C1DDF25C500DED366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				779DF1D31DDF29F200DED366 /* AssimpKit.framework */,
+				779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */,
+				779DF2601DDF2F9800DED366 /* AssimpKitTests_iOS.xctest */,
+				779DF2741DDF30B200DED366 /* AssimpKitTests_macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		779DF1A61DDF262400DED366 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */,
+				779DF1A71DDF262500DED366 /* libassimp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		779DF1D41DDF29F200DED366 /* AssimpKit-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */,
+				779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */,
+				779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */,
+				779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */,
+				779DF1E11DDF2A5700DED366 /* SCNAssimpAnimation.m */,
+				779DF1E21DDF2A5700DED366 /* SCNAssimpScene.h */,
+				779DF1E31DDF2A5700DED366 /* SCNAssimpScene.m */,
+				779DF1E41DDF2A5700DED366 /* SCNScene+AssimpImport.h */,
+				779DF1E51DDF2A5700DED366 /* SCNScene+AssimpImport.m */,
+				779DF1D61DDF29F200DED366 /* Info.plist */,
+			);
+			path = "AssimpKit-iOS";
+			sourceTree = "<group>";
+		};
+		779DF1FC1DDF2B8700DED366 /* AssimpKit-macOS */ = {
+			isa = PBXGroup;
+			children = (
+				779DF2031DDF2BB000DED366 /* AssimpImporter.h */,
+				779DF2041DDF2BB000DED366 /* AssimpImporter.m */,
+				779DF2051DDF2BB000DED366 /* AssimpSceneKit-Prefix.pch */,
+				779DF2061DDF2BB000DED366 /* SCNAssimpAnimation.h */,
+				779DF2071DDF2BB000DED366 /* SCNAssimpAnimation.m */,
+				779DF2081DDF2BB000DED366 /* SCNAssimpScene.h */,
+				779DF2091DDF2BB000DED366 /* SCNAssimpScene.m */,
+				779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */,
+				779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */,
+				779DF1FE1DDF2B8700DED366 /* Info.plist */,
+			);
+			path = "AssimpKit-macOS";
+			sourceTree = "<group>";
+		};
+		779DF2311DDF2D7B00DED366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				779DF2371DDF2D7B00DED366 /* OSX-Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		779DF23D1DDF2D8400DED366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				779DF2431DDF2D8400DED366 /* iOS-Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		779DF2611DDF2F9800DED366 /* AssimpKitTests_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */,
+				779DF26C1DDF2FD500DED366 /* ModelLog.h */,
+				779DF26D1DDF2FD500DED366 /* ModelLog.m */,
+				779DF2641DDF2F9800DED366 /* Info.plist */,
+			);
+			path = AssimpKitTests_iOS;
+			sourceTree = "<group>";
+		};
+		779DF2751DDF30B200DED366 /* AssimpKitTests_macOS */ = {
+			isa = PBXGroup;
+			children = (
+				779DF27F1DDF30E700DED366 /* AssimpImporterTests.m */,
+				779DF2801DDF30E700DED366 /* ModelLog.h */,
+				779DF2811DDF30E700DED366 /* ModelLog.m */,
+				779DF2781DDF30B200DED366 /* Info.plist */,
+			);
+			path = AssimpKitTests_macOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		779DF1D01DDF29F200DED366 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */,
+				779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */,
+				779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */,
+				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
+				779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF1F81DDF2B8700DED366 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF20E1DDF2BB000DED366 /* AssimpSceneKit-Prefix.pch in Headers */,
+				779DF2111DDF2BB000DED366 /* SCNAssimpScene.h in Headers */,
+				779DF20F1DDF2BB000DED366 /* SCNAssimpAnimation.h in Headers */,
+				779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */,
+				779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		779DF1D21DDF29F200DED366 /* AssimpKit-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 779DF1D81DDF29F200DED366 /* Build configuration list for PBXNativeTarget "AssimpKit-iOS" */;
+			buildPhases = (
+				779DF1CE1DDF29F200DED366 /* Sources */,
+				779DF1CF1DDF29F200DED366 /* Frameworks */,
+				779DF1D01DDF29F200DED366 /* Headers */,
+				779DF1D11DDF29F200DED366 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AssimpKit-iOS";
+			productName = "AssimpKit-iOS";
+			productReference = 779DF1D31DDF29F200DED366 /* AssimpKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		779DF1FA1DDF2B8700DED366 /* AssimpKit-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 779DF2001DDF2B8700DED366 /* Build configuration list for PBXNativeTarget "AssimpKit-macOS" */;
+			buildPhases = (
+				779DF1F61DDF2B8700DED366 /* Sources */,
+				779DF1F71DDF2B8700DED366 /* Frameworks */,
+				779DF1F81DDF2B8700DED366 /* Headers */,
+				779DF1F91DDF2B8700DED366 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AssimpKit-macOS";
+			productName = "AssimpKit-macOS";
+			productReference = 779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		779DF25F1DDF2F9800DED366 /* AssimpKitTests_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 779DF2681DDF2F9800DED366 /* Build configuration list for PBXNativeTarget "AssimpKitTests_iOS" */;
+			buildPhases = (
+				779DF25C1DDF2F9800DED366 /* Sources */,
+				779DF25D1DDF2F9800DED366 /* Frameworks */,
+				779DF25E1DDF2F9800DED366 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				779DF2671DDF2F9800DED366 /* PBXTargetDependency */,
+			);
+			name = AssimpKitTests_iOS;
+			productName = AssimpKitTests_iOS;
+			productReference = 779DF2601DDF2F9800DED366 /* AssimpKitTests_iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		779DF2731DDF30B200DED366 /* AssimpKitTests_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 779DF27C1DDF30B200DED366 /* Build configuration list for PBXNativeTarget "AssimpKitTests_macOS" */;
+			buildPhases = (
+				779DF2701DDF30B200DED366 /* Sources */,
+				779DF2711DDF30B200DED366 /* Frameworks */,
+				779DF2721DDF30B200DED366 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				779DF27B1DDF30B200DED366 /* PBXTargetDependency */,
+			);
+			name = AssimpKitTests_macOS;
+			productName = AssimpKitTests_macOS;
+			productReference = 779DF2741DDF30B200DED366 /* AssimpKitTests_macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		779DF1801DDF257A00DED366 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				TargetAttributes = {
+					779DF1D21DDF29F200DED366 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
+						ProvisioningStyle = Automatic;
+					};
+					779DF1FA1DDF2B8700DED366 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
+						ProvisioningStyle = Automatic;
+					};
+					779DF25F1DDF2F9800DED366 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
+						ProvisioningStyle = Automatic;
+					};
+					779DF2731DDF30B200DED366 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 779DF1831DDF257A00DED366 /* Build configuration list for PBXProject "Library" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 779DF17F1DDF257A00DED366;
+			productRefGroup = 779DF18C1DDF25C500DED366 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 779DF23D1DDF2D8400DED366 /* Products */;
+					ProjectRef = 779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */;
+				},
+				{
+					ProductGroup = 779DF2311DDF2D7B00DED366 /* Products */;
+					ProjectRef = 779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				779DF1D21DDF29F200DED366 /* AssimpKit-iOS */,
+				779DF1FA1DDF2B8700DED366 /* AssimpKit-macOS */,
+				779DF25F1DDF2F9800DED366 /* AssimpKitTests_iOS */,
+				779DF2731DDF30B200DED366 /* AssimpKitTests_macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		779DF2371DDF2D7B00DED366 /* OSX-Example.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "OSX-Example.app";
+			remoteRef = 779DF2361DDF2D7B00DED366 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		779DF2431DDF2D8400DED366 /* iOS-Example.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "iOS-Example.app";
+			remoteRef = 779DF2421DDF2D8400DED366 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		779DF1D11DDF29F200DED366 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF1F91DDF2B8700DED366 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF25E1DDF2F9800DED366 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF2721DDF30B200DED366 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		779DF1CE1DDF29F200DED366 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */,
+				779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */,
+				779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */,
+				779DF1EE1DDF2A5700DED366 /* SCNScene+AssimpImport.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF1F61DDF2B8700DED366 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */,
+				779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */,
+				779DF20D1DDF2BB000DED366 /* AssimpImporter.m in Sources */,
+				779DF2141DDF2BB000DED366 /* SCNScene+AssimpImport.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF25C1DDF2F9800DED366 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF26F1DDF2FD500DED366 /* ModelLog.m in Sources */,
+				779DF26E1DDF2FD500DED366 /* AssimpImporterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		779DF2701DDF30B200DED366 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF2831DDF30E700DED366 /* ModelLog.m in Sources */,
+				779DF2821DDF30E700DED366 /* AssimpImporterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		779DF2671DDF2F9800DED366 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 779DF1D21DDF29F200DED366 /* AssimpKit-iOS */;
+			targetProxy = 779DF2661DDF2F9800DED366 /* PBXContainerItemProxy */;
+		};
+		779DF27B1DDF30B200DED366 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 779DF1FA1DDF2B8700DED366 /* AssimpKit-macOS */;
+			targetProxy = 779DF27A1DDF30B200DED366 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		779DF1841DDF257A00DED366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		779DF1851DDF257A00DED366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		779DF1D91DDF29F200DED366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "AssimpKit-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKit-iOS";
+				PRODUCT_NAME = AssimpKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		779DF1DA1DDF29F200DED366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "AssimpKit-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKit-iOS";
+				PRODUCT_NAME = AssimpKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		779DF2011DDF2B8700DED366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "AssimpKit-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/osx";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKit-macOS";
+				PRODUCT_NAME = AssimpKit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		779DF2021DDF2B8700DED366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "AssimpKit-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/osx";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKit-macOS";
+				PRODUCT_NAME = AssimpKit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		779DF2691DDF2F9800DED366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets\\\"",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AssimpKitTests_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKitTests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+			};
+			name = Debug;
+		};
+		779DF26A1DDF2F9800DED366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AssimpKitTests_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKitTests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		779DF27D1DDF30B200DED366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets\\\"",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AssimpKitTests_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKitTests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+			};
+			name = Debug;
+		};
+		779DF27E1DDF30B200DED366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AssimpKitTests_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKitTests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		779DF1831DDF257A00DED366 /* Build configuration list for PBXProject "Library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				779DF1841DDF257A00DED366 /* Debug */,
+				779DF1851DDF257A00DED366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		779DF1D81DDF29F200DED366 /* Build configuration list for PBXNativeTarget "AssimpKit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				779DF1D91DDF29F200DED366 /* Debug */,
+				779DF1DA1DDF29F200DED366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		779DF2001DDF2B8700DED366 /* Build configuration list for PBXNativeTarget "AssimpKit-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				779DF2011DDF2B8700DED366 /* Debug */,
+				779DF2021DDF2B8700DED366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		779DF2681DDF2F9800DED366 /* Build configuration list for PBXNativeTarget "AssimpKitTests_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				779DF2691DDF2F9800DED366 /* Debug */,
+				779DF26A1DDF2F9800DED366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		779DF27C1DDF30B200DED366 /* Build configuration list for PBXNativeTarget "AssimpKitTests_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				779DF27D1DDF30B200DED366 /* Debug */,
+				779DF27E1DDF30B200DED366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 779DF1801DDF257A00DED366 /* Project object */;
+}

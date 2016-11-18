@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "779DF15E1DDEDCCB00DED366"
+               BlueprintIdentifier = "779DF1FA1DDF2B8700DED366"
                BuildableName = "AssimpKit.framework"
-               BlueprintName = "AssimpKit"
-               ReferencedContainer = "container:OSX-Example.xcodeproj">
+               BlueprintName = "AssimpKit-macOS"
+               ReferencedContainer = "container:Library.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "779DF15E1DDEDCCB00DED366"
+            BlueprintIdentifier = "779DF1FA1DDF2B8700DED366"
             BuildableName = "AssimpKit.framework"
-            BlueprintName = "AssimpKit"
-            ReferencedContainer = "container:OSX-Example.xcodeproj">
+            BlueprintName = "AssimpKit-macOS"
+            ReferencedContainer = "container:Library.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "779DF15E1DDEDCCB00DED366"
+            BlueprintIdentifier = "779DF1FA1DDF2B8700DED366"
             BuildableName = "AssimpKit.framework"
-            BlueprintName = "AssimpKit"
-            ReferencedContainer = "container:OSX-Example.xcodeproj">
+            BlueprintName = "AssimpKit-macOS"
+            ReferencedContainer = "container:Library.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
