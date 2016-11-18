@@ -35,9 +35,9 @@ md3***
 - Xcode 8.0 or later
 - ObjC 2.0
 - iOS 10.0 or later
-- OS X 10.11 or later
+- macOS 10.11 or later
 
-### Installation with Carthage (iOS 10.0+)
+### Installation with Carthage (iOS 10.0+, macOS 10.11+)
 
 [Carthage](https://github.com/Carthage/Carthage) is a lightweight dependency
 manager for Swift and Objective-C. It leverages CocoaTouch modules and is less
