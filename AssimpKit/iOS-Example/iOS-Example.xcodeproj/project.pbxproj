@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		779DF14B1DDED89400DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1421DDED89400DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF14C1DDED89400DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1431DDED89400DED366 /* AssimpImporter.m */; };
+		779DF14D1DDED89400DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1441DDED89400DED366 /* AssimpSceneKit-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF14E1DDED89400DED366 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1451DDED89400DED366 /* SCNAssimpAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF14F1DDED89400DED366 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1461DDED89400DED366 /* SCNAssimpAnimation.m */; };
+		779DF1501DDED89400DED366 /* SCNAssimpScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1471DDED89400DED366 /* SCNAssimpScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF1511DDED89400DED366 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1481DDED89400DED366 /* SCNAssimpScene.m */; };
+		779DF1521DDED89400DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1491DDED89400DED366 /* SCNScene+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF1531DDED89400DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF14A1DDED89400DED366 /* SCNScene+AssimpImport.m */; };
+		779DF1541DDED8D000DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77BE97D01DDE11B30056D354 /* AssimpKit.framework */; };
+		779DF1551DDED8D000DED366 /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 77BE97D01DDE11B30056D354 /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		779DF1591DDED93000DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77BE97D01DDE11B30056D354 /* AssimpKit.framework */; };
+		77BE97F71DDE122A0056D354 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAB701DD743B100B7E342 /* libassimp-fat.a */; };
 		77CDAB3F1DD7421500B7E342 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB3E1DD7421500B7E342 /* main.m */; };
 		77CDAB421DD7421500B7E342 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB411DD7421500B7E342 /* AppDelegate.m */; };
 		77CDAB441DD7421500B7E342 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB431DD7421500B7E342 /* art.scnassets */; };
@@ -18,15 +31,18 @@
 		77CDAB6C1DD7429900B7E342 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB661DD7429900B7E342 /* SCNAssimpAnimation.m */; };
 		77CDAB6D1DD7429900B7E342 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB681DD7429900B7E342 /* SCNAssimpScene.m */; };
 		77CDAB6E1DD7429900B7E342 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB6A1DD7429900B7E342 /* SCNScene+AssimpImport.m */; };
-		77CDAB711DD743B100B7E342 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAB701DD743B100B7E342 /* libassimp-fat.a */; };
-		77CDAB741DD7447B00B7E342 /* libAssimpSceneKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAB5A1DD7428900B7E342 /* libAssimpSceneKit.a */; };
-		77CDAB7E1DD745D800B7E342 /* libAssimpSceneKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAB5A1DD7428900B7E342 /* libAssimpSceneKit.a */; };
 		77CDAB881DD745EA00B7E342 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB861DD745EA00B7E342 /* ModelLog.m */; };
-		77CDAB891DD7486800B7E342 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAB701DD743B100B7E342 /* libassimp-fat.a */; };
 		77CDAB8B1DD749CB00B7E342 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB8A1DD749CB00B7E342 /* AssimpImporterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		779DF1561DDED8D000DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77CDAB321DD7421500B7E342 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77BE97CF1DDE11B30056D354;
+			remoteInfo = AssimpKit;
+		};
 		77CDAB721DD7447600B7E342 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 77CDAB321DD7421500B7E342 /* Project object */;
@@ -44,6 +60,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		779DF1581DDED8D100DED366 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				779DF1551DDED8D000DED366 /* AssimpKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77CDAB581DD7428900B7E342 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,6 +83,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		779DF1421DDED89400DED366 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
+		779DF1431DDED89400DED366 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
+		779DF1441DDED89400DED366 /* AssimpSceneKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssimpSceneKit-Prefix.pch"; path = "../../Code/Model/AssimpSceneKit-Prefix.pch"; sourceTree = "<group>"; };
+		779DF1451DDED89400DED366 /* SCNAssimpAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimation.h; path = ../../Code/Model/SCNAssimpAnimation.h; sourceTree = "<group>"; };
+		779DF1461DDED89400DED366 /* SCNAssimpAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimation.m; path = ../../Code/Model/SCNAssimpAnimation.m; sourceTree = "<group>"; };
+		779DF1471DDED89400DED366 /* SCNAssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpScene.h; path = ../../Code/Model/SCNAssimpScene.h; sourceTree = "<group>"; };
+		779DF1481DDED89400DED366 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpScene.m; path = ../../Code/Model/SCNAssimpScene.m; sourceTree = "<group>"; };
+		779DF1491DDED89400DED366 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
+		779DF14A1DDED89400DED366 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
+		77BE97D01DDE11B30056D354 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77BE97D31DDE11B30056D354 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77CDAB3A1DD7421500B7E342 /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAB3E1DD7421500B7E342 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		77CDAB401DD7421500B7E342 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,12 +123,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		77BE97CC1DDE11B30056D354 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77BE97F71DDE122A0056D354 /* libassimp-fat.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77CDAB371DD7421500B7E342 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77CDAB711DD743B100B7E342 /* libassimp-fat.a in Frameworks */,
-				77CDAB741DD7447B00B7E342 /* libAssimpSceneKit.a in Frameworks */,
+				779DF1541DDED8D000DED366 /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,20 +150,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77CDAB7E1DD745D800B7E342 /* libAssimpSceneKit.a in Frameworks */,
-				77CDAB891DD7486800B7E342 /* libassimp-fat.a in Frameworks */,
+				779DF1591DDED93000DED366 /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77BE97D11DDE11B30056D354 /* AssimpKit */ = {
+			isa = PBXGroup;
+			children = (
+				779DF1421DDED89400DED366 /* AssimpImporter.h */,
+				779DF1431DDED89400DED366 /* AssimpImporter.m */,
+				779DF1441DDED89400DED366 /* AssimpSceneKit-Prefix.pch */,
+				779DF1451DDED89400DED366 /* SCNAssimpAnimation.h */,
+				779DF1461DDED89400DED366 /* SCNAssimpAnimation.m */,
+				779DF1471DDED89400DED366 /* SCNAssimpScene.h */,
+				779DF1481DDED89400DED366 /* SCNAssimpScene.m */,
+				779DF1491DDED89400DED366 /* SCNScene+AssimpImport.h */,
+				779DF14A1DDED89400DED366 /* SCNScene+AssimpImport.m */,
+				77BE97D31DDE11B30056D354 /* Info.plist */,
+			);
+			path = AssimpKit;
+			sourceTree = "<group>";
+		};
 		77CDAB311DD7421500B7E342 = {
 			isa = PBXGroup;
 			children = (
 				77CDAB3C1DD7421500B7E342 /* iOS-Example */,
 				77CDAB5B1DD7428900B7E342 /* AssimpSceneKit */,
 				77CDAB7A1DD745D800B7E342 /* AssimpSceneKit_LogicTests */,
+				77BE97D11DDE11B30056D354 /* AssimpKit */,
 				77CDAB3B1DD7421500B7E342 /* Products */,
 				77CDAB6F1DD743B100B7E342 /* Frameworks */,
 			);
@@ -130,6 +192,7 @@
 				77CDAB3A1DD7421500B7E342 /* iOS-Example.app */,
 				77CDAB5A1DD7428900B7E342 /* libAssimpSceneKit.a */,
 				77CDAB791DD745D800B7E342 /* AssimpSceneKit_LogicTests.xctest */,
+				77BE97D01DDE11B30056D354 /* AssimpKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,7 +258,40 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		77BE97CD1DDE11B30056D354 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF14D1DDED89400DED366 /* AssimpSceneKit-Prefix.pch in Headers */,
+				779DF14B1DDED89400DED366 /* AssimpImporter.h in Headers */,
+				779DF14E1DDED89400DED366 /* SCNAssimpAnimation.h in Headers */,
+				779DF1521DDED89400DED366 /* SCNScene+AssimpImport.h in Headers */,
+				779DF1501DDED89400DED366 /* SCNAssimpScene.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		77BE97CF1DDE11B30056D354 /* AssimpKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77BE97DB1DDE11B30056D354 /* Build configuration list for PBXNativeTarget "AssimpKit" */;
+			buildPhases = (
+				77BE97CB1DDE11B30056D354 /* Sources */,
+				77BE97CC1DDE11B30056D354 /* Frameworks */,
+				77BE97CD1DDE11B30056D354 /* Headers */,
+				77BE97CE1DDE11B30056D354 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AssimpKit;
+			productName = AssimpKit;
+			productReference = 77BE97D01DDE11B30056D354 /* AssimpKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		77CDAB391DD7421500B7E342 /* iOS-Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77CDAB531DD7421600B7E342 /* Build configuration list for PBXNativeTarget "iOS-Example" */;
@@ -203,11 +299,13 @@
 				77CDAB361DD7421500B7E342 /* Sources */,
 				77CDAB371DD7421500B7E342 /* Frameworks */,
 				77CDAB381DD7421500B7E342 /* Resources */,
+				779DF1581DDED8D100DED366 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				77CDAB731DD7447600B7E342 /* PBXTargetDependency */,
+				779DF1571DDED8D000DED366 /* PBXTargetDependency */,
 			);
 			name = "iOS-Example";
 			productName = "iOS-Example";
@@ -258,6 +356,11 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Ison Apps";
 				TargetAttributes = {
+					77BE97CF1DDE11B30056D354 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
+						ProvisioningStyle = Automatic;
+					};
 					77CDAB391DD7421500B7E342 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = PRJ5CHFB5D;
@@ -291,11 +394,19 @@
 				77CDAB391DD7421500B7E342 /* iOS-Example */,
 				77CDAB591DD7428900B7E342 /* AssimpSceneKit */,
 				77CDAB781DD745D800B7E342 /* AssimpSceneKit_LogicTests */,
+				77BE97CF1DDE11B30056D354 /* AssimpKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		77BE97CE1DDE11B30056D354 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77CDAB381DD7421500B7E342 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -317,6 +428,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		77BE97CB1DDE11B30056D354 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				779DF1511DDED89400DED366 /* SCNAssimpScene.m in Sources */,
+				779DF14F1DDED89400DED366 /* SCNAssimpAnimation.m in Sources */,
+				779DF14C1DDED89400DED366 /* AssimpImporter.m in Sources */,
+				779DF1531DDED89400DED366 /* SCNScene+AssimpImport.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77CDAB361DD7421500B7E342 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -350,6 +472,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		779DF1571DDED8D000DED366 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77BE97CF1DDE11B30056D354 /* AssimpKit */;
+			targetProxy = 779DF1561DDED8D000DED366 /* PBXContainerItemProxy */;
+		};
 		77CDAB731DD7447600B7E342 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 77CDAB591DD7428900B7E342 /* AssimpSceneKit */;
@@ -382,10 +509,82 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		77BE97D91DDE11B30056D354 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
+				INFOPLIST_FILE = AssimpKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.isonapps.AssimpKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VALID_ARCHS = "arm64 armv7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		77BE97DA1DDE11B30056D354 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
+				INFOPLIST_FILE = AssimpKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lstdc++",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.isonapps.AssimpKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				VALID_ARCHS = "arm64 armv7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		77CDAB511DD7421600B7E342 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -424,9 +623,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -434,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -469,6 +670,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
@@ -478,19 +680,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-lstdc++",
-					"-ObjC",
-					"-all_load",
-				);
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -500,19 +701,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-lstdc++",
-					"-ObjC",
-					"-all_load",
-				);
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
@@ -558,12 +758,9 @@
 					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets\\\"",
 				);
 				INFOPLIST_FILE = AssimpSceneKit_LogicTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-lstdc++",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpSceneKit-LogicTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
@@ -576,12 +773,9 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				INFOPLIST_FILE = AssimpSceneKit_LogicTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-lstdc++",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpSceneKit-LogicTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
@@ -592,6 +786,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		77BE97DB1DDE11B30056D354 /* Build configuration list for PBXNativeTarget "AssimpKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77BE97D91DDE11B30056D354 /* Debug */,
+				77BE97DA1DDE11B30056D354 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		77CDAB351DD7421500B7E342 /* Build configuration list for PBXProject "iOS-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
