@@ -56,6 +56,10 @@ After `carthage update`, add the appropriate platform framework (iOS, macOS) to
 your project. The frameworks are placed in `iOS` and `Mac` subdirectories under
 the `Carthage/Build` directory of your project.
 
+### Important Build Setting for `iOS` applications only
+
+If you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
+
 ### Getting Started with AssimpKit
 
 Table below lists the important classes in AssimpKit.
