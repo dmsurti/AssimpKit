@@ -19,6 +19,7 @@
 		779DF17B1DDEDD3300DED366 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1721DDEDD3300DED366 /* SCNAssimpScene.m */; };
 		779DF17C1DDEDD3300DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1731DDEDD3300DED366 /* SCNScene+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF17D1DDEDD3300DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1741DDEDD3300DED366 /* SCNScene+AssimpImport.m */; };
+		779DF17E1DDEE58900DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF15F1DDEDCCB00DED366 /* AssimpKit.framework */; };
 		77CDAA571DD715C300B7E342 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA561DD715C300B7E342 /* AppDelegate.m */; };
 		77CDAA5A1DD715C300B7E342 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA591DD715C300B7E342 /* main.m */; };
 		77CDAA711DD715FE00B7E342 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA661DD715FE00B7E342 /* art.scnassets */; };
@@ -27,18 +28,8 @@
 		77CDAA761DD715FE00B7E342 /* spider.obj in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA6F1DD715FE00B7E342 /* spider.obj */; };
 		77CDAA771DD715FE00B7E342 /* SpiderTex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA701DD715FE00B7E342 /* SpiderTex.jpg */; };
 		77CDAA7A1DD716F100B7E342 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA781DD716F100B7E342 /* MainMenu.xib */; };
-		77CDAACF1DD71EF600B7E342 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 77CDAAC71DD71EF600B7E342 /* AssimpImporter.h */; };
-		77CDAAD01DD71EF600B7E342 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAAC81DD71EF600B7E342 /* AssimpImporter.m */; };
-		77CDAAD11DD71EF600B7E342 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 77CDAAC91DD71EF600B7E342 /* SCNAssimpAnimation.h */; };
-		77CDAAD21DD71EF600B7E342 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAACA1DD71EF600B7E342 /* SCNAssimpAnimation.m */; };
-		77CDAAD31DD71EF600B7E342 /* SCNAssimpScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 77CDAACB1DD71EF600B7E342 /* SCNAssimpScene.h */; };
-		77CDAAD41DD71EF600B7E342 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAACC1DD71EF600B7E342 /* SCNAssimpScene.m */; };
-		77CDAAD51DD71EF600B7E342 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 77CDAACD1DD71EF600B7E342 /* SCNScene+AssimpImport.h */; };
-		77CDAAD61DD71EF600B7E342 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAACE1DD71EF600B7E342 /* SCNScene+AssimpImport.m */; };
-		77CDAB1C1DD733E800B7E342 /* libAssimpSceneKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */; };
 		77CDAB251DD7341000B7E342 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB221DD7341000B7E342 /* AssimpImporterTests.m */; };
 		77CDAB261DD7341000B7E342 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB241DD7341000B7E342 /* ModelLog.m */; };
-		77CDAB2A1DD7351B00B7E342 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CDAAC51DD71D0C00B7E342 /* libassimp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,20 +39,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 779DF15E1DDEDCCB00DED366;
 			remoteInfo = AssimpKit;
-		};
-		77CDAABE1DD71B0300B7E342 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 77CDAA4A1DD715C300B7E342 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 77CDAA851DD717FD00B7E342;
-			remoteInfo = AssimpSceneKit;
-		};
-		77CDAB1D1DD733E800B7E342 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 77CDAA4A1DD715C300B7E342 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 77CDAA851DD717FD00B7E342;
-			remoteInfo = AssimpSceneKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -114,16 +91,7 @@
 		77CDAA701DD715FE00B7E342 /* SpiderTex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpiderTex.jpg; sourceTree = "<group>"; };
 		77CDAA791DD716F100B7E342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		77CDAA801DD7172F00B7E342 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
-		77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAssimpSceneKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAAC51DD71D0C00B7E342 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
-		77CDAAC71DD71EF600B7E342 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
-		77CDAAC81DD71EF600B7E342 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
-		77CDAAC91DD71EF600B7E342 /* SCNAssimpAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimation.h; path = ../../Code/Model/SCNAssimpAnimation.h; sourceTree = "<group>"; };
-		77CDAACA1DD71EF600B7E342 /* SCNAssimpAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimation.m; path = ../../Code/Model/SCNAssimpAnimation.m; sourceTree = "<group>"; };
-		77CDAACB1DD71EF600B7E342 /* SCNAssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpScene.h; path = ../../Code/Model/SCNAssimpScene.h; sourceTree = "<group>"; };
-		77CDAACC1DD71EF600B7E342 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpScene.m; path = ../../Code/Model/SCNAssimpScene.m; sourceTree = "<group>"; };
-		77CDAACD1DD71EF600B7E342 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
-		77CDAACE1DD71EF600B7E342 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
 		77CDAB171DD733E800B7E342 /* AssimpSceneKit_LogicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssimpSceneKit_LogicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAB1B1DD733E800B7E342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77CDAB221DD7341000B7E342 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporterTests.m; path = ../../Code/Model/Tests/AssimpImporterTests.m; sourceTree = "<group>"; };
@@ -148,19 +116,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		77CDAA831DD717FD00B7E342 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		77CDAB141DD733E800B7E342 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77CDAB1C1DD733E800B7E342 /* libAssimpSceneKit.a in Frameworks */,
-				77CDAB2A1DD7351B00B7E342 /* libassimp.a in Frameworks */,
+				779DF17E1DDEE58900DED366 /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +149,6 @@
 			children = (
 				77CDAAC51DD71D0C00B7E342 /* libassimp.a */,
 				77CDAA541DD715C300B7E342 /* OSX-Example */,
-				77CDAA871DD717FD00B7E342 /* AssimpSceneKit */,
 				77CDAB181DD733E800B7E342 /* AssimpSceneKit_LogicTests */,
 				779DF1601DDEDCCB00DED366 /* AssimpKit */,
 				77CDAA531DD715C300B7E342 /* Products */,
@@ -201,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				77CDAA521DD715C300B7E342 /* OSX-Example.app */,
-				77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */,
 				77CDAB171DD733E800B7E342 /* AssimpSceneKit_LogicTests.xctest */,
 				779DF15F1DDEDCCB00DED366 /* AssimpKit.framework */,
 			);
@@ -243,21 +201,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		77CDAA871DD717FD00B7E342 /* AssimpSceneKit */ = {
-			isa = PBXGroup;
-			children = (
-				77CDAAC71DD71EF600B7E342 /* AssimpImporter.h */,
-				77CDAAC81DD71EF600B7E342 /* AssimpImporter.m */,
-				77CDAAC91DD71EF600B7E342 /* SCNAssimpAnimation.h */,
-				77CDAACA1DD71EF600B7E342 /* SCNAssimpAnimation.m */,
-				77CDAACB1DD71EF600B7E342 /* SCNAssimpScene.h */,
-				77CDAACC1DD71EF600B7E342 /* SCNAssimpScene.m */,
-				77CDAACD1DD71EF600B7E342 /* SCNScene+AssimpImport.h */,
-				77CDAACE1DD71EF600B7E342 /* SCNScene+AssimpImport.m */,
-			);
-			path = AssimpSceneKit;
-			sourceTree = "<group>";
-		};
 		77CDAB181DD733E800B7E342 /* AssimpSceneKit_LogicTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,17 +224,6 @@
 				779DF1781DDEDD3300DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF1751DDEDD3300DED366 /* AssimpImporter.h in Headers */,
 				779DF17C1DDEDD3300DED366 /* SCNScene+AssimpImport.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77CDAA841DD717FD00B7E342 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77CDAACF1DD71EF600B7E342 /* AssimpImporter.h in Headers */,
-				77CDAAD11DD71EF600B7E342 /* SCNAssimpAnimation.h in Headers */,
-				77CDAAD31DD71EF600B7E342 /* SCNAssimpScene.h in Headers */,
-				77CDAAD51DD71EF600B7E342 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,30 +261,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				77CDAABF1DD71B0300B7E342 /* PBXTargetDependency */,
 				779DF1651DDEDCCB00DED366 /* PBXTargetDependency */,
 			);
 			name = "OSX-Example";
 			productName = "OSX-Example";
 			productReference = 77CDAA521DD715C300B7E342 /* OSX-Example.app */;
 			productType = "com.apple.product-type.application";
-		};
-		77CDAA851DD717FD00B7E342 /* AssimpSceneKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 77CDAA8C1DD717FE00B7E342 /* Build configuration list for PBXNativeTarget "AssimpSceneKit" */;
-			buildPhases = (
-				77CDAA821DD717FD00B7E342 /* Sources */,
-				77CDAA831DD717FD00B7E342 /* Frameworks */,
-				77CDAA841DD717FD00B7E342 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AssimpSceneKit;
-			productName = AssimpSceneKit;
-			productReference = 77CDAA861DD717FD00B7E342 /* libAssimpSceneKit.a */;
-			productType = "com.apple.product-type.library.static";
 		};
 		77CDAB161DD733E800B7E342 /* AssimpSceneKit_LogicTests */ = {
 			isa = PBXNativeTarget;
@@ -365,7 +279,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				77CDAB1E1DD733E800B7E342 /* PBXTargetDependency */,
 			);
 			name = AssimpSceneKit_LogicTests;
 			productName = AssimpSceneKit_LogicTests;
@@ -391,11 +304,6 @@
 						DevelopmentTeam = PRJ5CHFB5D;
 						ProvisioningStyle = Automatic;
 					};
-					77CDAA851DD717FD00B7E342 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = PRJ5CHFB5D;
-						ProvisioningStyle = Automatic;
-					};
 					77CDAB161DD733E800B7E342 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = PRJ5CHFB5D;
@@ -417,7 +325,6 @@
 			projectRoot = "";
 			targets = (
 				77CDAA511DD715C300B7E342 /* OSX-Example */,
-				77CDAA851DD717FD00B7E342 /* AssimpSceneKit */,
 				77CDAB161DD733E800B7E342 /* AssimpSceneKit_LogicTests */,
 				779DF15E1DDEDCCB00DED366 /* AssimpKit */,
 			);
@@ -475,17 +382,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		77CDAA821DD717FD00B7E342 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77CDAAD41DD71EF600B7E342 /* SCNAssimpScene.m in Sources */,
-				77CDAAD21DD71EF600B7E342 /* SCNAssimpAnimation.m in Sources */,
-				77CDAAD01DD71EF600B7E342 /* AssimpImporter.m in Sources */,
-				77CDAAD61DD71EF600B7E342 /* SCNScene+AssimpImport.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		77CDAB131DD733E800B7E342 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -502,16 +398,6 @@
 			isa = PBXTargetDependency;
 			target = 779DF15E1DDEDCCB00DED366 /* AssimpKit */;
 			targetProxy = 779DF1641DDEDCCB00DED366 /* PBXContainerItemProxy */;
-		};
-		77CDAABF1DD71B0300B7E342 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 77CDAA851DD717FD00B7E342 /* AssimpSceneKit */;
-			targetProxy = 77CDAABE1DD71B0300B7E342 /* PBXContainerItemProxy */;
-		};
-		77CDAB1E1DD733E800B7E342 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 77CDAA851DD717FD00B7E342 /* AssimpSceneKit */;
-			targetProxy = 77CDAB1D1DD733E800B7E342 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -712,38 +598,6 @@
 			};
 			name = Release;
 		};
-		77CDAA8D1DD717FE00B7E342 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
-				EXECUTABLE_PREFIX = lib;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/osx";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
-			};
-			name = Debug;
-		};
-		77CDAA8E1DD717FE00B7E342 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
-				EXECUTABLE_PREFIX = lib;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/osx";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
-			};
-			name = Release;
-		};
 		77CDAB201DD733E800B7E342 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -759,7 +613,7 @@
 				);
 				INFOPLIST_FILE = AssimpSceneKit_LogicTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/osx";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lstdc++",
@@ -780,7 +634,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = AssimpSceneKit_LogicTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/osx";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lstdc++",
@@ -816,15 +670,6 @@
 			buildConfigurations = (
 				77CDAA641DD715C300B7E342 /* Debug */,
 				77CDAA651DD715C300B7E342 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		77CDAA8C1DD717FE00B7E342 /* Build configuration list for PBXNativeTarget "AssimpSceneKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				77CDAA8D1DD717FE00B7E342 /* Debug */,
-				77CDAA8E1DD717FE00B7E342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
