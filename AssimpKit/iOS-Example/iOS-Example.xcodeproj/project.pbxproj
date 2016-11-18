@@ -27,10 +27,6 @@
 		77CDAB4A1DD7421500B7E342 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB481DD7421500B7E342 /* Main.storyboard */; };
 		77CDAB4C1DD7421500B7E342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB4B1DD7421500B7E342 /* Assets.xcassets */; };
 		77CDAB4F1DD7421600B7E342 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB4D1DD7421600B7E342 /* LaunchScreen.storyboard */; };
-		77CDAB6B1DD7429900B7E342 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB641DD7429900B7E342 /* AssimpImporter.m */; };
-		77CDAB6C1DD7429900B7E342 /* SCNAssimpAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB661DD7429900B7E342 /* SCNAssimpAnimation.m */; };
-		77CDAB6D1DD7429900B7E342 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB681DD7429900B7E342 /* SCNAssimpScene.m */; };
-		77CDAB6E1DD7429900B7E342 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB6A1DD7429900B7E342 /* SCNScene+AssimpImport.m */; };
 		77CDAB881DD745EA00B7E342 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB861DD745EA00B7E342 /* ModelLog.m */; };
 		77CDAB8B1DD749CB00B7E342 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB8A1DD749CB00B7E342 /* AssimpImporterTests.m */; };
 /* End PBXBuildFile section */
@@ -42,20 +38,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 77BE97CF1DDE11B30056D354;
 			remoteInfo = AssimpKit;
-		};
-		77CDAB721DD7447600B7E342 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 77CDAB321DD7421500B7E342 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 77CDAB591DD7428900B7E342;
-			remoteInfo = AssimpSceneKit;
-		};
-		77CDAB7F1DD745D800B7E342 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 77CDAB321DD7421500B7E342 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 77CDAB591DD7428900B7E342;
-			remoteInfo = AssimpSceneKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -69,15 +51,6 @@
 				779DF1551DDED8D000DED366 /* AssimpKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77CDAB581DD7428900B7E342 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -105,15 +78,6 @@
 		77CDAB4B1DD7421500B7E342 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77CDAB4E1DD7421600B7E342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77CDAB501DD7421600B7E342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		77CDAB5A1DD7428900B7E342 /* libAssimpSceneKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAssimpSceneKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		77CDAB631DD7429900B7E342 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
-		77CDAB641DD7429900B7E342 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
-		77CDAB651DD7429900B7E342 /* SCNAssimpAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimation.h; path = ../../Code/Model/SCNAssimpAnimation.h; sourceTree = "<group>"; };
-		77CDAB661DD7429900B7E342 /* SCNAssimpAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimation.m; path = ../../Code/Model/SCNAssimpAnimation.m; sourceTree = "<group>"; };
-		77CDAB671DD7429900B7E342 /* SCNAssimpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpScene.h; path = ../../Code/Model/SCNAssimpScene.h; sourceTree = "<group>"; };
-		77CDAB681DD7429900B7E342 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpScene.m; path = ../../Code/Model/SCNAssimpScene.m; sourceTree = "<group>"; };
-		77CDAB691DD7429900B7E342 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
-		77CDAB6A1DD7429900B7E342 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
 		77CDAB701DD743B100B7E342 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "../Assimp/lib/ios/libassimp-fat.a"; sourceTree = "<group>"; };
 		77CDAB791DD745D800B7E342 /* AssimpSceneKit_LogicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssimpSceneKit_LogicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAB7D1DD745D800B7E342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,13 +100,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				779DF1541DDED8D000DED366 /* AssimpKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77CDAB571DD7428900B7E342 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				77CDAB3C1DD7421500B7E342 /* iOS-Example */,
-				77CDAB5B1DD7428900B7E342 /* AssimpSceneKit */,
 				77CDAB7A1DD745D800B7E342 /* AssimpSceneKit_LogicTests */,
 				77BE97D11DDE11B30056D354 /* AssimpKit */,
 				77CDAB3B1DD7421500B7E342 /* Products */,
@@ -190,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				77CDAB3A1DD7421500B7E342 /* iOS-Example.app */,
-				77CDAB5A1DD7428900B7E342 /* libAssimpSceneKit.a */,
 				77CDAB791DD745D800B7E342 /* AssimpSceneKit_LogicTests.xctest */,
 				77BE97D01DDE11B30056D354 /* AssimpKit.framework */,
 			);
@@ -220,21 +175,6 @@
 				77CDAB3E1DD7421500B7E342 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		77CDAB5B1DD7428900B7E342 /* AssimpSceneKit */ = {
-			isa = PBXGroup;
-			children = (
-				77CDAB631DD7429900B7E342 /* AssimpImporter.h */,
-				77CDAB641DD7429900B7E342 /* AssimpImporter.m */,
-				77CDAB651DD7429900B7E342 /* SCNAssimpAnimation.h */,
-				77CDAB661DD7429900B7E342 /* SCNAssimpAnimation.m */,
-				77CDAB671DD7429900B7E342 /* SCNAssimpScene.h */,
-				77CDAB681DD7429900B7E342 /* SCNAssimpScene.m */,
-				77CDAB691DD7429900B7E342 /* SCNScene+AssimpImport.h */,
-				77CDAB6A1DD7429900B7E342 /* SCNScene+AssimpImport.m */,
-			);
-			path = AssimpSceneKit;
 			sourceTree = "<group>";
 		};
 		77CDAB6F1DD743B100B7E342 /* Frameworks */ = {
@@ -304,30 +244,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				77CDAB731DD7447600B7E342 /* PBXTargetDependency */,
 				779DF1571DDED8D000DED366 /* PBXTargetDependency */,
 			);
 			name = "iOS-Example";
 			productName = "iOS-Example";
 			productReference = 77CDAB3A1DD7421500B7E342 /* iOS-Example.app */;
 			productType = "com.apple.product-type.application";
-		};
-		77CDAB591DD7428900B7E342 /* AssimpSceneKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 77CDAB601DD7428900B7E342 /* Build configuration list for PBXNativeTarget "AssimpSceneKit" */;
-			buildPhases = (
-				77CDAB561DD7428900B7E342 /* Sources */,
-				77CDAB571DD7428900B7E342 /* Frameworks */,
-				77CDAB581DD7428900B7E342 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AssimpSceneKit;
-			productName = AssimpSceneKit;
-			productReference = 77CDAB5A1DD7428900B7E342 /* libAssimpSceneKit.a */;
-			productType = "com.apple.product-type.library.static";
 		};
 		77CDAB781DD745D800B7E342 /* AssimpSceneKit_LogicTests */ = {
 			isa = PBXNativeTarget;
@@ -340,7 +262,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				77CDAB801DD745D800B7E342 /* PBXTargetDependency */,
 			);
 			name = AssimpSceneKit_LogicTests;
 			productName = AssimpSceneKit_LogicTests;
@@ -366,11 +287,6 @@
 						DevelopmentTeam = PRJ5CHFB5D;
 						ProvisioningStyle = Automatic;
 					};
-					77CDAB591DD7428900B7E342 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = PRJ5CHFB5D;
-						ProvisioningStyle = Automatic;
-					};
 					77CDAB781DD745D800B7E342 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = PRJ5CHFB5D;
@@ -392,7 +308,6 @@
 			projectRoot = "";
 			targets = (
 				77CDAB391DD7421500B7E342 /* iOS-Example */,
-				77CDAB591DD7428900B7E342 /* AssimpSceneKit */,
 				77CDAB781DD745D800B7E342 /* AssimpSceneKit_LogicTests */,
 				77BE97CF1DDE11B30056D354 /* AssimpKit */,
 			);
@@ -449,17 +364,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		77CDAB561DD7428900B7E342 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77CDAB6B1DD7429900B7E342 /* AssimpImporter.m in Sources */,
-				77CDAB6D1DD7429900B7E342 /* SCNAssimpScene.m in Sources */,
-				77CDAB6C1DD7429900B7E342 /* SCNAssimpAnimation.m in Sources */,
-				77CDAB6E1DD7429900B7E342 /* SCNScene+AssimpImport.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		77CDAB751DD745D800B7E342 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -476,16 +380,6 @@
 			isa = PBXTargetDependency;
 			target = 77BE97CF1DDE11B30056D354 /* AssimpKit */;
 			targetProxy = 779DF1561DDED8D000DED366 /* PBXContainerItemProxy */;
-		};
-		77CDAB731DD7447600B7E342 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 77CDAB591DD7428900B7E342 /* AssimpSceneKit */;
-			targetProxy = 77CDAB721DD7447600B7E342 /* PBXContainerItemProxy */;
-		};
-		77CDAB801DD745D800B7E342 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 77CDAB591DD7428900B7E342 /* AssimpSceneKit */;
-			targetProxy = 77CDAB7F1DD745D800B7E342 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -716,38 +610,6 @@
 			};
 			name = Release;
 		};
-		77CDAB611DD7428900B7E342 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
-				ENABLE_BITCODE = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
-			};
-			name = Debug;
-		};
-		77CDAB621DD7428900B7E342 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
-				ENABLE_BITCODE = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../Code/Model/AssimpSceneKit-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
-			};
-			name = Release;
-		};
 		77CDAB821DD745D800B7E342 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -809,15 +671,6 @@
 			buildConfigurations = (
 				77CDAB541DD7421600B7E342 /* Debug */,
 				77CDAB551DD7421600B7E342 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		77CDAB601DD7428900B7E342 /* Build configuration list for PBXNativeTarget "AssimpSceneKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				77CDAB611DD7428900B7E342 /* Debug */,
-				77CDAB621DD7428900B7E342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
