@@ -4,6 +4,7 @@ AssimpKit
 Status](https://travis-ci.org/dmsurti/AssimpKit.svg?branch=master)](https://travis-ci.org/dmsurti/AssimpKit)
 [![codecov](https://codecov.io/gh/dmsurti/AssimpKit/branch/master/graph/badge.svg)](https://codecov.io/gh/dmsurti/AssimpKit)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 **AssimpKit** is a cross platform library (macOS, iOS) that coverts the files supported by [Assimp](https://github.com/assimp/assimp) to [Scene Kit](https://developer.apple.com/reference/scenekit) scenes.
 
