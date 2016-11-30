@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import "GameViewController.h"
+#import <AssimpKit/PostProcessingFlags.h>
 #import <AssimpKit/SCNScene+AssimpImport.h>
 
 @implementation GameViewController
@@ -45,9 +46,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NSString *boyPath =
         @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
     NSString *soldierPath =
-            @"/Users/deepaksurti/ios-osx/assimp/demo/assets/attack.dae";
+        @"/Users/deepaksurti/ios-osx/assimp/demo/assets/attack.dae";
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]
+                    postProcessFlags:AssimpKit_Process_FlipUVs |
+                                     AssimpKit_Process_Triangulate];
     // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
     SCNAssimpAnimation *anim = [scene animationForKey:@"attack-1"];
     [scene addAnimation:anim];

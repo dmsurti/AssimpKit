@@ -46,27 +46,31 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
  Loads a scene from a file with the specified name in the app’s main bundle.
- 
+
  @param name The name of a scene file in the app bundle’s resources directory.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
+                    postProcessFlags:(unsigned int)postProcessFlags
+
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
     NSString *file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-    return [assimpImporter importScene:file];
+    return [assimpImporter importScene:file postProcessFlags:postProcessFlags];
 }
 
 /**
  Loads a scene from the specified NSString URL.
- 
+
  @param url The NSString URL to the scene file to load.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
+                      postProcessFlags:(unsigned int)postProcessFlags
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
-    return [assimpImporter importScene:url.path];
+    return
+        [assimpImporter importScene:url.path postProcessFlags:postProcessFlags];
 }
 
 @end
