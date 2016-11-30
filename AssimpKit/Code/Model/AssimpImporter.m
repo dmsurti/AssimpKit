@@ -117,16 +117,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  Loads a scene from the specified file path.
 
  @param filePath The path to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
+               postProcessFlags:(unsigned int)postProcessFlags
 {
     // Start the import on the given file with some example postprocessing
     // Usually - if speed is not the most important aspect for you - you'll t
     // probably to request more postprocessing than we do in this example.
     const char *pFile = [filePath UTF8String];
-    const struct aiScene *aiScene =
-        aiImportFile(pFile, aiProcess_FlipUVs | aiProcess_Triangulate);
+    const struct aiScene *aiScene = aiImportFile(pFile, postProcessFlags);
+        // aiProcess_FlipUVs | aiProcess_Triangulate
     // If the import failed, report it
     if (!aiScene)
     {
@@ -204,8 +206,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     SCNNode *node = [[SCNNode alloc] init];
     const struct aiString *aiNodeName = &aiNode->mName;
     node.name = [NSString stringWithUTF8String:aiNodeName->data];
-    NSLog(@" Creating node %@ with %d meshes", node.name,
-              aiNode->mNumMeshes);
+    NSLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
     int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
     node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode
                                                 inScene:aiScene
@@ -233,7 +234,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     SCNMatrix4 scnMatrix = SCNMatrix4FromGLKMatrix4(glkNodeMatrix);
     node.transform = scnMatrix;
     NSLog(@" Node %@ position %f %f %f", node.name, aiNodeMatrix.a4,
-              aiNodeMatrix.b4, aiNodeMatrix.c4);
+          aiNodeMatrix.b4, aiNodeMatrix.c4);
 
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
@@ -272,7 +273,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return nVertices;
 }
 
-
 /**
  Finds the total number of faces in the meshes of the specified node.
 
@@ -292,7 +292,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     }
     return nFaces;
 }
-
 
 /**
  Finds the total number of indices in the specified mesh by index.
@@ -317,7 +316,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma mark - Make scenekit geometry sources
 
 /**
- @name Make scenekit geometry sources 
+ @name Make scenekit geometry sources
  */
 
 /**
@@ -363,7 +362,6 @@ makeVertexGeometrySourceForNode:(const struct aiNode *)aiNode
     return vertexSource;
 }
 
-
 /**
  Creates a scenekit geometry source from the normals of the specified node.
 
@@ -408,11 +406,10 @@ makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
     return normalSource;
 }
 
-
 /**
  Creates a scenekit geometry source from the texture coordinates of the
  specified node.
- 
+
  @param aiNode The assimp node.
  @param aiScene The assimp scene.
  @param nVertices The number of vertices in the meshes of the node.
@@ -455,9 +452,8 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
     return textureSource;
 }
 
-
 /**
- Creates an array of geometry sources for the specifed node describing 
+ Creates an array of geometry sources for the specifed node describing
  the vertices in the geometry and their attributes.
 
  @param aiNode The assimp node.
@@ -532,9 +528,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return indices;
 }
 
-
 /**
- Creates an array of scenekit geometry element obejcts describing how to 
+ Creates an array of scenekit geometry element obejcts describing how to
  connect the geometry's vertices of the specified node.
 
  @param aiNode The assimp node.
@@ -723,7 +718,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
 }
 
-
 /**
  Updates a scenekit material's multiply property
 
@@ -753,7 +747,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         }
     }
 }
-
 
 /**
  Creates an array of scenekit materials one for each mesh of the specified node.
@@ -859,7 +852,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return scnMaterials;
 }
 
-
 /**
  Creates a scenekit geometry to attach at the specified node.
 
@@ -930,7 +922,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 /**
  Creates a scenekit omni light from an assimp omni light.
- 
+
  @param aiLight The assimp omni light.
  @return A new scenekit omni light.
  */
@@ -963,7 +955,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 
 /**
  Creates a scenekit spot light from an assimp spot light.
- 
+
  @param aiLight The assimp spot light.
  @return A new scenekit spot light.
  */
@@ -997,7 +989,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return light;
 }
 
-
 /**
  Creates a scenekit light to attach at the specified node.
 
@@ -1021,18 +1012,18 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         {
             NSLog(@"### Creating light for node %@", nodeName);
             NSLog(@"    ambient     %f %f %f ", aiLight->mColorAmbient.r,
-                      aiLight->mColorAmbient.g, aiLight->mColorAmbient.b);
+                  aiLight->mColorAmbient.g, aiLight->mColorAmbient.b);
             NSLog(@"    diffuse     %f %f %f ", aiLight->mColorDiffuse.r,
-                      aiLight->mColorDiffuse.g, aiLight->mColorDiffuse.b);
+                  aiLight->mColorDiffuse.g, aiLight->mColorDiffuse.b);
             NSLog(@"    specular    %f %f %f ", aiLight->mColorSpecular.r,
-                      aiLight->mColorSpecular.g, aiLight->mColorSpecular.b);
+                  aiLight->mColorSpecular.g, aiLight->mColorSpecular.b);
             NSLog(@"    inner angle %f", aiLight->mAngleInnerCone);
             NSLog(@"    outer angle %f", aiLight->mAngleOuterCone);
             NSLog(@"    att const   %f", aiLight->mAttenuationConstant);
             NSLog(@"    att linear  %f", aiLight->mAttenuationLinear);
             NSLog(@"    att quad    %f", aiLight->mAttenuationQuadratic);
             NSLog(@"    position    %f %f %f", aiLight->mPosition.x,
-                      aiLight->mPosition.y, aiLight->mPosition.z);
+                  aiLight->mPosition.y, aiLight->mPosition.z);
             if (aiLight->mType == aiLightSource_DIRECTIONAL)
             {
                 NSLog(@"    type        Directional");
@@ -1146,7 +1137,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return boneNames;
 }
 
-
 /**
  Creates a dictionary of bone transforms where bone name is the key, for the
  meshes of the specified node.
@@ -1191,7 +1181,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return boneTransforms;
 }
 
-
 /**
  Creates an array of bone transforms from a dictionary of bone transforms where
  bone name is the key.
@@ -1210,7 +1199,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
     return transforms;
 }
-
 
 /**
  Creates an array of scenekit bone nodes for the specified bone names.
@@ -1232,7 +1220,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return boneNodes;
 }
 
-
 /**
  Find the root node of the skeleton from the specified bone nodes.
 
@@ -1247,7 +1234,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     {
         int depth = [self findDepthOfNodeFromRoot:boneNode];
         NSLog(@" bone with depth is (min depth): %@ -> %d ( %d )",
-                  boneNode.name, depth, minDepth);
+              boneNode.name, depth, minDepth);
         if (minDepth == -1 || (depth <= minDepth))
         {
             minDepth = depth;
@@ -1275,7 +1262,6 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     }
 }
 
-
 /**
  Finds the depth of the specified node from the scene's root node.
 
@@ -1294,11 +1280,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return depth;
 }
 
-
 /**
  Finds the maximum number of weights that influence the vertices in the meshes
  of the specified node.
- 
+
  @param aiNode The assimp node.
  @param aiScene The assimp scene.
  @return The maximum influences or weights.
@@ -1355,9 +1340,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     return maxWeights;
 }
 
-
 /**
- Creates a scenekit geometry source defining the influence of each bone on the 
+ Creates a scenekit geometry source defining the influence of each bone on the
  positions of vertices in the geometry
 
  @param aiNode The assimp node.
@@ -1442,9 +1426,8 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
     return boneWeightsSource;
 }
 
-
 /**
- Creates a scenekit geometry source defining the mapping from bone indices in 
+ Creates a scenekit geometry source defining the mapping from bone indices in
  skeleton data to the skinner’s bones array
 
  @param aiNode The assimp node.
@@ -1537,11 +1520,10 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     return boneIndicesSource;
 }
 
-
 /**
- Builds a skeleton database of unique bone names and inverse bind bone 
+ Builds a skeleton database of unique bone names and inverse bind bone
  transforms.
- 
+
  When the scenekit scene is created from the assimp scene, a list of all bone
  names and a dictionary of bone transforms where each key is the bone name,
  is generated when parsing each node of the assimp scene.
@@ -1551,26 +1533,24 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
 - (void)buildSkeletonDatabaseForScene:(SCNScene *)scene
 {
     self.uniqueBoneNames = [[NSSet setWithArray:self.boneNames] allObjects];
-    NSLog(@" |--| bone names %lu: %@", self.boneNames.count,
-              self.boneNames);
+    NSLog(@" |--| bone names %lu: %@", self.boneNames.count, self.boneNames);
     NSLog(@" |--| unique bone names %lu: %@", self.uniqueBoneNames.count,
-              self.uniqueBoneNames);
+          self.uniqueBoneNames);
     self.uniqueBoneNodes =
         [self findBoneNodesInScene:scene forBones:self.uniqueBoneNames];
     NSLog(@" |--| unique bone nodes %lu: %@", self.uniqueBoneNodes.count,
-              self.uniqueBoneNodes);
+          self.uniqueBoneNodes);
     self.uniqueBoneTransforms =
         [self getTransformsForBones:self.uniqueBoneNames
                      fromTransforms:self.boneTransforms];
     NSLog(@" |--| unique bone transforms %lu: %@",
-              self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
+          self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
     self.skelton = [self findSkeletonNodeFromBoneNodes:self.uniqueBoneNodes];
     NSLog(@" |--| skeleton bone is : %@", self.skelton);
 }
 
-
 /**
- Creates a scenekit skinner for the specified node with visible geometry and 
+ Creates a scenekit skinner for the specified node with visible geometry and
  skeleton information.
 
  @param aiNode The assimp node.
@@ -1588,10 +1568,9 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     {
         int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
         int maxWeights = [self findMaxWeightsForNode:aiNode inScene:aiScene];
-        NSLog(
-            @" |--| Making Skinner for node: %@ vertices: %d max-weights: %d "
-            @"nBones: %d",
-            nodeName, nVertices, maxWeights, nBones);
+        NSLog(@" |--| Making Skinner for node: %@ vertices: %d max-weights: %d "
+              @"nBones: %d",
+              nodeName, nVertices, maxWeights, nBones);
 
         SCNGeometrySource *boneWeights =
             [self makeBoneWeightsGeometrySourceAtNode:aiNode
@@ -1614,8 +1593,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                                     boneWeights:boneWeights
                                     boneIndices:boneIndices];
         skinner.skeleton = self.skelton;
-        NSLog(@" assigned skinner %@ skeleton: %@", skinner,
-                  skinner.skeleton);
+        NSLog(@" assigned skinner %@ skeleton: %@", skinner, skinner.skeleton);
         node.skinner = skinner;
     }
 
@@ -1635,14 +1613,14 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
  */
 
 /**
- Creates a dictionary of animations where each animation is a 
+ Creates a dictionary of animations where each animation is a
  SCNAssimpAnimation, from each animation in the assimp scene.
- 
- For each animation's channel which is a bone node, a CAKeyframeAnimation is 
- created for each of position, orientation and scale. These animations are 
- then stored in an SCNAssimpAnimation object, which holds the animation name and 
+
+ For each animation's channel which is a bone node, a CAKeyframeAnimation is
+ created for each of position, orientation and scale. These animations are
+ then stored in an SCNAssimpAnimation object, which holds the animation name and
  the keyframe animations.
- 
+
  The animation name is generated by appending the file name with an animation
  index. The example of an animation name is walk-1 for the first animation in a
  file named walk.
@@ -1656,7 +1634,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                            atPath:(NSString *)path
 {
     NSLog(@" ========= Number of animations in scene: %d",
-              aiScene->mNumAnimations);
+          aiScene->mNumAnimations);
     for (int i = 0; i < aiScene->mNumAnimations; i++)
     {
         NSLog(@"--- Animation data for animation at index: %d", i);
@@ -1669,9 +1647,9 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
         NSMutableDictionary *currentAnimation =
             [[NSMutableDictionary alloc] init];
         NSLog(@" This animation %@ has %d channels with duration %f ticks "
-                  @"per sec: %f",
-                  animName, aiAnimation->mNumChannels, aiAnimation->mDuration,
-                  aiAnimation->mTicksPerSecond);
+              @"per sec: %f",
+              animName, aiAnimation->mNumChannels, aiAnimation->mDuration,
+              aiAnimation->mTicksPerSecond);
         float duration;
         if (aiAnimation->mTicksPerSecond != 0)
         {
@@ -1687,11 +1665,10 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
             const struct aiString *aiNodeName = &aiNodeAnim->mNodeName;
             NSString *name = [NSString stringWithUTF8String:aiNodeName->data];
             NSLog(@" The channel %@ has data for %d position, %d rotation, "
-                      @"%d scale "
-                      @"keyframes",
-                      name, aiNodeAnim->mNumPositionKeys,
-                      aiNodeAnim->mNumRotationKeys,
-                      aiNodeAnim->mNumScalingKeys);
+                  @"%d scale "
+                  @"keyframes",
+                  name, aiNodeAnim->mNumPositionKeys,
+                  aiNodeAnim->mNumRotationKeys, aiNodeAnim->mNumScalingKeys);
 
             // create a lookup for all animation keys
             NSMutableDictionary *channelKeys =

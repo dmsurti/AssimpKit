@@ -63,8 +63,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  Loads a scene from the specified file path.
 
  @param filePath The path to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
-- (SCNAssimpScene *)importScene:(NSString *)filePath;
-
+- (SCNAssimpScene *)importScene:(NSString *)filePath
+               postProcessFlags:(unsigned int)postProcessFlags;
 @end
