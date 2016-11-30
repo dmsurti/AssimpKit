@@ -35,8 +35,9 @@
  */
 
 #import "ModelsTableViewController.h"
+#import <AssimpKit/PostProcessingFlags.h>
 #import <AssimpKit/SCNScene+AssimpImport.h>
-#import "GameViewController.h"
+#import "AnimationsTableViewController.h"
 
 @interface ModelsTableViewController ()
 
@@ -56,15 +57,15 @@
     NSString *docsDir = [paths objectAtIndex:0];
     self.docsDir = [docsDir stringByAppendingString:@"/"];
     NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:docsDir];
-    NSMutableArray *supportedFiles = [[NSMutableArray alloc] init];
+    NSMutableArray *modelFiles = [[NSMutableArray alloc] init];
     for (NSString *file in files)
     {
         if ([SCNScene canImportFileExtension:file.pathExtension])
         {
-            [supportedFiles addObject:file];
+            [modelFiles addObject:file];
         }
     }
-    self.modelFiles = supportedFiles;
+    self.modelFiles = modelFiles;
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,9 +104,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    GameViewController *gameVC =
-        (GameViewController *)segue.destinationViewController;
-    gameVC.modelFilePath = [self.docsDir
+    AnimationsTableViewController *animsVC =
+        (AnimationsTableViewController *)segue.destinationViewController;
+    animsVC.modelFiles = self.modelFiles;
+    animsVC.docsDir = self.docsDir;
+    animsVC.modelFilePath = [self.docsDir
         stringByAppendingString:[self.modelFiles objectAtIndex:indexPath.row]];
 }
 
