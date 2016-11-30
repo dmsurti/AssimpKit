@@ -103,13 +103,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // Common for both segues: skipModelSegue_ID, showAnimsSegue_ID
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     AnimationsTableViewController *animsVC =
         (AnimationsTableViewController *)segue.destinationViewController;
     animsVC.modelFiles = self.modelFiles;
     animsVC.docsDir = self.docsDir;
-    animsVC.modelFilePath = [self.docsDir
-        stringByAppendingString:[self.modelFiles objectAtIndex:indexPath.row]];
+    if ([segue.identifier isEqualToString:@"showAnimsSegue_ID"])
+    {
+        animsVC.modelFilePath = [self.docsDir
+            stringByAppendingString:[self.modelFiles
+                                        objectAtIndex:indexPath.row]];
+    }
 }
 
 @end
