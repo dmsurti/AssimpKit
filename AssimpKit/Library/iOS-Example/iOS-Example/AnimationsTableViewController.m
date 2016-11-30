@@ -84,10 +84,26 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     GameViewController *gameVC =
-        (GameViewController *)segue.destinationViewController;
-    gameVC.modelFilePath = self.modelFilePath;
-    gameVC.animFilePath = [self.docsDir
-        stringByAppendingString:[self.modelFiles objectAtIndex:indexPath.row]];
+    (GameViewController *)segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"playAnimSegue_ID"])
+    {
+        NSString *animFilePath = [self.docsDir
+            stringByAppendingString:[self.modelFiles
+                                        objectAtIndex:indexPath.row]];
+        gameVC.animFilePath = animFilePath;
+
+        if (self.modelFilePath)
+        {
+            gameVC.modelFilePath = self.modelFilePath;
+        }
+        else {
+            gameVC.modelFilePath = animFilePath;
+        }
+    }
+    if ([segue.identifier isEqualToString:@"viewModelSegue_ID"])
+    {
+        gameVC.modelFilePath = self.modelFilePath;
+    }
 }
 
 @end
