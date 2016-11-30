@@ -46,8 +46,8 @@ You can load a scene which is a part of your app bundle, as in Listing I-1 below
     NSString *spider = @"spider.obj";
 
     // Start the import on the given file with some example postprocessing
-    // Usually - if speed is not the most important aspect for you - you'll t
-    // probably to request more postprocessing than we do in this example.
+    // Usually - if speed is not the most important aspect for you - you'll
+    // probably request more postprocessing than we do in this example.
     SCNAssimpScene* scene =
         [SCNScene sceneNamed:spider
             postProcessFlags:AssimpKit_Process_FlipUVs |
@@ -70,8 +70,8 @@ You can load a scene by specifying a file URL, as in Listing I-2 below.
     NSString *soldierPath = @"/assets/apple/attack.dae";
 
     // Start the import on the given file with some example postprocessing
-    // Usually - if speed is not the most important aspect for you - you'll t
-    // probably to request more postprocessing than we do in this example.
+    // Usually - if speed is not the most important aspect for you - you'll
+    // probably request more postprocessing than we do in this example.
     SCNAssimpScene *scene = 
         [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]
                     postProcessFlags:AssimpKit_Process_FlipUVs |
@@ -108,8 +108,8 @@ animating, using the listing I-3 below.
     NSString *boyPath = @"/of/assets/astroBoy_walk.dae";
 
     // Start the import on the given file with some example postprocessing
-    // Usually - if speed is not the most important aspect for you - you'll t
-    // probably to request more postprocessing than we do in this example.
+    // Usually - if speed is not the most important aspect for you - you'll
+    // probably request more postprocessing than we do in this example.
     SCNAssimpScene *scene = 
         [SCNScene assimpSceneWithURL:[NSURL URLWithString:boyPath];
                     postProcessFlags:AssimpKit_Process_FlipUVs |
@@ -140,8 +140,8 @@ are animating, using the listing I-5 below.
     NSString *explorer = @"/assets/apple/explorer_skinned.dae";
 
     // Start the import on the given file with some example postprocessing
-    // Usually - if speed is not the most important aspect for you - you'll t
-    // probably to request more postprocessing than we do in this example.
+    // Usually - if speed is not the most important aspect for you - you'll
+    // probably request more postprocessing than we do in this example.
     SCNAssimpScene *scene =
         [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]
                     postProcessFlags:AssimpKit_Process_FlipUVs |
