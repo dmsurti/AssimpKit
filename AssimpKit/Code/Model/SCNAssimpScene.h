@@ -90,4 +90,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 - (SCNAssimpAnimation *)animationForKey:(NSString *)key;
 
+/**
+ Return the keys for all the animations in this file.
+
+ @return The array of animation keys.
+ */
+-(NSArray*)animationKeys;
+
 @end

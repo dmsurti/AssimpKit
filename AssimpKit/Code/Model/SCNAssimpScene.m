@@ -125,4 +125,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return [self.animations valueForKey:key];
 }
 
+
+/**
+ Return the keys for all the animations in this file.
+
+ @return The array of animation keys.
+ */
+-(NSArray*)animationKeys
+{
+    return self.animations.allKeys;
+}
 @end
