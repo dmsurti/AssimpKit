@@ -39,5 +39,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @interface GameViewController : UIViewController
 
 @property(readwrite, nonatomic) NSString* modelFilePath;
+@property(readwrite, nonatomic) NSString* animFilePath;
 
 @end
