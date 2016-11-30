@@ -33,17 +33,25 @@ Class/Category        | Description
 SCNScene(AssimpImport)| The container for all SceneKit content, loaded with assimp.
 SCNAssimpAnimation    | The container for all SceneKit skeletal animation content.
 
-You can use the AssimpKit category defined on SCNScene to load scenes.
+You can use the AssimpKit category defined on SCNScene to load scenes. The post processing
+steps that the assimp library can apply to the imported data are listed at AssimpKitPostProcessSteps.
 
 You can load a scene which is a part of your app bundle, as in Listing I-1 below.
 
 ***Listing I-1*** Load a scene which is part of your app bundle
 
+    #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
 
     NSString *spider = @"spider.obj";
 
-    SCNAssimpScene* scene = [SCNScene assimpSceneNamed:spider];
+    // Start the import on the given file with some example postprocessing
+    // Usually - if speed is not the most important aspect for you - you'll t
+    // probably to request more postprocessing than we do in this example.
+    SCNAssimpScene* scene =
+        [SCNScene sceneNamed:spider
+            postProcessFlags:AssimpKit_Process_FlipUVs |
+                             AssimpKit_Process_Triangulate]];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
@@ -55,13 +63,19 @@ You can load a scene by specifying a file URL, as in Listing I-2 below.
 
 ***Listing I-2*** Load a scene with a file URL
 
+    #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
 
     // The path to the file path must not be a relative path
     NSString *soldierPath = @"/assets/apple/attack.dae";
 
+    // Start the import on the given file with some example postprocessing
+    // Usually - if speed is not the most important aspect for you - you'll t
+    // probably to request more postprocessing than we do in this example.
     SCNAssimpScene *scene = 
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]
+                    postProcessFlags:AssimpKit_Process_FlipUVs |
+                                     AssimpKit_Process_Triangulate]];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
@@ -87,13 +101,19 @@ animating, using the listing I-3 below.
 
 ***Listing I-3*** Load and play an animation which is defined in the same file
 
+    #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
 
     // The path to the file path must not be a relative path
     NSString *boyPath = @"/of/assets/astroBoy_walk.dae";
 
+    // Start the import on the given file with some example postprocessing
+    // Usually - if speed is not the most important aspect for you - you'll t
+    // probably to request more postprocessing than we do in this example.
     SCNAssimpScene *scene = 
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:boyPath]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:boyPath];
+                    postProcessFlags:AssimpKit_Process_FlipUVs |
+                                     AssimpKit_Process_Triangulate]];
 
     // get the animation which is defined in the same file
     NSString *walkID = @"astroBoy_walk-1";
@@ -113,16 +133,26 @@ are animating, using the listing I-5 below.
 
 ***Listing I-4*** Load and play an animation which is defined in a separate file
 
+    #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
 
     // The path to the file path must not be a relative path
     NSString *explorer = @"/assets/apple/explorer_skinned.dae";
+
+    // Start the import on the given file with some example postprocessing
+    // Usually - if speed is not the most important aspect for you - you'll t
+    // probably to request more postprocessing than we do in this example.
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]
+                    postProcessFlags:AssimpKit_Process_FlipUVs |
+                                     AssimpKit_Process_Triangulate];
 
     // load an animation which is defined in a separate file
     NSString *jumpAnim = @"/explorer/jump_start.dae"];
-    SCNAssimpScene *jumpStartScene = [assimpImporter importScene:jumpAnim];
+    SCNAssimpScene *jumpStartScene =
+        [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]
+                          postProcessFlags:AssimpKit_Process_FlipUVs |
+                                           AssimpKit_Process_Triangulate];
 
     // get the aniamtion with animation key
     NSString *jumpId = @"jump_start-1";
