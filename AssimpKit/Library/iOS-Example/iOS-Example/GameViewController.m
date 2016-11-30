@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import "GameViewController.h"
+#import <AssimpKit/PostProcessingFlags.h>
 #import <AssimpKit/SCNScene+AssimpImport.h>
 
 @implementation GameViewController
@@ -47,17 +48,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     NSString *docsDir = [paths objectAtIndex:0];
     NSString *explorer =
         [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
-    NSString *soldier =
-            [docsDir stringByAppendingString:@"/attack.dae"];
+    NSString *soldier = [docsDir stringByAppendingString:@"/attack.dae"];
     NSString *bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]];
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]
+                    postProcessFlags:AssimpKit_Process_FlipUVs |
+                                     AssimpKit_Process_Triangulate];
 
     // Now we can access the file's contents
     NSString *jumpAnim =
         [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
     NSString *bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
-    SCNAssimpScene *jumpStartScene = [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]];
+    SCNAssimpScene *jumpStartScene =
+        [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]
+                          postProcessFlags:AssimpKit_Process_FlipUVs |
+                                           AssimpKit_Process_Triangulate];
     NSString *bobId = @"Bob-1";
     NSString *jumpId = @"jump_start-1";
     NSString *attackId = @"attack-1";
