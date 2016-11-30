@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = 7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = 7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
 		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
@@ -67,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostProcessingFlags.h; path = ../../Code/Model/PostProcessingFlags.h; sourceTree = "<group>"; };
+		7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostProcessingFlags.h; path = ../../Code/Model/PostProcessingFlags.h; sourceTree = "<group>"; };
 		779DF1A71DDF262500DED366 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
 		779DF1D31DDF29F200DED366 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DF1D61DDF29F200DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 		779DF1D41DDF29F200DED366 /* AssimpKit-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */,
 				779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */,
 				779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */,
 				779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */,
@@ -195,6 +200,7 @@
 		779DF1FC1DDF2B8700DED366 /* AssimpKit-macOS */ = {
 			isa = PBXGroup;
 			children = (
+				7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */,
 				779DF2031DDF2BB000DED366 /* AssimpImporter.h */,
 				779DF2041DDF2BB000DED366 /* AssimpImporter.m */,
 				779DF2051DDF2BB000DED366 /* AssimpSceneKit-Prefix.pch */,
@@ -258,6 +264,7 @@
 				779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */,
 				779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
+				7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */,
 				779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +277,7 @@
 				779DF2111DDF2BB000DED366 /* SCNAssimpScene.h in Headers */,
 				779DF20F1DDF2BB000DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */,
+				7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */,
 				779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

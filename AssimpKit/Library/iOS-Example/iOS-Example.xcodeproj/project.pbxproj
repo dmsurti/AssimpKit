@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		771E8EF31DDF412F0081FD6C /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF21DDF412F0081FD6C /* AssimpKit.framework */; };
-		771E8EF41DDF412F0081FD6C /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF21DDF412F0081FD6C /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7746DB5A1DEEB9BE00C651DC /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7746DB591DEEB9BE00C651DC /* AssimpKit.framework */; };
+		7746DB5B1DEEB9BE00C651DC /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7746DB591DEEB9BE00C651DC /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		77CDAB3F1DD7421500B7E342 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB3E1DD7421500B7E342 /* main.m */; };
 		77CDAB421DD7421500B7E342 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB411DD7421500B7E342 /* AppDelegate.m */; };
 		77CDAB441DD7421500B7E342 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB431DD7421500B7E342 /* art.scnassets */; };
@@ -19,13 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		779DF1F51DDF2B2500DED366 /* Embed Frameworks */ = {
+		7746DB2B1DEEB7AC00C651DC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				771E8EF41DDF412F0081FD6C /* AssimpKit.framework in Embed Frameworks */,
+				7746DB5B1DEEB9BE00C651DC /* AssimpKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -33,7 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		771E8EF21DDF412F0081FD6C /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7746DB591DEEB9BE00C651DC /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAB3A1DD7421500B7E342 /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAB3E1DD7421500B7E342 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		77CDAB401DD7421500B7E342 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				771E8EF31DDF412F0081FD6C /* AssimpKit.framework in Frameworks */,
+				7746DB5A1DEEB9BE00C651DC /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,7 @@
 		77CDAB311DD7421500B7E342 = {
 			isa = PBXGroup;
 			children = (
-				771E8EF21DDF412F0081FD6C /* AssimpKit.framework */,
+				7746DB591DEEB9BE00C651DC /* AssimpKit.framework */,
 				77CDAB3C1DD7421500B7E342 /* iOS-Example */,
 				77CDAB3B1DD7421500B7E342 /* Products */,
 				77CDAB6F1DD743B100B7E342 /* Frameworks */,
@@ -119,7 +119,7 @@
 				77CDAB361DD7421500B7E342 /* Sources */,
 				77CDAB371DD7421500B7E342 /* Frameworks */,
 				77CDAB381DD7421500B7E342 /* Resources */,
-				779DF1F51DDF2B2500DED366 /* Embed Frameworks */,
+				7746DB2B1DEEB7AC00C651DC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
