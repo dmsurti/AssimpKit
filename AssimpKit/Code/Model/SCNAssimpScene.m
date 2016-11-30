@@ -58,7 +58,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
  Creates a new scene animation, without any animation data.
- 
+
  @return A new scene animation object.
  */
 - (id)init
@@ -79,7 +79,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
  Adds an SCNAssimpAnimation object.
- 
+
  @param assimpAnimation The scene animation object created from animation data.
  */
 - (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation
@@ -88,14 +88,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     for (NSString *nodeName in frameAnims.allKeys)
     {
         SCNNode *boneNode =
-            [self.rootNode childNodeWithName:nodeName
-                                 recursively:YES];
+            [self.rootNode childNodeWithName:nodeName recursively:YES];
         NSDictionary *channelKeys = [frameAnims valueForKey:nodeName];
         CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
-        CAKeyframeAnimation *quatAnim = [channelKeys valueForKey:@"orientation"];
+        CAKeyframeAnimation *quatAnim =
+            [channelKeys valueForKey:@"orientation"];
         CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"scale"];
-        NSLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
-                  quatAnim);
+        DLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
+             quatAnim);
         if (posAnim)
         {
             [boneNode addAnimation:posAnim
@@ -108,15 +108,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         }
         if (scaleAnim)
         {
-            [boneNode addAnimation:scaleAnim
-                            forKey:[nodeName stringByAppendingString:@"-scale"]];
+            [boneNode
+                addAnimation:scaleAnim
+                      forKey:[nodeName stringByAppendingString:@"-scale"]];
         }
     }
 }
 
 /**
  Return the SCNAssimpAnimation object for the specified animation key.
- 
+
  @param key The unique scene animation key.
  @return The scene animation object.
  */
@@ -125,13 +126,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return [self.animations valueForKey:key];
 }
 
-
 /**
  Return the keys for all the animations in this file.
 
  @return The array of animation keys.
  */
--(NSArray*)animationKeys
+- (NSArray *)animationKeys
 {
     return self.animations.allKeys;
 }
