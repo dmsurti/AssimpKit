@@ -43,31 +43,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {
     [super viewDidLoad];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *docsDir = [paths objectAtIndex:0];
-    NSString *explorer =
-        [docsDir stringByAppendingString:@"/explorer_skinned.dae"];
-    NSString *soldier = [docsDir stringByAppendingString:@"/attack.dae"];
-    NSString *bob = [docsDir stringByAppendingString:@"/Bob.md5mesh"];
+    // Load the scene
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:explorer]
+        [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.modelFilePath]
                     postProcessFlags:AssimpKit_Process_FlipUVs |
                                      AssimpKit_Process_Triangulate];
 
-    // Now we can access the file's contents
-    NSString *jumpAnim =
-        [docsDir stringByAppendingString:@"/explorer/jump_start.dae"];
-    NSString *bobAnim = [docsDir stringByAppendingString:@"/Bob.md5anim"];
-    SCNAssimpScene *jumpStartScene =
-        [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]
-                          postProcessFlags:AssimpKit_Process_FlipUVs |
-                                           AssimpKit_Process_Triangulate];
-    NSString *bobId = @"Bob-1";
-    NSString *jumpId = @"jump_start-1";
-    NSString *attackId = @"attack-1";
-    SCNAssimpAnimation *jumpStartAnim = [jumpStartScene animationForKey:jumpId];
-    [scene addAnimation:jumpStartAnim];
+    // If animations exist, load the first animation
+    NSArray *animationKeys = scene.animationKeys;
+    if (animationKeys.count > 0)
+    {
+        SCNAssimpAnimation *animation =
+            [scene animationForKey:[animationKeys objectAtIndex:0]];
+        [scene addAnimation:animation];
+    }
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
