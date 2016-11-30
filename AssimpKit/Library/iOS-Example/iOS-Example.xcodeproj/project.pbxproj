@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7746DB5A1DEEB9BE00C651DC /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7746DB591DEEB9BE00C651DC /* AssimpKit.framework */; };
 		7746DB5B1DEEB9BE00C651DC /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7746DB591DEEB9BE00C651DC /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7746DB681DEEF1AC00C651DC /* ModelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7746DB671DEEF1AC00C651DC /* ModelsTableViewController.m */; };
+		7746DB7A1DEF32F600C651DC /* AnimationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7746DB791DEF32F600C651DC /* AnimationsTableViewController.m */; };
 		77CDAB3F1DD7421500B7E342 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB3E1DD7421500B7E342 /* main.m */; };
 		77CDAB421DD7421500B7E342 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAB411DD7421500B7E342 /* AppDelegate.m */; };
 		77CDAB441DD7421500B7E342 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB431DD7421500B7E342 /* art.scnassets */; };
@@ -34,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		7746DB591DEEB9BE00C651DC /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7746DB661DEEF1AC00C651DC /* ModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsTableViewController.h; sourceTree = "<group>"; };
+		7746DB671DEEF1AC00C651DC /* ModelsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelsTableViewController.m; sourceTree = "<group>"; };
+		7746DB781DEF32F600C651DC /* AnimationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationsTableViewController.h; sourceTree = "<group>"; };
+		7746DB791DEF32F600C651DC /* AnimationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationsTableViewController.m; sourceTree = "<group>"; };
 		77CDAB3A1DD7421500B7E342 /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAB3E1DD7421500B7E342 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		77CDAB401DD7421500B7E342 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +96,10 @@
 				77CDAB4D1DD7421600B7E342 /* LaunchScreen.storyboard */,
 				77CDAB501DD7421600B7E342 /* Info.plist */,
 				77CDAB3D1DD7421500B7E342 /* Supporting Files */,
+				7746DB661DEEF1AC00C651DC /* ModelsTableViewController.h */,
+				7746DB671DEEF1AC00C651DC /* ModelsTableViewController.m */,
+				7746DB781DEF32F600C651DC /* AnimationsTableViewController.h */,
+				7746DB791DEF32F600C651DC /* AnimationsTableViewController.m */,
 			);
 			path = "iOS-Example";
 			sourceTree = "<group>";
@@ -184,7 +194,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				77CDAB421DD7421500B7E342 /* AppDelegate.m in Sources */,
+				7746DB681DEEF1AC00C651DC /* ModelsTableViewController.m in Sources */,
 				77CDAB471DD7421500B7E342 /* GameViewController.m in Sources */,
+				7746DB7A1DEF32F600C651DC /* AnimationsTableViewController.m in Sources */,
 				77CDAB3F1DD7421500B7E342 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
