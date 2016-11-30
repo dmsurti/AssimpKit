@@ -69,9 +69,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return NO;
     }
 
-    NSArray *validExts = [extsFileContents
-        componentsSeparatedByCharactersInSet:
-                          [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *validExts = [
+        [extsFileContents componentsSeparatedByCharactersInSet:
+                              [NSCharacterSet whitespaceAndNewlineCharacterSet]]
+        filteredArrayUsingPredicate:[NSPredicate
+                                        predicateWithFormat:@"self != \"\""]];
     return [validExts containsObject:extension.lowercaseString];
 }
 

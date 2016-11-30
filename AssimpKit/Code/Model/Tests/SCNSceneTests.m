@@ -48,7 +48,6 @@
  @name Test formats supported
  */
 
-
 /**
  Tests the API returns YES for file extensions for supported formats.
  */
@@ -65,7 +64,6 @@
     }
 }
 
-
 /**
  Tests the API returns NO for file extensions for unsupported formats.
  */
@@ -77,9 +75,11 @@
     for (NSString *notSupportedExt in notSupportedExts)
     {
         XCTAssertFalse([SCNScene canImportFileExtension:notSupportedExt],
-                       @"Can import un-supported format %@",
-                       notSupportedExt);
+                       @"Can import un-supported format %@", notSupportedExt);
     }
+
+    XCTAssertFalse([SCNScene canImportFileExtension:@""],
+                   @"Can import format with no extension");
 }
 
 @end
