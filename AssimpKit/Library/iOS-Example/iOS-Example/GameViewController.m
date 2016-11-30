@@ -50,17 +50,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                      AssimpKit_Process_Triangulate];
 
     // Load the animation scene
-    SCNAssimpScene *animScene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.animFilePath]
-                    postProcessFlags:AssimpKit_Process_FlipUVs |
-                                     AssimpKit_Process_Triangulate];
-    NSArray *animationKeys = animScene.animationKeys;
-    // If multiple animations exist, load the first animation
-    if (animationKeys.count > 0)
+    if (self.animFilePath)
     {
-        SCNAssimpAnimation *animation =
-            [animScene animationForKey:[animationKeys objectAtIndex:0]];
-        [scene addAnimation:animation];
+        SCNAssimpScene *animScene =
+            [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.animFilePath]
+                        postProcessFlags:AssimpKit_Process_FlipUVs |
+                                         AssimpKit_Process_Triangulate];
+        NSArray *animationKeys = animScene.animationKeys;
+        // If multiple animations exist, load the first animation
+        if (animationKeys.count > 0)
+        {
+            SCNAssimpAnimation *animation =
+                [animScene animationForKey:[animationKeys objectAtIndex:0]];
+            [scene addAnimation:animation];
+        }
     }
 
     // retrieve the SCNView
