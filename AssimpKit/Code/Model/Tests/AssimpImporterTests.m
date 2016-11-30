@@ -36,6 +36,7 @@
 #import <XCTest/XCTest.h>
 #import "AssimpImporter.h"
 #import "ModelLog.h"
+#import "PostProcessingFlags.h"
 #import "SCNAssimpAnimation.h"
 #include "assimp/cimport.h"     // Plain-C interface
 #include "assimp/light.h"       // Lights
@@ -45,18 +46,18 @@
 
 /**
  The test class for AssimpImporter.
- 
+
  This class tests the model files placed in a directory named assets, which
  has subdirectories: apple, of and assimp; which are the owners of the model
  files. (Note: of represents open frameworks).
- 
+
  Each asset owner subdirectory is further classified into:
  * models - which contain open source model files
  * models-properietary - which contain properietary model files.
- 
+
  Each model directory categorized by license has a subdirectory for each file
  format that AssimpKit supports.
- 
+
  The list of file formats that AssimpKit supports is in valid-extensions.txt
  file under assets directory.
  */
@@ -67,7 +68,6 @@
 
 @end
 
-
 @implementation AssimpImporterTests
 
 #pragma mark - Set up and tear down
@@ -76,12 +76,11 @@
  @name Set up and tear down
  */
 
-
 /**
  The common initialization for each test method.
- 
+
  This method initializes the assets path from the TEST_ASSETS_PATH which is
- a processor macro defined in the AssimpSceneKit_LogicTests target defined in 
+ a processor macro defined in the AssimpSceneKit_LogicTests target defined in
  both OSX-Example and iOS-Example projects.
  */
 - (void)setUp
@@ -179,8 +178,8 @@
 /**
  Check the scenekit node's materials property from the corrersponding material
  property of the material for a mesh of the specified node.
- 
- This checks that the material texture file has the correct path. 
+
+ This checks that the material texture file has the correct path.
  If no texture is defined, it checks the material color exists.
 
  @param aiNode The assimp node.
@@ -294,21 +293,20 @@
 /**
  Check the scenekit node's materials from the corrersponding material
  materials of the specified node.
- 
+
  This checks that the material texture file has the correct path.
  If no texture is defined, it checks the material color exists.
- 
+
  @param aiNode The assimp node.
  @param sceneNode The scenekit node.
  @param modelPath The path to the file being tested.
  @param testLog The log for the file being tested.
  */
 
-
 /**
  Check the scenekit node's materials from the corrersponding material
  materials of the specified node.
- 
+
  This checks each material property of the material.
 
  @param aiNode The assimp node.
@@ -523,9 +521,9 @@
  */
 
 /**
- Checks the cameras in the scenekit scene correspond to the cameras in the 
+ Checks the cameras in the scenekit scene correspond to the cameras in the
  assimp scene.
- 
+
  @param aiScene The assimp. scene.
  @param scene The scenekit scene.
  @param testLog The log for the file being tested.
@@ -566,7 +564,7 @@
  */
 
 /**
- Checks the animation data for bone positions in scenekit scene contains 
+ Checks the animation data for bone positions in scenekit scene contains
  the animation data from the assimp scene for each bone in the animation.
 
  @param aiNodeAnim The assimp node.
@@ -667,7 +665,7 @@
 /**
  Checks the animation data for bone orientations in scenekit scene contains
  the animation data from the assimp scene for each bone in the animation.
- 
+
  @param aiNodeAnim The assimp node.
  @param aiAnimation The assimp animation.
  @param channelKeys The bone channels in the assimp animation.
@@ -773,7 +771,7 @@
 /**
  Checks the animation data for bone scales in scenekit scene contains
  the animation data from the assimp scene for each bone in the animation.
- 
+
  @param aiNodeAnim The assimp node.
  @param aiAnimation The assimp animation.
  @param channelKeys The bone channels in the assimp animation.
@@ -867,7 +865,6 @@
         }
     }
 }
-
 
 /**
  Checks the animation data for bones in scenekit scene contains
@@ -972,9 +969,9 @@
 
 /**
  Checks the scene kit scene corresponds to the assimp scene.
- 
+
  This is the entry point check method for each model file that is tested.
- 
+
  This verifies that:
  1. The scenekit scene has the same node hierarchy as the assimp scene where
  each node has the correct geometry with geometry sources, elements and
@@ -1002,7 +999,10 @@
     }
 
     AssimpImporter *importer = [[AssimpImporter alloc] init];
-    SCNAssimpScene *scene = [importer importScene:path];
+    SCNAssimpScene *scene =
+        [importer importScene:path
+             postProcessFlags:AssimpKit_Process_FlipUVs |
+                              AssimpKit_Process_Triangulate];
 
     [self checkNode:aiScene->mRootNode
         withSceneNode:[scene.rootNode.childNodes objectAtIndex:0]
@@ -1026,15 +1026,14 @@
  @name Test all models
  */
 
-
 /**
  Creates an array of the model files that can be tested.
- 
+
  This filters the assets directory for the file formats that are supported
- by AssimpKit. 
- 
+ by AssimpKit.
+
  The list of valid file formats is stored in assets/valid-extensions.txt.
- 
+
  See: The test class description for more details about the assets directory.
 
  @return The array of model files that can be tested.
@@ -1112,7 +1111,6 @@
 
     return modelFilePaths;
 }
-
 
 /**
  The test method that tests all the testable models specifed by getModelFiles
