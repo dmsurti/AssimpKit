@@ -33,15 +33,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 
-#import "SCNAssimpScene.h"
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
-
+#import "SCNAssimpScene.h"
 
 /**
  A scenekit SCNScene category to import scenes using the assimp library.
  */
 @interface SCNScene (AssimpImport)
+
 
 #pragma mark - Loading scenes using assimp
 
@@ -53,16 +53,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  Loads a scene from a file with the specified name in the app’s main bundle.
 
  @param name The name of a scene file in the app bundle’s resources directory.
+ @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
-+ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name;
++ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
+                    postProcessFlags:(unsigned int)postProcessFlags;
 
 /**
  Loads a scene from the specified NSString URL.
 
  @param url The NSString URL to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
-+ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url;
++ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
+                      postProcessFlags:(unsigned int)postProcessFlags;
 
 @end
