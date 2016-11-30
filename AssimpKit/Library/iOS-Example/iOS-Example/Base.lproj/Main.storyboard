@@ -26,7 +26,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="RFb-cl-SDi" kind="show" id="3A2-0a-RO0"/>
+                                    <segue destination="RFb-cl-SDi" kind="show" identifier="showAnimsSegue_ID" id="3A2-0a-RO0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -35,7 +35,13 @@
                             <outlet property="delegate" destination="0b6-Lt-c0x" id="R0L-Bx-hzk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select Model" id="mXa-E0-W8x"/>
+                    <navigationItem key="navigationItem" title="Select Model" id="mXa-E0-W8x">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="KzP-Jb-o8L">
+                            <connections>
+                                <segue destination="RFb-cl-SDi" kind="show" identifier="skipModelSegue_ID" id="71b-f3-S4H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkM-q3-Jkv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -58,7 +64,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="iqo-YI-Q9i"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="playAnimSegue_ID" id="iqo-YI-Q9i"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -67,6 +73,15 @@
                             <outlet property="delegate" destination="RFb-cl-SDi" id="43R-79-lpW"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Select Animation" id="Z7o-EQ-xfd" userLabel="Select Animation">
+                        <barButtonItem key="rightBarButtonItem" title="View Model" id="rjk-QF-99W">
+                            <connections>
+                                <segue destination="BV1-FR-VrT" kind="show" identifier="viewModelSegue_ID" id="af6-La-eBg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5hp-5G-x1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -105,4 +120,8 @@
             <point key="canvasLocation" x="-1585" y="-101"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="71b-f3-S4H"/>
+        <segue reference="iqo-YI-Q9i"/>
+    </inferredMetricsTieBreakers>
 </document>
