@@ -52,14 +52,18 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                          NSUserDomainMask, YES);
     NSString *docsDir = [paths objectAtIndex:0];
-    self.modelFiles =
+    NSArray* files =
         [[NSFileManager defaultManager] contentsOfDirectoryAtPath:docsDir
                                                             error:NULL];
-    for (NSInteger count = 0; count < self.modelFiles.count; count++)
+    NSMutableArray* supportedFiles = [[NSMutableArray alloc] init];
+    for (NSString* file in files)
     {
-        NSLog(@"File %d: %@", (count + 1),
-              [self.modelFiles objectAtIndex:count]);
+        NSLog(@" File extension is: %@", file.pathExtension);
+        if ([SCNScene canImportFileExtension:file.pathExtension]) {
+            [supportedFiles addObject:file];
+        }
     }
+    self.modelFiles = supportedFiles;
 }
 
 - (void)didReceiveMemoryWarning
