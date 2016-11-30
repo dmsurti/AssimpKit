@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>AssimpKitPostProcessSteps Constants Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">AssimpKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Deepak Surti, Ison Apps, AssimpKit team</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">AssimpKitPostProcessSteps Constants Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Declared in</th>
+	<td>PostProcessingFlags.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+
+                    
+                    <h3 class="subsubtitle method-title">AssimpKitPostProcessSteps</h3>
+                    
+					
+					<div class="section section-overview">
+                        <p>Defines the flags for all possible post processing steps.</p>
+
+<p>The following presets can also be used for post processing:</p>
+
+<hr></hr>
+
+
+<p><b>AssimpKit_ProcessPreset_TargetRealtimeUse_Fast</b> - Default postprocess
+configuration optimizing the data for real-time rendering.</p>
+
+<p>Applications would want to use this preset to load models on end-user PCs,
+maybe for direct use in game.</p>
+
+<hr></hr>
+
+
+<p><b>AssimpKit_ProcessPreset_TargetRealtime_Quality</b> - Default postprocess
+configuration optimizing the data for real-time rendering.</p>
+
+<p>Unlike AssimpKit_ProcessPreset_TargetRealtime_Fast, this configuration performs some
+extra optimizations to improve rendering speed and to minimize memory usage. It
+could be a good choice for a level editor environment where import speed is not
+so important.</p>
+
+<hr></hr>
+
+
+<p><b>AssimpKit_ProcessPreset_TargetRealtime_MaxQuality</b> - Default postprocess
+configuration optimizing the data for real-time rendering.</p>
+
+<p>This preset enables almost every optimization step to achieve perfectly
+optimized data. It&rsquo;s your choice for level editor environments where import
+speed is not important.</p>
+
+<hr></hr>
+
+
+<p><b>Note</b>: All the flags and presets are copied and renamed from Assimp&rsquo;s
+postprocess.h</p>
+					</div>
+					
+					
+                    <div class="section">
+                        <!-- display enum values -->
+                        
+                        <h4 class="method-subtitle">Definition</h4>
+                        <code>typedef NS_ENUM(NSInteger, AssimpKitPostProcessSteps ) {<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_CalcTangentSpace</a> = 0 x1,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_JoinIdenticalVertices</a> = 0 x2,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_MakeLeftHanded</a> = 0 x4,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_Triangulate</a> = 0 x8,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_RemoveComponent</a> = 0 x10,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_GenNormals</a> = 0 x20,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_GenSmoothNormals</a> = 0 x40,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_SplitLargeMeshes</a> = 0 x80,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_PreTransformVertices</a> = 0 x100,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_LimitBoneWeights</a> = 0 x200,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_ValidateDataStructure</a> = 0 x400,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_ImproveCacheLocality</a> = 0 x800,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_RemoveRedundantMaterials</a> = 0 x1000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_FixInfacingNormals</a> = 0 x2000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_SortByPType</a> = 0 x8000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_FindDegenerates</a> = 0 x10000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_FindInvalidData</a> = 0 x20000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_GenUVCoords</a> = 0 x40000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_TransformUVCoords</a> = 0 x80000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_FindInstances</a> = 0 x100000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_OptimizeMeshes</a> = 0 x200000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_OptimizeGraph</a> = 0 x400000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_FlipUVs</a> = 0 x800000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_FlipWindingOrder</a> = 0 x1000000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_SplitByBoneCount</a> = 0 x2000000,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AssimpKit_Process_Debone</a> = 0 x4000000,<br>
+                            
+                            };</code>
+                    
+                    </div>
+                    
+                    <div class="section section-methods">
+                        <h4 class="method-subtitle">Constants</h4>
+                        <dl class="termdef">
+                            
+                            <dt><a name="" title="AssimpKit_Process_CalcTangentSpace"></a><code>AssimpKit_Process_CalcTangentSpace</code></dt>
+<dd>
+
+
+<p>Calculates the tangents and bitangents for the imported meshes.
+Does nothing if a mesh does not have normals. You might want this post
+processing step to be executed if you plan to use tangent space
+calculations such as normal mapping applied to the meshes.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_JoinIdenticalVertices"></a><code>AssimpKit_JoinIdenticalVertices</code></dt>
+<dd>
+
+
+<p>Identifies and joins identical vertex data sets within all imported
+meshes. After this step is run, each mesh contains unique vertices,
+so a vertex may be used by multiple faces. You usually want
+to use this post processing step. If your application deals with
+indexed geometry, this step is compulsory or you&rsquo;ll just waste rendering
+time. If this flag is not specified</b>, no vertices are referenced by
+more than one face and <b>no index buffer is required</b> for rendering.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_MakeLeftHanded"></a><code>AssimpKit_Process_MakeLeftHanded</code></dt>
+<dd>
+
+
+<hr>Converts all the imported data to a left-handed coordinate space.
+
+
+<p>By default the data is returned in a right-handed coordinate space (which
+OpenGL prefers). In this space, +X points to the right,
++Z points towards the viewer, and +Y points upwards. In the DirectX
+coordinate space +X points to the right, +Y points upwards, and +Z points
+away from the viewer.
+You&rsquo;ll probably want to consider this flag if you use Direct3D for
+rendering. The AssimpKit_Process_ConvertToLeftHanded flag supersedes this
+setting and bundles all conversions typically required for D3D-based
+applications.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_Triangulate"></a><code>AssimpKit_Process_Triangulate</code></dt>
+<dd>
+
+
+<hr>Triangulates all faces of all meshes.
+
+
+<p>By default the imported mesh data might contain faces with more than 3
+indices. For rendering you&rsquo;ll usually want all faces to be triangles.
+This post processing step splits up faces with more than 3 indices into
+triangles. Line and point primitives are <em>not</em> modified! If you want
+&lsquo;triangles only&rsquo; with no other kinds of primitives, try the following
+solution:</p>
+
+<ul>
+<li>Specify both AssimpKit_Process_Triangulate and #aiProcess_SortByPType </li>
+<li>Ignore all point and line meshes when you process assimp's output</li>
+</ul>
+
+
+
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_RemoveComponent"></a><code>AssimpKit_Process_RemoveComponent</code></dt>
+<dd>
+
+
+<hr>Removes some parts of the data structure (animations, materials,
+
+
+<p>light sources, cameras, textures, vertex components).
+The  components to be removed are specified in a separate
+importer property, <tt>#AI_CONFIG_PP_RVC_FLAGS</tt>. This is quite useful
+if you don&rsquo;t need all parts of the output structure. Vertex colors
+are rarely used today for example&hellip; Calling this step to remove unneeded
+data from the pipeline as early as possible results in increased
+performance and a more optimized output data structure.
+This step is also useful if you want to force Assimp to recompute
+normals or tangents. The corresponding steps don&rsquo;t recompute them if
+they&rsquo;re already there (loaded from the source asset). By using this
+step you can make sure they are NOT there.
+This flag is a poor one, mainly because its purpose is usually
+misunderstood. Consider the following case: a 3D model has been exported
+from a CAD app, and it has per-face vertex colors. Vertex positions can&rsquo;t be
+shared, thus the AssimpKit_Process_JoinIdenticalVertices step fails to
+optimize the data because of these nasty little vertex colors.
+Most apps don&rsquo;t even process them, so it&rsquo;s all for nothing. By using
+this step, unneeded components are excluded as early as possible
+thus opening more room for internal optimizations.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_GenNormals"></a><code>AssimpKit_Process_GenNormals</code></dt>
+<dd>
+
+
+<hr>Generates normals for all faces of all meshes.
+
+
+<p>This is ignored if normals are already there at the time this flag
+is evaluated. Model importers try to load them from the source file, so
+they&rsquo;re usually already there. Face normals are shared between all points
+of a single face, so a single point can have multiple normals, which
+forces the library to duplicate vertices in some cases.
+AssimpKit_Process_JoinIdenticalVertices is <em>senseless</em> then.
+This flag may not be specified together with AssimpKit_Process_GenSmoothNormals.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_GenSmoothNormals"></a><code>AssimpKit_Process_GenSmoothNormals</code></dt>
+<dd>
+
+
+<hr>Generates smooth normals for all vertices in the mesh.
+
+
+<p>This is ignored if normals are already there at the time this flag
+is evaluated. Model importers try to load them from the source file, so
+they&rsquo;re usually already there.
+This flag may not be specified together with
+AssimpKit_Process_GenNormals. There&rsquo;s a importer property,
+<tt>#AI_CONFIG_PP_GSN_MAX_SMOOTHING_ANGLE</tt> which allows you to specify
+an angle maximum for the normal smoothing algorithm. Normals exceeding
+this limit are not smoothed, resulting in a &lsquo;hard&rsquo; seam between two faces.
+Using a decent angle here (e.g. 80 degrees) results in very good visual
+appearance.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_SplitLargeMeshes"></a><code>AssimpKit_Process_SplitLargeMeshes</code></dt>
+<dd>
+
+
+<hr>Splits large meshes into smaller sub-meshes.
+
+
+<p>This is quite useful for real-time rendering, where the number of triangles
+which can be maximally processed in a single draw-call is limited
+by the video driver/hardware. The maximum vertex buffer is usually limited
+too. Both requirements can be met with this step: you may specify both a
+triangle and vertex limit for a single mesh.
+The split limits can (and should!) be set through the
+<tt>#AI_CONFIG_PP_SLM_VERTEX_LIMIT</tt> and <tt>#AI_CONFIG_PP_SLM_TRIANGLE_LIMIT</tt>
+importer properties. The default values are <tt>#AI_SLM_DEFAULT_MAX_VERTICES</tt> and
+<tt>#AI_SLM_DEFAULT_MAX_TRIANGLES</tt>.
+Note that splitting is generally a time-consuming task, but only if there&rsquo;s
+something to split. The use of this step is recommended for most users.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_PreTransformVertices"></a><code>AssimpKit_Process_PreTransformVertices</code></dt>
+<dd>
+
+
+<hr>Removes the node graph and pre-transforms all vertices with
+
+
+<p>the local transformation matrices of their nodes.
+The output scene still contains nodes, however there is only a
+root node with children, each one referencing only one mesh,
+and each mesh referencing one material. For rendering, you can
+simply render all meshes in order - you don&rsquo;t need to pay
+attention to local transformations and the node hierarchy.
+Animations are removed during this step.
+This step is intended for applications without a scenegraph.
+The step CAN cause some problems: if e.g. a mesh of the asset
+contains normals and another, using the same material index, does not,
+they will be brought together, but the first meshes&rsquo;s part of
+the normal list is zeroed. However, these artifacts are rare.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_LimitBoneWeights"></a><code>AssimpKit_Process_LimitBoneWeights</code></dt>
+<dd>
+
+
+<hr>Limits the number of bones simultaneously affecting a single vertex
+
+
+<p>to a maximum value.
+If any vertex is affected by more than the maximum number of bones, the least
+important vertex weights are removed and the remaining vertex weights are
+renormalized so that the weights still sum up to 1.
+The default bone weight limit is 4 (defined as <tt>#AI_LMW_MAX_WEIGHTS</tt> in
+config.h), but you can use the <tt>#AI_CONFIG_PP_LBW_MAX_WEIGHTS</tt> importer
+property to supply your own limit to the post processing step.
+If you intend to perform the skinning in hardware, this post processing
+step might be of interest to you.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_ValidateDataStructure"></a><code>AssimpKit_Process_ValidateDataStructure</code></dt>
+<dd>
+
+
+<hr>Validates the imported scene data structure.
+
+
+<p>This makes sure that all indices are valid, all animations and
+bones are linked correctly, all material references are correct .. etc.
+It is recommended that you capture Assimp&rsquo;s log output if you use this flag,
+so you can easily find out what&rsquo;s wrong if a file fails the
+validation. The validator is quite strict and will find <em>all</em>
+inconsistencies in the data structure&hellip; It is recommended that plugin
+developers use it to debug their loaders. There are two types of
+validation failures:</p>
+
+<ul>
+<li>Error: There's something wrong with the imported data. Further
+postprocessing is not possible and the data is not usable at all.
+The import fails. #Importer::GetErrorString() or #aiGetErrorString()
+carry the error message around.</li>
+<li>Warning: There are some minor issues (e.g. 1000000 animation
+keyframes with the same time), but further postprocessing and use
+of the data structure is still safe. Warning details are written
+to the log file, <tt>#AI_SCENE_FLAGS_VALIDATION_WARNING</tt> is set
+in #aiScene::mFlags</li>
+</ul>
+
+
+<p>This post-processing step is not time-consuming. Its use is not
+compulsory, but recommended.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_ImproveCacheLocality"></a><code>AssimpKit_Process_ImproveCacheLocality</code></dt>
+<dd>
+
+
+<hr>Reorders triangles for better vertex cache locality.
+
+
+<p>The step tries to improve the ACMR (average post-transform vertex cache
+miss ratio) for all meshes. The implementation runs in O(n) and is
+roughly based on the &lsquo;tipsify&rsquo; algorithm (see <a href="
+[http://www.cs.princeton.edu/gfx/pubs/Sander](http://www.cs.princeton.edu/gfx/pubs/Sander)_2007_%3ETR/tipsy.pdf">this
+paper</a>).
+If you intend to render huge models in hardware, this step might
+be of interest to you. The <tt>#AI_CONFIG_PP_ICL_PTCACHE_SIZE</tt>
+importer property can be used to fine-tune the cache optimization.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_RemoveRedundantMaterials"></a><code>AssimpKit_Process_RemoveRedundantMaterials</code></dt>
+<dd>
+
+
+<hr>Searches for redundant/unreferenced materials and removes them.
+
+
+<p>This is especially useful in combination with the
+Process_PretransformVertices and Process_OptimizeMeshes flags.
+Both join small meshes with equal characteristics, but they can&rsquo;t do
+their work if two meshes have different materials. Because several
+material settings are lost during Assimp&rsquo;s import filters,
+(and because many exporters don&rsquo;t check for redundant materials), huge
+models often have materials which are are defined several times with
+exactly the same settings.
+Several material settings not contributing to the final appearance of
+a surface are ignored in all comparisons (e.g. the material name).
+So, if you&rsquo;re passing additional information through the
+content pipeline (probably using <em>magic</em> material names), don&rsquo;t
+specify this flag. Alternatively take a look at the
+<tt>#AI_CONFIG_PP_RRM_EXCLUDE_LIST</tt> importer property.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_FixInfacingNormals"></a><code>AssimpKit_Process_FixInfacingNormals</code></dt>
+<dd>
+
+
+<hr>This step tries to determine which meshes have normal vectors
+
+
+<p>that are facing inwards and inverts them.
+The algorithm is simple but effective:
+the bounding box of all vertices + their normals is compared against
+the volume of the bounding box of all vertices without their normals.
+This works well for most objects, problems might occur with planar
+surfaces. However, the step tries to filter such cases.
+The step inverts all in-facing normals. Generally it is recommended
+to enable this step, although the result is not always correct.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_SortByPType"></a><code>AssimpKit_Process_SortByPType</code></dt>
+<dd>
+
+
+<hr>This step splits meshes with more than one primitive type in
+
+
+<p>homogeneous sub-meshes.
+The step is executed after the triangulation step. After the step
+returns, just one bit is set in aiMesh::mPrimitiveTypes. This is
+especially useful for real-time rendering where point and line
+primitives are often ignored or rendered separately.
+You can use the <tt>#AI_CONFIG_PP_SBP_REMOVE</tt> importer property to
+specify which primitive types you need. This can be used to easily
+exclude lines and points, which are rarely used, from the import.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_FindDegenerates"></a><code>AssimpKit_Process_FindDegenerates</code></dt>
+<dd>
+
+
+<hr>This step searches all meshes for degenerate primitives and
+
+
+<p>converts them to proper lines or points.
+A face is &lsquo;degenerate&rsquo; if one or more of its points are identical.
+To have the degenerate stuff not only detected and collapsed but
+removed, try one of the following procedures:
+<br><b>1.</b> (if you support lines and points for rendering but don&rsquo;t
+want the degenerates)</br></p>
+
+<ul>
+<li>Specify the AssimpKit_Process_FindDegenerates flag.
+</li>
+<li>Set the <tt>#AI_CONFIG_PP_FD_REMOVE</tt> importer property to
+1. This will cause the step to remove degenerate triangles from the
+import as soon as they're detected. They won't pass any further
+pipeline steps.
+</li>
+</ul>
+
+
+<p><br><b>2.</b>(if you don&rsquo;t support lines and points at all)</br></p>
+
+<ul>
+<li>Specify the AssimpKit_Process_FindDegenerates flag.
+</li>
+<li>Specify the Process_SortByPType flag. This moves line and
+point primitives to separate meshes.
+</li>
+<li>Set the <tt>#AI_CONFIG_PP_SBP_REMOVE</tt> importer property to
+@code AssimpKit_PrimitiveType_POINTS | aiPrimitiveType_LINES
+@endcode to cause SortByPType to reject point
+and line meshes from the scene.
+</li>
+</ul>
+
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_FindInvalidData"></a><code>AssimpKit_Process_FindInvalidData</code></dt>
+<dd>
+
+
+<hr>This step searches all meshes for invalid data, such as zeroed
+
+
+<p>normal vectors or invalid UV coords and removes/fixes them. This is
+intended to get rid of some common exporter errors.
+This is especially useful for normals. If they are invalid, and
+the step recognizes this, they will be removed and can later
+be recomputed, i.e. by the AssimpKit_Process_GenSmoothNormals flag.<br>
+The step will also remove meshes that are infinitely small and reduce
+animation tracks consisting of hundreds if redundant keys to a single
+key. The <tt>AI_CONFIG_PP_FID_ANIM_ACCURACY</tt> config property decides
+the accuracy of the check for duplicate animation tracks.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_GenUVCoords"></a><code>AssimpKit_Process_GenUVCoords</code></dt>
+<dd>
+
+
+<hr>This step converts non-UV mappings (such as spherical or
+
+
+<p>cylindrical mapping) to proper texture coordinate channels.
+Most applications will support UV mapping only, so you will
+probably want to specify this step in every case. Note that Assimp is not
+always able to match the original mapping implementation of the
+3D app which produced a model perfectly. It&rsquo;s always better to let the
+modelling app compute the UV channels - 3ds max, Maya, Blender,
+LightWave, and Modo do this for example.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_TransformUVCoords"></a><code>AssimpKit_Process_TransformUVCoords</code></dt>
+<dd>
+
+
+<hr>This step applies per-texture UV transformations and bakes
+
+
+<p>them into stand-alone vtexture coordinate channels.
+UV transformations are specified per-texture - see the
+<tt>#AI_MATKEY_UVTRANSFORM</tt> material key for more information.
+This step processes all textures with
+transformed input UV coordinates and generates a new (pre-transformed)
+UV Channel which replaces the old channel.
+Most applications won&rsquo;t support UV transformations, so you will probably
+want to specify this step.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_FindInstances"></a><code>AssimpKit_Process_FindInstances</code></dt>
+<dd>
+
+
+<hr>This step searches for duplicate meshes and replaces them
+
+
+<p>with references to the first mesh.
+This step takes a while, so don&rsquo;t use it if speed is a concern.
+Its main purpose is to workaround the fact that many export
+file formats don&rsquo;t support instanced meshes, so exporters need to
+duplicate meshes. This step removes the duplicates again. Please
+note that Assimp does not currently support per-node material
+assignment to meshes, which means that identical meshes with
+different materials are currently <em>not</em> joined, although this is
+planned for future versions.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_OptimizeMeshes"></a><code>AssimpKit_Process_OptimizeMeshes</code></dt>
+<dd>
+
+
+<hr>A postprocessing step to reduce the number of meshes.
+
+
+<p>This will, in fact, reduce the number of draw calls.
+This is a very effective optimization and is recommended to be used
+together with AssimpKit_Process_OptimizeGraph, if possible. The flag is fully
+compatible with both AssimpKit_Process_SplitLargeMeshes and
+AssimpKit_Process_SortByPType.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_OptimizeGraph"></a><code>AssimpKit_Process_OptimizeGraph</code></dt>
+<dd>
+
+
+<hr>A postprocessing step to optimize the scene hierarchy.
+
+
+<p>Nodes without animations, bones, lights or cameras assigned are
+collapsed and joined.
+Node names can be lost during this step. If you use special &lsquo;tag nodes&rsquo;
+to pass additional information through your content pipeline, use the
+<tt>#AI_CONFIG_PP_OG_EXCLUDE_LIST</tt> importer property to specify a
+list of node names you want to be kept. Nodes matching one of the names
+in this list won&rsquo;t be touched or modified.
+Use this flag with caution. Most simple files will be collapsed to a
+single node, so complex hierarchies are usually completely lost. This is
+not useful for editor environments, but probably a very effective
+optimization if you just want to get the model data, convert it to your
+own format, and render it as fast as possible.
+This flag is designed to be used with AssimpKit_Process_OptimizeMeshes for best
+results.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_FlipUVs"></a><code>AssimpKit_Process_FlipUVs</code></dt>
+<dd>
+
+
+<hr>This step flips all UV coordinates along the y-axis and adjusts
+
+
+<p>material settings and bitangents accordingly.
+You&rsquo;ll probably want to consider this flag if you use Direct3D for
+rendering. The AssimpKit_Process_ConvertToLeftHanded flag supersedes this
+setting and bundles all conversions typically required for D3D-based
+applications.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_FlipWindingOrder"></a><code>AssimpKit_Process_FlipWindingOrder</code></dt>
+<dd>
+
+
+<hr>This step adjusts the output face winding order to be CW.
+
+
+<p>The default face winding order is counter clockwise (CCW).</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_SplitByBoneCount"></a><code>AssimpKit_Process_SplitByBoneCount</code></dt>
+<dd>
+
+
+<hr>This step splits meshes with many bones into sub-meshes so that each
+
+
+<p>su-bmesh has fewer or as many bones as a given limit.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AssimpKit_Process_Debone"></a><code>AssimpKit_Process_Debone</code></dt>
+<dd>
+
+
+<hr>This step removes bones losslessly or according to some threshold.
+
+
+<p>In some cases (i.e. formats that require it) exporters are forced to
+assign dummy bone weights to otherwise static meshes assigned to
+animated meshes. Full, weight-based skinning is expensive while
+animating nodes is extremely cheap, so this step is offered to clean up
+the data in that regard.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">PostProcessingFlags.h</code>.
+	</p>
+	
+</dd>
+                            
+                        </dl>
+                    </div>
+                    
+
+                    
+                    
+
+                    
+
+                    
+                    <div class="method-subsection declared-in-section">
+                        <h4 class="method-subtitle">Declared In</h4>
+                        <p><code class="declared-in-ref">PostProcessingFlags.h</code></p>
+                    </div>
+                    
+                    
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-11-30</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
