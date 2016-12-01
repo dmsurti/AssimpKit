@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = 7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = 7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7746DB6A1DEEF93F00C651DC /* valid-extensions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB691DEEF93F00C651DC /* valid-extensions.txt */; };
+		7746DB6D1DEEFD8600C651DC /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1D31DDF29F200DED366 /* AssimpKit.framework */; };
+		7746DB711DEEFE4000C651DC /* SCNSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7746DB701DEEFE4000C651DC /* SCNSceneTests.m */; };
+		7746DB721DEF01BD00C651DC /* valid-extensions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB691DEEF93F00C651DC /* valid-extensions.txt */; };
+		7746DB741DEF08FE00C651DC /* not-supported-formats.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB731DEF08FE00C651DC /* not-supported-formats.txt */; };
+		7746DB751DEF090500C651DC /* not-supported-formats.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB731DEF08FE00C651DC /* not-supported-formats.txt */; };
+		7746DB771DEF0DFA00C651DC /* SCNSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7746DB761DEF0DFA00C651DC /* SCNSceneTests.m */; };
 		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
 		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
@@ -29,7 +36,6 @@
 		779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF2141DDF2BB000DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */; };
 		779DF2151DDF2BEE00DED366 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1A71DDF262500DED366 /* libassimp.a */; };
-		779DF2651DDF2F9800DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1D31DDF29F200DED366 /* AssimpKit.framework */; };
 		779DF26E1DDF2FD500DED366 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */; };
 		779DF26F1DDF2FD500DED366 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF26D1DDF2FD500DED366 /* ModelLog.m */; };
 		779DF2791DDF30B200DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */; };
@@ -71,6 +77,10 @@
 /* Begin PBXFileReference section */
 		7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostProcessingFlags.h; path = ../../Code/Model/PostProcessingFlags.h; sourceTree = "<group>"; };
 		7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostProcessingFlags.h; path = ../../Code/Model/PostProcessingFlags.h; sourceTree = "<group>"; };
+		7746DB691DEEF93F00C651DC /* valid-extensions.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "valid-extensions.txt"; path = "../assets/valid-extensions.txt"; sourceTree = "<group>"; };
+		7746DB701DEEFE4000C651DC /* SCNSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNSceneTests.m; path = ../../Code/Model/Tests/SCNSceneTests.m; sourceTree = "<group>"; };
+		7746DB731DEF08FE00C651DC /* not-supported-formats.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "not-supported-formats.txt"; path = "../assets/not-supported-formats.txt"; sourceTree = "<group>"; };
+		7746DB761DEF0DFA00C651DC /* SCNSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNSceneTests.m; path = ../../Code/Model/Tests/SCNSceneTests.m; sourceTree = "<group>"; };
 		779DF1A71DDF262500DED366 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
 		779DF1D31DDF29F200DED366 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DF1D61DDF29F200DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				779DF2651DDF2F9800DED366 /* AssimpKit.framework in Frameworks */,
+				7746DB6D1DEEFD8600C651DC /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +158,8 @@
 		779DF17F1DDF257A00DED366 = {
 			isa = PBXGroup;
 			children = (
+				7746DB731DEF08FE00C651DC /* not-supported-formats.txt */,
+				7746DB691DEEF93F00C651DC /* valid-extensions.txt */,
 				779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */,
 				779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */,
 				779DF1D41DDF29F200DED366 /* AssimpKit-iOS */,
@@ -234,6 +246,7 @@
 		779DF2611DDF2F9800DED366 /* AssimpKitTests_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7746DB701DEEFE4000C651DC /* SCNSceneTests.m */,
 				779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */,
 				779DF26C1DDF2FD500DED366 /* ModelLog.h */,
 				779DF26D1DDF2FD500DED366 /* ModelLog.m */,
@@ -245,6 +258,7 @@
 		779DF2751DDF30B200DED366 /* AssimpKitTests_macOS */ = {
 			isa = PBXGroup;
 			children = (
+				7746DB761DEF0DFA00C651DC /* SCNSceneTests.m */,
 				779DF27F1DDF30E700DED366 /* AssimpImporterTests.m */,
 				779DF2801DDF30E700DED366 /* ModelLog.h */,
 				779DF2811DDF30E700DED366 /* ModelLog.m */,
@@ -439,6 +453,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7746DB741DEF08FE00C651DC /* not-supported-formats.txt in Resources */,
+				7746DB721DEF01BD00C651DC /* valid-extensions.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +462,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7746DB751DEF090500C651DC /* not-supported-formats.txt in Resources */,
+				7746DB6A1DEEF93F00C651DC /* valid-extensions.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				779DF26F1DDF2FD500DED366 /* ModelLog.m in Sources */,
+				7746DB711DEEFE4000C651DC /* SCNSceneTests.m in Sources */,
 				779DF26E1DDF2FD500DED366 /* AssimpImporterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				779DF2831DDF30E700DED366 /* ModelLog.m in Sources */,
+				7746DB771DEF0DFA00C651DC /* SCNSceneTests.m in Sources */,
 				779DF2821DDF30E700DED366 /* AssimpImporterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -866,6 +886,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKitTests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -912,6 +936,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isonapps.AssimpKitTests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

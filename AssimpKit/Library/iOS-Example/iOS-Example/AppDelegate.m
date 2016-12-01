@@ -3,7 +3,7 @@
 ---------------------------------------------------------------------------
 Assimp to Scene Kit Library (AssimpKit)
 ---------------------------------------------------------------------------
-Copyright (c) 2016, AssimpKit team
+Copyright (c) 2016, Deepak Surti, Ison Apps, AssimpKit team
 All rights reserved.
 Redistribution and use of this software in source and binary forms,
 with or without modification, are permitted provided that the following
@@ -45,6 +45,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    UIStoryboard *mainStoryboard =
+        [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    UINavigationController *navVC = (UINavigationController *)[mainStoryboard
+        instantiateViewControllerWithIdentifier:@"navVC_ID"];
+
+    // UI Appearance
+    self.window.tintColor = [UIColor blackColor];
+
+    // customize UINavigationBar
+    navVC.navigationBar.translucent = NO;
+    [[UINavigationBar appearance]
+        setBackgroundImage:[UIImage imageNamed:@"navbar-bg.png"]
+             forBarMetrics:UIBarMetricsDefault];
+
     return YES;
 }
 
@@ -52,7 +67,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {
     // Sent when the application is about to move from active to inactive state.
     // This can occur for certain types of temporary interruptions (such as an
-    // incoming phone call or SMS message) or when the user quits the application
+    // incoming phone call or SMS message) or when the user quits the
+    // application
     // and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down
     // OpenGL ES frame rates. Games should use this method to pause the game.
@@ -69,7 +85,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state;
+    // Called as part of the transition from the background to the inactive
+    // state;
     // here you can undo many of the changes made on entering the background.
 }
 

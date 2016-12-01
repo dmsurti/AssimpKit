@@ -50,6 +50,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 /**
+ Returns a Boolean value that indicates whether the SCNAssimpScene class can
+ read asset data from files with the specified extension.
+
+ @param extension The filename extension identifying an asset file format.
+ @return YES if the SCNAssimpScene class can read asset data from files with
+ the specified extension; otherwise, NO.
+ */
++(BOOL)canImportFileExtension:(NSString*)extension;
+
+/**
  Loads a scene from a file with the specified name in the app’s main bundle.
 
  @param name The name of a scene file in the app bundle’s resources directory.

@@ -3,7 +3,7 @@
  ---------------------------------------------------------------------------
  Assimp to Scene Kit Library (AssimpKit)
  ---------------------------------------------------------------------------
- Copyright (c) 2016, Deepak Surti, Ison Apps, AssimpKit team
+ Copyright (c) 2016, AssimpKit team
  All rights reserved.
  Redistribution and use of this software in source and binary forms,
  with or without modification, are permitted provided that the following
@@ -15,10 +15,10 @@
  copyright notice, this list of conditions and the
  following disclaimer in the documentation and/or other
  materials provided with the distribution.
- * Neither the name of the assimp team, nor the names of its
+ * Neither the name of the AssimpKit team, nor the names of its
  contributors may be used to endorse or promote products
  derived from this software without specific prior
- written permission of the assimp team.
+ written permission of the AssimpKit team.
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -33,17 +33,53 @@
  ---------------------------------------------------------------------------
  */
 
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
+#import <XCTest/XCTest.h>
+#import "SCNScene+AssimpImport.h"
 
-    // #define MY_DEBUG 1
-    #ifdef MY_DEBUG
-    #	define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-    #else
-    #	define DLog(...)
-    #endif
+@interface SCNSceneTests : XCTestCase
 
-    // ALog always displays output regardless of the DEBUG setting
-    #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+@end
 
-#endif
+@implementation SCNSceneTests
+
+#pragma mark - Test formats supported
+
+/**
+ @name Test formats supported
+ */
+
+/**
+ Tests the API returns YES for file extensions for supported formats.
+ */
+- (void)testSupportedFormats
+{
+    NSArray *validExts =
+        [@"3d,3ds,ac,b3d,bvh,cob,dae,dxf,hmp,ifc,irr,md2,md5mesh,"
+         @"md5anim,mdl,m3sd,nff,obj,off,mesh.xml,ply,q3o,q3s,raw,"
+         @"smd,stl,wrl,xgl,zgl,fbx,md3" componentsSeparatedByString:@","];
+    for (NSString *validExt in validExts)
+    {
+        XCTAssertTrue([SCNScene canImportFileExtension:validExt],
+                      @"Could not import supported extension %@", validExt);
+    }
+}
+
+/**
+ Tests the API returns NO for file extensions for unsupported formats.
+ */
+- (void)testNotSupportedFormats
+{
+    NSArray *notSupportedExts =
+        [@"ase,csm,lwo,lxo,lws,ter,X,pk3,m3,blend,irrmesh"
+            componentsSeparatedByString:@","];
+    for (NSString *notSupportedExt in notSupportedExts)
+    {
+        XCTAssertFalse([SCNScene canImportFileExtension:notSupportedExt],
+                       @"Can import un-supported format %@", notSupportedExt);
+    }
+
+    XCTAssertFalse([SCNScene canImportFileExtension:@""],
+                   @"Can import format with no extension");
+}
+
+@end

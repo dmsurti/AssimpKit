@@ -15,10 +15,10 @@
  copyright notice, this list of conditions and the
  following disclaimer in the documentation and/or other
  materials provided with the distribution.
- * Neither the name of the assimp team, nor the names of its
+ * Neither the name of the AssimpKit team, nor the names of its
  contributors may be used to endorse or promote products
  derived from this software without specific prior
- written permission of the assimp team.
+ written permission of the AssimpKit team.
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -33,17 +33,8 @@
  ---------------------------------------------------------------------------
  */
 
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-    // #define MY_DEBUG 1
-    #ifdef MY_DEBUG
-    #	define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-    #else
-    #	define DLog(...)
-    #endif
+@interface ModelsTableViewController : UITableViewController
 
-    // ALog always displays output regardless of the DEBUG setting
-    #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-
-#endif
+@end
