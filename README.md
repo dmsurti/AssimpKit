@@ -8,14 +8,16 @@ Status](https://travis-ci.org/dmsurti/AssimpKit.svg?branch=master)](https://trav
 
 **AssimpKit** is a cross platform library (macOS, iOS) that coverts the files supported by [Assimp](https://github.com/assimp/assimp) to [Scene Kit](https://developer.apple.com/reference/scenekit) scenes.
 
-### Why AssimpKit?
+Why AssimpKit?
+---
 
 AssimpKit currently supports ***31 file formats*** that allows you to use these
 files directly in SceneKit without having to convert these to any of the files
 that SceneKit or Model IO supports thereby saving an extra step in your asset
 pipeline.
 
-### Features
+Features
+---
 
 AssimpKit supports loading:
 * Geometry
@@ -24,7 +26,8 @@ AssimpKit supports loading:
 * Cameras and
 * Skeletal animations.
 
-### File formats supported by AssimpKit
+File formats supported by AssimpKit
+---
 
 Currently AssimpKit supports the following file formats:
 
@@ -32,14 +35,16 @@ Currently AssimpKit supports the following file formats:
 m3sd, nff, obj, off, mesh.xml, ply, q3o, q3s, raw, smd, stl, wrl, xgl, zgl, fbx,
 md3***
 
-### Requirements
+Requirements
+---
 
 - Xcode 8.0 or later
 - ObjC 2.0
 - iOS 10.0 or later
 - macOS 10.11 or later
 
-### Installation with Carthage (iOS 10.0+, macOS 10.11+)
+Installation with Carthage (iOS 10.0+, macOS 10.11+)
+---
 
 [Carthage](https://github.com/Carthage/Carthage) is a lightweight dependency
 manager for Swift and Objective-C. It leverages CocoaTouch modules and is less
@@ -48,7 +53,7 @@ invasive than CocoaPods.
 To install with Carthage, follow the instructions on
 [Carthage](https://github.com/Carthage/Carthage).
 
-##### Your application Cartfile should have the following entry for AssimpKit:
+### Your application Cartfile should have the following entry for AssimpKit:
 
 ```
 github "dmsurti/AssimpKit"
@@ -58,11 +63,13 @@ After `carthage update`, add the appropriate platform framework (iOS, macOS) to
 your project. The frameworks are placed in `iOS` and `Mac` subdirectories under
 the `Carthage/Build` directory of your project.
 
-### Important Build Setting for `iOS` applications only
+Important Build Setting for `iOS` applications only
+---
 
 If you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
 
-### Getting Started with AssimpKit
+Getting Started with AssimpKit
+---
 
 Table below lists the important classes in AssimpKit.
 
@@ -74,17 +81,18 @@ SCNAssimpAnimation    | The container for all SceneKit skeletal animation conten
 You can use the AssimpKit category defined on SCNScene to load scenes.
 
 For more details on how to use AssimpKit to load scenes, including those with skeletal
-animations, please refer to the API docs.
+animations, please refer to the [API
+Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
 
-### [API Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
-
-### AssimpKit License
+AssimpKit License
+---
 
 [AssimpKit's license](LICENSE.md) is based on the modified, 3-clause BSD-License.
 
 An informal summary is: do whatever you want, but include Assimp Kit's license text with your product - and don't sue me if the code doesn't work. For the legal details, see the LICENSE file.
 
-### 3D Model Licenses
+3D Model Licenses
+---
 
 AssimpKit uses many model files placed under `assets` directory for testing purpose.
 
@@ -100,11 +108,13 @@ Please refer to [licenses](licenses/) directory for more information.
 
 So, if you re-package AssimpKit for use in a 'clean' OSS package, consider removing the model files which are proprietary.
 
-### Author
+Author
+---
 
 [Deepak Surti](https://github.com/dmsurti)
 
-### Contributing Guide
+Contributing Guide
+---
 
 To contribute to AssimpKit:
 
