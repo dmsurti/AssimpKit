@@ -41,23 +41,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (void)awakeFromNib
 {
-    //  NSString* filePath = @"/Users/deepaksurti/ios-osx/assimp/demo/assets/"
-    // @"models-nonbsd/3DS/jeep1.3ds";
-    NSString *boyPath =
-        @"/Users/deepaksurti/ios-osx/assimp/demo/assets/astroBoy_walk.dae";
-    NSString *soldierPath =
-        @"/Users/deepaksurti/ios-osx/assimp/demo/assets/attack.dae";
-    SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:soldierPath]
-                    postProcessFlags:AssimpKit_Process_FlipUVs |
-                                     AssimpKit_Process_Triangulate];
-    // SCNScene* scene = [SCNScene assimpSceneNamed:@"spider.obj"];
-    SCNAssimpAnimation *anim = [scene animationForKey:@"attack-1"];
-    [scene addAnimation:anim];
-
-    self.gameView.scene = scene;
-
-    // allows the user to manipulate the camera
     self.gameView.allowsCameraControl = YES;
 
     // show statistics such as fps and timing information
@@ -67,6 +50,25 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     self.gameView.backgroundColor = [NSColor whiteColor];
 
     self.gameView.playing = YES;
+}
+
+- (IBAction)viewModel:(id)sender
+{
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowedFileTypes:[SCNAssimpScene allowedFileExtensions]];
+    [panel setCanChooseFiles:YES];
+    [panel setCanChooseDirectories:NO];
+    [panel setAllowsMultipleSelection:NO];
+    NSInteger clicked = [panel runModal];
+
+    if (clicked == NSFileHandlingPanelOKButton)
+    {
+        SCNAssimpScene *scene = [SCNScene
+            assimpSceneWithURL:[NSURL URLWithString:panel.URL.absoluteString]
+              postProcessFlags:AssimpKit_Process_FlipUVs |
+                               AssimpKit_Process_Triangulate];
+        self.gameView.scene = scene;
+    }
 }
 
 @end
