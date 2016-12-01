@@ -673,20 +673,20 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="22C51162-443E-4650-872B-8E4239415293" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="CoT-bb-sBJ">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="CEB2B169-D178-40D0-A99F-BF6B25BFB02E" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="3dmodel" id="elh-6p-o5z" userLabel="Select Model">
+                    <toolbarItem implicitItemIdentifier="CEB2B169-D178-40D0-A99F-BF6B25BFB02E" label="Select Model" paletteLabel="Select Model" tag="-1" image="3dmodel" id="elh-6p-o5z" userLabel="Select Model">
                         <connections>
                             <action selector="viewModel:" target="z44-Lp-cgU" id="EPN-bN-NI5"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C4977358-B938-4F7E-83A6-CBC7DD608182" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="bones" id="Zna-NX-XyX" userLabel="Select Animation"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="6js-PL-qur"/>
-                    <toolbarItem implicitItemIdentifier="0ED290D8-1613-49DE-9676-E7E864C7F015" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="play" id="ufm-R7-2ew"/>
+                    <toolbarItem implicitItemIdentifier="C4977358-B938-4F7E-83A6-CBC7DD608182" label="Select Animation" paletteLabel="Select Animation" tag="-1" image="bones" id="Zna-NX-XyX" userLabel="Select Animation">
+                        <connections>
+                            <action selector="addAnimation:" target="z44-Lp-cgU" id="uP1-AK-YLf"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="elh-6p-o5z"/>
                     <toolbarItem reference="Zna-NX-XyX"/>
-                    <toolbarItem reference="6js-PL-qur"/>
-                    <toolbarItem reference="ufm-R7-2ew"/>
                 </defaultToolbarItems>
             </toolbar>
             <point key="canvasLocation" x="385" y="452"/>
@@ -707,6 +707,5 @@
     <resources>
         <image name="3dmodel" width="128" height="128"/>
         <image name="bones" width="128" height="128"/>
-        <image name="play" width="128" height="128"/>
     </resources>
 </document>
