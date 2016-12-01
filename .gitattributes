@@ -1,2 +1,2 @@
-AssimpKit/assets/* linguist-vendored=false
-AssimpKit/Assimp/* linguist-vendored=false
+AssimpKit/assets/* linguist-vendored=true
+AssimpKit/Assimp/* linguist-vendored=true
