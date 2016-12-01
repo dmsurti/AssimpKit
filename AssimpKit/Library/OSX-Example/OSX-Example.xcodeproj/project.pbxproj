@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		771E8EF61DDF42690081FD6C /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF51DDF42690081FD6C /* AssimpKit.framework */; };
 		771E8EF71DDF42690081FD6C /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF51DDF42690081FD6C /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7726B8681DF001C200856EE7 /* 3dmodel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7726B8661DF001C200856EE7 /* 3dmodel.png */; };
+		7726B8691DF001C200856EE7 /* bones.png in Resources */ = {isa = PBXBuildFile; fileRef = 7726B8671DF001C200856EE7 /* bones.png */; };
+		7726B86B1DF0029300856EE7 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7726B86A1DF0029300856EE7 /* play.png */; };
 		77CDAA571DD715C300B7E342 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA561DD715C300B7E342 /* AppDelegate.m */; };
 		77CDAA5A1DD715C300B7E342 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CDAA591DD715C300B7E342 /* main.m */; };
 		77CDAA711DD715FE00B7E342 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA661DD715FE00B7E342 /* art.scnassets */; };
@@ -44,6 +47,9 @@
 
 /* Begin PBXFileReference section */
 		771E8EF51DDF42690081FD6C /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7726B8661DF001C200856EE7 /* 3dmodel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3dmodel.png; sourceTree = "<group>"; };
+		7726B8671DF001C200856EE7 /* bones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bones.png; sourceTree = "<group>"; };
+		7726B86A1DF0029300856EE7 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		77CDAA521DD715C300B7E342 /* OSX-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OSX-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CDAA551DD715C300B7E342 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		77CDAA561DD715C300B7E342 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -112,6 +118,9 @@
 		77CDAA581DD715C300B7E342 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7726B86A1DF0029300856EE7 /* play.png */,
+				7726B8661DF001C200856EE7 /* 3dmodel.png */,
+				7726B8671DF001C200856EE7 /* bones.png */,
 				77CDAA591DD715C300B7E342 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -186,10 +195,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7726B86B1DF0029300856EE7 /* play.png in Resources */,
 				77CDAA771DD715FE00B7E342 /* SpiderTex.jpg in Resources */,
 				77CDAA761DD715FE00B7E342 /* spider.obj in Resources */,
 				77CDAA711DD715FE00B7E342 /* art.scnassets in Resources */,
+				7726B8681DF001C200856EE7 /* 3dmodel.png in Resources */,
 				77CDAA7A1DD716F100B7E342 /* MainMenu.xib in Resources */,
+				7726B8691DF001C200856EE7 /* bones.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
