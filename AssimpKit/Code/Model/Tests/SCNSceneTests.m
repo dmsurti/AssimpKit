@@ -82,4 +82,12 @@
                    @"Can import format with no extension");
 }
 
+- (void)testSupportedFileTypes
+{
+    NSArray *validExts = [SCNAssimpScene allowedFileExtensions];
+    XCTAssertTrue(validExts.count == 31,
+                  @"Expected %d formats supported, instead supports %lu", 31,
+                  (unsigned long)validExts.count);
+}
+
 @end

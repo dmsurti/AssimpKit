@@ -45,14 +45,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 /**
- Returns a Boolean value that indicates whether the SCNAssimpScene class can
- read asset data from files with the specified extension.
+ Returns the array of file extensions for all the supported formats.
 
- @param extension The filename extension identifying an asset file format.
- @return YES if the SCNAssimpScene class can read asset data from files with
- the specified extension; otherwise, NO.
+ @return The array of supported file extensions
  */
-+ (BOOL)canImportFileExtension:(NSString *)extension
++ (NSArray *)allowedFileExtensions
 {
     NSError *error;
     NSString *extsFile = [[NSBundle bundleForClass:[SCNAssimpScene class]]
@@ -66,14 +63,27 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     {
         ALog(@" Error loading valid-extensions.txt file: %@ ",
              error.description);
-        return NO;
+        return nil;
     }
-
     NSArray *validExts = [
         [extsFileContents componentsSeparatedByCharactersInSet:
                               [NSCharacterSet whitespaceAndNewlineCharacterSet]]
         filteredArrayUsingPredicate:[NSPredicate
                                         predicateWithFormat:@"self != \"\""]];
+    return validExts;
+}
+
+/**
+ Returns a Boolean value that indicates whether the SCNAssimpScene class can
+ read asset data from files with the specified extension.
+
+ @param extension The filename extension identifying an asset file format.
+ @return YES if the SCNAssimpScene class can read asset data from files with
+ the specified extension; otherwise, NO.
+ */
++ (BOOL)canImportFileExtension:(NSString *)extension
+{
+    NSArray *validExts = [SCNAssimpScene allowedFileExtensions];
     return [validExts containsObject:extension.lowercaseString];
 }
 

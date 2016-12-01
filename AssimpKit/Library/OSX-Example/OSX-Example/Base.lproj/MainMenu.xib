@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
@@ -647,6 +647,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="356" y="30"/>
         </menu>
         <window title="OSX-ObjC-Example" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -670,6 +671,24 @@
                     <constraint firstItem="536" firstAttribute="trailing" secondItem="372" secondAttribute="trailing" id="544"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="22C51162-443E-4650-872B-8E4239415293" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="CoT-bb-sBJ">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="CEB2B169-D178-40D0-A99F-BF6B25BFB02E" label="Select Model" paletteLabel="Select Model" tag="-1" image="3dmodel" id="elh-6p-o5z" userLabel="Select Model">
+                        <connections>
+                            <action selector="viewModel:" target="z44-Lp-cgU" id="EPN-bN-NI5"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="C4977358-B938-4F7E-83A6-CBC7DD608182" label="Select Animation" paletteLabel="Select Animation" tag="-1" image="bones" id="Zna-NX-XyX" userLabel="Select Animation">
+                        <connections>
+                            <action selector="addAnimation:" target="z44-Lp-cgU" id="uP1-AK-YLf"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="elh-6p-o5z"/>
+                    <toolbarItem reference="Zna-NX-XyX"/>
+                </defaultToolbarItems>
+            </toolbar>
             <point key="canvasLocation" x="385" y="452"/>
         </window>
         <customObject id="494" customClass="AppDelegate">
@@ -685,4 +704,8 @@
             </connections>
         </viewController>
     </objects>
+    <resources>
+        <image name="3dmodel" width="128" height="128"/>
+        <image name="bones" width="128" height="128"/>
+    </resources>
 </document>

@@ -42,13 +42,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 @interface SCNScene (AssimpImport)
 
-
 #pragma mark - Loading scenes using assimp
 
 /**
  @name Loading scenes using assimp
  */
 
+/**
+  Returns the array of file extensions for all the supported formats.
+
+  @return The array of supported file extensions
+*/
++ (NSArray *)allowedFileExtensions;
 /**
  Returns a Boolean value that indicates whether the SCNAssimpScene class can
  read asset data from files with the specified extension.
@@ -57,7 +62,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return YES if the SCNAssimpScene class can read asset data from files with
  the specified extension; otherwise, NO.
  */
-+(BOOL)canImportFileExtension:(NSString*)extension;
++ (BOOL)canImportFileExtension:(NSString *)extension;
 
 /**
  Loads a scene from a file with the specified name in the app’s main bundle.
