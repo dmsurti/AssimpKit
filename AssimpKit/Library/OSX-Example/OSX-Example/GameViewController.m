@@ -70,5 +70,35 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         self.gameView.scene = scene;
     }
 }
+- (IBAction)addAnimation:(id)sender
+{
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowedFileTypes:[SCNAssimpScene allowedFileExtensions]];
+    [panel setCanChooseFiles:YES];
+    [panel setCanChooseDirectories:NO];
+    [panel setAllowsMultipleSelection:NO];
+    NSInteger clicked = [panel runModal];
+
+    if (clicked == NSFileHandlingPanelOKButton)
+    {
+        SCNAssimpScene *animScene = [SCNScene
+            assimpSceneWithURL:[NSURL URLWithString:panel.URL.absoluteString]
+              postProcessFlags:AssimpKit_Process_FlipUVs |
+                               AssimpKit_Process_Triangulate];
+        SCNAssimpScene *scene = (SCNAssimpScene *)self.gameView.scene;
+        if (scene == nil) {
+            scene = animScene;
+            self.gameView.scene = scene;
+        }
+        NSArray *animationKeys = animScene.animationKeys;
+        // If multiple animations exist, load the first animation
+        if (animationKeys.count > 0)
+        {
+            SCNAssimpAnimation *animation =
+                [animScene animationForKey:[animationKeys objectAtIndex:0]];
+            [scene addAnimation:animation];
+        }
+    }
+}
 
 @end
