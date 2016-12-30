@@ -84,4 +84,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                       postProcessFlags:(unsigned int)postProcessFlags;
 
+#pragma mark - Adding animation
+
+/**
+ @name Adding animation
+ */
+
+/**
+ Adds a skeletal animation scene to the scene.
+
+ @param animScene The scene object representing the animation.
+ */
+- (void)addAnimationScene:(SCNScene *)animScene;
 @end

@@ -3,7 +3,7 @@
  ---------------------------------------------------------------------------
  Assimp to Scene Kit Library (AssimpKit)
  ---------------------------------------------------------------------------
- Copyright (c) 2016, AssimpKit team
+ Copyright (c) 2016, Deepak Surti, Ison Apps, AssimpKit team
  All rights reserved.
  Redistribution and use of this software in source and binary forms,
  with or without modification, are permitted provided that the following
@@ -33,66 +33,69 @@
  ---------------------------------------------------------------------------
  */
 
-#import <XCTest/XCTest.h>
-#import "SCNScene+AssimpImport.h"
+#import <Foundation/Foundation.h>
 
 /**
- The test class for the file format support.
- 
- This class tests the number of file formats and the file formats supported.
+ An object that stores the file name, path and subdirectory information for a
+ testable model in the assets directory.
  */
-@interface SCNSceneTests : XCTestCase
+@interface ModelFile : NSObject
 
-@end
-
-@implementation SCNSceneTests
-
-#pragma mark - Test formats supported
-
+#pragma mark - Model file info
 /**
- @name Test formats supported
+ @name Model file info
  */
 
 /**
- Tests the API returns YES for file extensions for supported formats.
+ The asset subdirectory of the model file.
  */
-- (void)testSupportedFormats
-{
-    NSArray *validExts =
-        [@"3d,3ds,ac,b3d,bvh,cob,dae,dxf,hmp,ifc,irr,md2,md5mesh,"
-         @"md5anim,m3sd,nff,obj,off,mesh.xml,ply,q3o,q3s,raw,"
-         @"smd,stl,wrl,xgl,zgl,fbx,md3" componentsSeparatedByString:@","];
-    for (NSString *validExt in validExts)
-    {
-        XCTAssertTrue([SCNScene canImportFileExtension:validExt],
-                      @"Could not import supported extension %@", validExt);
-    }
-}
+@property (readonly, nonatomic) NSString *subDir;
 
 /**
- Tests the API returns NO for file extensions for unsupported formats.
+ The file name (including the file format) directory of the model file.
  */
-- (void)testNotSupportedFormats
-{
-    NSArray *notSupportedExts =
-        [@"ase,csm,lwo,lxo,lws,ter,X,pk3,m3,blend,irrmesh, mdl"
-            componentsSeparatedByString:@","];
-    for (NSString *notSupportedExt in notSupportedExts)
-    {
-        XCTAssertFalse([SCNScene canImportFileExtension:notSupportedExt],
-                       @"Can import un-supported format %@", notSupportedExt);
-    }
+@property (readonly, nonatomic) NSString *file;
 
-    XCTAssertFalse([SCNScene canImportFileExtension:@""],
-                   @"Can import format with no extension");
-}
+/**
+ The full file path of the model file.
+ */
+@property (readonly, nonatomic) NSString *path;
 
-- (void)testSupportedFileTypes
-{
-    NSArray *validExts = [SCNAssimpScene allowedFileExtensions];
-    XCTAssertTrue(validExts.count == 30,
-                  @"Expected %d formats supported, instead supports %lu", 31,
-                  (unsigned long)validExts.count);
-}
+#pragma mark - Creating a model file
+/**
+ @name Creating a model file.
+ */
+
+/**
+ Creates a model file object with file name, subdirectory and path.
+
+ @param file The model file name including the file format subdirectory.
+ @param path The full file path of the model file.
+ @param subDir The asset subdirectory of the model file.
+ @return A model file object.
+ */
+- (id)initWithFileName:(NSString *)file
+                atPath:(NSString *)path
+              inSubDir:(NSString *)subDir;
+
+#pragma mark - SCN asset filepaths
+/**
+ @name SCN asset filepaths
+ */
+
+/**
+ Returns the scn asset including the model file subdirectory and scn extension.
+
+ @return The scn asset filename with .scn extension.
+ */
+-(NSString*)getScnAssetFile;
+
+/**
+ Returns the animation scn asset including file subdirectory and scn extension.
+
+ @param animFileName The animation file name, usually the key name.
+ @return The scn asset filename with .scn extension.
+ */
+-(NSString*)getAnimScnAssetFile:(NSString*)animFileName;
 
 @end

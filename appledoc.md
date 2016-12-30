@@ -13,7 +13,7 @@ skeletal animations.
 Overview
 ========
 
-AssimpKit currently supports ***31 file formats*** that allows you to use these
+AssimpKit currently supports ***30 file formats*** that allows you to use these
 files directly in SceneKit without having to convert these to any of the files
 that SceneKit or Model IO supports thereby saving an extra step in your asset
 pipeline.
@@ -36,6 +36,8 @@ SCNAssimpAnimation    | The container for all SceneKit skeletal animation conten
 You can use the AssimpKit category defined on SCNScene to load scenes. The post processing
 steps that the assimp library can apply to the imported data are listed at AssimpKitPostProcessSteps.
 
+The imported SCNAssimpScene contains a model SCNScene which represents the 3D model and the skeleton if it contains one, in addition to the array of animations each represented by an SCNScene object. The SCNAssimpScene also contains the key names for the animations which can be used when adding, removing animations.
+
 You can load a scene which is a part of your app bundle, as in Listing I-1 below.
 
 ***Listing I-1*** Load a scene which is part of your app bundle
@@ -56,8 +58,8 @@ You can load a scene which is a part of your app bundle, as in Listing I-1 below
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
 
-    // set the scene to the view
-    scnView.scene = scene;
+    // set the model scene to the view
+    scnView.scene = scene.modelScene;
                     
 You can load a scene by specifying a file URL, as in Listing I-2 below.
 
@@ -80,8 +82,8 @@ You can load a scene by specifying a file URL, as in Listing I-2 below.
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
 
-    // set the scene to the view
-    scnView.scene = scene;
+    // set the model scene to the view
+    scnView.scene = scene.modelScene;
 
 Skeletal Animations
 -------------------
@@ -117,16 +119,16 @@ animating, using the listing I-3 below.
 
     // get the animation which is defined in the same file
     NSString *walkID = @"astroBoy_walk-1";
-    SCNAssimpAnimation *walkAnim = [scene animationForKey:walkAnim];
+    SCNScene *walkAnim = [scene animationSceneForKey:walkAnim];
 
-    // add the walk animation to the boy scene
-    [scene addAnimation:attackAnim];
+    // add the walk animation to the boy model scene
+    [scene.modelScene addAnimation:attackAnim];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
 
-    // set the scene to the view
-    scnView.scene = scene;
+    // set the model scene to the view
+    scnView.scene = scene.modelScene;
 
 You can load an animation which is defined in a separate file from the model you
 are animating, using the listing I-5 below.
@@ -156,22 +158,22 @@ are animating, using the listing I-5 below.
 
     // get the aniamtion with animation key
     NSString *jumpId = @"jump_start-1";
-    SCNAssimpAnimation *jumpStartAnim = [jumpStartScene animationForKey:jumpId];
+    SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
 
     // add the jump animation to the explorer scene
-    [scene addAnimation:jumpStartAnim];
+    [scene.modelScene addAnimation:jumpStartAnim];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
 
-    // set the scene to the view
-    scnView.scene = scene;
+    // set the model scene to the view
+    scnView.scene = scene.modelScene;
 
 File formats supported by AssimpKit
 -----------------------------------
 
 Currently AssimpKit supports the following file formats:
 
-***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, hmp, ifc, irr, md2, md5mesh, md5anim, mdl,
+***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, hmp, ifc, irr, md2, md5mesh, md5anim, 
 m3sd, nff, obj, off, mesh.xml, ply, q3o, q3s, raw, smd, stl, wrl, xgl, zgl, fbx,
 md3***

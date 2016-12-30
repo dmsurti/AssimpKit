@@ -9,3 +9,4 @@ pk3
 m3
 blend
 irrmesh
+mdl

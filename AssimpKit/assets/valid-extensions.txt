@@ -12,7 +12,6 @@ irr
 md2
 md5mesh
 md5anim
-mdl
 m3sd
 nff
 obj

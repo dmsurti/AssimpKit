@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7728FCEE1E16518C00B99F2B /* ModelFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7728FCEC1E16518C00B99F2B /* ModelFile.m */; };
+		7728FCF31E16539700B99F2B /* ModelFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7728FCF21E16539700B99F2B /* ModelFile.m */; };
 		7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = 7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = 7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7746DB6A1DEEF93F00C651DC /* valid-extensions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB691DEEF93F00C651DC /* valid-extensions.txt */; };
@@ -75,6 +77,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7728FCEB1E16518C00B99F2B /* ModelFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelFile.h; path = ../../Code/Model/Tests/ModelFile.h; sourceTree = "<group>"; };
+		7728FCEC1E16518C00B99F2B /* ModelFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelFile.m; path = ../../Code/Model/Tests/ModelFile.m; sourceTree = "<group>"; };
+		7728FCF11E16539700B99F2B /* ModelFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelFile.h; path = ../../Code/Model/Tests/ModelFile.h; sourceTree = "<group>"; };
+		7728FCF21E16539700B99F2B /* ModelFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelFile.m; path = ../../Code/Model/Tests/ModelFile.m; sourceTree = "<group>"; };
 		7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostProcessingFlags.h; path = ../../Code/Model/PostProcessingFlags.h; sourceTree = "<group>"; };
 		7746DB5E1DEED16E00C651DC /* PostProcessingFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostProcessingFlags.h; path = ../../Code/Model/PostProcessingFlags.h; sourceTree = "<group>"; };
 		7746DB691DEEF93F00C651DC /* valid-extensions.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "valid-extensions.txt"; path = "../assets/valid-extensions.txt"; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 				779DF26C1DDF2FD500DED366 /* ModelLog.h */,
 				779DF26D1DDF2FD500DED366 /* ModelLog.m */,
 				779DF2641DDF2F9800DED366 /* Info.plist */,
+				7728FCF11E16539700B99F2B /* ModelFile.h */,
+				7728FCF21E16539700B99F2B /* ModelFile.m */,
 			);
 			path = AssimpKitTests_iOS;
 			sourceTree = "<group>";
@@ -263,6 +271,8 @@
 				779DF2801DDF30E700DED366 /* ModelLog.h */,
 				779DF2811DDF30E700DED366 /* ModelLog.m */,
 				779DF2781DDF30B200DED366 /* Info.plist */,
+				7728FCEB1E16518C00B99F2B /* ModelFile.h */,
+				7728FCEC1E16518C00B99F2B /* ModelFile.m */,
 			);
 			path = AssimpKitTests_macOS;
 			sourceTree = "<group>";
@@ -510,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7728FCF31E16539700B99F2B /* ModelFile.m in Sources */,
 				779DF26F1DDF2FD500DED366 /* ModelLog.m in Sources */,
 				7746DB711DEEFE4000C651DC /* SCNSceneTests.m in Sources */,
 				779DF26E1DDF2FD500DED366 /* AssimpImporterTests.m in Sources */,
@@ -523,6 +534,7 @@
 				779DF2831DDF30E700DED366 /* ModelLog.m in Sources */,
 				7746DB771DEF0DFA00C651DC /* SCNSceneTests.m in Sources */,
 				779DF2821DDF30E700DED366 /* AssimpImporterTests.m in Sources */,
+				7728FCEE1E16518C00B99F2B /* ModelFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,7 +885,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets\\\"",
+					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets/\\\"",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -983,7 +995,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets\\\"",
+					"TEST_ASSETS_PATH=@\\\"$(PROJECT_DIR)/../assets/\\\"",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

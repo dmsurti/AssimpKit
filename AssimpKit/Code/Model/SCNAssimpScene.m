@@ -36,16 +36,49 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface SCNAssimpScene ()
 
-#pragma mark - Animation data
+#pragma mark - SCNScene objects
 
 /**
- @name Animation data
+ @name SCNScene objects
+ */
+
+/**
+ The scene representing the mdoel and the optional skeleton.
+ */
+@property (readwrite, nonatomic) SCNScene *modelScene;
+
+/**
+ The array of scenes where each scene is a skeletal animation.
+ */
+
+@property (readwrite, nonatomic) NSDictionary *animationScenes;
+
+#pragma mark - Add, fetch SCNAssimpAnimation animations
+
+/**
+ @name Add, fetch SCNAssimpAnimation animations
  */
 
 /**
  The dictionary of SCNAssimpAnimation objects, for each animation in the scene.
  */
 @property (readwrite, nonatomic) NSMutableDictionary *animations;
+
+/**
+ Adds an SCNAssimpAnimation object.
+
+ @param assimpAnimation The scene animation object created from animation data.
+ */
+- (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation
+             toScene:(SCNScene *)animScene;
+
+/**
+ Return the SCNAssimpAnimation object for the specified animation key.
+
+ @param key The unique scene animation key.
+ @return The scene animation object.
+ */
+- (SCNAssimpAnimation *)animationForKey:(NSString *)key;
 
 @end
 
@@ -67,8 +100,70 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     if (self)
     {
         self.animations = [[NSMutableDictionary alloc] init];
+        self.animationScenes = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
+#pragma mark - Add, fetch SCNAssimpAnimation animations
+
+/**
+ @name Add, fetch SCNAssimpAnimation animations
+ */
+
+/**
+ Adds an SCNAssimpAnimation object to the given scene.
+
+ @param assimpAnimation The scene animation object created from the animation
+ data.
+ @param animScene The scene to which the animation object is added.
+ */
+- (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation
+             toScene:(SCNScene *)animScene
+{
+    NSDictionary *frameAnims = assimpAnimation.frameAnims;
+    for (NSString *nodeName in frameAnims.allKeys)
+    {
+        SCNNode *boneNode =
+            [animScene.rootNode childNodeWithName:nodeName recursively:YES];
+        NSDictionary *channelKeys = [frameAnims valueForKey:nodeName];
+        CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
+        CAKeyframeAnimation *quatAnim =
+            [channelKeys valueForKey:@"orientation"];
+        CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"scale"];
+        DLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
+             quatAnim);
+        NSString *nodeKey = [@"/node-" stringByAppendingString:nodeName];
+        if (posAnim)
+        {
+            NSString *posKey =
+                [nodeKey stringByAppendingString:@".transform.translation"];
+            [boneNode addAnimation:posAnim forKey:posKey];
+        }
+        if (quatAnim)
+        {
+            NSString *quatKey =
+                [nodeKey stringByAppendingString:@".transform.quaternion"];
+            [boneNode addAnimation:quatAnim forKey:quatKey];
+        }
+        if (scaleAnim)
+        {
+            NSString *scaleKey =
+                [nodeKey stringByAppendingString:@".transform.scale"];
+            [boneNode addAnimation:scaleAnim forKey:scaleKey];
+        }
+    }
+}
+
+/**
+ Return the SCNAssimpAnimation object for the specified animation key.
+ 
+ @param key The unique scene animation key.
+ @return The scene animation object.
+ */
+- (SCNAssimpAnimation *)animationForKey:(NSString *)key
+{
+    return [self.animations valueForKey:key];
 }
 
 #pragma mark - Add, fetch scene animations
@@ -78,61 +173,69 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 /**
- Adds an SCNAssimpAnimation object.
-
- @param assimpAnimation The scene animation object created from animation data.
- */
-- (void)addAnimation:(SCNAssimpAnimation *)assimpAnimation
-{
-    NSDictionary *frameAnims = assimpAnimation.frameAnims;
-    for (NSString *nodeName in frameAnims.allKeys)
-    {
-        SCNNode *boneNode =
-            [self.rootNode childNodeWithName:nodeName recursively:YES];
-        NSDictionary *channelKeys = [frameAnims valueForKey:nodeName];
-        CAKeyframeAnimation *posAnim = [channelKeys valueForKey:@"position"];
-        CAKeyframeAnimation *quatAnim =
-            [channelKeys valueForKey:@"orientation"];
-        CAKeyframeAnimation *scaleAnim = [channelKeys valueForKey:@"scale"];
-        DLog(@" for node %@ pos anim is %@ quat anim is %@", boneNode, posAnim,
-             quatAnim);
-        if (posAnim)
-        {
-            [boneNode addAnimation:posAnim
-                            forKey:[nodeName stringByAppendingString:@"-pos"]];
-        }
-        if (quatAnim)
-        {
-            [boneNode addAnimation:quatAnim
-                            forKey:[nodeName stringByAppendingString:@"-quat"]];
-        }
-        if (scaleAnim)
-        {
-            [boneNode
-                addAnimation:scaleAnim
-                      forKey:[nodeName stringByAppendingString:@"-scale"]];
-        }
-    }
-}
-
-/**
- Return the SCNAssimpAnimation object for the specified animation key.
-
- @param key The unique scene animation key.
- @return The scene animation object.
- */
-- (SCNAssimpAnimation *)animationForKey:(NSString *)key
-{
-    return [self.animations valueForKey:key];
-}
-
-/**
  Return the keys for all the animations in this file.
 
  @return The array of animation keys.
  */
 - (NSArray *)animationKeys
 {
-    return self.animations.allKeys;
+    return self.animationScenes.allKeys;
 }
+
+/**
+Return the SCNScene object for the specified animation key.
+
+@param key The unique scene animation key.
+@return The scene animation object.
+*/
+- (SCNScene *)animationSceneForKey:(NSString *)key
+{
+    return [self.animationScenes valueForKey:key];
+}
+
+#pragma mark - Make SCNScene objects
+
+/**
+ @name Make SCNScene objects
+ */
+
+/**
+ Makes the SCNScene representing the model and the optional skeleton.
+
+ This transformation to SCNScene allows the client to use the existing SCNScene
+ API. This also makes it trivial to support serialization using the existing
+ SCNScene export API, thereby allowing easy integration in the XCode Scene
+ editor and the asset pipeline.
+ */
+- (void)makeModelScene
+{
+    self.modelScene = [[SCNScene alloc] init];
+    for (SCNNode *childNode in self.rootNode.childNodes)
+    {
+        [self.modelScene.rootNode addChildNode:childNode];
+    }
+}
+
+/**
+ Makes an array of SCNScene objects, each SCNScene representing a skeletal
+ animation.
+
+ This transformation to SCNScene allows the client to use the existing SCNScene
+ API. This also makes it trivial to support serialization using the existing
+ SCNScene export API, thereby allowing easy integration in the XCode Scene
+ editor and the asset pipeline.
+ */
+- (void)makeAnimationScenes
+{
+    for (NSString *animSceneKey in self.animations.allKeys)
+    {
+        SCNAssimpAnimation *assimpAnim =
+            [self.animations valueForKey:animSceneKey];
+        SCNScene *animScene = [[SCNScene alloc] init];
+        [animScene.rootNode addChildNode:[self.skeletonNode clone]];
+        [self addAnimation:assimpAnim toScene:animScene];
+        [self.animationScenes setValue:animScene forKey:animSceneKey];
+    }
+}
+
 @end
