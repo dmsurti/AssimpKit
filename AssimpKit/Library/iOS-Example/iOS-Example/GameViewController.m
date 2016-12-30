@@ -60,9 +60,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         // If multiple animations exist, load the first animation
         if (animationKeys.count > 0)
         {
-            SCNAssimpAnimation *animation =
-                [animScene animationForKey:[animationKeys objectAtIndex:0]];
-            [scene addAnimation:animation];
+            SCNScene* animation = [animScene animationSceneForKey:[animationKeys objectAtIndex:0]];
+            [scene.modelScene addAnimationScene:animation];
         }
     }
 
@@ -70,7 +69,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     SCNView *scnView = (SCNView *)self.view;
 
     // set the scene to the view
-    scnView.scene = scene;
+    scnView.scene = scene.modelScene;
 
     // allows the user to manipulate the camera
     scnView.allowsCameraControl = YES;
