@@ -118,4 +118,65 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         [assimpImporter importScene:url.path postProcessFlags:postProcessFlags];
 }
 
+#pragma mark - Adding animation
+
+/**
+ @name Adding animation
+ */
+
+/**
+ Adds the animation at the given node subtree to the corresponding node subtree
+ in the scene.
+
+ @param animNode The node and it's subtree which has a CAAnimation.
+ */
+- (void)addAnimationFromNode:(SCNNode *)animNode
+{
+    for (NSString *animKey in animNode.animationKeys)
+    {
+        CAAnimation *animation = [animNode animationForKey:animKey];
+        NSString *boneName = animNode.name;
+        SCNNode *sceneBoneNode =
+            [self.rootNode childNodeWithName:boneName recursively:YES];
+        [sceneBoneNode addAnimation:animation forKey:animKey];
+    }
+    for (SCNNode *childNode in animNode.childNodes)
+    {
+        [self addAnimationFromNode:childNode];
+    }
+}
+
+/**
+ Adds a skeletal animation scene to the scene.
+
+ @param animScene The scene object representing the animation.
+ */
+- (void)addAnimationScene:(SCNScene *)animScene
+{
+    __block SCNNode *rootAnimNode = nil;
+    // find root of skeleton
+    [animScene.rootNode
+        enumerateChildNodesUsingBlock:^(SCNNode *child, BOOL *stop) {
+          if (child.animationKeys.count > 0)
+          {
+              DLog(@" found anim: %@ at node %@", child.animationKeys, child);
+              rootAnimNode = child;
+              *stop = YES;
+          }
+
+        }];
+
+    if (rootAnimNode.childNodes.count > 0)
+    {
+        [self addAnimationFromNode:rootAnimNode];
+    }
+    else
+    {
+        // no root exists, so add animation data to all bones
+        DLog(@" no root: %@ %d", rootAnimNode.parentNode,
+              rootAnimNode.parentNode.childNodes.count);
+        [self addAnimationFromNode:rootAnimNode.parentNode];
+    }
+}
+
 @end
