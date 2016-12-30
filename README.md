@@ -11,7 +11,7 @@ Status](https://travis-ci.org/dmsurti/AssimpKit.svg?branch=master)](https://trav
 Why AssimpKit?
 ---
 
-AssimpKit currently supports ***31 file formats*** that allows you to use these
+AssimpKit currently supports ***30 file formats*** that allows you to use these
 files directly in SceneKit without having to convert these to any of the files
 that SceneKit or Model IO supports thereby saving an extra step in your asset
 pipeline.
@@ -31,7 +31,7 @@ File formats supported by AssimpKit
 
 Currently AssimpKit supports the following file formats:
 
-***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, hmp, ifc, irr, md2, md5mesh, md5anim, mdl,
+***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, hmp, ifc, irr, md2, md5mesh, md5anim,
 m3sd, nff, obj, off, mesh.xml, ply, q3o, q3s, raw, smd, stl, wrl, xgl, zgl, fbx,
 md3***
 
