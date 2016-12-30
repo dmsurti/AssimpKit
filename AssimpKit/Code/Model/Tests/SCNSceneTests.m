@@ -36,6 +36,11 @@
 #import <XCTest/XCTest.h>
 #import "SCNScene+AssimpImport.h"
 
+/**
+ The test class for the file format support.
+ 
+ This class tests the number of file formats and the file formats supported.
+ */
 @interface SCNSceneTests : XCTestCase
 
 @end
@@ -55,7 +60,7 @@
 {
     NSArray *validExts =
         [@"3d,3ds,ac,b3d,bvh,cob,dae,dxf,hmp,ifc,irr,md2,md5mesh,"
-         @"md5anim,mdl,m3sd,nff,obj,off,mesh.xml,ply,q3o,q3s,raw,"
+         @"md5anim,m3sd,nff,obj,off,mesh.xml,ply,q3o,q3s,raw,"
          @"smd,stl,wrl,xgl,zgl,fbx,md3" componentsSeparatedByString:@","];
     for (NSString *validExt in validExts)
     {
@@ -70,7 +75,7 @@
 - (void)testNotSupportedFormats
 {
     NSArray *notSupportedExts =
-        [@"ase,csm,lwo,lxo,lws,ter,X,pk3,m3,blend,irrmesh"
+        [@"ase,csm,lwo,lxo,lws,ter,X,pk3,m3,blend,irrmesh, mdl"
             componentsSeparatedByString:@","];
     for (NSString *notSupportedExt in notSupportedExts)
     {
@@ -85,7 +90,7 @@
 - (void)testSupportedFileTypes
 {
     NSArray *validExts = [SCNAssimpScene allowedFileExtensions];
-    XCTAssertTrue(validExts.count == 31,
+    XCTAssertTrue(validExts.count == 30,
                   @"Expected %d formats supported, instead supports %lu", 31,
                   (unsigned long)validExts.count);
 }
