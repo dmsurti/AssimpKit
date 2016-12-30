@@ -35,9 +35,11 @@
 
 #import <XCTest/XCTest.h>
 #import "AssimpImporter.h"
+#import "ModelFile.h"
 #import "ModelLog.h"
 #import "PostProcessingFlags.h"
 #import "SCNAssimpAnimation.h"
+#import "SCNScene+AssimpImport.h"
 #include "assimp/cimport.h"     // Plain-C interface
 #include "assimp/light.h"       // Lights
 #include "assimp/material.h"    // Materials
@@ -246,48 +248,6 @@
             [testLog addErrorLog:errorLog];
         }
     }
-    else
-    {
-        CGColorRef color;
-        NSString *materialType;
-        if (aiTextureType == aiTextureType_DIFFUSE)
-        {
-            color = (__bridge CGColorRef)[scnMaterial diffuse].contents;
-            materialType = @"Diffuse";
-        }
-        else if (aiTextureType == aiTextureType_SPECULAR)
-        {
-            color = (__bridge CGColorRef)[scnMaterial specular].contents;
-            materialType = @"Specular";
-        }
-        else if (aiTextureType == aiTextureType_AMBIENT)
-        {
-            color = (__bridge CGColorRef)[scnMaterial ambient].contents;
-            materialType = @"Ambient";
-        }
-        else if (aiTextureType == aiTextureType_REFLECTION)
-        {
-            color = (__bridge CGColorRef)[scnMaterial reflective].contents;
-            materialType = @"Reflective";
-        }
-        else if (aiTextureType == aiTextureType_EMISSIVE)
-        {
-            color = (__bridge CGColorRef)[scnMaterial emission].contents;
-            materialType = @"Emission";
-        }
-        else if (aiTextureType == aiTextureType_OPACITY)
-        {
-            color = (__bridge CGColorRef)[scnMaterial transparent].contents;
-            materialType = @"Transparent";
-        }
-        if (color == nil)
-        {
-            NSString *errorLog = [NSString
-                stringWithFormat:@"The material color for %@ does not exist",
-                                 materialType];
-            [testLog addErrorLog:errorLog];
-        }
-    }
 }
 
 /**
@@ -404,7 +364,7 @@
  @param testLog The log for the file being tested.
  */
 - (void)checkLights:(const struct aiScene *)aiScene
-          withScene:(SCNAssimpScene *)scene
+          withScene:(SCNScene *)scene
             testLog:(ModelLog *)testLog
 {
     for (int i = 0; i < aiScene->mNumLights; i++)
@@ -530,7 +490,7 @@
  */
 
 - (void)checkCameras:(const struct aiScene *)aiScene
-           withScene:(SCNAssimpScene *)scene
+           withScene:(SCNScene *)scene
              testLog:(ModelLog *)testLog
 {
     for (int i = 0; i < aiScene->mNumCameras; i++)
@@ -1004,15 +964,17 @@
              postProcessFlags:AssimpKit_Process_FlipUVs |
                               AssimpKit_Process_Triangulate];
 
+    NSLog(@"   SCENE Root node: %@ with children: %lu", scene.rootNode,
+          (unsigned long)scene.rootNode.childNodes.count);
     [self checkNode:aiScene->mRootNode
-        withSceneNode:[scene.rootNode.childNodes objectAtIndex:0]
+        withSceneNode:[scene.modelScene.rootNode.childNodes objectAtIndex:0]
               aiScene:aiScene
             modelPath:path
               testLog:testLog];
 
-    [self checkLights:aiScene withScene:scene testLog:testLog];
+    // [self checkLights:aiScene withScene:scene.modelScene testLog:testLog];
 
-    [self checkCameras:aiScene withScene:scene testLog:testLog];
+    [self checkCameras:aiScene withScene:scene.modelScene testLog:testLog];
 
     [self checkAnimations:aiScene
                 withScene:scene
@@ -1043,11 +1005,9 @@
     // -------------------------------------------------------------
     // All asset directories by owner: Apple, OpenFrameworks, Assimp
     // -------------------------------------------------------------
-    NSString *appleAssets =
-        [self.testAssetsPath stringByAppendingString:@"/apple"];
-    NSString *ofAssets = [self.testAssetsPath stringByAppendingString:@"/of"];
-    NSString *assimpAssets =
-        [self.testAssetsPath stringByAppendingString:@"/assimp"];
+    NSString *appleAssets = @"apple/";
+    NSString *ofAssets = @"of/";
+    NSString *assimpAssets = @"assimp/";
     NSArray *assetDirs =
         [NSArray arrayWithObjects:appleAssets, ofAssets, assimpAssets, nil];
 
@@ -1055,13 +1015,13 @@
     // Asset subdirectories sorted by open and proprietary files
     // ---------------------------------------------------------
     NSArray *subDirs =
-        [NSArray arrayWithObjects:@"/models", @"/models-proprietary", nil];
+        [NSArray arrayWithObjects:@"models/", @"models-proprietary/", nil];
 
     // ------------------------------------------------------
     // Read the valid extensions that are currently supported
     // ------------------------------------------------------
     NSString *validExtsFile =
-        [self.testAssetsPath stringByAppendingString:@"/valid-extensions.txt"];
+        [self.testAssetsPath stringByAppendingString:@"valid-extensions.txt"];
     NSArray *validExts = [[NSString
         stringWithContentsOfFile:validExtsFile
                         encoding:NSUTF8StringEncoding
@@ -1078,15 +1038,16 @@
         for (NSString *subDir in subDirs)
         {
             NSString *assetSubDir = [assetDir stringByAppendingString:subDir];
-            NSLog(@"========== Scanning asset dir: %@", assetSubDir);
+            NSString *scanPath =
+                [self.testAssetsPath stringByAppendingString:assetSubDir];
+            NSLog(@"========== Scanning asset dir: %@", scanPath);
             NSArray *modelFiles =
-                [fileManager subpathsOfDirectoryAtPath:assetSubDir error:nil];
-            for (NSString *modelFile in modelFiles)
+                [fileManager subpathsOfDirectoryAtPath:scanPath error:nil];
+            for (NSString *modelFileName in modelFiles)
             {
                 BOOL isDir = NO;
                 NSString *modelFilePath =
-                    [[assetSubDir stringByAppendingString:@"/"]
-                        stringByAppendingString:modelFile];
+                    [scanPath stringByAppendingString:modelFileName];
 
                 if ([fileManager fileExistsAtPath:modelFilePath
                                       isDirectory:&isDir])
@@ -1101,7 +1062,13 @@
                              [validExts
                                  containsObject:fileExt.lowercaseString]))
                         {
-                            [modelFilePaths addObject:modelFilePath];
+                            NSLog(@"   %@ : %@ : %@", modelFileName,
+                                  assetSubDir, modelFilePath);
+                            ModelFile *modelFile = [[ModelFile alloc]
+                                initWithFileName:modelFileName
+                                          atPath:modelFilePath
+                                        inSubDir:assetSubDir];
+                            [modelFilePaths addObject:modelFile];
                         }
                     }
                 }
@@ -1113,22 +1080,110 @@
 }
 
 /**
- The test method that tests all the testable models specifed by getModelFiles
+ The test method that tests the structure and serialization of all the testable
+ models.
+
+ For every valid supported file extension:
+ 1. The scene graph is checked by comparing it with a separate scene graph
+    loaded using Assimp.
+ 2. For every model that passes the verification test in 1 above:
+    1. The model scene is serialized.
+    2. The animation scenes, if existing, are serialized.
+
+ The pass percentage is 90% for the structure test.
+ The pass percentage is 99% for the serialization test.
  */
 - (void)testAssimpModelFormats
 {
     int numFilesTested = 0;
     int numFilesPassed = 0;
-    NSArray *modelFiles = [self getModelFiles];
-    for (NSString *modelFilePath in modelFiles)
+    int numFilesTestedForSerialization = 0;
+    int numFilesSerialized = 0;
+    NSString *tempDir =
+        [NSTemporaryDirectory() stringByAppendingString:@"temp-scn-assets/"];
+    NSError *error;
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:tempDir
+                                   withIntermediateDirectories:YES
+                                                    attributes:nil
+                                                         error:&error])
     {
-        NSLog(@"=== TESTING %@ file ===", modelFilePath);
+        NSLog(@" FAILED TO CREATE TMP SCN ASSETS DIR: %@ with error: %@",
+              tempDir, error.description);
+    }
+    NSArray *modelFiles = [self getModelFiles];
+    for (ModelFile *modelFile in modelFiles)
+    {
+        NSLog(@"=== TESTING %@ file ===", modelFile.path);
         ModelLog *testLog = [[ModelLog alloc] init];
-        [self checkModel:modelFilePath testLog:testLog];
+        [self checkModel:modelFile.path testLog:testLog];
         ++numFilesTested;
         if ([testLog testPassed])
         {
+            ++numFilesTestedForSerialization;
             ++numFilesPassed;
+            NSString *scnAsset =
+                [tempDir stringByAppendingString:[modelFile getScnAssetFile]];
+            NSLog(@"=== File %@ ==> SCN: %@ ===", modelFile.file, scnAsset);
+            NSString *scnAssetDir =
+                [scnAsset stringByDeletingLastPathComponent];
+            if (![[NSFileManager defaultManager]
+                          createDirectoryAtPath:scnAssetDir
+                    withIntermediateDirectories:YES
+                                     attributes:nil
+                                          error:&error])
+            {
+                NSLog(@" FAILED TO CREATE TMP SCN ASSET SUB DIR: %@ with "
+                      @"error: %@",
+                      scnAssetDir, error.description);
+            }
+
+            NSString *fileSchemeScnAsset =
+                [@"file://" stringByAppendingString:scnAsset];
+
+            SCNAssimpScene *assimpScene = [SCNAssimpScene
+                assimpSceneWithURL:[NSURL URLWithString:modelFile.path]
+                  postProcessFlags:AssimpKit_Process_FlipUVs |
+                                   AssimpKit_Process_Triangulate];
+            if ([assimpScene.modelScene
+                         writeToURL:[NSURL URLWithString:fileSchemeScnAsset]
+                            options:nil
+                           delegate:nil
+                    progressHandler:nil])
+            {
+                ++numFilesSerialized;
+                NSLog(@" Serialization success");
+            }
+            else
+            {
+                NSLog(@" Serialization failed");
+            }
+
+            for (NSString *animKey in assimpScene.animationScenes.allKeys)
+            {
+                SCNScene *animScene =
+                    [assimpScene.animationScenes valueForKey:animKey];
+                NSString *animScnAsset = [tempDir
+                    stringByAppendingString:[modelFile
+                                                getAnimScnAssetFile:animKey]];
+                NSLog(@"=== File %@ ==> ANIM SCN: %@ ===", modelFile.file,
+                      animScnAsset);
+                NSString *fileSchemeAnimScnAsset =
+                    [@"file://" stringByAppendingString:animScnAsset];
+                ++numFilesTestedForSerialization;
+                if ([animScene writeToURL:
+                                   [NSURL URLWithString:fileSchemeAnimScnAsset]
+                                  options:nil
+                                 delegate:nil
+                          progressHandler:nil])
+                {
+                    ++numFilesSerialized;
+                    NSLog(@" Anim Serialization success");
+                }
+                else
+                {
+                    NSLog(@" Anim Serialization failed");
+                }
+            }
         }
         else
         {
@@ -1137,12 +1192,27 @@
                   [testLog getErrors]);
         }
     }
+    if (![[NSFileManager defaultManager] removeItemAtPath:tempDir error:&error])
+    {
+        NSLog(@" FAILED TO REMOVE TEMP DIR: %@ with error: %@", tempDir,
+              error.description);
+    }
     float passPercent = numFilesPassed * 100.0 / numFilesTested;
-    NSLog(@" NUM OF FILES TESTED             : %d", numFilesTested);
-    NSLog(@" NUM OF FILES PASSED VERIFICATION: %d", numFilesPassed);
-    NSLog(@" PASS PERCENT                    : %f", passPercent);
+    float serlPercent =
+        numFilesSerialized * 100.0 / numFilesTestedForSerialization;
+    NSLog(@" NUM OF FILES TESTED                   : %d", numFilesTested);
+    NSLog(@" NUM OF FILES PASSED VERIFICATION      : %d", numFilesPassed);
+    NSLog(@" PASS PERCENT VERFICIATION             : %f", passPercent);
+    NSLog(@" NUM OF FILES TESTED FOR SERIALIZATION : %d",
+          numFilesTestedForSerialization);
+    NSLog(@" NUM OF FILES SERIALIZED               : %d", numFilesSerialized);
+    NSLog(@" SERL PERCENT VERFICIATION             : %f", serlPercent);
     XCTAssertGreaterThan(passPercent, 90,
-                         @"The 3D file format model test verification is %f "
+                         @"The 3D file model test verification is %f "
+                         @"instead of the expected > 90 percent",
+                         passPercent);
+    XCTAssertGreaterThan(serlPercent, 99,
+                         @"The 3D file serializaton test verification is %f "
                          @"instead of the expected > 90 percent",
                          passPercent);
 }
