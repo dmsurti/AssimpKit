@@ -33,11 +33,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 
-#import "SCNAssimpScene.h"
 #import <Foundation/Foundation.h>
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
-
+#import "SCNAssimpScene.h"
 
 /**
  An importer that imports the files with formats supported by Assimp and
@@ -68,4 +67,5 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
                postProcessFlags:(unsigned int)postProcessFlags;
+
 @end
