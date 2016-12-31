@@ -84,9 +84,16 @@ SCNNode(AssimpImport) | The node category to add animation to a node.
 
 You can use the AssimpKit category defined on SCNScene to load scenes.
 
-For more details on how to use AssimpKit to load scenes, including those with skeletal
-animations, please refer to the [API
-Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
+For more details on how to use AssimpKit to load scenes, including those with
+skeletal animations, please refer to the [Getting
+Started](http://assimpkit.readthedocs.io/en/latest/user/getting_started.html) or
+[API Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
+
+Documentation
+---
+
+* [User and Developer Docs](http://assimpkit.readthedocs.io/)
+* [API Docs](https://dmsurti.github.io/AssimpKit/appledocs/html/index.html)
 
 AssimpKit License
 ---
