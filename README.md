@@ -16,6 +16,8 @@ files directly in SceneKit without having to convert these to any of the files
 that SceneKit or Model IO supports thereby saving an extra step in your asset
 pipeline.
 
+i![](docs/img/kit.png?raw=true)
+
 Features
 ---
 
