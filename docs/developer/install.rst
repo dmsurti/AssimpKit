@@ -10,9 +10,9 @@ This library has a simple 2 step installation process:
 Assimp Dependency
 -----------------
 
-As AssimpKit depends on `Assimp`_, AssimpKit ships with the fat libraries for both
-iOS and macOS platform. The xcodeproj is also configured for Assimp dependency
-usage, so you only need to checkout and start editing!!!
+As AssimpKit depends on `Assimp`_, AssimpKit ships with the static fat libraries
+for both iOS and macOS platform. The xcodeproj is also configured for Assimp
+dependency usage, so you only need to checkout and start editing!!!
 
 The repository also contains ``assets`` which have their own licenses and are
 meant to be used only for testing. Please refer to the `License`_ and

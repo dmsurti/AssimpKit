@@ -2,7 +2,10 @@
 XCode Project Layout
 ====================
 
-The XCode project is laid out such that the common cross platfrom code related to reading using Assimp and transforming it to a Scene Kit scene graph is reused for both the iOS and macOS platforms. The testing code is similary reused for both the platforms.
+The XCode project is laid out such that the common cross platform code related
+to reading using Assimp and transforming it to a Scene Kit scene graph is reused
+for both the iOS and macOS platforms. The testing code is similary reused for
+both the platforms.
 
 .. image:: ../img/xcode-layout.*
 
@@ -44,7 +47,7 @@ Example Apps
 
 The library also contains 2 example apps `iOS-Example.xcodeproj`_ and
 `OSX-Example.xcodeproj`_ which are configured for the ``AssimpKit.framework``
-depedency. You can read more about the :ref:example-apps here.
+depedency. You can read more about the :ref:`example-apps`.
 
 Changing Code
 ~~~~~~~~~~~~~

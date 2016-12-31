@@ -1,3 +1,5 @@
+.. _tutorial:
+
 ========
 Tutorial
 ========
@@ -111,8 +113,8 @@ animating, using the listing I-3 below.
     // set the model scene to the view
     scnView.scene = scene.modelScene;
 
-Load an animation which is defined in a seprate file
-----------------------------------------------------
+Load an animation which is defined in a separate file
+-----------------------------------------------------
 
 You can load an animation which is defined in a separate file from the model you
 are animating, using the listing I-5 below.
@@ -183,14 +185,14 @@ You can also add an animation to a node, using the SCNNode(AssimpImport) categor
 Removing Animations
 -------------------
 
-You can use the `removeAllAnimations`_ method defined in ``SCNAnimatable`` to
+You can use the `removeAllAnimations`_ method defined in `SCNAnimatable`_ to
 remove all animations attached to the object, using AssimpKit.
 
 Serialization and integrating with asset pipeline
 =================================================
 
 You can serialize the model and animation scenes in SCNAssimpScene using the
-`write`_ defined in `SCNScene` to export to either `.scn` or `.dae` file. See
+`write`_ defined in `SCNScene`_ to export to either `.scn` or `.dae` file. See
 the discussion section of `write`_ for more details.
 
 By exporting using the above serialization method, you can both edit the
@@ -230,3 +232,5 @@ The edited ``Bob.scn`` with animation rendered.
 
 .. _removeAllAnimations: https://developer.apple.com/reference/scenekit/scnanimatable/1522762-removeallanimations
 .. _write: https://developer.apple.com/reference/scenekit/scnscene/1523577-write
+.. _SCNAnimatable: https://developer.apple.com/reference/scenekit/scnanimatable 
+.. _SCNScene: https://developer.apple.com/reference/scenekit/scnscene

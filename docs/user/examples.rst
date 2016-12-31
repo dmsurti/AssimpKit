@@ -40,11 +40,11 @@ You can pick a 3D animation in this step. You can skip this step if you just wan
 Step 3
 ~~~~~~
 
-Based on your selection, you can view only the model, the skeltal animation or both.
+Based on your selection, you can view only the model, the skeletal animation or both.
 
 .. image:: ../img/iOS-app3.*
 
-About the maCOS example app
+About the macOS example app
 ---------------------------
 
 This example app allows you to select the 3D model and animation files using the
@@ -69,7 +69,7 @@ want to view the 3D model selected in step 1.
 Step 3
 ~~~~~~
 
-Based on your selection, you can view only the model, the skeltal animation or both.
+Based on your selection, you can view only the model, the skeletal animation or both.
 
 .. image:: ../img/macOS-app3.*
 

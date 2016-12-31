@@ -45,20 +45,23 @@ Table below lists the important clasess in AssimpKit.
 |SCNNode(AssimpImport) | The node category to add animation to a node.              |
 +----------------------+------------------------------------------------------------+
 
-You can use the AssimpImport category defined on SCNScene to load scenes. The post
-processing steps that the assimp library can apply to the imported data are
-listed at AssimpKitPostProcessSteps.
+You can use the ``AssimpImport`` category defined on ``SCNScene`` to load
+scenes. The post processing steps that the assimp library can apply to the
+imported data are listed at `AssimpKitPostProcessSteps`_.
 
-The imported SCNAssimpScene contains a model SCNScene which represents the 3D
-model and the skeleton if it contains one, in addition to the array of
-animations each represented by an SCNScene object. The SCNAssimpScene also
-contains the key names for the animations which can be used when adding,
+The imported `SCNAssimpScene`_ contains a model ``SCNScene`` which represents
+the 3D model and the skeleton if it contains one, in addition to the array of
+animations each represented by an ``SCNScene`` object. The `SCNAssimpScene`_
+also contains the key names for the animations which can be used when adding,
 removing animations.
 
-The AssimpImport category defined on SCNScene and SCNNode also contain a method
-to add a skeltal animation.
+The ``AssimpImport`` category defined on `SCNScene+AssimpImport`_ and
+`SCNNode+AssimpImport`_ also contain a method to add a skeltal animation.
 
-For more information, refer to the Tutorial.
-
+For more information, refer to the :ref:`Tutorial`.
 
 .. _Carthage: https://github.com/Carthage/Carthage
+.. _SCNAssimpScene: https://dmsurti.github.io/AssimpKit/appledocs/html/Classes/SCNAssimpScene.html
+.. _SCNScene+AssimpImport: https://dmsurti.github.io/AssimpKit/appledocs/html/Categories/SCNScene+AssimpImport.html
+.. _SCNNode+AssimpImport: https://dmsurti.github.io/AssimpKit/appledocs/html/Categories/SCNNode+AssimpImport.html
+.. _AssimpKitPostProcessSteps: https://dmsurti.github.io/AssimpKit/appledocs/html/Constants/AssimpKitPostProcessSteps.html
