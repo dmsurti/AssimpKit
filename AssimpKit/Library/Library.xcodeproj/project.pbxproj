@@ -43,6 +43,10 @@
 		779DF2791DDF30B200DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */; };
 		779DF2821DDF30E700DED366 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF27F1DDF30E700DED366 /* AssimpImporterTests.m */; };
 		779DF2831DDF30E700DED366 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2811DDF30E700DED366 /* ModelLog.m */; };
+		77EB2B8A1E1776EB004FA171 /* SCNNode+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 77EB2B881E1776EB004FA171 /* SCNNode+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */; };
+		77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 77EB2B8E1E17773B004FA171 /* SCNNode+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +127,10 @@
 		779DF27F1DDF30E700DED366 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporterTests.m; path = ../../Code/Model/Tests/AssimpImporterTests.m; sourceTree = "<group>"; };
 		779DF2801DDF30E700DED366 /* ModelLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLog.h; path = ../../Code/Model/Tests/ModelLog.h; sourceTree = "<group>"; };
 		779DF2811DDF30E700DED366 /* ModelLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelLog.m; path = ../../Code/Model/Tests/ModelLog.m; sourceTree = "<group>"; };
+		77EB2B881E1776EB004FA171 /* SCNNode+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNNode+AssimpImport.h"; path = "../../Code/Model/SCNNode+AssimpImport.h"; sourceTree = "<group>"; };
+		77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNNode+AssimpImport.m"; path = "../../Code/Model/SCNNode+AssimpImport.m"; sourceTree = "<group>"; };
+		77EB2B8E1E17773B004FA171 /* SCNNode+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNNode+AssimpImport.h"; path = "../../Code/Model/SCNNode+AssimpImport.h"; sourceTree = "<group>"; };
+		77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNNode+AssimpImport.m"; path = "../../Code/Model/SCNNode+AssimpImport.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +219,8 @@
 				779DF1E41DDF2A5700DED366 /* SCNScene+AssimpImport.h */,
 				779DF1E51DDF2A5700DED366 /* SCNScene+AssimpImport.m */,
 				779DF1D61DDF29F200DED366 /* Info.plist */,
+				77EB2B8E1E17773B004FA171 /* SCNNode+AssimpImport.h */,
+				77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */,
 			);
 			path = "AssimpKit-iOS";
 			sourceTree = "<group>";
@@ -229,6 +239,8 @@
 				779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */,
 				779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */,
 				779DF1FE1DDF2B8700DED366 /* Info.plist */,
+				77EB2B881E1776EB004FA171 /* SCNNode+AssimpImport.h */,
+				77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */,
 			);
 			path = "AssimpKit-macOS";
 			sourceTree = "<group>";
@@ -289,6 +301,7 @@
 				779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
 				7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */,
+				77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */,
 				779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +315,7 @@
 				779DF20F1DDF2BB000DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */,
 				7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */,
+				77EB2B8A1E1776EB004FA171 /* SCNNode+AssimpImport.h in Headers */,
 				779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */,
 				779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */,
 				779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */,
 				779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */,
@@ -509,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */,
 				779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */,
 				779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */,
 				779DF20D1DDF2BB000DED366 /* AssimpImporter.m in Sources */,
