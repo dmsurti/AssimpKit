@@ -58,13 +58,25 @@
 	
 	<optgroup label="Class Methods">
 		
+		<option value="//api/name/allowedFileExtensions">+ allowedFileExtensions</option>
+		
 		<option value="//api/name/assimpSceneNamed:postProcessFlags:">+ assimpSceneNamed:postProcessFlags:</option>
 		
 		<option value="//api/name/assimpSceneWithURL:postProcessFlags:">+ assimpSceneWithURL:postProcessFlags:</option>
 		
+		<option value="//api/name/canImportFileExtension:">+ canImportFileExtension:</option>
+		
 	</optgroup>
 	
 
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/addAnimationFromNode:">- addAnimationFromNode:</option>
+		
+		<option value="//api/name/addAnimationScene:">- addAnimationScene:</option>
+		
+	</optgroup>
 	
 	
 </select>
@@ -107,10 +119,127 @@
 						
 
 						<a title="Loading scenes using assimp" name="task_Loading scenes using assimp"></a>
-						
-<h2 class="task-title">Loading scenes using assimp</h2>
+						<h2 class="task-title">Loading scenes using assimp</h2>
+
 						<div class="task-list">
 							<div class="section-method">
+	<a name="//api/name/allowedFileExtensions" title="allowedFileExtensions"></a>
+	<h3 class="method-title"><code><a href="#//api/name/allowedFileExtensions">+&nbsp;allowedFileExtensions</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>  Returns the array of file extensions for all the supported formats.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSArray *)allowedFileExtensions</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The array of supported file extensions</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>  Returns the array of file extensions for all the supported formats.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNScene+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/canImportFileExtension:" title="canImportFileExtension:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/canImportFileExtension:">+&nbsp;canImportFileExtension:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a Boolean value that indicates whether the <a href="../Classes/SCNAssimpScene.html">SCNAssimpScene</a> class can
+read asset data from files with the specified extension.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (BOOL)canImportFileExtension:(NSString *)<em>extension</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>extension</code></th>
+						<td><p>The filename extension identifying an asset file format.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>YES if the <a href="../Classes/SCNAssimpScene.html">SCNAssimpScene</a> class can read asset data from files with
+the specified extension; otherwise, NO.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Returns a Boolean value that indicates whether the <a href="../Classes/SCNAssimpScene.html">SCNAssimpScene</a> class can
+read asset data from files with the specified extension.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNScene+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/assimpSceneNamed:postProcessFlags:" title="assimpSceneNamed:postProcessFlags:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/assimpSceneNamed:postProcessFlags:">+&nbsp;assimpSceneNamed:postProcessFlags:</a></code>
 </h3>
@@ -249,6 +378,132 @@
 </div>
 						</div>
 						
+
+						<a title="Adding animation" name="task_Adding animation"></a>
+						<h2 class="task-title">Adding animation</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/addAnimationScene:" title="addAnimationScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addAnimationScene:">&ndash;&nbsp;addAnimationScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a skeletal animation scene to the scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)addAnimationScene:(SCNScene *)<em>animScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animScene</code></th>
+						<td><p>The scene object representing the animation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Adds a skeletal animation scene to the scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNScene+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addAnimationFromNode:" title="addAnimationFromNode:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addAnimationFromNode:">&ndash;&nbsp;addAnimationFromNode:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds the animation at the given node subtree to the corresponding node subtree
+in the scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)addAnimationFromNode:(SCNNode *)<em>animNode</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animNode</code></th>
+						<td><p>The node and it&rsquo;s subtree which has a CAAnimation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Adds the animation at the given node subtree to the corresponding node subtree
+in the scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNScene+AssimpImport.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
 					</div>
 					
 					
@@ -261,7 +516,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-11-30</p>
+						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-12-31</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

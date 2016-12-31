@@ -56,7 +56,13 @@
 	
 	<optgroup label="Properties">
 		
+		<option value="//api/name/animationScenes">animationScenes</option>
+		
 		<option value="//api/name/animations">animations</option>
+		
+		<option value="//api/name/modelScene">modelScene</option>
+		
+		<option value="//api/name/skeletonNode">skeletonNode</option>
 		
 	</optgroup>
 	
@@ -66,11 +72,19 @@
 	
 	<optgroup label="Instance Methods">
 		
-		<option value="//api/name/addAnimation:">- addAnimation:</option>
+		<option value="//api/name/addAnimation:toScene:">- addAnimation:toScene:</option>
 		
 		<option value="//api/name/animationForKey:">- animationForKey:</option>
 		
+		<option value="//api/name/animationKeys">- animationKeys</option>
+		
+		<option value="//api/name/animationSceneForKey:">- animationSceneForKey:</option>
+		
 		<option value="//api/name/init">- init</option>
+		
+		<option value="//api/name/makeAnimationScenes">- makeAnimationScenes</option>
+		
+		<option value="//api/name/makeModelScene">- makeModelScene</option>
 		
 	</optgroup>
 	
@@ -121,11 +135,157 @@ loaded with the assimp library.</p>
 						<a title="Tasks" name="tasks"></a>
 						
 
+						<a title="SCNScene objects" name="task_SCNScene objects"></a>
+						<h2 class="task-title">SCNScene objects</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/modelScene" title="modelScene"></a>
+	<h3 class="method-title"><code><a href="#//api/name/modelScene">&nbsp;&nbsp;modelScene</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The scene representing the mdoel and the optional skeleton.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, nonatomic) SCNScene *modelScene</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The scene representing the mdoel and the optional skeleton.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/animationScenes" title="animationScenes"></a>
+	<h3 class="method-title"><code><a href="#//api/name/animationScenes">&nbsp;&nbsp;animationScenes</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of scenes where each scene is a skeletal animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, nonatomic) NSDictionary *animationScenes</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The array of scenes where each scene is a skeletal animation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
 						<a title="Animation data" name="task_Animation data"></a>
 						<h2 class="task-title">Animation data</h2>
 
 						<div class="task-list">
 							<div class="section-method">
+	<a name="//api/name/skeletonNode" title="skeletonNode"></a>
+	<h3 class="method-title"><code><a href="#//api/name/skeletonNode">&nbsp;&nbsp;skeletonNode</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The root of the skeleton.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readwrite, nonatomic) SCNNode *skeletonNode</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The root of the skeleton.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/animations" title="animations"></a>
 	<h3 class="method-title"><code><a href="#//api/name/animations">&nbsp;&nbsp;animations</a></code>
 </h3>
@@ -234,69 +394,11 @@ loaded with the assimp library.</p>
 						</div>
 						
 
-						<a title="Add, fetch scene animations" name="task_Add, fetch scene animations"></a>
-						<h2 class="task-title">Add, fetch scene animations</h2>
+						<a title="Add, fetch SCNAssimpAnimation animations" name="task_Add, fetch SCNAssimpAnimation animations"></a>
+						<h2 class="task-title">Add, fetch SCNAssimpAnimation animations</h2>
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/addAnimation:" title="addAnimation:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/addAnimation:">&ndash;&nbsp;addAnimation:</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>Adds an <a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a> object.</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>- (void)addAnimation:(SCNAssimpAnimation *)<em>assimpAnimation</em></code></div>
-
-		    
-			
-			<div class="method-subsection arguments-section parameters">
-				<h4 class="method-subtitle parameter-title">Parameters</h4>
-				<table class="argument-def parameter-def">
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>assimpAnimation</code></th>
-						<td><p>The scene animation object created from animation data.</p></td>
-					</tr>
-				
-				</table>
-			</div>
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection discussion-section">
-				<h4 class="method-subtitle">Discussion</h4>
-				<p>Adds an <a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a> object.</p>
-			</div>
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
 	<a name="//api/name/animationForKey:" title="animationForKey:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/animationForKey:">&ndash;&nbsp;animationForKey:</a></code>
 </h3>
@@ -359,6 +461,296 @@ loaded with the assimp library.</p>
 			
 		</div>
 	</div>
+</div><div class="section-method">
+	<a name="//api/name/addAnimation:toScene:" title="addAnimation:toScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addAnimation:toScene:">&ndash;&nbsp;addAnimation:toScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds an <a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a> object to the given scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)addAnimation:(SCNAssimpAnimation *)<em>assimpAnimation</em> toScene:(SCNScene *)<em>animScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>assimpAnimation</code></th>
+						<td><p>The scene animation object created from the animation
+data.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animScene</code></th>
+						<td><p>The scene to which the animation object is added.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Adds an <a href="../Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a> object to the given scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Add, fetch scene animations" name="task_Add, fetch scene animations"></a>
+						<h2 class="task-title">Add, fetch scene animations</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/animationKeys" title="animationKeys"></a>
+	<h3 class="method-title"><code><a href="#//api/name/animationKeys">&ndash;&nbsp;animationKeys</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Return the keys for all the <a href="#//api/name/animations">animations</a> in this file.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)animationKeys</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The array of animation keys.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Return the keys for all the <a href="#//api/name/animations">animations</a> in this file.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/animationSceneForKey:" title="animationSceneForKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/animationSceneForKey:">&ndash;&nbsp;animationSceneForKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Return the SCNScene object for the specified animation key.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNScene *)animationSceneForKey:(NSString *)<em>key</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>key</code></th>
+						<td><p>The unique scene animation key.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The scene animation object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Return the SCNScene object for the specified animation key.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeModelScene" title="makeModelScene"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeModelScene">&ndash;&nbsp;makeModelScene</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Makes the SCNScene representing the model and the optional skeleton.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)makeModelScene</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Makes the SCNScene representing the model and the optional skeleton.</p>
+
+<p>This transformation to SCNScene allows the client to use the existing SCNScene
+API. This also makes it trivial to support serialization using the existing
+SCNScene export API, thereby allowing easy integration in the XCode Scene
+editor and the asset pipeline.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makeAnimationScenes" title="makeAnimationScenes"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeAnimationScenes">&ndash;&nbsp;makeAnimationScenes</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Makes an array of SCNScene objects, each SCNScene representing a skeletal
+animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)makeAnimationScenes</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Makes an array of SCNScene objects, each SCNScene representing a skeletal
+animation.</p>
+
+<p>This transformation to SCNScene allows the client to use the existing SCNScene
+API. This also makes it trivial to support serialization using the existing
+SCNScene export API, thereby allowing easy integration in the XCode Scene
+editor and the asset pipeline.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNAssimpScene.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
 </div>
 						</div>
 						
@@ -374,7 +766,7 @@ loaded with the assimp library.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-11-30</p>
+						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-12-31</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
