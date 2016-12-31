@@ -1646,8 +1646,6 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                 [CAKeyframeAnimation animationWithKeyPath:@"position"];
             translationKeyFrameAnim.values = translationValues;
             translationKeyFrameAnim.keyTimes = translationTimes;
-            translationKeyFrameAnim.speed = 1;
-            translationKeyFrameAnim.repeatCount = 10;
             translationKeyFrameAnim.duration = duration;
             [channelKeys setValue:translationKeyFrameAnim forKey:@"position"];
 
@@ -1670,8 +1668,6 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                 [CAKeyframeAnimation animationWithKeyPath:@"orientation"];
             rotationKeyFrameAnim.values = rotationValues;
             rotationKeyFrameAnim.keyTimes = rotationTimes;
-            rotationKeyFrameAnim.speed = 1;
-            rotationKeyFrameAnim.repeatCount = 10;
             rotationKeyFrameAnim.duration = duration;
             [channelKeys setValue:rotationKeyFrameAnim forKey:@"orientation"];
 
@@ -1693,8 +1689,6 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                 [CAKeyframeAnimation animationWithKeyPath:@"scale"];
             scaleKeyFrameAnim.values = scaleValues;
             scaleKeyFrameAnim.keyTimes = scaleTimes;
-            scaleKeyFrameAnim.speed = 1;
-            scaleKeyFrameAnim.repeatCount = 10;
             scaleKeyFrameAnim.duration = duration;
             [channelKeys setValue:scaleKeyFrameAnim forKey:@"scale"];
 
