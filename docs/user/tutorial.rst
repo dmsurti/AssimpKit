@@ -1,52 +1,21 @@
-
-Library
--------
-
-AssimpKit
-=========
-
-Create 3D SceneKit scenes from files imported by assimp library with support for
-skeletal animations.
-
----
-
-Overview
+========
+Tutorial
 ========
 
-AssimpKit currently supports ***30 file formats*** that allows you to use these
-files directly in SceneKit without having to convert these to any of the files
-that SceneKit or Model IO supports thereby saving an extra step in your asset
-pipeline.
+Install the ``AssimpKit.framework`` following the :ref:`installation-label` guide.
 
-You can use the AssimpKit API to easily load, view and inspect such files with
-just few lines of code, including skeletal animations.
+It is recommended to go through the :ref:`api-overview-label`, before working
+through the tutorial.
 
-Getting Started with AssimpKit
-------------------------------
+Load a 3D model
+===============
 
-Table I-1 lists the important classes in AssimpKit.
+Load a Scene which is a part of your app bundle
+-----------------------------------------------
 
-***Table I-1*** Important classes in AssimpKit.
+You can load a scene which is a part of your app bundle, as in Listing I-1 below.
 
-Class/Category        | Description         
-----------------------| ----------------- 
-SCNScene(AssimpImport)| The container for all SceneKit content, loaded with assimp.
-SCNNode(AssimpImport) | The node category to add animation to a node.
-
-You can use the AssimpImport category defined on SCNScene to load scenes. The
-post processing steps that the assimp library can apply to the imported data are
-listed at AssimpKitPostProcessSteps.
-
-The imported SCNAssimpScene contains a model SCNScene which represents the 3D
-model and the skeleton if it contains one, in addition to the array of
-animations each represented by an SCNScene object. The SCNAssimpScene also
-contains the key names for the animations which can be used when adding,
-removing animations.
-
-You can load a scene which is a part of your app bundle, as in Listing I-1
-below.
-
-***Listing I-1*** Load a scene which is part of your app bundle
+*Listing I-1: Load a scene which is part of your app bundle*::
 
     #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
@@ -66,10 +35,13 @@ below.
 
     // set the model scene to the view
     scnView.scene = scene.modelScene;
+
+Load a scene by specifying a file URL
+-------------------------------------
                     
 You can load a scene by specifying a file URL, as in Listing I-2 below.
 
-***Listing I-2*** Load a scene with a file URL
+*Listing I-2: Load a scene with a file URL*::
 
     #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
@@ -91,8 +63,8 @@ You can load a scene by specifying a file URL, as in Listing I-2 below.
     // set the model scene to the view
     scnView.scene = scene.modelScene;
 
-Skeletal Animations
--------------------
+Load Skeletal Animations
+========================
 
 AssimpKit builds on top of the skeletal animation support provided by SceneKit.
 For any scene that contains skeletal animation data, it creates a skinner and
@@ -104,10 +76,13 @@ about which node to add the animation.
 AssimpKit supports skeletal animations irrespective of whether they are defined
 in one animation file or multiple animation files.
 
+Load an animation which is defined in the same file
+---------------------------------------------------
+
 You can load an animation which is defined in the same file as the model you are
 animating, using the listing I-3 below.
 
-***Listing I-3*** Load and play an animation which is defined in the same file
+*Listing I-3: Load and play an animation which is defined in the same file*::
 
     #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
@@ -136,10 +111,13 @@ animating, using the listing I-3 below.
     // set the model scene to the view
     scnView.scene = scene.modelScene;
 
+Load an animation which is defined in a seprate file
+----------------------------------------------------
+
 You can load an animation which is defined in a separate file from the model you
 are animating, using the listing I-5 below.
 
-***Listing I-4*** Load and play an animation which is defined in a separate file
+*Listing I-4: Load and play an animation which is defined in a separate file*::
 
     #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
@@ -175,9 +153,12 @@ are animating, using the listing I-5 below.
     // set the model scene to the view
     scnView.scene = scene.modelScene;
 
+Adding an animation to a node
+-----------------------------
+
 You can also add an animation to a node, using the SCNNode(AssimpImport) category.
 
-***Listing I-5*** Load and play an animation added to SCNNode
+*Listing I-5: Load and play an animation added to SCNNode*::
 
     #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
@@ -202,22 +183,50 @@ You can also add an animation to a node, using the SCNNode(AssimpImport) categor
 Removing Animations
 -------------------
 
-You can use the `removeAllAnimations` method defined in `SCNAnimatable` to remove
-all animations attached to the object, using AssimpKit.
+You can use the `removeAllAnimations`_ method defined in ``SCNAnimatable`` to
+remove all animations attached to the object, using AssimpKit.
 
 Serialization and integrating with asset pipeline
--------------------------------------------------
+=================================================
 
-You can serialize the model and animation scenes in SCNAssimpScene using the [write(to:options:delegate:progressHandler:)](https://developer.apple.com/reference/scenekit/scnscene/1523577-write) defined in `SCNScene` to export to either `.scn` or `.dae` file. See the discussion section of [write(to:options:delegate:progressHandler:)](https://developer.apple.com/reference/scenekit/scnscene/1523577-write) for more details.
+You can serialize the model and animation scenes in SCNAssimpScene using the
+`write`_ defined in `SCNScene` to export to either `.scn` or `.dae` file. See
+the discussion section of `write`_ for more details.
 
-By exporting using the above serialization method, you can both edit the exported assets in XCode's scene editor and also integrate the assets imported into your application's asset pipeline. 
+By exporting using the above serialization method, you can both edit the
+exported assets in XCode's scene editor and also integrate the assets imported
+into your application's asset pipeline.
 
+.. image:: ../img/kit.*
 
-File formats supported by AssimpKit
------------------------------------
+.. _using-exported-scn:
 
-Currently AssimpKit supports the following file formats:
+Using ``.scn`` archives exported from AssimpKit in your app
+===========================================================
 
-***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, hmp, ifc, irr, md2, md5mesh, md5anim, 
-m3sd, nff, obj, off, mesh.xml, ply, q3o, q3s, raw, smd, stl, wrl, xgl, zgl, fbx,
-md3***
+Assuming you have two files in the ``Quake .md5`` format, ``Bob.md5mesh`` which
+contains the 3D model data and ``Bob.md5anim`` which contains a skeletal
+animation. Using the API as explained above, you can load both the model
+``SCNScene`` and animation ``SCNScene`` and then export these to the native
+``.scn`` archive format.
+
+Assume ``Bob.md5mesh`` is exported to ``Bob.scn`` and ``Bob.md5anim`` is
+exported to ``Bob-1.scn``, then in some ``iOS/macOS`` app,
+you can load these and play the animation as such.::
+
+     #import <AssimpKit/SCNScene+AssimpImport.h>
+
+     SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/Bob.scn"];
+     SCNScene *animScene = [SCNScene sceneNamed:@"art.scnassets/Bob-1.scn"];
+     [scene addAnimationScene:animScene];
+
+You can see below the ``Bob.scn`` file edited in XCode Scene editor.
+
+.. image:: ../img/bob-XCode.*
+
+The edited ``Bob.scn`` with animation rendered.
+
+.. image:: ../img/bob-iOS.*
+
+.. _removeAllAnimations: https://developer.apple.com/reference/scenekit/scnanimatable/1522762-removeallanimations
+.. _write: https://developer.apple.com/reference/scenekit/scnscene/1523577-write
