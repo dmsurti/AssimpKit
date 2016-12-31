@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #import "GameViewController.h"
 #import <AssimpKit/PostProcessingFlags.h>
 #import <AssimpKit/SCNScene+AssimpImport.h>
+#import <AssimpKit/SCNNode+AssimpImport.h>
 
 @implementation GameViewController
 
@@ -96,6 +97,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         {
             SCNScene* animation = [animScene animationSceneForKey:[animationKeys objectAtIndex:0]];
             [scene addAnimationScene:animation];
+            
+            /** You can also use the SCNNode category to add animation
+            
+             [scene.rootNode addAnimationScene:animation];
+             
+            */
         }
     }
 }
