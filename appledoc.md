@@ -31,7 +31,7 @@ Table I-1 lists the important classes in AssimpKit.
 Class/Category        | Description         
 ----------------------| ----------------- 
 SCNScene(AssimpImport)| The container for all SceneKit content, loaded with assimp.
-SCNAssimpAnimation    | The container for all SceneKit skeletal animation content.
+SCNNode(AssimpImport) | The node category to add animation to a node.
 
 You can use the AssimpKit category defined on SCNScene to load scenes. The post processing
 steps that the assimp library can apply to the imported data are listed at AssimpKitPostProcessSteps.
@@ -168,6 +168,44 @@ are animating, using the listing I-5 below.
 
     // set the model scene to the view
     scnView.scene = scene.modelScene;
+
+You can also add an animation to a node, using the SCNNode(AssimpImport) category.
+
+***Listing I-5*** Load and play an animation added to SCNNode
+
+    #import <AssimpKit/PostProcessing.h>
+    #import <AssimpKit/SCNScene+AssimpImport.h>
+
+    // Some node somewhere to which you add the animation
+    SCNNode *targetNode = ...
+    
+    // load an animation which is defined in a separate file
+    NSString *jumpAnim = @"/explorer/jump_start.dae"];
+    SCNAssimpScene *jumpStartScene =
+        [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]
+                          postProcessFlags:AssimpKit_Process_FlipUVs |
+                                           AssimpKit_Process_Triangulate];
+
+    // get the aniamtion with animation key
+    NSString *jumpId = @"jump_start-1";
+    SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
+
+    // add the jump animation to the explorer scene
+    [targetNode addAnimation:jumpStartAnim];
+
+Removing Animations
+-------------------
+
+You can use the `removeAllAnimations` method defined in `SCNAnimatable` to remove
+all animations attached to the object, using AssimpKit.
+
+Serialization and integrating with asset pipeline
+-------------------------------------------------
+
+You can serialize the model and animation scenes in SCNAssimpScene using the [write(to:options:delegate:progressHandler:)](https://developer.apple.com/reference/scenekit/scnscene/1523577-write) defined in `SCNScene` to export to either `.scn` or `.dae` file. See the discussion section of [write(to:options:delegate:progressHandler:)](https://developer.apple.com/reference/scenekit/scnscene/1523577-write) for more details.
+
+By exporting using the above serialization method, you can both edit the exported assets in XCode's scene editor and also integrate the assets imported into your application's asset pipeline. 
+
 
 File formats supported by AssimpKit
 -----------------------------------

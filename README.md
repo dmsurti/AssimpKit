@@ -19,12 +19,14 @@ pipeline.
 Features
 ---
 
-AssimpKit supports loading:
+AssimpKit supports:
 * Geometry
 * Materials (both color and texture)
-* Lights
 * Cameras and
 * Skeletal animations.
+* Serialization to `.scn` format
+
+For lights support, see [Issue 46](https://github.com/dmsurti/AssimpKit/issues/46).
 
 File formats supported by AssimpKit
 ---
@@ -76,7 +78,7 @@ Table below lists the important classes in AssimpKit.
 Class/Category        | Description         
 ----------------------| ----------------- 
 SCNScene(AssimpImport)| The container for all SceneKit content, loaded with assimp.
-SCNAssimpAnimation    | The container for all SceneKit skeletal animation content.
+SCNNode(AssimpImport) | The node category to add animation to a node.
 
 You can use the AssimpKit category defined on SCNScene to load scenes.
 
