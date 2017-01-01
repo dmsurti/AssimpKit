@@ -55,8 +55,8 @@ animations each represented by an ``SCNScene`` object. The `SCNAssimpScene`_
 also contains the key names for the animations which can be used when adding,
 removing animations.
 
-The ``AssimpImport`` category defined on `SCNScene+AssimpImport`_ and
-`SCNNode+AssimpImport`_ also contain a method to add a skeltal animation.
+The ``AssimpImport`` category defined on `SCNNode+AssimpImport`_ also contain a
+method to add a skeltal animation.
 
 For more information, refer to the :ref:`Tutorial`.
 

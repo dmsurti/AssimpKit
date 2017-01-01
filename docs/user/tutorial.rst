@@ -72,8 +72,7 @@ AssimpKit builds on top of the skeletal animation support provided by SceneKit.
 For any scene that contains skeletal animation data, it creates a skinner and
 sets it to the node whose geometry the skinner deforms. The animated scene after
 importing will contain a set of animations each with a unique animation key. You
-only have to add the animation to the scene to play it, without even worrying
-about which node to add the animation.
+only have to add the animation to the scene to play it.
 
 AssimpKit supports skeletal animations irrespective of whether they are defined
 in one animation file or multiple animation files.
@@ -105,7 +104,7 @@ animating, using the listing I-3 below.
     SCNScene *walkAnim = [scene animationSceneForKey:walkAnim];
 
     // add the walk animation to the boy model scene
-    [scene.modelScene addAnimation:attackAnim];
+    [scene.modelScene.rootNode addAnimation:attackAnim];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
@@ -147,7 +146,7 @@ are animating, using the listing I-5 below.
     SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
 
     // add the jump animation to the explorer scene
-    [scene.modelScene addAnimation:jumpStartAnim];
+    [scene.modelScene.rootNode addAnimation:jumpStartAnim];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
