@@ -51,4 +51,19 @@
  */
 - (void)addAnimationScene:(SCNScene *)animScene;
 
+/**
+ Adds the animation at the given node subtree to the corresponding node subtree
+ in the scene.
+ 
+ @param animNode The node and it's subtree which has a CAAnimation.
+ */
+- (void)addAnimationFromNode:(SCNNode *)animNode;
+
+/**
+ Finds the root node of the skeleton in the scene.
+
+ @return Retuns the root node of the skeleton in the scene.
+ */
+-(SCNNode*)findSkeletonRootNode;
+
 @end

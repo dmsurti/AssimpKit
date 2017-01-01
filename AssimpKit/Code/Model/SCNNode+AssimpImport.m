@@ -72,19 +72,8 @@
  */
 - (void)addAnimationScene:(SCNScene *)animScene
 {
-    __block SCNNode *rootAnimNode = nil;
-        // find root of skeleton
-    [animScene.rootNode
-     enumerateChildNodesUsingBlock:^(SCNNode *child, BOOL *stop) {
-         if (child.animationKeys.count > 0)
-         {
-             DLog(@" found anim: %@ at node %@", child.animationKeys, child);
-             rootAnimNode = child;
-             *stop = YES;
-         }
-         
-     }];
-    
+    SCNNode* rootAnimNode = [animScene.rootNode findSkeletonRootNode];
+
     if (rootAnimNode.childNodes.count > 0)
     {
         [self addAnimationFromNode:rootAnimNode];
@@ -96,6 +85,27 @@
              rootAnimNode.parentNode.childNodes.count);
         [self addAnimationFromNode:rootAnimNode.parentNode];
     }
+}
+
+/**
+ Finds the root node of the skeleton in the scene.
+ 
+ @return Retuns the root node of the skeleton in the scene.
+ */
+-(SCNNode*)findSkeletonRootNode
+{
+    __block SCNNode *rootAnimNode = nil;
+        // find root of skeleton
+    [self
+     enumerateChildNodesUsingBlock:^(SCNNode *child, BOOL *stop) {
+         if (child.animationKeys.count > 0)
+         {
+             DLog(@" found anim: %@ at node %@", child.animationKeys, child);
+             rootAnimNode = child;
+             *stop = YES;
+         }
+     }];
+    return rootAnimNode;
 }
 
 @end
