@@ -62,13 +62,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if (animationKeys.count > 0)
         {
             SCNScene* animation = [animScene animationSceneForKey:[animationKeys objectAtIndex:0]];            
-            [scene.modelScene addAnimationScene:animation];
-
-            /** You can also use the SCNNode category to add animation
-
-             [scene.modelScene.rootNode addAnimationScene:animation];
-
-             */
+            [scene.modelScene.rootNode addAnimationScene:animation];
         }
     }
 
