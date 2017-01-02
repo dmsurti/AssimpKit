@@ -103,6 +103,10 @@ only have to add the animation to the scene to play it.
 AssimpKit supports skeletal animations irrespective of whether they are defined
 in one animation file or multiple animation files.
 
+AssimpKit supports CAMediaTiming, animation attributes and animating scene kit
+content with an SCNAssimpAnimSettings class which you can (optionally) pass when
+adding an animation. You can set animation events and a delegate as well.
+
 You can load an animation which is defined in the same file as the model you are
 animating, using the listing I-3 below.
 
@@ -110,6 +114,7 @@ animating, using the listing I-3 below.
 
     #import <AssimpKit/PostProcessing.h>
     #import <AssimpKit/SCNScene+AssimpImport.h>
+    #import <AssimpKit/SCNAssimpAnimSettings.h>
 
     // The path to the file path must not be a relative path
     NSString *boyPath = @"/of/assets/astroBoy_walk.dae";
@@ -122,12 +127,34 @@ animating, using the listing I-3 below.
                     postProcessFlags:AssimpKit_Process_FlipUVs |
                                      AssimpKit_Process_Triangulate]];
 
-    // get the animation which is defined in the same file
-    NSString *walkID = @"astroBoy_walk-1";
-    SCNScene *walkAnim = [scene animationSceneForKey:walkAnim];
-
     // add the walk animation to the boy model scene
-    [scene.modelScene.rootNode addAnimation:attackAnim];
+    // add an animation event as well as a delegate
+    SCNAssimpAnimSettings *settings =
+              [[SCNAssimpAnimSettings alloc] init];
+    settings.repeatCount = 3;
+
+    NSString *key = [scene.animationKeys objectAtIndex:0];
+    SCNAnimationEventBlock eventBlock =
+        ^(CAAnimation *animation, id animatedObject,
+          BOOL playingBackward) {
+            NSLog(@" Animation Event triggered ");
+            // You can remove the animation
+            // [scene.rootNode removeAnimationSceneForKey:key];
+        };
+    SCNAnimationEvent *animEvent =
+        [SCNAnimationEvent animationEventWithKeyTime:0.9f
+                                               block:eventBlock];
+    NSArray *animEvents =
+        [[NSArray alloc] initWithObjects:animEvent, nil];
+    settings.animationEvents = animEvents;
+
+    settings.delegate = self;
+
+    // get the animation which is defined in the same file
+    SCNScene *animation = [animScene animationSceneForKey:key];
+    [scene.modelScene.rootNode addAnimationScene:animation
+                                          forKey:key
+                                    withSettings:settings];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
@@ -166,7 +193,10 @@ are animating, using the listing I-5 below.
     SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
 
     // add the jump animation to the explorer scene
-    [scene.modelScene.rootNode addAnimation:jumpStartAnim];
+    // use the default settings, for custom settings see previous listing I-4
+    [scene.modelScene.rootNode addAnimation:jumpStartAnim
+                                     forKey:jumpId
+                               withSettings:nil];
 
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
@@ -174,35 +204,11 @@ are animating, using the listing I-5 below.
     // set the model scene to the view
     scnView.scene = scene.modelScene;
 
-You can also add an animation to a node, using the SCNNode(AssimpImport) category.
-
-***Listing I-5*** Load and play an animation added to SCNNode
-
-    #import <AssimpKit/PostProcessing.h>
-    #import <AssimpKit/SCNScene+AssimpImport.h>
-
-    // Some node somewhere to which you add the animation
-    SCNNode *targetNode = ...
-    
-    // load an animation which is defined in a separate file
-    NSString *jumpAnim = @"/explorer/jump_start.dae"];
-    SCNAssimpScene *jumpStartScene =
-        [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]
-                          postProcessFlags:AssimpKit_Process_FlipUVs |
-                                           AssimpKit_Process_Triangulate];
-
-    // get the aniamtion with animation key
-    NSString *jumpId = @"jump_start-1";
-    SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
-
-    // add the jump animation to the explorer scene
-    [targetNode addAnimation:jumpStartAnim];
-
-Removing Animations
+Managing Animations
 -------------------
 
-You can use the `removeAllAnimations` method defined in `SCNAnimatable` to remove
-all animations attached to the object, using AssimpKit.
+The SCNNode+AssimpImport category simulates the SCNAnimatable protocol and
+provides methods to attach, remove, pause and resume animations.
 
 Serialization and integrating with asset pipeline
 -------------------------------------------------
