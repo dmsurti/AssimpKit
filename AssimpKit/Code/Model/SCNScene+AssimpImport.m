@@ -34,8 +34,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import "AssimpImporter.h"
-#import "SCNScene+AssimpImport.h"
 #import "SCNNode+AssimpImport.h"
+#import "SCNScene+AssimpImport.h"
 
 @implementation SCNScene (AssimpImport)
 
