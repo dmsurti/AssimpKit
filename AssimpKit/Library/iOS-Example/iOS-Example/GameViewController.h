@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #import <SceneKit/SceneKit.h>
 #import <UIKit/UIKit.h>
 
-@interface GameViewController : UIViewController
+@interface GameViewController : UIViewController <CAAnimationDelegate>
 
 @property(readwrite, nonatomic) NSString* modelFilePath;
 @property(readwrite, nonatomic) NSString* animFilePath;
