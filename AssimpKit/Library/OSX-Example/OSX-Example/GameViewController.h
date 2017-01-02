@@ -34,10 +34,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import <SceneKit/SceneKit.h>
+#import <Quartz/Quartz.h>
 
 #import "GameView.h"
 
-@interface GameViewController : NSViewController
+@interface GameViewController : NSViewController <CAAnimationDelegate>
 
 @property (assign) IBOutlet GameView *gameView;
 

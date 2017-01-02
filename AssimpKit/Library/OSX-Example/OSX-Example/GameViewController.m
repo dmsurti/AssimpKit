@@ -35,8 +35,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "GameViewController.h"
 #import <AssimpKit/PostProcessingFlags.h>
-#import <AssimpKit/SCNScene+AssimpImport.h>
+#import <AssimpKit/SCNAssimpAnimSettings.h>
 #import <AssimpKit/SCNNode+AssimpImport.h>
+#import <AssimpKit/SCNScene+AssimpImport.h>
 
 @implementation GameViewController
 
@@ -87,7 +88,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               postProcessFlags:AssimpKit_Process_FlipUVs |
                                AssimpKit_Process_Triangulate];
         SCNScene *scene = self.gameView.scene;
-        if (scene == nil) {
+        if (scene == nil)
+        {
             scene = animScene.modelScene;
             self.gameView.scene = scene;
         }
@@ -95,16 +97,53 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         // If multiple animations exist, load the first animation
         if (animationKeys.count > 0)
         {
-            SCNScene* animation = [animScene animationSceneForKey:[animationKeys objectAtIndex:0]];
-            [scene addAnimationScene:animation];
+            SCNAssimpAnimSettings *settings =
+                [[SCNAssimpAnimSettings alloc] init];
+            settings.repeatCount = 3;
             
-            /** You can also use the SCNNode category to add animation
+            NSString *key = [animationKeys objectAtIndex:0];
+            SCNAnimationEventBlock eventBlock =
+                ^(CAAnimation *animation, id animatedObject,
+                  BOOL playingBackward) {
+                    NSLog(@" Animation Event triggered ");
+                  
+                    // To test removing animation uncomment
+                    // Then the animation wont repeat 3 times
+                    // as it will be removed after 90% of the first loop
+                    // is completed, as event key time is 0.9
+                    // [scene.rootNode removeAnimationSceneForKey:key];
+                    [scene.rootNode pauseAnimationSceneForKey:key];
+                    NSLog(@" Animation paused: %d",
+                          [scene.rootNode isAnimationSceneForKeyPaused:key]);
+                    // [scene.rootNode resumeAnimationSceneForKey:key];
+                };
+            SCNAnimationEvent *animEvent =
+                [SCNAnimationEvent animationEventWithKeyTime:0.9f
+                                                       block:eventBlock];
+            NSArray *animEvents =
+                [[NSArray alloc] initWithObjects:animEvent, nil];
+            settings.animationEvents = animEvents;
+
+            settings.delegate = self;
             
-             [scene.rootNode addAnimationScene:animation];
-             
-            */
+            SCNScene *animation = [animScene animationSceneForKey:key];
+            [scene.rootNode addAnimationScene:animation
+                                       forKey:key
+                                 withSettings:settings];
+            
+            
         }
     }
+}
+
+- (void)animationDidStart:(CAAnimation *)anim
+{
+    NSLog(@" animation did start...");
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    NSLog(@" animation did stop...");
 }
 
 @end

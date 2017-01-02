@@ -20,9 +20,7 @@ it generates a `scene kit node`_.
 `SCNAssimpScene`_ contains all the transformed data, excluding the animation
 data, for which `SCNAssimpAnimation`_ is the container. The `SCNAssimpScene`_
 generates the model `SCNScene`_ and animation `SCNScene`_ instances. The
-`SCNScene+AssimpImport`_ category also contains method to add the animation data in
-`SCNScene`_ to another `SCNScene`_ or `SCNNode`_.
-
+`SCNNode+AssimpImport`_ category contains method to add the animation.
 
 
 Generating the scene kit scene graph
@@ -162,11 +160,10 @@ integration into existing asset pipelines and/or applications becomes trivial.
 Loading Animations
 ==================
 
-The `SCNScene+AssimpImport`_ and `SCNNode+AssimpImport`_ category defines a
-method to add the animation data to a scene or node. As all the animation data
-is just `CAAnimation`_ objects, the animation `SCNScene`_ graph is traversed and
-the core animation objects are added to the corresponding bone node in the
-target scene or target nodes' subtree.
+The `SCNNode+AssimpImport`_ category defines a method to add the animation. As
+all the animation data is just `CAAnimation`_ objects, the animation `SCNScene`_
+graph is traversed and the core animation objects are added to the corresponding
+bone node in the target scene or target nodes' subtree.
 
 Testing
 =======

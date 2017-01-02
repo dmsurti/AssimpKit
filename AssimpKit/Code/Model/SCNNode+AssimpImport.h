@@ -35,20 +35,85 @@
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SceneKit.h>
+#import "SCNAssimpAnimSettings.h"
 
+/**
+ A scenekit SCNNode category which imitates the SCNAnimatable protocol.
+ */
 @interface SCNNode (AssimpImport)
 
-#pragma mark - Adding animation
+#pragma mark - SCNAnimatable Clone
 
 /**
- @name Adding animation
+ @name SCNAnimatable Clone
  */
 
 /**
- Adds a skeletal animation scene to the scene.
- 
+ Adds an animation object for the specified key..
+
  @param animScene The scene object representing the animation.
+ @param animKey An string identifying the animation for later retrieval. You may
+ pass nil if you don’t need to reference the animation later.
+ @param settings The animation settings object.
  */
-- (void)addAnimationScene:(SCNScene *)animScene;
+- (void)addAnimationScene:(SCNScene *)animScene
+                   forKey:(NSString *)animKey
+             withSettings:(SCNAssimpAnimSettings *)settings;
+
+/**
+ Removes the animation attached to the object with the specified key.
+
+ @param animKey A string identifying an attached animation to remove.
+ */
+- (void)removeAnimationSceneForKey:(NSString *)animKey;
+
+/**
+ Removes the animation attached to the object with the specified key, smoothly
+ transitioning out of the animation’s effect.
+
+ @param animKey A string identifying an attached animation to remove.
+ @param fadeOutDuration The duration for transitioning out of the animation’s
+ effect before it is removed
+ */
+- (void)removeAnimationSceneForKey:(NSString *)animKey
+                   fadeOutDuration:(CGFloat)fadeOutDuration;
+
+/**
+ Pauses the animation attached to the object with the specified key.
+
+ @param animKey A string identifying an attached animation.
+ */
+- (void)pauseAnimationSceneForKey:(NSString *)animKey;
+
+/**
+ Resumes a previously paused animation attached to the object with the specified
+ key.
+
+ @param animKey A string identifying an attached animation.
+ */
+- (void)resumeAnimationSceneForKey:(NSString *)animKey;
+
+/**
+ Returns a Boolean value indicating whether the animation attached to the object
+ with the specified key is paused.
+
+ @param animKey A string identifying an attached animation.
+ @return YES if the specified animation is paused. NO if the animation is
+ running or no animation is attached to the object with that key.
+ */
+- (BOOL)isAnimationSceneForKeyPaused:(NSString *)animKey;
+
+#pragma mark - Skeleton
+
+/**
+ @name Skeleton
+ */
+
+/**
+ Finds the root node of the skeleton in the scene.
+
+ @return Retuns the root node of the skeleton in the scene.
+ */
+- (SCNNode *)findSkeletonRootNode;
 
 @end
