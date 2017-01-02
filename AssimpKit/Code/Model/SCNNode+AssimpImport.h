@@ -37,6 +37,9 @@
 #import <SceneKit/SceneKit.h>
 #import "SCNAssimpAnimSettings.h"
 
+/**
+ A scenekit SCNNode category which imitates the SCNAnimatable protocol.
+ */
 @interface SCNNode (AssimpImport)
 
 #pragma mark - SCNAnimatable Clone
