@@ -89,12 +89,18 @@ just few lines of code, including skeletal animations.</p>
 </table>
 
 
-<p>You can use the AssimpKit category defined on SCNScene to load scenes. The post processing
-steps that the assimp library can apply to the imported data are listed at <a href="Constants/AssimpKitPostProcessSteps.html">AssimpKitPostProcessSteps</a>.</p>
+<p>You can use the AssimpImport category defined on SCNScene to load scenes. The
+post processing steps that the assimp library can apply to the imported data are
+listed at <a href="Constants/AssimpKitPostProcessSteps.html">AssimpKitPostProcessSteps</a>.</p>
 
-<p>The imported <a href="Classes/SCNAssimpScene.html">SCNAssimpScene</a> contains a model SCNScene which represents the 3D model and the skeleton if it contains one, in addition to the array of animations each represented by an SCNScene object. The <a href="Classes/SCNAssimpScene.html">SCNAssimpScene</a> also contains the key names for the animations which can be used when adding, removing animations.</p>
+<p>The imported <a href="Classes/SCNAssimpScene.html">SCNAssimpScene</a> contains a model SCNScene which represents the 3D
+model and the skeleton if it contains one, in addition to the array of
+animations each represented by an SCNScene object. The <a href="Classes/SCNAssimpScene.html">SCNAssimpScene</a> also
+contains the key names for the animations which can be used when adding,
+removing animations.</p>
 
-<p>You can load a scene which is a part of your app bundle, as in Listing I-1 below.</p>
+<p>You can load a scene which is a part of your app bundle, as in Listing I-1
+below.</p>
 
 <p><strong><em>Listing I-1</em></strong> Load a scene which is part of your app bundle</p>
 
@@ -149,11 +155,14 @@ scnView.scene = scene.modelScene;
 For any scene that contains skeletal animation data, it creates a skinner and
 sets it to the node whose geometry the skinner deforms. The animated scene after
 importing will contain a set of animations each with a unique animation key. You
-only have to add the animation to the scene to play it, without even worrying
-about which node to add the animation.</p>
+only have to add the animation to the scene to play it.</p>
 
 <p>AssimpKit supports skeletal animations irrespective of whether they are defined
 in one animation file or multiple animation files.</p>
+
+<p>AssimpKit supports CAMediaTiming, animation attributes and animating scene kit
+content with an <a href="Classes/SCNAssimpAnimSettings.html">SCNAssimpAnimSettings</a> class which you can (optionally) pass when
+adding an animation. You can set animation events and a delegate as well.</p>
 
 <p>You can load an animation which is defined in the same file as the model you are
 animating, using the listing I-3 below.</p>
@@ -162,6 +171,7 @@ animating, using the listing I-3 below.</p>
 
 <pre><code>#import &lt;AssimpKit/PostProcessing.h&gt;
 #import &lt;AssimpKit/SCNScene+AssimpImport.h&gt;
+#import &lt;AssimpKit/SCNAssimpAnimSettings.h&gt;
 
 // The path to the file path must not be a relative path
 NSString *boyPath = @"/of/assets/astroBoy_walk.dae";
@@ -174,12 +184,34 @@ SCNAssimpScene *scene =
                 postProcessFlags:AssimpKit_Process_FlipUVs |
                                  AssimpKit_Process_Triangulate]];
 
-// get the animation which is defined in the same file
-NSString *walkID = @"astroBoy_walk-1";
-SCNScene *walkAnim = [scene animationSceneForKey:walkAnim];
-
 // add the walk animation to the boy model scene
-[scene.modelScene addAnimation:attackAnim];
+// add an animation event as well as a delegate
+SCNAssimpAnimSettings *settings =
+          [[SCNAssimpAnimSettings alloc] init];
+settings.repeatCount = 3;
+
+NSString *key = [scene.animationKeys objectAtIndex:0];
+SCNAnimationEventBlock eventBlock =
+    ^(CAAnimation *animation, id animatedObject,
+      BOOL playingBackward) {
+        NSLog(@" Animation Event triggered ");
+        // You can remove the animation
+        // [scene.rootNode removeAnimationSceneForKey:key];
+    };
+SCNAnimationEvent *animEvent =
+    [SCNAnimationEvent animationEventWithKeyTime:0.9f
+                                           block:eventBlock];
+NSArray *animEvents =
+    [[NSArray alloc] initWithObjects:animEvent, nil];
+settings.animationEvents = animEvents;
+
+settings.delegate = self;
+
+// get the animation which is defined in the same file
+SCNScene *animation = [animScene animationSceneForKey:key];
+[scene.modelScene.rootNode addAnimationScene:animation
+                                      forKey:key
+                                withSettings:settings];
 
 // retrieve the SCNView
 SCNView *scnView = (SCNView *)self.view;
@@ -219,7 +251,10 @@ NSString *jumpId = @"jump_start-1";
 SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
 
 // add the jump animation to the explorer scene
-[scene.modelScene addAnimation:jumpStartAnim];
+// use the default settings, for custom settings see previous listing I-4
+[scene.modelScene.rootNode addAnimation:jumpStartAnim
+                                 forKey:jumpId
+                           withSettings:nil];
 
 // retrieve the SCNView
 SCNView *scnView = (SCNView *)self.view;
@@ -228,35 +263,10 @@ SCNView *scnView = (SCNView *)self.view;
 scnView.scene = scene.modelScene;
 </code></pre>
 
-<p>You can also add an animation to a node, using the <a href="Categories/SCNNode+AssimpImport.html">SCNNode(AssimpImport)</a> category.</p>
+<h2>Managing Animations</h2>
 
-<p><strong><em>Listing I-5</em></strong> Load and play an animation added to SCNNode</p>
-
-<pre><code>#import &lt;AssimpKit/PostProcessing.h&gt;
-#import &lt;AssimpKit/SCNScene+AssimpImport.h&gt;
-
-// Some node somewhere to which you add the animation
-SCNNode *targetNode = ...
-
-// load an animation which is defined in a separate file
-NSString *jumpAnim = @"/explorer/jump_start.dae"];
-SCNAssimpScene *jumpStartScene =
-    [SCNAssimpScene assimpSceneWithURL:[NSURL URLWithString:jumpAnim]
-                      postProcessFlags:AssimpKit_Process_FlipUVs |
-                                       AssimpKit_Process_Triangulate];
-
-// get the aniamtion with animation key
-NSString *jumpId = @"jump_start-1";
-SCNScene *jumpStartAnim = [jumpStartScene animationSceneForKey:jumpId];
-
-// add the jump animation to the explorer scene
-[targetNode addAnimation:jumpStartAnim];
-</code></pre>
-
-<h2>Removing Animations</h2>
-
-<p>You can use the <code>removeAllAnimations</code> method defined in <code>SCNAnimatable</code> to remove
-all animations attached to the object, using AssimpKit.</p>
+<p>The SCNNode+AssimpImport category simulates the SCNAnimatable protocol and
+provides methods to attach, remove, pause and resume animations.</p>
 
 <h2>Serialization and integrating with asset pipeline</h2>
 
@@ -288,11 +298,11 @@ md3</em></strong></p>
 								
 								<li><a href="Classes/AssimpImporterTests.html">AssimpImporterTests</a></li>
 								
-								<li><a href="Classes/GameViewController.html">GameViewController</a></li>
-								
 								<li><a href="Classes/ModelFile.html">ModelFile</a></li>
 								
 								<li><a href="Classes/ModelLog.html">ModelLog</a></li>
+								
+								<li><a href="Classes/SCNAssimpAnimSettings.html">SCNAssimpAnimSettings</a></li>
 								
 								<li><a href="Classes/SCNAssimpAnimation.html">SCNAssimpAnimation</a></li>
 								
@@ -334,7 +344,7 @@ md3</em></strong></p>
 					<footer>
 						<div class="footer-copyright">
 							
-							<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-12-31</p>
+							<p class="copyright">Copyright &copy; 2017 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2017-01-02</p>
 							
 							
 							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

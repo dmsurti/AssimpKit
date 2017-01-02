@@ -43,6 +43,8 @@
 							<select id="jump-to">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 
 	
 	
@@ -58,9 +60,21 @@
 	
 	<optgroup label="Instance Methods">
 		
-		<option value="//api/name/addAnimationFromNode:">- addAnimationFromNode:</option>
+		<option value="//api/name/addAnimationFromNode:forKey:withSettings:hasEvents:hasDelegate:">- addAnimationFromNode:forKey:withSettings:hasEvents:hasDelegate:</option>
 		
-		<option value="//api/name/addAnimationScene:">- addAnimationScene:</option>
+		<option value="//api/name/addAnimationScene:forKey:withSettings:">- addAnimationScene:forKey:withSettings:</option>
+		
+		<option value="//api/name/findSkeletonRootNode">- findSkeletonRootNode</option>
+		
+		<option value="//api/name/isAnimationSceneForKeyPaused:">- isAnimationSceneForKeyPaused:</option>
+		
+		<option value="//api/name/pauseAnimationSceneForKey:">- pauseAnimationSceneForKey:</option>
+		
+		<option value="//api/name/removeAnimationSceneForKey:">- removeAnimationSceneForKey:</option>
+		
+		<option value="//api/name/removeAnimationSceneForKey:fadeOutDuration:">- removeAnimationSceneForKey:fadeOutDuration:</option>
+		
+		<option value="//api/name/resumeAnimationSceneForKey:">- resumeAnimationSceneForKey:</option>
 		
 	</optgroup>
 	
@@ -89,6 +103,14 @@
 					
 
                     
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>A scenekit SCNNode category which imitates the SCNAnimatable protocol.</p>
+					</div>
+					
+					
 
 					
 					
@@ -96,13 +118,13 @@
 						<a title="Tasks" name="tasks"></a>
 						
 
-						<a title="Adding animation" name="task_Adding animation"></a>
-						
-<h2 class="task-title">Adding animation</h2>
+						<a title="SCNAnimatable Clone" name="task_SCNAnimatable Clone"></a>
+						<h2 class="task-title">SCNAnimatable Clone</h2>
+
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/addAnimationScene:" title="addAnimationScene:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/addAnimationScene:">&ndash;&nbsp;addAnimationScene:</a></code>
+	<a name="//api/name/addAnimationScene:forKey:withSettings:" title="addAnimationScene:forKey:withSettings:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addAnimationScene:forKey:withSettings:">&ndash;&nbsp;addAnimationScene:forKey:withSettings:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -112,12 +134,12 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Adds a skeletal animation scene to the scene.</p>
+				<p>Adds an animation object for the specified key..</p>
 			</div>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)addAnimationScene:(SCNScene *)<em>animScene</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)addAnimationScene:(SCNScene *)<em>animScene</em> forKey:(NSString *)<em>animKey</em> withSettings:(SCNAssimpAnimSettings *)<em>settings</em></code></div>
 
 		    
 			
@@ -128,6 +150,17 @@
 					<tr>
 						<th scope="row" class="argument-name"><code>animScene</code></th>
 						<td><p>The scene object representing the animation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animKey</code></th>
+						<td><p>An string identifying the animation for later retrieval. You may
+pass nil if you don’t need to reference the animation later.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>settings</code></th>
+						<td><p>The animation settings object.</p></td>
 					</tr>
 				
 				</table>
@@ -141,7 +174,7 @@
 			
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
-				<p>Adds a skeletal animation scene to the scene.</p>
+				<p>Adds an animation object for the specified key..</p>
 			</div>
 			
 
@@ -159,8 +192,316 @@
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/addAnimationFromNode:" title="addAnimationFromNode:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/addAnimationFromNode:">&ndash;&nbsp;addAnimationFromNode:</a></code>
+	<a name="//api/name/removeAnimationSceneForKey:" title="removeAnimationSceneForKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeAnimationSceneForKey:">&ndash;&nbsp;removeAnimationSceneForKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes the animation attached to the object with the specified key.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)removeAnimationSceneForKey:(NSString *)<em>animKey</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animKey</code></th>
+						<td><p>A string identifying an attached animation to remove.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Removes the animation attached to the object with the specified key.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNNode+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeAnimationSceneForKey:fadeOutDuration:" title="removeAnimationSceneForKey:fadeOutDuration:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeAnimationSceneForKey:fadeOutDuration:">&ndash;&nbsp;removeAnimationSceneForKey:fadeOutDuration:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes the animation attached to the object with the specified key, smoothly
+transitioning out of the animation’s effect.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)removeAnimationSceneForKey:(NSString *)<em>animKey</em> fadeOutDuration:(CGFloat)<em>fadeOutDuration</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animKey</code></th>
+						<td><p>A string identifying an attached animation to remove.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>fadeOutDuration</code></th>
+						<td><p>The duration for transitioning out of the animation’s
+effect before it is removed</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Removes the animation attached to the object with the specified key, smoothly
+transitioning out of the animation’s effect.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNNode+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/pauseAnimationSceneForKey:" title="pauseAnimationSceneForKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/pauseAnimationSceneForKey:">&ndash;&nbsp;pauseAnimationSceneForKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Pauses the animation attached to the object with the specified key.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)pauseAnimationSceneForKey:(NSString *)<em>animKey</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animKey</code></th>
+						<td><p>A string identifying an attached animation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Pauses the animation attached to the object with the specified key.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNNode+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resumeAnimationSceneForKey:" title="resumeAnimationSceneForKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resumeAnimationSceneForKey:">&ndash;&nbsp;resumeAnimationSceneForKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Resumes a previously paused animation attached to the object with the specified
+key.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)resumeAnimationSceneForKey:(NSString *)<em>animKey</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animKey</code></th>
+						<td><p>A string identifying an attached animation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Resumes a previously paused animation attached to the object with the specified
+key.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNNode+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isAnimationSceneForKeyPaused:" title="isAnimationSceneForKeyPaused:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isAnimationSceneForKeyPaused:">&ndash;&nbsp;isAnimationSceneForKeyPaused:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a Boolean value indicating whether the animation attached to the object
+with the specified key is paused.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)isAnimationSceneForKeyPaused:(NSString *)<em>animKey</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animKey</code></th>
+						<td><p>A string identifying an attached animation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>YES if the specified animation is paused. NO if the animation is
+running or no animation is attached to the object with that key.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Returns a Boolean value indicating whether the animation attached to the object
+with the specified key is paused.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNNode+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addAnimationFromNode:forKey:withSettings:hasEvents:hasDelegate:" title="addAnimationFromNode:forKey:withSettings:hasEvents:hasDelegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addAnimationFromNode:forKey:withSettings:hasEvents:hasDelegate:">&ndash;&nbsp;addAnimationFromNode:forKey:withSettings:hasEvents:hasDelegate:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -176,7 +517,7 @@ in the scene.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)addAnimationFromNode:(SCNNode *)<em>animNode</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)addAnimationFromNode:(SCNNode *)<em>animNode</em> forKey:(NSString *)<em>animKey</em> withSettings:(SCNAssimpAnimSettings *)<em>settings</em> hasEvents:(BOOL)<em>hasEvents</em> hasDelegate:(BOOL)<em>hasDelegate</em></code></div>
 
 		    
 			
@@ -221,6 +562,65 @@ in the scene.</p>
 </div>
 						</div>
 						
+
+						<a title="Skeleton" name="task_Skeleton"></a>
+						<h2 class="task-title">Skeleton</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/findSkeletonRootNode" title="findSkeletonRootNode"></a>
+	<h3 class="method-title"><code><a href="#//api/name/findSkeletonRootNode">&ndash;&nbsp;findSkeletonRootNode</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Finds the root node of the skeleton in the scene.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNNode *)findSkeletonRootNode</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Retuns the root node of the skeleton in the scene.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Finds the root node of the skeleton in the scene.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNNode+AssimpImport.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
 					</div>
 					
 					
@@ -233,7 +633,7 @@ in the scene.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2016-12-31</p>
+						<p class="copyright">Copyright &copy; 2017 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2017-01-02</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
