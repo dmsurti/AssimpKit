@@ -18,6 +18,10 @@
 		7746DB741DEF08FE00C651DC /* not-supported-formats.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB731DEF08FE00C651DC /* not-supported-formats.txt */; };
 		7746DB751DEF090500C651DC /* not-supported-formats.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7746DB731DEF08FE00C651DC /* not-supported-formats.txt */; };
 		7746DB771DEF0DFA00C651DC /* SCNSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7746DB761DEF0DFA00C651DC /* SCNSceneTests.m */; };
+		77824E3C1E1A5B21000B24A3 /* SCNAssimpAnimSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 77824E3A1E1A5B21000B24A3 /* SCNAssimpAnimSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77824E3D1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 77824E3B1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m */; };
+		77824E421E1A5B45000B24A3 /* SCNAssimpAnimSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77824E431E1A5B45000B24A3 /* SCNAssimpAnimSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 77824E411E1A5B45000B24A3 /* SCNAssimpAnimSettings.m */; };
 		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
 		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
@@ -91,6 +95,10 @@
 		7746DB701DEEFE4000C651DC /* SCNSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNSceneTests.m; path = ../../Code/Model/Tests/SCNSceneTests.m; sourceTree = "<group>"; };
 		7746DB731DEF08FE00C651DC /* not-supported-formats.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "not-supported-formats.txt"; path = "../assets/not-supported-formats.txt"; sourceTree = "<group>"; };
 		7746DB761DEF0DFA00C651DC /* SCNSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNSceneTests.m; path = ../../Code/Model/Tests/SCNSceneTests.m; sourceTree = "<group>"; };
+		77824E3A1E1A5B21000B24A3 /* SCNAssimpAnimSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimSettings.h; path = ../../Code/Model/SCNAssimpAnimSettings.h; sourceTree = "<group>"; };
+		77824E3B1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimSettings.m; path = ../../Code/Model/SCNAssimpAnimSettings.m; sourceTree = "<group>"; };
+		77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimSettings.h; path = ../../Code/Model/SCNAssimpAnimSettings.h; sourceTree = "<group>"; };
+		77824E411E1A5B45000B24A3 /* SCNAssimpAnimSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimSettings.m; path = ../../Code/Model/SCNAssimpAnimSettings.m; sourceTree = "<group>"; };
 		779DF1A71DDF262500DED366 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
 		779DF1D31DDF29F200DED366 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DF1D61DDF29F200DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -208,6 +216,8 @@
 		779DF1D41DDF29F200DED366 /* AssimpKit-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */,
+				77824E411E1A5B45000B24A3 /* SCNAssimpAnimSettings.m */,
 				7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */,
 				779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */,
 				779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */,
@@ -241,6 +251,8 @@
 				779DF1FE1DDF2B8700DED366 /* Info.plist */,
 				77EB2B881E1776EB004FA171 /* SCNNode+AssimpImport.h */,
 				77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */,
+				77824E3A1E1A5B21000B24A3 /* SCNAssimpAnimSettings.h */,
+				77824E3B1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m */,
 			);
 			path = "AssimpKit-macOS";
 			sourceTree = "<group>";
@@ -302,6 +314,7 @@
 				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
 				7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */,
 				77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */,
+				77824E421E1A5B45000B24A3 /* SCNAssimpAnimSettings.h in Headers */,
 				779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +329,7 @@
 				779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */,
 				7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */,
 				77EB2B8A1E1776EB004FA171 /* SCNNode+AssimpImport.h in Headers */,
+				77824E3C1E1A5B21000B24A3 /* SCNAssimpAnimSettings.h in Headers */,
 				779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +529,7 @@
 				77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */,
 				779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */,
 				779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */,
+				77824E431E1A5B45000B24A3 /* SCNAssimpAnimSettings.m in Sources */,
 				779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */,
 				779DF1EE1DDF2A5700DED366 /* SCNScene+AssimpImport.m in Sources */,
 			);
@@ -527,6 +542,7 @@
 				77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */,
 				779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */,
 				779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */,
+				77824E3D1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m in Sources */,
 				779DF20D1DDF2BB000DED366 /* AssimpImporter.m in Sources */,
 				779DF2141DDF2BB000DED366 /* SCNScene+AssimpImport.m in Sources */,
 			);
