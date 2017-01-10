@@ -1499,7 +1499,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
          self.uniqueBoneTransforms.count, self.uniqueBoneTransforms);
     self.skeleton = [self findSkeletonNodeFromBoneNodes:self.uniqueBoneNodes];
     [scene setSkeletonNode:self.skeleton];
-    DLog(@" |--| skeleton bone is : %@", self.skelton);
+    DLog(@" |--| skeleton bone is : %@", self.skeleton);
 }
 
 /**
