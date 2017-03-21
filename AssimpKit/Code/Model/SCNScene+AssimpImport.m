@@ -96,7 +96,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
-                    postProcessFlags:(unsigned int)postProcessFlags
+                    postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
 
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
@@ -112,7 +112,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
-                      postProcessFlags:(unsigned int)postProcessFlags
+                      postProcessFlags:
+                          (AssimpKitPostProcessSteps)postProcessFlags
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
     return

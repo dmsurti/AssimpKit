@@ -121,7 +121,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
-               postProcessFlags:(unsigned int)postProcessFlags
+               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
 {
     // Start the import on the given file with some example postprocessing
     // Usually - if speed is not the most important aspect for you - you'll t

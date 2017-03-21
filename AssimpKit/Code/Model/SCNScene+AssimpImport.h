@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
 #import "SCNAssimpScene.h"
+#import "PostProcessingFlags.h"
 
 /**
  A scenekit SCNScene category to import scenes using the assimp library.
@@ -53,7 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   @return The array of supported file extensions
 */
-+ (NSArray *)allowedFileExtensions;
++ (NSArray<NSString *> *)allowedFileExtensions;
 /**
  Returns a Boolean value that indicates whether the SCNAssimpScene class can
  read asset data from files with the specified extension.
@@ -72,7 +73,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
-                    postProcessFlags:(unsigned int)postProcessFlags;
+                    postProcessFlags:
+                        (AssimpKitPostProcessSteps)postProcessFlags;
 
 /**
  Loads a scene from the specified NSString URL.
@@ -82,6 +84,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
-                      postProcessFlags:(unsigned int)postProcessFlags;
+                      postProcessFlags:
+                          (AssimpKitPostProcessSteps)postProcessFlags;
 
 @end

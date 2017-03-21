@@ -71,8 +71,7 @@
  postprocess.h
 
  */
-typedef NS_ENUM(NSInteger, AssimpKitPostProcessSteps)
-{
+typedef NS_OPTIONS(unsigned int, AssimpKitPostProcessSteps) {
     // -------------------------------------------------------------------------
     /** Calculates the tangents and bitangents for the imported meshes.
      * Does nothing if a mesh does not have normals. You might want this post
@@ -87,7 +86,7 @@ typedef NS_ENUM(NSInteger, AssimpKitPostProcessSteps)
      * so a vertex may be used by multiple faces. You usually want
      * to use this post processing step. If your application deals with
      * indexed geometry, this step is compulsory or you'll just waste rendering
-     * time. If this flag is not specified</b>, no vertices are referenced by
+     * time. If this flag is <b>not specified</b>, no vertices are referenced by
      * more than one face and <b>no index buffer is required</b> for rendering.
      */
     AssimpKit_JoinIdenticalVertices = 0x2,
