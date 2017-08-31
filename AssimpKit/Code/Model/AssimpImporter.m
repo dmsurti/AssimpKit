@@ -523,6 +523,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     for (int i = 0; i < aiMesh->mNumFaces; i++)
     {
         const struct aiFace *aiFace = &aiMesh->mFaces[i];
+        // we ignore faces which are not triangulated
+        if(aiFace->mNumIndices != 3) {
+            return nil;
+        }
         for (int j = 0; j < aiFace->mNumIndices; j++)
         {
             scnIndices[indicesCounter++] =
@@ -562,7 +566,9 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                                  inScene:aiScene
                                          withIndexOffset:indexOffset
                                                   nFaces:aiMesh->mNumFaces];
-        [scnGeometryElements addObject:indices];
+        if(indices != nil) {
+            [scnGeometryElements addObject:indices];
+        }
         indexOffset += aiMesh->mNumVertices;
     }
 
