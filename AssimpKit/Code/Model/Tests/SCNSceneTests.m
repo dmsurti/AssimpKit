@@ -59,7 +59,7 @@
 - (void)testSupportedFormats
 {
     NSArray *validExts =
-        [@"3d,3ds,ac,b3d,bvh,cob,dae,dxf,hmp,ifc,irr,md2,md5mesh,"
+        [@"3d,3ds,ac,b3d,bvh,cob,dae,dxf,ifc,irr,md2,md5mesh,"
          @"md5anim,m3sd,nff,obj,off,mesh.xml,ply,q3o,q3s,raw,"
          @"smd,stl,wrl,xgl,zgl,fbx,md3" componentsSeparatedByString:@","];
     for (NSString *validExt in validExts)
@@ -90,7 +90,7 @@
 - (void)testSupportedFileTypes
 {
     NSArray *validExts = [SCNAssimpScene allowedFileExtensions];
-    XCTAssertTrue(validExts.count == 30,
+    XCTAssertTrue(validExts.count == 29,
                   @"Expected %d formats supported, instead supports %lu", 31,
                   (unsigned long)validExts.count);
 }
