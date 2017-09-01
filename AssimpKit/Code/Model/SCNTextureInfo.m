@@ -233,6 +233,7 @@
 - (void)generateCGImageForEmbeddedTextureAtIndex:(int)index
                                          inScene:(const struct aiScene *)aiScene
 {
+    DLog(@" Generating embedded texture ");
     const struct aiTexture *aiTexture = aiScene->mTextures[index];
     NSData *imageData = [NSData dataWithBytes:aiTexture->pcData
                                        length:aiTexture->mWidth];
@@ -259,6 +260,7 @@
  */
 -(void)generateCGImageForExternalTextureAtPath:(NSString*)path
 {
+    DLog(@" Generating external texture");
     NSURL *imageURL = [NSURL fileURLWithPath:path];
     self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
     self.image = CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL);
@@ -267,6 +269,7 @@
 -(void)extractColorForMaterial:(const struct aiMaterial *)aiMaterial
                       withTextureType:(enum aiTextureType)aiTextureType
 {
+    DLog(@" Extracting color");
     struct aiColor4D color;
     color.r = 0.0f;
     color.g = 0.0f;

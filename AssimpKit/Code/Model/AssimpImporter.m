@@ -641,6 +641,16 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         material.normal.contents = [textureInfo getMaterialPropertyContents];
         keyPrefix = @"normal";
     }
+    else if (textureInfo.textureType == aiTextureType_HEIGHT)
+    {
+        material.normal.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"normal";
+    }
+    else if (textureInfo.textureType == aiTextureType_DISPLACEMENT)
+    {
+        material.normal.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"normal";
+    }
     else if (textureInfo.textureType == aiTextureType_LIGHTMAP)
     {
         material.ambientOcclusion.contents =
@@ -723,77 +733,42 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             @" Material name is %@",
             [NSString stringWithUTF8String:(const char *_Nonnull) & name.data]);
         SCNMaterial *material = [SCNMaterial material];
+        int kTextureTypes = 10;
+        int textureTypes[10] = {
+            aiTextureType_DIFFUSE,      aiTextureType_SPECULAR,
+            aiTextureType_AMBIENT,      aiTextureType_EMISSIVE,
+            aiTextureType_REFLECTION,   aiTextureType_OPACITY,
+            aiTextureType_NORMALS,      aiTextureType_HEIGHT,
+            aiTextureType_DISPLACEMENT, aiTextureType_SHININESS};
+        NSDictionary *textureTypeNames = @{
+            @"0" : @"Diffuse",
+            @"1" : @"Specular",
+            @"2" : @"Ambient",
+            @"3" : @"Emissive",
+            @"4" : @"Reflection",
+            @"5" : @"Opacity",
+            @"6" : @"Normals",
+            @"7" : @"Height",
+            @"8" : @"Displacement",
+            @"9" : @"Shininess"
+        };
 
-        DLog(@"+++ Loading diffuse");
-        SCNTextureInfo *diffuseInfo =
-            [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                          textureType:aiTextureType_DIFFUSE
-                                              inScene:aiScene
-                                               atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:diffuseInfo
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading specular");
-        SCNTextureInfo *specularInfo =
-        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                      textureType:aiTextureType_SPECULAR
-                                          inScene:aiScene
+        for(int i = 0; i < kTextureTypes; i++) {
+            DLog(@" Loading texture type : %@",
+                 [textureTypeNames
+                     valueForKey:[NSNumber numberWithInt:i].stringValue]);
+            SCNTextureInfo *textureInfo =
+                [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                              textureType:textureTypes[i]
+                                                  inScene:aiScene
+                                                   atPath:path];
+            [self makeMaterialPropertyForMaterial:aiMaterial
+                                  withTextureInfo:textureInfo
+                                  withSCNMaterial:material
                                            atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:specularInfo
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading ambient");
-        SCNTextureInfo *ambientInfo =
-        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                      textureType:aiTextureType_AMBIENT
-                                          inScene:aiScene
-                                           atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:ambientInfo
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading reflective");
-        SCNTextureInfo *reflectiveInfo =
-        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                      textureType:aiTextureType_REFLECTION
-                                          inScene:aiScene
-                                           atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:reflectiveInfo
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading emissive");
-        SCNTextureInfo *emissiveInfo =
-        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                      textureType:aiTextureType_EMISSIVE
-                                          inScene:aiScene
-                                           atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:emissiveInfo
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading transparent");
-        SCNTextureInfo *opacityInfo =
-        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                      textureType:aiTextureType_OPACITY
-                                          inScene:aiScene
-                                           atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:opacityInfo
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading ambient occlusion");
-        SCNTextureInfo *lightMapInfo =
-        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
-                                      textureType:aiTextureType_LIGHTMAP
-                                          inScene:aiScene
-                                           atPath:path];
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureInfo:lightMapInfo
-                              withSCNMaterial:material
-                                       atPath:path];
+            [textureInfo releaseContents];
+        }
+
         DLog(@"+++ Loading multiply color");
         [self applyMultiplyPropertyForMaterial:aiMaterial
                                withSCNMaterial:material];
@@ -824,7 +799,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
                                   (int *)&shininess, max);
         DLog(@"   shininess: %d", shininess);
-        material.shininess = shininess;
+            //material.shininess = shininess;
         DLog(@"+++ Loading shading model");
         /**
      FIXME: The shading mode works only on iOS for iPhone.
