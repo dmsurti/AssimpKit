@@ -418,6 +418,52 @@ makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
 }
 
 /**
+ Creates a scenekit geometry source from the tangents of the specified node.
+
+@param aiNode The assimp node.
+@param aiScene The assimp scene.
+@param nVertices The number of vertices in the meshes of the aiNode.
+@return A new geometry source whose semantic property is tangent.
+*/
+- (SCNGeometrySource *)
+makeTangentGeometrySourceForNode:(const struct aiNode *)aiNode
+inScene:(const struct aiScene *)aiScene
+withNVertices:(int)nVertices
+{
+    float* scnTangents = (float*)malloc(nVertices * 3 * sizeof(float));
+    int verticesCounter = 0;
+    for (int i = 0; i < aiNode->mNumMeshes; i++)
+    {
+        int aiMeshIndex = aiNode->mMeshes[i];
+        const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
+        if (aiMesh->mTangents != NULL)
+        {
+            for (int j = 0; j < aiMesh->mNumVertices; j++)
+            {
+                const struct aiVector3D *aiVector3D = &aiMesh->mTangents[j];
+                scnTangents[verticesCounter++] = aiVector3D->x;
+                scnTangents[verticesCounter++] = aiVector3D->y;
+                scnTangents[verticesCounter++] = aiVector3D->z;
+            }
+        }
+    }
+    SCNGeometrySource *tangentSource = [SCNGeometrySource
+        geometrySourceWithData:[NSData
+                                   dataWithBytes:scnTangents
+                                          length:nVertices * 3 * sizeof(float)]
+                      semantic:SCNGeometrySourceSemanticTangent
+                   vectorCount:nVertices
+               floatComponents:YES
+           componentsPerVector:3
+             bytesPerComponent:sizeof(float)
+                    dataOffset:0
+                    dataStride:3 * sizeof(float)];
+    free(scnTangents);
+    return tangentSource;
+}
+
+
+/**
  Creates a scenekit geometry source from the texture coordinates of the
  specified node.
 
@@ -486,6 +532,10 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
         addObject:[self makeNormalGeometrySourceForNode:aiNode
                                                 inScene:aiScene
                                           withNVertices:nVertices]];
+    [scnGeometrySources
+        addObject:[self makeTangentGeometrySourceForNode:aiNode
+                                                 inScene:aiScene
+                                           withNVertices:nVertices]];
     [scnGeometrySources
         addObject:[self makeTextureGeometrySourceForNode:aiNode
                                                  inScene:aiScene
