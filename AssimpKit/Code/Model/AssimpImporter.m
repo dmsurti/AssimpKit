@@ -35,6 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "AssimpImporter.h"
 #import "SCNAssimpAnimation.h"
+#import "SCNTextureInfo.h"
 #include "assimp/cimport.h"     // Plain-C interface
 #include "assimp/light.h"       // Lights
 #include "assimp/material.h"    // Materials
@@ -586,98 +587,85 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
  if no texture is specifed.
 
  @param aiMaterial The assimp material.
- @param aiTextureType The texture type which is diffuse, specular etc.
+ @param textureInfo The metadata of the texture.
  @param material The scenekit material.
  @param path The path to the scene file to load.
  */
 - (void)makeMaterialPropertyForMaterial:(const struct aiMaterial *)aiMaterial
-                        withTextureType:(enum aiTextureType)aiTextureType
+                        withTextureInfo:(SCNTextureInfo *)textureInfo
                         withSCNMaterial:(SCNMaterial *)material
                                  atPath:(NSString *)path
 {
-    int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
-    if (nTextures > 0)
+    NSString *channel = @".mappingChannel";
+    NSString *wrapS = @".wrapS";
+    NSString *wrapT = @".wrapS";
+    NSString *intensity = @".intensity";
+    NSString *minFilter = @".minificationFilter";
+    NSString *magFilter = @".magnificationFilter";
+
+    NSString *keyPrefix = @"";
+    if (textureInfo.textureType == aiTextureType_DIFFUSE)
     {
-        DLog(@" has %d textures", nTextures);
-        struct aiString aiPath;
-        aiGetMaterialTexture(aiMaterial, aiTextureType, 0, &aiPath, NULL, NULL,
-                             NULL, NULL, NULL, NULL);
-        NSString *texFilePath = [NSString
-            stringWithUTF8String:(const char *_Nonnull) & aiPath.data];
-        NSString *texFileName = [texFilePath lastPathComponent];
-        NSString *sceneDir = [[path stringByDeletingLastPathComponent]
-            stringByAppendingString:@"/"];
-        NSString *texPath = [sceneDir stringByAppendingString:texFileName];
-        DLog(@"  tex path is %@", texPath);
-
-        NSString *channel = @".mappingChannel";
-        NSString *wrapS = @".wrapS";
-        NSString *wrapT = @".wrapS";
-        NSString *intensity = @".intensity";
-        NSString *minFilter = @".minificationFilter";
-        NSString *magFilter = @".magnificationFilter";
-
-        NSString *keyPrefix = @"";
-        if (aiTextureType == aiTextureType_DIFFUSE)
-        {
-            material.diffuse.contents = texPath;
-            keyPrefix = @"diffuse";
-        }
-        else if (aiTextureType == aiTextureType_SPECULAR)
-        {
-            material.specular.contents = texPath;
-            keyPrefix = @"specular";
-        }
-        else if (aiTextureType == aiTextureType_AMBIENT)
-        {
-            material.ambient.contents = texPath;
-            keyPrefix = @"ambient";
-        }
-        else if (aiTextureType == aiTextureType_REFLECTION)
-        {
-            material.reflective.contents = texPath;
-            keyPrefix = @"reflective";
-        }
-        else if (aiTextureType == aiTextureType_EMISSIVE)
-        {
-            material.emission.contents = texPath;
-            keyPrefix = @"emissive";
-        }
-        else if (aiTextureType == aiTextureType_OPACITY)
-        {
-            material.transparent.contents = texPath;
-            keyPrefix = @"transparent";
-        }
-        else if (aiTextureType == aiTextureType_NORMALS)
-        {
-            material.normal.contents = texPath;
-            keyPrefix = @"normal";
-        }
-        else if (aiTextureType == aiTextureType_LIGHTMAP)
-        {
-            material.ambientOcclusion.contents = texPath;
-            keyPrefix = @"ambientOcclusion";
-        }
-
-        // Update the keys
-        channel = [keyPrefix stringByAppendingString:channel];
-        wrapS = [keyPrefix stringByAppendingString:wrapS];
-        wrapT = [keyPrefix stringByAppendingString:wrapT];
-        intensity = [keyPrefix stringByAppendingString:intensity];
-        minFilter = [keyPrefix stringByAppendingString:minFilter];
-        magFilter = [keyPrefix stringByAppendingString:magFilter];
-
-        [material setValue:0 forKey:channel];
-        [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
-                    forKey:wrapS];
-        [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
-                    forKey:wrapT];
-        [material setValue:[NSNumber numberWithInt:1] forKey:intensity];
-        [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
-                    forKey:minFilter];
-        [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
-                    forKey:magFilter];
+        material.diffuse.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"diffuse";
     }
+    else if (textureInfo.textureType == aiTextureType_SPECULAR)
+    {
+        material.specular.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"specular";
+    }
+    else if (textureInfo.textureType == aiTextureType_AMBIENT)
+    {
+        material.ambient.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"ambient";
+    }
+    else if (textureInfo.textureType == aiTextureType_REFLECTION)
+    {
+        material.reflective.contents =
+            [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"reflective";
+    }
+    else if (textureInfo.textureType == aiTextureType_EMISSIVE)
+    {
+        material.emission.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"emissive";
+    }
+    else if (textureInfo.textureType == aiTextureType_OPACITY)
+    {
+        material.transparent.contents =
+        [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"transparent";
+    }
+    else if (textureInfo.textureType == aiTextureType_NORMALS)
+    {
+        material.normal.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"normal";
+    }
+    else if (textureInfo.textureType == aiTextureType_LIGHTMAP)
+    {
+        material.ambientOcclusion.contents =
+            [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"ambientOcclusion";
+    }
+
+    // Update the keys
+    channel = [keyPrefix stringByAppendingString:channel];
+    wrapS = [keyPrefix stringByAppendingString:wrapS];
+    wrapT = [keyPrefix stringByAppendingString:wrapT];
+    intensity = [keyPrefix stringByAppendingString:intensity];
+    minFilter = [keyPrefix stringByAppendingString:minFilter];
+    magFilter = [keyPrefix stringByAppendingString:magFilter];
+
+    [material setValue:0 forKey:channel];
+    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
+                forKey:wrapS];
+    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
+                forKey:wrapT];
+    [material setValue:[NSNumber numberWithInt:1] forKey:intensity];
+    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
+                forKey:minFilter];
+    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
+                forKey:magFilter];
 }
 
 /**
@@ -735,39 +723,75 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             @" Material name is %@",
             [NSString stringWithUTF8String:(const char *_Nonnull) & name.data]);
         SCNMaterial *material = [SCNMaterial material];
+
         DLog(@"+++ Loading diffuse");
+        SCNTextureInfo *diffuseInfo =
+            [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                          textureType:aiTextureType_DIFFUSE
+                                              inScene:aiScene
+                                               atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_DIFFUSE
+                              withTextureInfo:diffuseInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading specular");
+        SCNTextureInfo *specularInfo =
+        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                      textureType:aiTextureType_SPECULAR
+                                          inScene:aiScene
+                                           atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_SPECULAR
+                              withTextureInfo:specularInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading ambient");
+        SCNTextureInfo *ambientInfo =
+        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                      textureType:aiTextureType_AMBIENT
+                                          inScene:aiScene
+                                           atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_AMBIENT
+                              withTextureInfo:ambientInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading reflective");
+        SCNTextureInfo *reflectiveInfo =
+        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                      textureType:aiTextureType_REFLECTION
+                                          inScene:aiScene
+                                           atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_REFLECTION
+                              withTextureInfo:reflectiveInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading emissive");
+        SCNTextureInfo *emissiveInfo =
+        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                      textureType:aiTextureType_EMISSIVE
+                                          inScene:aiScene
+                                           atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_EMISSIVE
+                              withTextureInfo:emissiveInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading transparent");
+        SCNTextureInfo *opacityInfo =
+        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                      textureType:aiTextureType_OPACITY
+                                          inScene:aiScene
+                                           atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_OPACITY
+                              withTextureInfo:opacityInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading ambient occlusion");
+        SCNTextureInfo *lightMapInfo =
+        [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                      textureType:aiTextureType_LIGHTMAP
+                                          inScene:aiScene
+                                           atPath:path];
         [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_LIGHTMAP
+                              withTextureInfo:lightMapInfo
                               withSCNMaterial:material
                                        atPath:path];
         DLog(@"+++ Loading multiply color");
