@@ -339,7 +339,8 @@ makeVertexGeometrySourceForNode:(const struct aiNode *)aiNode
                         inScene:(const struct aiScene *)aiScene
                   withNVertices:(int)nVertices
 {
-    float scnVertices[nVertices * 3];
+        //float scnVertices[nVertices * 3];
+    float* scnVertices = (float*)malloc(nVertices * 3 * sizeof(float));
     int verticesCounter = 0;
     for (int i = 0; i < aiNode->mNumMeshes; i++)
     {
@@ -366,6 +367,7 @@ makeVertexGeometrySourceForNode:(const struct aiNode *)aiNode
              bytesPerComponent:sizeof(float)
                     dataOffset:0
                     dataStride:3 * sizeof(float)];
+    free(scnVertices);
     return vertexSource;
 }
 
@@ -382,7 +384,7 @@ makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
                         inScene:(const struct aiScene *)aiScene
                   withNVertices:(int)nVertices
 {
-    float scnNormals[nVertices * 3];
+    float* scnNormals = (float*)malloc(nVertices * 3 * sizeof(float));
     int verticesCounter = 0;
     for (int i = 0; i < aiNode->mNumMeshes; i++)
     {
@@ -410,6 +412,7 @@ makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
              bytesPerComponent:sizeof(float)
                     dataOffset:0
                     dataStride:3 * sizeof(float)];
+    free(scnNormals);
     return normalSource;
 }
 
@@ -427,7 +430,7 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
                          inScene:(const struct aiScene *)aiScene
                    withNVertices:(int)nVertices
 {
-    float scnTextures[nVertices * 2];
+    float* scnTextures = (float*)malloc(nVertices * 3 * sizeof(float));
     int verticesCounter = 0;
     for (int i = 0; i < aiNode->mNumMeshes; i++)
     {
@@ -456,6 +459,7 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
              bytesPerComponent:sizeof(float)
                     dataOffset:0
                     dataStride:2 * sizeof(float)];
+    free(scnTextures);
     return textureSource;
 }
 
@@ -519,6 +523,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     for (int i = 0; i < aiMesh->mNumFaces; i++)
     {
         const struct aiFace *aiFace = &aiMesh->mFaces[i];
+        // we ignore faces which are not triangulated
+        if(aiFace->mNumIndices != 3) {
+            return nil;
+        }
         for (int j = 0; j < aiFace->mNumIndices; j++)
         {
             scnIndices[indicesCounter++] =
@@ -558,7 +566,9 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                                  inScene:aiScene
                                          withIndexOffset:indexOffset
                                                   nFaces:aiMesh->mNumFaces];
-        [scnGeometryElements addObject:indices];
+        if(indices != nil) {
+            [scnGeometryElements addObject:indices];
+        }
         indexOffset += aiMesh->mNumVertices;
     }
 

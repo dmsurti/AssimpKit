@@ -51,6 +51,8 @@
 		77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */; };
 		77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 77EB2B8E1E17773B004FA171 /* SCNNode+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */; };
+		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
+		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,8 @@
 		77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNNode+AssimpImport.m"; path = "../../Code/Model/SCNNode+AssimpImport.m"; sourceTree = "<group>"; };
 		77EB2B8E1E17773B004FA171 /* SCNNode+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNNode+AssimpImport.h"; path = "../../Code/Model/SCNNode+AssimpImport.h"; sourceTree = "<group>"; };
 		77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNNode+AssimpImport.m"; path = "../../Code/Model/SCNNode+AssimpImport.m"; sourceTree = "<group>"; };
+		77FF141A1F5843360041F4FA /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "../Assimp/lib/ios/libIrrXML-fat.a"; sourceTree = "<group>"; };
+		77FF141E1F58433D0041F4FA /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../Assimp/lib/osx/libIrrXML.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */,
+				77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				779DF2151DDF2BEE00DED366 /* libassimp.a in Frameworks */,
+				77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +213,8 @@
 		779DF1A61DDF262400DED366 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77FF141E1F58433D0041F4FA /* libIrrXML.a */,
+				77FF141A1F5843360041F4FA /* libIrrXML-fat.a */,
 				779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */,
 				779DF1A71DDF262500DED366 /* libassimp.a */,
 			);

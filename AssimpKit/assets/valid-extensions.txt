@@ -6,7 +6,6 @@ bvh
 cob
 dae
 dxf
-hmp
 ifc
 irr
 md2

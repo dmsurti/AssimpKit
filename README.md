@@ -12,7 +12,7 @@ Status](https://travis-ci.org/dmsurti/AssimpKit.svg?branch=master)](https://trav
 Why AssimpKit?
 ---
 
-AssimpKit currently supports ***30 file formats*** that allows you to use these
+AssimpKit currently supports ***29 file formats*** that allows you to use these
 files directly in SceneKit without having to convert these to any of the files
 that SceneKit or Model IO supports thereby saving an extra step in your asset
 pipeline.
@@ -36,7 +36,7 @@ File formats supported by AssimpKit
 
 Currently AssimpKit supports the following file formats:
 
-***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, hmp, ifc, irr, md2, md5mesh, md5anim,
+***3d, 3ds, ac, b3d, bvh, cob, dae, dxf, ifc, irr, md2, md5mesh, md5anim,
 m3sd, nff, obj, off, mesh.xml, ply, q3o, q3s, raw, smd, stl, wrl, xgl, zgl, fbx,
 md3***
 
@@ -72,6 +72,12 @@ Important Build Setting for `iOS` applications only
 ---
 
 If you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
+
+Git LFS
+---
+
+If you fork or clone this project, ensure you have `git lfs` installed as it 
+is used for the dependent static libs.
 
 Getting Started with AssimpKit
 ---
@@ -112,6 +118,7 @@ These model files are classified by owner:
 * `assets/apple` --> asset files reused from Apple sample code projects, [Bananas](https://github.com/master-nevi/WWDC-2014/tree/master/Bananas%20A%20simple%20SceneKit%20platforming%20game) and [SceneKitAnimations](https://developer.apple.com/library/content/samplecode/SceneKitAnimations/Introduction/Intro.html#//apple_ref/doc/uid/DTS40012569).
 * `assets/of` --> The `astroBoy_walk.dae` file reused from the openframeworks example proejct, [examples/ios/assimpExample](https://github.com/openframeworks/openFrameworks/tree/master/examples/ios/assimpExample).
 * `assets/assimp` --> The model files reused from the [assimpl/test/models-*](https://github.com/assimp/assimp/tree/master/test).
+* `assets/issues` --> asset files submitted by users for bugs/feature requests.
 
 Please note that the copyright of these model files belongs to the respective owners and
 AssimpKit utilizes these only for testing purpose.

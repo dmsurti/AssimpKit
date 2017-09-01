@@ -1008,9 +1008,11 @@
     NSString *appleAssets = @"apple/";
     NSString *ofAssets = @"of/";
     NSString *assimpAssets = @"assimp/";
+    // issues subdir contains all models submitted by users for bugs/features
+    NSString *issuesAssets = @"issues/";
     NSArray *assetDirs =
-        [NSArray arrayWithObjects:appleAssets, ofAssets, assimpAssets, nil];
-
+        [NSArray arrayWithObjects:appleAssets, ofAssets, assimpAssets,
+                                  issuesAssets, nil];
     // ---------------------------------------------------------
     // Asset subdirectories sorted by open and proprietary files
     // ---------------------------------------------------------
