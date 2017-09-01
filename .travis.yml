@@ -9,6 +9,8 @@ env:
 before_install:
     - env
     - locale
+    - brew update && brew install git-lfs
+    - git lfs install
     - xcpretty --version
     - xcodebuild -version
     - xcodebuild -showsdks
