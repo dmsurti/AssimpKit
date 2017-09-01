@@ -134,7 +134,9 @@
         const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
         nVertices += aiMesh->mNumVertices;
     }
-
+    XCTAssertEqual(sceneNode.geometry.geometrySources.count, 4,
+                   @" Expected 4 geometry sources but got %lu",
+                   sceneNode.geometry.geometrySources.count);
     SCNGeometrySource *vertexSource =
         [sceneNode.geometry.geometrySources objectAtIndex:0];
     if (nVertices != vertexSource.vectorCount)
@@ -146,6 +148,9 @@
 
         [testLog addErrorLog:errorLog];
     }
+    XCTAssertEqual(vertexSource.dataStride, 12,
+                   @" The vertex source data stride is %ld instead of 12",
+                   (long)vertexSource.dataStride);
     SCNGeometrySource *normalSource =
         [sceneNode.geometry.geometrySources objectAtIndex:1];
     if (nVertices != normalSource.vectorCount)
@@ -156,111 +161,43 @@
                 nodeName, nVertices];
         [testLog addErrorLog:errorLog];
     }
-
+    XCTAssertEqual(normalSource.dataStride, 12,
+                   @" The texture source data stride is %ld instead of 12",
+                   (long)normalSource.dataStride);
     SCNGeometrySource *texSource =
-        [sceneNode.geometry.geometrySources objectAtIndex:2];
+    [sceneNode.geometry.geometrySources objectAtIndex:2];
     if (nVertices != texSource.vectorCount)
     {
         {
             NSString *errorLog = [NSString
-                stringWithFormat:@"Scene node %@ geometry does not have "
-                                 @"expected %d tex coords",
-                                 nodeName, nVertices];
+                                  stringWithFormat:@"Scene node %@ geometry does not have "
+                                  @"expected %d tex coords",
+                                  nodeName, nVertices];
             [testLog addErrorLog:errorLog];
         }
     }
+    XCTAssertEqual(texSource.dataStride, 8,
+                   @" The texture source data stride is %ld instead of 8",
+                   (long)texSource.dataStride);
+    SCNGeometrySource *tangentSource =
+    [sceneNode.geometry.geometrySources objectAtIndex:3];
+    if (nVertices != tangentSource.vectorCount)
+    {
+        NSString *errorLog = [NSString
+            stringWithFormat:
+                @"Scene node %@ geometry does not have expected %d tangents",
+                nodeName, nVertices];
+        [testLog addErrorLog:errorLog];
+    }
+    XCTAssertEqual(tangentSource.dataStride, 12,
+                   @" The tangent source data stride is %ld instead of 12",
+                   (long)tangentSource.dataStride);
 }
 
 #pragma mark - Check node materials
 
 /**
  @name Check node materials
- */
-
-/**
- Check the scenekit node's materials property from the corrersponding material
- property of the material for a mesh of the specified node.
-
- This checks that the material texture file has the correct path.
- If no texture is defined, it checks the material color exists.
-
- @param aiNode The assimp node.
- @param aiMaterial The assimp material for a mesh of the assimp  node.
- @param aiTextureType The material property type.
- @param sceneNode The scenekit node.
- @param scnMaterial The scenekit material.
- @param modelPath The path to the file being tested.
- @param testLog The log for the file being tested.
- */
-- (void)checkNode:(const struct aiNode *)aiNode
-         material:(const struct aiMaterial *)aiMaterial
-      textureType:(enum aiTextureType)aiTextureType
-    withSceneNode:(SCNNode *)sceneNode
-      scnMaterial:(SCNMaterial *)scnMaterial
-        modelPath:(NSString *)modelPath
-          testLog:(ModelLog *)testLog
-{
-    int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
-    if (nTextures > 0)
-    {
-        NSString *texFileName;
-        if (aiTextureType == aiTextureType_DIFFUSE)
-        {
-            texFileName = scnMaterial.diffuse.contents;
-        }
-        else if (aiTextureType == aiTextureType_SPECULAR)
-        {
-            texFileName = scnMaterial.specular.contents;
-        }
-        else if (aiTextureType == aiTextureType_AMBIENT)
-        {
-            texFileName = scnMaterial.ambient.contents;
-        }
-        else if (aiTextureType == aiTextureType_REFLECTION)
-        {
-            texFileName = scnMaterial.reflective.contents;
-        }
-        else if (aiTextureType == aiTextureType_EMISSIVE)
-        {
-            texFileName = scnMaterial.emission.contents;
-        }
-        else if (aiTextureType == aiTextureType_OPACITY)
-        {
-            texFileName = scnMaterial.transparent.contents;
-        }
-        else if (aiTextureType == aiTextureType_NORMALS)
-        {
-            texFileName = scnMaterial.normal.contents;
-        }
-        else if (aiTextureType == aiTextureType_LIGHTMAP)
-        {
-            texFileName = scnMaterial.ambientOcclusion.contents;
-        }
-        if (![[texFileName stringByDeletingLastPathComponent]
-                isEqualToString:[modelPath stringByDeletingLastPathComponent]])
-        {
-            NSString *errorLog = [NSString
-                stringWithFormat:@"The texture file name %@ is not a "
-                                 @"file under the model path %@",
-                                 [texFileName
-                                     stringByDeletingLastPathComponent],
-                                 [modelPath stringByDeletingLastPathComponent]];
-            [testLog addErrorLog:errorLog];
-        }
-    }
-}
-
-/**
- Check the scenekit node's materials from the corrersponding material
- materials of the specified node.
-
- This checks that the material texture file has the correct path.
- If no texture is defined, it checks the material color exists.
-
- @param aiNode The assimp node.
- @param sceneNode The scenekit node.
- @param modelPath The path to the file being tested.
- @param testLog The log for the file being tested.
  */
 
 /**
@@ -283,70 +220,9 @@
                  modelPath:(NSString *)modelPath
                    testLog:(ModelLog *)testLog
 {
-    for (int i = 0; i < aiNode->mNumMeshes; i++)
-    {
-        int aiMeshIndex = aiNode->mMeshes[i];
-        const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
-        const struct aiMaterial *aiMaterial =
-            aiScene->mMaterials[aiMesh->mMaterialIndex];
-        SCNMaterial *material = [sceneNode.geometry.materials objectAtIndex:i];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_DIFFUSE
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_SPECULAR
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_AMBIENT
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_REFLECTION
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_EMISSIVE
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_OPACITY
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_NORMALS
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-        [self checkNode:aiNode
-                 material:aiMaterial
-              textureType:aiTextureType_LIGHTMAP
-            withSceneNode:sceneNode
-              scnMaterial:material
-                modelPath:modelPath
-                  testLog:testLog];
-    }
+    XCTAssertEqual(sceneNode.geometry.materials.count, aiNode->mNumMeshes,
+                   @" Expected %lu materials but only %d were applied",
+                   sceneNode.geometry.materials.count, aiNode->mNumMeshes);
 }
 
 #pragma mark - Check lights
