@@ -1215,8 +1215,8 @@
                          passPercent);
     XCTAssertGreaterThan(serlPercent, 99,
                          @"The 3D file serializaton test verification is %f "
-                         @"instead of the expected > 90 percent",
-                         passPercent);
+                         @"instead of the expected > 99 percent",
+                         serlPercent);
 }
 
 @end
