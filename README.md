@@ -118,6 +118,7 @@ These model files are classified by owner:
 * `assets/apple` --> asset files reused from Apple sample code projects, [Bananas](https://github.com/master-nevi/WWDC-2014/tree/master/Bananas%20A%20simple%20SceneKit%20platforming%20game) and [SceneKitAnimations](https://developer.apple.com/library/content/samplecode/SceneKitAnimations/Introduction/Intro.html#//apple_ref/doc/uid/DTS40012569).
 * `assets/of` --> The `astroBoy_walk.dae` file reused from the openframeworks example proejct, [examples/ios/assimpExample](https://github.com/openframeworks/openFrameworks/tree/master/examples/ios/assimpExample).
 * `assets/assimp` --> The model files reused from the [assimpl/test/models-*](https://github.com/assimp/assimp/tree/master/test).
+* `assets/issues` --> asset files submitted by users for bugs/feature requests.
 
 Please note that the copyright of these model files belongs to the respective owners and
 AssimpKit utilizes these only for testing purpose.
