@@ -10,7 +10,23 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;cd $PROJECT_DIR&#10;echo &quot;$PROJECT_DIR&quot;&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libassimp.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libassimp.7z&#10;mv $PROJECT_DIR/libassimp.a $PROJECT_DIR/../Assimp/lib/osx/">
+               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;cd $PROJECT_DIR&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libassimp.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libassimp.7z&#10;mv $PROJECT_DIR/libassimp.a $PROJECT_DIR/../Assimp/lib/osx/">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "779DF1FA1DDF2B8700DED366"
+                     BuildableName = "AssimpKit.framework"
+                     BlueprintName = "AssimpKit-macOS"
+                     ReferencedContainer = "container:Library.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;cd $PROJECT_DIR&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libIrrXML.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libIrrXML.7z&#10;mv $PROJECT_DIR/libIrrXML.a $PROJECT_DIR/../Assimp/lib/osx/">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
