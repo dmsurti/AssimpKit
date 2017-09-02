@@ -9,16 +9,17 @@ env:
 before_install:
     - env
     - locale
-    - brew update && brew install git-lfs
     - xcpretty --version
     - xcodebuild -version
     - xcodebuild -showsdks
 
 script:
-  - echo : Test the AssimpSceneKit static library for macOS
+  - echo Test the AssimpSceneKit static library for macOS
+  - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKit-macOS clean build
   - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKitTests_macOS -destination 'platform=OS X,arch=x86_64' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean test
 
   - echo Test the AssimpSceneKit static library for iOS
+  - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKit-iOS clean build
   - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKitTests_iOS -destination 'platform=iOS Simulator,OS=10.3.1,name=iPhone 6' clean test
 
 after_success:
