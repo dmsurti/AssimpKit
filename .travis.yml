@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.3
 
 env:
   global:
@@ -9,18 +9,28 @@ env:
 before_install:
     - env
     - locale
-    - brew update && brew install git-lfs
-    - git lfs install
+    - brew update
+    - brew install p7zip
     - xcpretty --version
     - xcodebuild -version
     - xcodebuild -showsdks
 
-before_script:
-    - git lfs pull
+install:
+    - echo Extracting iOS fat libs...
+    - 7z x ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/ios/libassimp-fat.7z
+    - mv ${TRAVIS_BUILD_DIR}/libassimp-fat.a ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/ios/
+    - 7z x ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/ios/libIrrXML-fat.7z
+    - mv ${TRAVIS_BUILD_DIR}/libIrrXML-fat.a ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/ios/
+
+    - echo Extracting macOS libs...
+    - 7z x ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/osx/libassimp.7z
+    - mv ${TRAVIS_BUILD_DIR}/libassimp.a ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/osx/
+    - 7z x ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/osx/libIrrXML.7z
+    - mv ${TRAVIS_BUILD_DIR}/libIrrXML.a ${TRAVIS_BUILD_DIR}/AssimpKit/Assimp/lib/osx/
 
 script:
-#  - echo : Test the AssimpSceneKit static library for macOS
-#  - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKitTests_macOS -destination 'platform=OS X,arch=x86_64' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean test
+  - echo Test the AssimpSceneKit static library for macOS
+  - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKitTests_macOS -destination 'platform=OS X,arch=x86_64' GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean test
 
   - echo Test the AssimpSceneKit static library for iOS
   - xcodebuild -project AssimpKit/Library/Library.xcodeproj -scheme AssimpKitTests_iOS -destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6' clean test
