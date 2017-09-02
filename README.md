@@ -73,12 +73,6 @@ Important Build Setting for `iOS` applications only
 
 If you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.
 
-Git LFS
----
-
-If you fork or clone this project, ensure you have `git lfs` installed as it 
-is used for the dependent static libs.
-
 Getting Started with AssimpKit
 ---
 
