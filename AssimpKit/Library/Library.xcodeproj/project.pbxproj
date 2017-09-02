@@ -51,9 +51,9 @@
 		77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B891E1776EB004FA171 /* SCNNode+AssimpImport.m */; };
 		77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 77EB2B8E1E17773B004FA171 /* SCNNode+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */; };
-		77FB462F1F59751300C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB462D1F59751300C73D50 /* SCNTextureInfo.h */; };
+		77FB462F1F59751300C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB462D1F59751300C73D50 /* SCNTextureInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FB46301F59751300C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB462E1F59751300C73D50 /* SCNTextureInfo.m */; };
-		77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB46311F59751900C73D50 /* SCNTextureInfo.h */; };
+		77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB46311F59751900C73D50 /* SCNTextureInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB46321F59751900C73D50 /* SCNTextureInfo.m */; };
 		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
 		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
@@ -334,8 +334,8 @@
 				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
 				7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */,
 				77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */,
-				77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */,
 				77824E421E1A5B45000B24A3 /* SCNAssimpAnimSettings.h in Headers */,
+				77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */,
 				779DF1ED1DDF2A5700DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,8 +350,8 @@
 				779DF20C1DDF2BB000DED366 /* AssimpImporter.h in Headers */,
 				7746DB5F1DEED16E00C651DC /* PostProcessingFlags.h in Headers */,
 				77EB2B8A1E1776EB004FA171 /* SCNNode+AssimpImport.h in Headers */,
-				77FB462F1F59751300C73D50 /* SCNTextureInfo.h in Headers */,
 				77824E3C1E1A5B21000B24A3 /* SCNAssimpAnimSettings.h in Headers */,
+				77FB462F1F59751300C73D50 /* SCNTextureInfo.h in Headers */,
 				779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
