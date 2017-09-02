@@ -58,3 +58,7 @@ fastlane/screenshots
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# ignore assimp libs extracted
+libassimp-fat.a
+libassimp.a

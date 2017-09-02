@@ -1,3 +1,2 @@
 AssimpKit/assets/* linguist-vendored=true
 AssimpKit/Assimp/* linguist-vendored=true
-*.a filter=lfs diff=lfs merge=lfs -text
