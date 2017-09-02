@@ -61,4 +61,6 @@ iOSInjectionProject/
 
 # ignore assimp libs extracted
 libassimp-fat.a
+libIrrXML-fat.a
 libassimp.a
+libIrrXML.a
