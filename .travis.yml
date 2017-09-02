@@ -7,10 +7,10 @@ env:
     - LANG=en_US.UTF-8
 
 before_install:
-    - sudo apt-get -qq update
-    - sudo apt-get install -y p7zip-full
     - env
     - locale
+    - brew update
+    - brew install p7zip
     - xcpretty --version
     - xcodebuild -version
     - xcodebuild -showsdks
