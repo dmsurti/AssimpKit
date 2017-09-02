@@ -35,6 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "AssimpImporter.h"
 #import "SCNAssimpAnimation.h"
+#import "SCNTextureInfo.h"
 #include "assimp/cimport.h"     // Plain-C interface
 #include "assimp/light.h"       // Lights
 #include "assimp/material.h"    // Materials
@@ -417,6 +418,52 @@ makeNormalGeometrySourceForNode:(const struct aiNode *)aiNode
 }
 
 /**
+ Creates a scenekit geometry source from the tangents of the specified node.
+
+@param aiNode The assimp node.
+@param aiScene The assimp scene.
+@param nVertices The number of vertices in the meshes of the aiNode.
+@return A new geometry source whose semantic property is tangent.
+*/
+- (SCNGeometrySource *)
+makeTangentGeometrySourceForNode:(const struct aiNode *)aiNode
+inScene:(const struct aiScene *)aiScene
+withNVertices:(int)nVertices
+{
+    float* scnTangents = (float*)malloc(nVertices * 3 * sizeof(float));
+    int verticesCounter = 0;
+    for (int i = 0; i < aiNode->mNumMeshes; i++)
+    {
+        int aiMeshIndex = aiNode->mMeshes[i];
+        const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
+        if (aiMesh->mTangents != NULL)
+        {
+            for (int j = 0; j < aiMesh->mNumVertices; j++)
+            {
+                const struct aiVector3D *aiVector3D = &aiMesh->mTangents[j];
+                scnTangents[verticesCounter++] = aiVector3D->x;
+                scnTangents[verticesCounter++] = aiVector3D->y;
+                scnTangents[verticesCounter++] = aiVector3D->z;
+            }
+        }
+    }
+    SCNGeometrySource *tangentSource = [SCNGeometrySource
+        geometrySourceWithData:[NSData
+                                   dataWithBytes:scnTangents
+                                          length:nVertices * 3 * sizeof(float)]
+                      semantic:SCNGeometrySourceSemanticTangent
+                   vectorCount:nVertices
+               floatComponents:YES
+           componentsPerVector:3
+             bytesPerComponent:sizeof(float)
+                    dataOffset:0
+                    dataStride:3 * sizeof(float)];
+    free(scnTangents);
+    return tangentSource;
+}
+
+
+/**
  Creates a scenekit geometry source from the texture coordinates of the
  specified node.
 
@@ -485,6 +532,10 @@ makeTextureGeometrySourceForNode:(const struct aiNode *)aiNode
         addObject:[self makeNormalGeometrySourceForNode:aiNode
                                                 inScene:aiScene
                                           withNVertices:nVertices]];
+    [scnGeometrySources
+        addObject:[self makeTangentGeometrySourceForNode:aiNode
+                                                 inScene:aiScene
+                                           withNVertices:nVertices]];
     [scnGeometrySources
         addObject:[self makeTextureGeometrySourceForNode:aiNode
                                                  inScene:aiScene
@@ -586,98 +637,95 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
  if no texture is specifed.
 
  @param aiMaterial The assimp material.
- @param aiTextureType The texture type which is diffuse, specular etc.
+ @param textureInfo The metadata of the texture.
  @param material The scenekit material.
  @param path The path to the scene file to load.
  */
 - (void)makeMaterialPropertyForMaterial:(const struct aiMaterial *)aiMaterial
-                        withTextureType:(enum aiTextureType)aiTextureType
+                        withTextureInfo:(SCNTextureInfo *)textureInfo
                         withSCNMaterial:(SCNMaterial *)material
                                  atPath:(NSString *)path
 {
-    int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
-    if (nTextures > 0)
+    NSString *channel = @".mappingChannel";
+    NSString *wrapS = @".wrapS";
+    NSString *wrapT = @".wrapS";
+    NSString *intensity = @".intensity";
+    NSString *minFilter = @".minificationFilter";
+    NSString *magFilter = @".magnificationFilter";
+
+    NSString *keyPrefix = @"";
+    if (textureInfo.textureType == aiTextureType_DIFFUSE)
     {
-        DLog(@" has %d textures", nTextures);
-        struct aiString aiPath;
-        aiGetMaterialTexture(aiMaterial, aiTextureType, 0, &aiPath, NULL, NULL,
-                             NULL, NULL, NULL, NULL);
-        NSString *texFilePath = [NSString
-            stringWithUTF8String:(const char *_Nonnull) & aiPath.data];
-        NSString *texFileName = [texFilePath lastPathComponent];
-        NSString *sceneDir = [[path stringByDeletingLastPathComponent]
-            stringByAppendingString:@"/"];
-        NSString *texPath = [sceneDir stringByAppendingString:texFileName];
-        DLog(@"  tex path is %@", texPath);
-
-        NSString *channel = @".mappingChannel";
-        NSString *wrapS = @".wrapS";
-        NSString *wrapT = @".wrapS";
-        NSString *intensity = @".intensity";
-        NSString *minFilter = @".minificationFilter";
-        NSString *magFilter = @".magnificationFilter";
-
-        NSString *keyPrefix = @"";
-        if (aiTextureType == aiTextureType_DIFFUSE)
-        {
-            material.diffuse.contents = texPath;
-            keyPrefix = @"diffuse";
-        }
-        else if (aiTextureType == aiTextureType_SPECULAR)
-        {
-            material.specular.contents = texPath;
-            keyPrefix = @"specular";
-        }
-        else if (aiTextureType == aiTextureType_AMBIENT)
-        {
-            material.ambient.contents = texPath;
-            keyPrefix = @"ambient";
-        }
-        else if (aiTextureType == aiTextureType_REFLECTION)
-        {
-            material.reflective.contents = texPath;
-            keyPrefix = @"reflective";
-        }
-        else if (aiTextureType == aiTextureType_EMISSIVE)
-        {
-            material.emission.contents = texPath;
-            keyPrefix = @"emissive";
-        }
-        else if (aiTextureType == aiTextureType_OPACITY)
-        {
-            material.transparent.contents = texPath;
-            keyPrefix = @"transparent";
-        }
-        else if (aiTextureType == aiTextureType_NORMALS)
-        {
-            material.normal.contents = texPath;
-            keyPrefix = @"normal";
-        }
-        else if (aiTextureType == aiTextureType_LIGHTMAP)
-        {
-            material.ambientOcclusion.contents = texPath;
-            keyPrefix = @"ambientOcclusion";
-        }
-
-        // Update the keys
-        channel = [keyPrefix stringByAppendingString:channel];
-        wrapS = [keyPrefix stringByAppendingString:wrapS];
-        wrapT = [keyPrefix stringByAppendingString:wrapT];
-        intensity = [keyPrefix stringByAppendingString:intensity];
-        minFilter = [keyPrefix stringByAppendingString:minFilter];
-        magFilter = [keyPrefix stringByAppendingString:magFilter];
-
-        [material setValue:0 forKey:channel];
-        [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
-                    forKey:wrapS];
-        [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
-                    forKey:wrapT];
-        [material setValue:[NSNumber numberWithInt:1] forKey:intensity];
-        [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
-                    forKey:minFilter];
-        [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
-                    forKey:magFilter];
+        material.diffuse.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"diffuse";
     }
+    else if (textureInfo.textureType == aiTextureType_SPECULAR)
+    {
+        material.specular.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"specular";
+    }
+    else if (textureInfo.textureType == aiTextureType_AMBIENT)
+    {
+        material.ambient.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"ambient";
+    }
+    else if (textureInfo.textureType == aiTextureType_REFLECTION)
+    {
+        material.reflective.contents =
+            [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"reflective";
+    }
+    else if (textureInfo.textureType == aiTextureType_EMISSIVE)
+    {
+        material.emission.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"emissive";
+    }
+    else if (textureInfo.textureType == aiTextureType_OPACITY)
+    {
+        material.transparent.contents =
+        [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"transparent";
+    }
+    else if (textureInfo.textureType == aiTextureType_NORMALS)
+    {
+        material.normal.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"normal";
+    }
+    else if (textureInfo.textureType == aiTextureType_HEIGHT)
+    {
+        material.normal.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"normal";
+    }
+    else if (textureInfo.textureType == aiTextureType_DISPLACEMENT)
+    {
+        material.normal.contents = [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"normal";
+    }
+    else if (textureInfo.textureType == aiTextureType_LIGHTMAP)
+    {
+        material.ambientOcclusion.contents =
+            [textureInfo getMaterialPropertyContents];
+        keyPrefix = @"ambientOcclusion";
+    }
+
+    // Update the keys
+    channel = [keyPrefix stringByAppendingString:channel];
+    wrapS = [keyPrefix stringByAppendingString:wrapS];
+    wrapT = [keyPrefix stringByAppendingString:wrapT];
+    intensity = [keyPrefix stringByAppendingString:intensity];
+    minFilter = [keyPrefix stringByAppendingString:minFilter];
+    magFilter = [keyPrefix stringByAppendingString:magFilter];
+
+    [material setValue:0 forKey:channel];
+    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
+                forKey:wrapS];
+    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
+                forKey:wrapT];
+    [material setValue:[NSNumber numberWithInt:1] forKey:intensity];
+    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
+                forKey:minFilter];
+    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
+                forKey:magFilter];
 }
 
 /**
@@ -735,41 +783,42 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             @" Material name is %@",
             [NSString stringWithUTF8String:(const char *_Nonnull) & name.data]);
         SCNMaterial *material = [SCNMaterial material];
-        DLog(@"+++ Loading diffuse");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_DIFFUSE
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading specular");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_SPECULAR
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading ambient");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_AMBIENT
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading reflective");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_REFLECTION
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading emissive");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_EMISSIVE
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading transparent");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_OPACITY
-                              withSCNMaterial:material
-                                       atPath:path];
-        DLog(@"+++ Loading ambient occlusion");
-        [self makeMaterialPropertyForMaterial:aiMaterial
-                              withTextureType:aiTextureType_LIGHTMAP
-                              withSCNMaterial:material
-                                       atPath:path];
+        int kTextureTypes = 10;
+        int textureTypes[10] = {
+            aiTextureType_DIFFUSE,      aiTextureType_SPECULAR,
+            aiTextureType_AMBIENT,      aiTextureType_EMISSIVE,
+            aiTextureType_REFLECTION,   aiTextureType_OPACITY,
+            aiTextureType_NORMALS,      aiTextureType_HEIGHT,
+            aiTextureType_DISPLACEMENT, aiTextureType_SHININESS};
+        NSDictionary *textureTypeNames = @{
+            @"0" : @"Diffuse",
+            @"1" : @"Specular",
+            @"2" : @"Ambient",
+            @"3" : @"Emissive",
+            @"4" : @"Reflection",
+            @"5" : @"Opacity",
+            @"6" : @"Normals",
+            @"7" : @"Height",
+            @"8" : @"Displacement",
+            @"9" : @"Shininess"
+        };
+
+        for(int i = 0; i < kTextureTypes; i++) {
+            DLog(@" Loading texture type : %@",
+                 [textureTypeNames
+                     valueForKey:[NSNumber numberWithInt:i].stringValue]);
+            SCNTextureInfo *textureInfo =
+                [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
+                                              textureType:textureTypes[i]
+                                                  inScene:aiScene
+                                                   atPath:path];
+            [self makeMaterialPropertyForMaterial:aiMaterial
+                                  withTextureInfo:textureInfo
+                                  withSCNMaterial:material
+                                           atPath:path];
+            [textureInfo releaseContents];
+        }
+
         DLog(@"+++ Loading multiply color");
         [self applyMultiplyPropertyForMaterial:aiMaterial
                                withSCNMaterial:material];
@@ -800,7 +849,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
                                   (int *)&shininess, max);
         DLog(@"   shininess: %d", shininess);
-        material.shininess = shininess;
+            //material.shininess = shininess;
         DLog(@"+++ Loading shading model");
         /**
      FIXME: The shading mode works only on iOS for iPhone.
