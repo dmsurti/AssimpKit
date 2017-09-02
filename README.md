@@ -24,7 +24,7 @@ Features
 
 AssimpKit supports:
 * Geometry
-* Materials (both color and texture)
+* Materials (with color, embedded textures and external textures)
 * Cameras and
 * Skeletal animations.
 * Serialization to `.scn` format
