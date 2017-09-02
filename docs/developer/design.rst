@@ -59,7 +59,13 @@ A visual representation of this transformation is as shown.
 Generating Materials
 --------------------
 
-As seen in the visual for geometry transformation, the importer now generates a material for each mesh in the node. The material in assimp maps to `SCNMaterial`_ in scene kit. The importer generates a texture if available for the following material properties: diffuse, specular, ambient, reflective, opacity, normals and light map. The material property in assimp maps to `SCNMaterialProperty`_.
+As seen in the visual for geometry transformation, the importer now generates a
+material for each mesh in the node. The material in assimp maps to
+`SCNMaterial`_ in scene kit. The importer generates a image object for a texture
+or a color object for a color if available for the following material
+properties: diffuse, specular, ambient, reflective, opacity, normals, height,
+displacement and light map. Both embedded and external textures are supported.
+The material property in assimp maps to `SCNMaterialProperty`_.
 
 Generating Cameras
 ------------------
