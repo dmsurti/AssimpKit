@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
-	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
 </head>
 <body class="appledoc">
 	<header>
@@ -118,7 +118,7 @@
 		
 		<option value="//api/name/makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:">- makeIndicesGeometryElementForMeshIndex:inNode:inScene:withIndexOffset:nFaces:</option>
 		
-		<option value="//api/name/makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:">- makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:</option>
+		<option value="//api/name/makeMaterialPropertyForMaterial:withTextureInfo:withSCNMaterial:atPath:">- makeMaterialPropertyForMaterial:withTextureInfo:withSCNMaterial:atPath:</option>
 		
 		<option value="//api/name/makeMaterialsForNode:inScene:atPath:">- makeMaterialsForNode:inScene:atPath:</option>
 		
@@ -141,6 +141,8 @@
 		<option value="//api/name/makeSCNSceneFromAssimpScene:atPath:">- makeSCNSceneFromAssimpScene:atPath:</option>
 		
 		<option value="//api/name/makeSkinnerForAssimpNode:inScene:scnScene:">- makeSkinnerForAssimpNode:inScene:scnScene:</option>
+		
+		<option value="//api/name/makeTangentGeometrySourceForNode:inScene:withNVertices:">- makeTangentGeometrySourceForNode:inScene:withNVertices:</option>
 		
 		<option value="//api/name/makeTextureGeometrySourceForNode:inScene:withNVertices:">- makeTextureGeometrySourceForNode:inScene:withNVertices:</option>
 		
@@ -264,7 +266,7 @@ converts the assimp scene graph into a scenekit scene graph.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (SCNAssimpScene *)importScene:(NSString *)<em>filePath</em> postProcessFlags:(unsigned int)<em>postProcessFlags</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (SCNAssimpScene *)importScene:(NSString *)<em>filePath</em> postProcessFlags:(AssimpKitPostProcessSteps)<em>postProcessFlags</em></code></div>
 
 		    
 			
@@ -839,6 +841,79 @@ converts the assimp scene graph into a scenekit scene graph.</p>
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/makeTangentGeometrySourceForNode:inScene:withNVertices:" title="makeTangentGeometrySourceForNode:inScene:withNVertices:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeTangentGeometrySourceForNode:inScene:withNVertices:">&ndash;&nbsp;makeTangentGeometrySourceForNode:inScene:withNVertices:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a scenekit geometry source from the tangents of the specified node.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (SCNGeometrySource *)makeTangentGeometrySourceForNode:(const struct aiNode *)<em>aiNode</em> inScene:(const struct aiScene *)<em>aiScene</em> withNVertices:(int)<em>nVertices</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiNode</code></th>
+						<td><p>The assimp node.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nVertices</code></th>
+						<td><p>The number of vertices in the meshes of the aiNode.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new geometry source whose semantic property is tangent.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Creates a scenekit geometry source from the tangents of the specified node.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AssimpImporter.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/makeTextureGeometrySourceForNode:inScene:withNVertices:" title="makeTextureGeometrySourceForNode:inScene:withNVertices:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/makeTextureGeometrySourceForNode:inScene:withNVertices:">&ndash;&nbsp;makeTextureGeometrySourceForNode:inScene:withNVertices:</a></code>
 </h3>
@@ -1160,8 +1235,8 @@ connect the geometry&rsquo;s vertices of the specified node.</p>
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:" title="makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:">&ndash;&nbsp;makeMaterialPropertyForMaterial:withTextureType:withSCNMaterial:atPath:</a></code>
+	<a name="//api/name/makeMaterialPropertyForMaterial:withTextureInfo:withSCNMaterial:atPath:" title="makeMaterialPropertyForMaterial:withTextureInfo:withSCNMaterial:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makeMaterialPropertyForMaterial:withTextureInfo:withSCNMaterial:atPath:">&ndash;&nbsp;makeMaterialPropertyForMaterial:withTextureInfo:withSCNMaterial:atPath:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -1177,7 +1252,7 @@ if no texture is specifed.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)makeMaterialPropertyForMaterial:(const struct aiMaterial *)<em>aiMaterial</em> withTextureType:(enum aiTextureType)<em>aiTextureType</em> withSCNMaterial:(SCNMaterial *)<em>material</em> atPath:(NSString *)<em>path</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)makeMaterialPropertyForMaterial:(const struct aiMaterial *)<em>aiMaterial</em> withTextureInfo:(SCNTextureInfo *)<em>textureInfo</em> withSCNMaterial:(SCNMaterial *)<em>material</em> atPath:(NSString *)<em>path</em></code></div>
 
 		    
 			
@@ -1191,8 +1266,8 @@ if no texture is specifed.</p>
 					</tr>
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>aiTextureType</code></th>
-						<td><p>The texture type which is diffuse, specular etc.</p></td>
+						<th scope="row" class="argument-name"><code>textureInfo</code></th>
+						<td><p>The metadata of the texture.</p></td>
 					</tr>
 				
 					<tr>
@@ -3022,10 +3097,10 @@ file named walk.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2017 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2017-01-02</p>
+						<p class="copyright">Copyright &copy; 2017 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2017-09-02</p>
 						
 						
-						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
 						
 					</div>
 				</footer>

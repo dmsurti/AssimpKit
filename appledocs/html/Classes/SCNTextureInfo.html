@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>SCNTextureInfo Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">AssimpKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Deepak Surti, Ison Apps, AssimpKit team</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/applyColor">applyColor</option>
+		
+		<option value="//api/name/applyEmbeddedTexture">applyEmbeddedTexture</option>
+		
+		<option value="//api/name/applyExternalTexture">applyExternalTexture</option>
+		
+		<option value="//api/name/color">color</option>
+		
+		<option value="//api/name/colorSpace">colorSpace</option>
+		
+		<option value="//api/name/embeddedTextureIndex">embeddedTextureIndex</option>
+		
+		<option value="//api/name/externalTexturePath">externalTexturePath</option>
+		
+		<option value="//api/name/image">image</option>
+		
+		<option value="//api/name/imageDataProvider">imageDataProvider</option>
+		
+		<option value="//api/name/imageSource">imageSource</option>
+		
+		<option value="//api/name/materialName">materialName</option>
+		
+		<option value="//api/name/textureType">textureType</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/checkTextureTypeForMaterial:withTextureType:inScene:atPath:">- checkTextureTypeForMaterial:withTextureType:inScene:atPath:</option>
+		
+		<option value="//api/name/generateCGImageForEmbeddedTextureAtIndex:inScene:">- generateCGImageForEmbeddedTextureAtIndex:inScene:</option>
+		
+		<option value="//api/name/generateCGImageForExternalTextureAtPath:">- generateCGImageForExternalTextureAtPath:</option>
+		
+		<option value="//api/name/getMaterialPropertyContents">- getMaterialPropertyContents</option>
+		
+		<option value="//api/name/initWithMeshIndex:textureType:inScene:atPath:">- initWithMeshIndex:textureType:inScene:atPath:</option>
+		
+		<option value="//api/name/releaseContents">- releaseContents</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">SCNTextureInfo Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>SCNTextureInfo.h<br />SCNTextureInfo.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/textureType" title="textureType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textureType">&nbsp;&nbsp;textureType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The texture type: diffuse, specular etc.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property enum aiTextureType textureType</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The texture type: diffuse, specular etc.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithMeshIndex:textureType:inScene:atPath:" title="initWithMeshIndex:textureType:inScene:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithMeshIndex:textureType:inScene:atPath:">&ndash;&nbsp;initWithMeshIndex:textureType:inScene:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Create a texture metadata object for a material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (id)initWithMeshIndex:(int)<em>aiMeshIndex</em> textureType:(enum aiTextureType)<em>aiTextureType</em> inScene:(const struct aiScene *)<em>aiScene</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMeshIndex</code></th>
+						<td><p>The index of the mesh to which this texture is applied.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiTextureType</code></th>
+						<td><p>The texture type: diffuse, specular etc.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new texture info.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Create a texture metadata object for a material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getMaterialPropertyContents" title="getMaterialPropertyContents"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getMaterialPropertyContents">&ndash;&nbsp;getMaterialPropertyContents</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The contents of the material property which can be a texture or <a href="#//api/name/color">color</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (id)getMaterialPropertyContents</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The contents which is either a texture or a <a href="#//api/name/color">color</a>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The contents of the material property which can be a texture or <a href="#//api/name/color">color</a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/releaseContents" title="releaseContents"></a>
+	<h3 class="method-title"><code><a href="#//api/name/releaseContents">&ndash;&nbsp;releaseContents</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Releases the core graphics <a href="#//api/name/image">image</a> resources used to load colors and textures.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)releaseContents</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Releases the core graphics <a href="#//api/name/image">image</a> resources used to load colors and textures.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/checkTextureTypeForMaterial:withTextureType:inScene:atPath:" title="checkTextureTypeForMaterial:withTextureType:inScene:atPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/checkTextureTypeForMaterial:withTextureType:inScene:atPath:">&ndash;&nbsp;checkTextureTypeForMaterial:withTextureType:inScene:atPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Inspects the material texture properties to determine if <a href="#//api/name/color">color</a>, embedded
+texture or external texture should be applied to the material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)checkTextureTypeForMaterial:(const struct aiMaterial *)<em>aiMaterial</em> withTextureType:(enum aiTextureType)<em>aiTextureType</em> inScene:(const struct aiScene *)<em>aiScene</em> atPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiMaterial</code></th>
+						<td><p>The assimp material.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiTextureType</code></th>
+						<td><p>The material property: diffuse, specular etc.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Inspects the material texture properties to determine if <a href="#//api/name/color">color</a>, embedded
+texture or external texture should be applied to the material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/generateCGImageForEmbeddedTextureAtIndex:inScene:" title="generateCGImageForEmbeddedTextureAtIndex:inScene:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/generateCGImageForEmbeddedTextureAtIndex:inScene:">&ndash;&nbsp;generateCGImageForEmbeddedTextureAtIndex:inScene:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Generates a bitmap <a href="#//api/name/image">image</a> representing the embedded texture.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)generateCGImageForEmbeddedTextureAtIndex:(int)<em>index</em> inScene:(const struct aiScene *)<em>aiScene</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>index</code></th>
+						<td><p>The index of the texture in assimp scene&rsquo;s textures.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aiScene</code></th>
+						<td><p>The assimp scene.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Generates a bitmap <a href="#//api/name/image">image</a> representing the embedded texture.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/generateCGImageForExternalTextureAtPath:" title="generateCGImageForExternalTextureAtPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/generateCGImageForExternalTextureAtPath:">&ndash;&nbsp;generateCGImageForExternalTextureAtPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Generates a bitmap <a href="#//api/name/image">image</a> representing the external texture.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)generateCGImageForExternalTextureAtPath:(NSString *)<em>path</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>The path to the scene file to load.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Generates a bitmap <a href="#//api/name/image">image</a> representing the external texture.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/materialName" title="materialName"></a>
+	<h3 class="method-title"><code><a href="#//api/name/materialName">&nbsp;&nbsp;materialName</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The material name which is the owner of this texture.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readwrite) NSString *materialName</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The material name which is the owner of this texture.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyColor" title="applyColor"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyColor">&nbsp;&nbsp;applyColor</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value that determines whether a <a href="#//api/name/color">color</a> is applied to a material
+property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property bool applyColor</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A Boolean value that determines whether a <a href="#//api/name/color">color</a> is applied to a material
+property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyEmbeddedTexture" title="applyEmbeddedTexture"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyEmbeddedTexture">&nbsp;&nbsp;applyEmbeddedTexture</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value that determines if embedded texture is applied to a
+material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property bool applyEmbeddedTexture</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A Boolean value that determines if embedded texture is applied to a
+material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyExternalTexture" title="applyExternalTexture"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyExternalTexture">&nbsp;&nbsp;applyExternalTexture</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value that determines if an external texture is applied to a
+material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property bool applyExternalTexture</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A Boolean value that determines if an external texture is applied to a
+material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/embeddedTextureIndex" title="embeddedTextureIndex"></a>
+	<h3 class="method-title"><code><a href="#//api/name/embeddedTextureIndex">&nbsp;&nbsp;embeddedTextureIndex</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The index of the embedded texture in the array of assimp scene textures.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property int embeddedTextureIndex</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The index of the embedded texture in the array of assimp scene textures.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/externalTexturePath" title="externalTexturePath"></a>
+	<h3 class="method-title"><code><a href="#//api/name/externalTexturePath">&nbsp;&nbsp;externalTexturePath</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The path to the external texture resource on the disk.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property NSString *externalTexturePath</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The path to the external texture resource on the disk.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageSource" title="imageSource"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageSource">&nbsp;&nbsp;imageSource</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An opaque type that represents the external texture <a href="#//api/name/image">image</a> source.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property CGImageSourceRef imageSource</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>An opaque type that represents the external texture <a href="#//api/name/image">image</a> source.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageDataProvider" title="imageDataProvider"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageDataProvider">&nbsp;&nbsp;imageDataProvider</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An abstraction for the raw <a href="#//api/name/image">image</a> data of an embedded texture <a href="#//api/name/image">image</a> source that
+eliminates the need to manage raw memory buffer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property CGDataProviderRef imageDataProvider</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>An abstraction for the raw <a href="#//api/name/image">image</a> data of an embedded texture <a href="#//api/name/image">image</a> source that
+eliminates the need to manage raw memory buffer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/image" title="image"></a>
+	<h3 class="method-title"><code><a href="#//api/name/image">&nbsp;&nbsp;image</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A bitmap image representing either an external or embedded texture applied to
+a material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property CGImageRef image</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A bitmap image representing either an external or embedded texture applied to
+a material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/colorSpace" title="colorSpace"></a>
+	<h3 class="method-title"><code><a href="#//api/name/colorSpace">&nbsp;&nbsp;colorSpace</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A profile that specifies the interpretation of a <a href="#//api/name/color">color</a> to be applied to
+a material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property CGColorSpaceRef colorSpace</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A profile that specifies the interpretation of a <a href="#//api/name/color">color</a> to be applied to
+a material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/color" title="color"></a>
+	<h3 class="method-title"><code><a href="#//api/name/color">&nbsp;&nbsp;color</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The actual color to be applied to a material property.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property CGColorRef color</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The actual color to be applied to a material property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">SCNTextureInfo.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2017 Deepak Surti, Ison Apps, AssimpKit team. All rights reserved. Updated: 2017-09-02</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
