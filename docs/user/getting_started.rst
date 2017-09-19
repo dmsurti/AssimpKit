@@ -11,8 +11,31 @@ Requirements
 
 .. _installation-label:
 
+
+
 Installation
 ============
+
+PreRequiste: Install 7z
+-----------------------
+
+The build process depends on 7z to extract static library archives. Please ensure 7z is installed.
+
+You can check if 7z is installed with:
+
+```
+type 7z
+```
+command on the Terminal.
+
+To install, you can use brew as such:
+
+```
+brew update && brew install p7zip
+```
+
+Using Carthage
+--------------
 
 AssimpKit is `Carthage`_ compatible.
 

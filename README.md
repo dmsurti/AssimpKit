@@ -47,8 +47,32 @@ Requirements
 - ObjC 2.0
 - iOS 10.0 or later
 - macOS 10.11 or later
+- 7z
 
 Installation with Carthage (iOS 10.0+, macOS 10.11+)
+---
+
+---
+1. PreRequiste: Install 7z
+---
+
+The build process depends on 7z to extract static library archives. Please ensure 7z is installed.
+
+You can check if 7z is installed with:
+
+```
+type 7z
+```
+command on the Terminal.
+
+To install, you can use brew as such:
+
+```
+brew update && brew install p7zip
+```
+
+---
+2. Using Carthage
 ---
 
 [Carthage](https://github.com/Carthage/Carthage) is a lightweight dependency
@@ -68,7 +92,8 @@ After `carthage update`, add the appropriate platform framework (iOS, macOS) to
 your project. The frameworks are placed in `iOS` and `Mac` subdirectories under
 the `Carthage/Build` directory of your project.
 
-Important Build Setting for `iOS` applications only
+---
+3. Important Build Setting for `iOS` applications only
 ---
 
 If you are developing an `iOS` application, set the `Enable Bitcode` under `Build Settings->Build Options` of your target to `NO`.

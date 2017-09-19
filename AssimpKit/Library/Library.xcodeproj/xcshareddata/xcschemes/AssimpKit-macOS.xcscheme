@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;cd $PROJECT_DIR&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libassimp.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libassimp.7z&#10;mv $PROJECT_DIR/libassimp.a $PROJECT_DIR/../Assimp/lib/osx/">
+               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;if ! [ -x &quot;$(command -v 7z)&quot; ]; then&#10;  echo &apos;error: 7z is not installed.&apos; &gt;&amp;2&#10;  echo &apos;fix: Install 7z with brew ...&apos; &gt;&amp;2&#10;  echo &apos;fix: Please run: brew install p7zip&apos; &gt;&amp;2&#10;  exit 1&#10;fi&#10;cd $PROJECT_DIR&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libassimp.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libassimp.7z&#10;mv $PROJECT_DIR/libassimp.a $PROJECT_DIR/../Assimp/lib/osx/">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -26,7 +26,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;cd $PROJECT_DIR&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libIrrXML.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libIrrXML.7z&#10;mv $PROJECT_DIR/libIrrXML.a $PROJECT_DIR/../Assimp/lib/osx/">
+               scriptText = "#!/bin/sh&#10;echo Extracting macOS fat lib...&#10;if ! [ -x &quot;$(command -v 7z)&quot; ]; then&#10;  echo &apos;error: 7z is not installed.&apos; &gt;&amp;2&#10;  echo &apos;fix: Install 7z with brew ...&apos; &gt;&amp;2&#10;  echo &apos;fix: Please run: brew install p7zip&apos; &gt;&amp;2&#10;  exit 1&#10;fi&#10;cd $PROJECT_DIR&#10;rm $PROJECT_DIR/../Assimp/lib/osx/libIrrXML.a&#10;7z x $PROJECT_DIR/../Assimp/lib/osx/libIrrXML.7z&#10;mv $PROJECT_DIR/libIrrXML.a $PROJECT_DIR/../Assimp/lib/osx/">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
