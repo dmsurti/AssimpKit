@@ -40,11 +40,14 @@
 
 @interface SCNTextureInfo ()
 
+#pragma mark - Texture material
+
 /**
  The material name which is the owner of this texture.
  */
 @property (nonatomic, readwrite) NSString *materialName;
 
+#pragma mark - Texture color and resources
 
 /**
  A Boolean value that determines whether a color is applied to a material 
@@ -52,13 +55,31 @@
  */
 @property bool applyColor;
 
+/**
+ The actual color to be applied to a material property.
+ */
+@property CGColorRef color;
 
 /**
- A Boolean value that determines if embedded texture is applied to a 
+ A profile that specifies the interpretation of a color to be applied to
+ a material property.
+ */
+@property CGColorSpaceRef colorSpace;
+
+#pragma mark - Embedded texture
+
+/**
+ A Boolean value that determines if embedded texture is applied to a
  material property.
  */
 @property bool applyEmbeddedTexture;
 
+/**
+ The index of the embedded texture in the array of assimp scene textures.
+ */
+@property int embeddedTextureIndex;
+
+#pragma mark - External texture
 
 /**
  A Boolean value that determines if an external texture is applied to a 
@@ -66,18 +87,12 @@
  */
 @property bool applyExternalTexture;
 
-
-/**
- The index of the embedded texture in the array of assimp scene textures.
- */
-@property int embeddedTextureIndex;
-
-
 /**
  The path to the external texture resource on the disk.
  */
 @property NSString* externalTexturePath;
 
+#pragma mark - Texture image resources
 
 /**
  An opaque type that represents the external texture image source.
@@ -98,22 +113,13 @@
  */
 @property CGImageRef image;
 
-
-/**
- A profile that specifies the interpretation of a color to be applied to 
- a material property.
- */
-@property CGColorSpaceRef colorSpace;
-
-
-/**
- The actual color to be applied to a material property.
- */
-@property CGColorRef color;
-
 @end
 
+#pragma mark -
+
 @implementation SCNTextureInfo
+
+#pragma mark - Creating a texture info
 
 /**
  Create a texture metadata object for a material property.
@@ -154,6 +160,7 @@
     return nil;
 }
 
+#pragma mark - Inspect texture metadata
 
 /**
  Inspects the material texture properties to determine if color, embedded 
@@ -223,6 +230,7 @@
     }
 }
 
+#pragma mark - Generate textures
 
 /**
  Generates a bitmap image representing the embedded texture.
@@ -266,6 +274,8 @@
     self.image = CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL);
 }
 
+#pragma mark - Extract color
+
 -(void)extractColorForMaterial:(const struct aiMaterial *)aiMaterial
                       withTextureType:(enum aiTextureType)aiTextureType
 {
@@ -301,15 +311,13 @@
     }
     if (AI_SUCCESS == matColor)
     {
-        if (color.r != 0 && color.g != 0 && color.b != 0)
-        {
             self.colorSpace = CGColorSpaceCreateDeviceRGB();
             CGFloat components[4] = {color.r, color.g, color.b, color.a};
             self.color = CGColorCreate(self.colorSpace, components);
-        }
     }
 }
 
+#pragma mark - Texture resources
 
 /**
  Returns the color or the bitmap image to be applied to the material property.

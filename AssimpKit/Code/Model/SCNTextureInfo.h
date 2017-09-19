@@ -38,11 +38,14 @@
 
 @interface SCNTextureInfo : NSObject
 
+#pragma mark - Texture metadata
+
 /**
  The texture type: diffuse, specular etc.
  */
 @property enum aiTextureType textureType;
 
+#pragma mark - Creating a texture info
 
 /**
  Create a texture metadata object for a material property.
@@ -58,6 +61,7 @@
                 inScene:(const struct aiScene *)aiScene
                  atPath:(NSString *)path;
 
+#pragma mark - Getting texture contents
 /**
  The contents of the material property which can be a texture or color.
 
@@ -65,6 +69,8 @@
  */
 -(id)getMaterialPropertyContents;
 
+
+#pragma mark - Releasing texture resources
 
 /**
  Releases the core graphics image resources used to load colors and textures.
