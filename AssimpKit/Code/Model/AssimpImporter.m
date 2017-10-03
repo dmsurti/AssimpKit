@@ -569,7 +569,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 {
     int indicesCounter = 0;
     int nIndices = [self findNumIndicesInMesh:aiMeshIndex inScene:aiScene];
-    short scnIndices[nIndices];
+    short *scnIndices =(short *)malloc(nIndices * sizeof(short));
     const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
     for (int i = 0; i < aiMesh->mNumFaces; i++)
     {
@@ -585,12 +585,13 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         }
     }
     NSData *indicesData =
-        [NSData dataWithBytes:scnIndices length:sizeof(scnIndices)];
+        [NSData dataWithBytes:scnIndices length:nIndices * sizeof(short)];
     SCNGeometryElement *indices = [SCNGeometryElement
         geometryElementWithData:indicesData
                   primitiveType:SCNGeometryPrimitiveTypeTriangles
                  primitiveCount:nFaces
                   bytesPerIndex:sizeof(short)];
+    free(scnIndices);
     return indices;
 }
 
