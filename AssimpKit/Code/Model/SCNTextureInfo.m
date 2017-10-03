@@ -270,8 +270,10 @@
 {
     DLog(@" Generating external texture");
     NSURL *imageURL = [NSURL fileURLWithPath:path];
+    [imageURL startAccessingSecurityScopedResource];
     self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
     self.image = CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL);
+    [imageURL stopAccessingSecurityScopedResource];
 }
 
 #pragma mark - Extract color
