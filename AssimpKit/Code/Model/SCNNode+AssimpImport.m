@@ -242,7 +242,7 @@
         {
             NSString *key = [[keyPrefix stringByAppendingString:suffix]
                 stringByAppendingString:animKey];
-            NSLog(@" resuming animation with key: %@", key);
+            DLog(@" resuming animation with key: %@", key);
             [animNode resumeAnimationForKey:key];
         }
     }
@@ -272,7 +272,7 @@
         {
             NSString *key = [[keyPrefix stringByAppendingString:suffix]
                 stringByAppendingString:animKey];
-            NSLog(@" resuming animation with key: %@", key);
+            DLog(@" resuming animation with key: %@", key);
             paused = [animNode isAnimationForKeyPaused:key];
         }
     }
