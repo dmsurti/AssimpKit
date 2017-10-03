@@ -50,7 +50,7 @@
 #pragma mark - Texture color and resources
 
 /**
- A Boolean value that determines whether a color is applied to a material 
+ A Boolean value that determines whether a color is applied to a material
  property.
  */
 @property bool applyColor;
@@ -82,7 +82,7 @@
 #pragma mark - External texture
 
 /**
- A Boolean value that determines if an external texture is applied to a 
+ A Boolean value that determines if an external texture is applied to a
  material property.
  */
 @property bool applyExternalTexture;
@@ -101,14 +101,14 @@
 
 
 /**
- An abstraction for the raw image data of an embedded texture image source that 
+ An abstraction for the raw image data of an embedded texture image source that
  eliminates the need to manage raw memory buffer.
  */
 @property CGDataProviderRef imageDataProvider;
 
 
 /**
- A bitmap image representing either an external or embedded texture applied to 
+ A bitmap image representing either an external or embedded texture applied to
  a material property.
  */
 @property CGImageRef image;
@@ -163,7 +163,7 @@
 #pragma mark - Inspect texture metadata
 
 /**
- Inspects the material texture properties to determine if color, embedded 
+ Inspects the material texture properties to determine if color, embedded
  texture or external texture should be applied to the material property.
 
  @param aiMaterial The assimp material.
@@ -270,6 +270,10 @@
 {
     DLog(@" Generating external texture");
     NSURL *imageURL = [NSURL fileURLWithPath:path];
+    if(![imageURL isFileURL]) {
+        imageURL =
+            [NSURL URLWithString:[@"file://" stringByAppendingString:path]];
+    }
     [imageURL startAccessingSecurityScopedResource];
     self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
     self.image = CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL);
