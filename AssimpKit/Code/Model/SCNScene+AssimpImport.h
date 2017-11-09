@@ -74,7 +74,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:
-                        (AssimpKitPostProcessSteps)postProcessFlags;
+                        (AssimpKitPostProcessSteps)postProcessFlags
+                               error:(NSError **)error;
+
 
 /**
  Loads a scene from the specified NSString URL.
@@ -85,6 +87,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                       postProcessFlags:
-                          (AssimpKitPostProcessSteps)postProcessFlags;
+                          (AssimpKitPostProcessSteps)postProcessFlags
+                                 error:(NSError **)error;
 
 @end

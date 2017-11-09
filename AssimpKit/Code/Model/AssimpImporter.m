@@ -123,6 +123,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
                postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+                          error:(NSError **)error
 {
     // Start the import on the given file with some example postprocessing
     // Usually - if speed is not the most important aspect for you - you'll t
@@ -137,6 +138,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             [NSString stringWithUTF8String:aiGetErrorString()];
         ALog(@" Scene importing failed for filePath %@", filePath);
         ALog(@" Scene importing failed with error %@", errorString);
+        
+        // Return error
+        if (error) {
+            *error = [NSError errorWithDomain:@"AssimpImporter" code:-1 userInfo:@{NSLocalizedDescriptionKey:errorString}];
+        }
+        
         return nil;
     }
     // Now we can access the file's contents

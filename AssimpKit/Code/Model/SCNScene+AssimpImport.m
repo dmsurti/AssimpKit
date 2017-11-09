@@ -97,11 +97,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
-
+                               error:(NSError **)error
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
     NSString *file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-    return [assimpImporter importScene:file postProcessFlags:postProcessFlags];
+    return [assimpImporter importScene:file postProcessFlags:postProcessFlags error:error];
 }
 
 /**
@@ -114,10 +114,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                       postProcessFlags:
                           (AssimpKitPostProcessSteps)postProcessFlags
+                                 error:(NSError **)error
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
     return
-        [assimpImporter importScene:url.path postProcessFlags:postProcessFlags];
+        [assimpImporter importScene:url.path postProcessFlags:postProcessFlags error:error];
 }
 
 @end

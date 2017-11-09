@@ -67,6 +67,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
-               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags;
+               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+                          error:(NSError **)error;
 
 @end
