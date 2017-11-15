@@ -134,6 +134,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
  @param filePath The path to the scene file to load.
  @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene import error.
  @return A new scene object, or nil if no scene could be loaded.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath

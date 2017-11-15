@@ -164,10 +164,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return;
     }
     
-    UIAlertController *vc = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    UIAlertController *vc = [UIAlertController
+                             alertControllerWithTitle:@"Error"
+                             message:error.localizedDescription
+                             preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * _Nonnull action) {}];
     [vc addAction:action];
-    [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:vc animated:true completion:nil];
+    
+    [UIApplication.sharedApplication.keyWindow.rootViewController
+     presentViewController:vc
+     animated:true
+     completion:nil];
 }
 
 @end
