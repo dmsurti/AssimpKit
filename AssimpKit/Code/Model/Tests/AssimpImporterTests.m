@@ -825,29 +825,39 @@
 {
     const char *pFile = [path UTF8String];
     const struct aiScene *aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
-    // If the import failed, report it
+    
+    NSError *error = nil;
+    AssimpImporter *importer = [[AssimpImporter alloc] init];
+    SCNAssimpScene *scene =
+    [importer importScene:path
+         postProcessFlags:AssimpKit_Process_FlipUVs |
+     AssimpKit_Process_Triangulate
+                    error:&error];
+    
+    // If the import failed, report it and assure error.localizedDescription
+    // populated properly
     if (!aiScene)
     {
         NSString *errorString =
             [NSString stringWithUTF8String:aiGetErrorString()];
+        
+        XCTAssertEqualObjects(errorString, error.localizedDescription,
+        @" Expected error.localizedDescription (%@)\
+        to equal to aiGetErrorString() (%@)",
+                              error.localizedDescription,
+                              errorString);
+        
         [testLog addErrorLog:errorString];
         return;
     }
 
-    AssimpImporter *importer = [[AssimpImporter alloc] init];
-    SCNAssimpScene *scene =
-        [importer importScene:path
-             postProcessFlags:AssimpKit_Process_FlipUVs |
-                              AssimpKit_Process_Triangulate
-                        error:nil];
-
     NSLog(@"   SCENE Root node: %@ with children: %lu", scene.rootNode,
           (unsigned long)scene.rootNode.childNodes.count);
     [self checkNode:aiScene->mRootNode
-        withSceneNode:[scene.modelScene.rootNode.childNodes objectAtIndex:0]
-              aiScene:aiScene
-            modelPath:path
-              testLog:testLog];
+      withSceneNode:[scene.modelScene.rootNode.childNodes objectAtIndex:0]
+            aiScene:aiScene
+          modelPath:path
+            testLog:testLog];
 
     // [self checkLights:aiScene withScene:scene.modelScene testLog:testLog];
 

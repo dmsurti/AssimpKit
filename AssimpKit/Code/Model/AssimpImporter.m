@@ -157,7 +157,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         
         // Return error
         if (error) {
-            *error = [NSError errorWithDomain:@"AssimpImporter" code:-1 userInfo:@{NSLocalizedDescriptionKey:errorString}];
+            *error = [NSError
+                      errorWithDomain:@"AssimpImporter"
+                      code:-1
+                      userInfo:@{NSLocalizedDescriptionKey:errorString}];
         }
         
         return nil;
