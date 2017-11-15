@@ -75,7 +75,31 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:
                         (AssimpKitPostProcessSteps)postProcessFlags
+DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
+
+/**
+ Loads a scene from a file with the specified name in the app’s main bundle.
+
+ @param name The name of a scene file in the app bundle’s resources directory.
+ @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene loading error.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
++ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
+                    postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
                                error:(NSError **)error;
+
+/**
+ Loads a scene from the specified NSString URL.
+
+ @param url The NSString URL to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
++ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
+                    postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+DEPRECATED_MSG_ATTRIBUTE(
+"Please use assimpSceneWithURL:postProcessFlags:error:");
 
 
 /**
@@ -83,6 +107,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
  @param url The NSString URL to the scene file to load.
  @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene loading error.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url

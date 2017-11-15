@@ -97,11 +97,29 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 + (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+{
+    return [self assimpSceneNamed:name
+                 postProcessFlags:postProcessFlags
+                            error:nil];
+}
+
+/**
+ Loads a scene from a file with the specified name in the app’s main bundle.
+ 
+ @param name The name of a scene file in the app bundle’s resources directory.
+ @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene loading error.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
++ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
+                    postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
                                error:(NSError **)error
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
     NSString *file = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-    return [assimpImporter importScene:file postProcessFlags:postProcessFlags error:error];
+    return [assimpImporter importScene:file
+                      postProcessFlags:postProcessFlags
+                                 error:error];
 }
 
 /**
@@ -112,13 +130,29 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 + (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
-                      postProcessFlags:
-                          (AssimpKitPostProcessSteps)postProcessFlags
+                    postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+{
+    return [self assimpSceneWithURL:url
+                   postProcessFlags:postProcessFlags
+                              error:nil];
+}
+
+/**
+ Loads a scene from the specified NSString URL.
+
+ @param url The NSString URL to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene loading error.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
++ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
+                    postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
                                  error:(NSError **)error
 {
     AssimpImporter *assimpImporter = [[AssimpImporter alloc] init];
-    return
-        [assimpImporter importScene:url.path postProcessFlags:postProcessFlags error:error];
+    return [assimpImporter importScene:url.path
+                      postProcessFlags:postProcessFlags
+                                 error:error];
 }
 
 @end

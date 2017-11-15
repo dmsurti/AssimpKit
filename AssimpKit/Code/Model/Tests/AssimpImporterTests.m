@@ -838,7 +838,8 @@
     SCNAssimpScene *scene =
         [importer importScene:path
              postProcessFlags:AssimpKit_Process_FlipUVs |
-                              AssimpKit_Process_Triangulate];
+                              AssimpKit_Process_Triangulate
+                        error:nil];
 
     NSLog(@"   SCENE Root node: %@ with children: %lu", scene.rootNode,
           (unsigned long)scene.rootNode.childNodes.count);
@@ -1021,7 +1022,8 @@
             SCNAssimpScene *assimpScene = [SCNAssimpScene
                 assimpSceneWithURL:[NSURL URLWithString:modelFile.path]
                   postProcessFlags:AssimpKit_Process_FlipUVs |
-                                   AssimpKit_Process_Triangulate];
+                                   AssimpKit_Process_Triangulate
+                             error:nil];
             if ([assimpScene.modelScene
                          writeToURL:[NSURL URLWithString:fileSchemeScnAsset]
                             options:nil
