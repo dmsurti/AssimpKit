@@ -67,6 +67,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @return A new scene object, or nil if no scene could be loaded.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
-               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags;
+               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+DEPRECATED_MSG_ATTRIBUTE("Please use importScene:postProcessFlags:error:");
+
+/**
+ Loads a scene from the specified file path.
+
+ @param filePath The path to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene import error.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
+- (SCNAssimpScene *)importScene:(NSString *)filePath
+               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+                          error:(NSError **)error;
 
 @end

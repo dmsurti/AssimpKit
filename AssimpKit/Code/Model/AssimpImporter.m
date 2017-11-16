@@ -116,13 +116,30 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
  Loads a scene from the specified file path.
-
+ 
  @param filePath The path to the scene file to load.
  @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
 - (SCNAssimpScene *)importScene:(NSString *)filePath
                postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+{
+    return [self importScene:filePath
+            postProcessFlags:postProcessFlags
+                       error:nil];
+}
+
+/**
+ Loads a scene from the specified file path.
+
+ @param filePath The path to the scene file to load.
+ @param postProcessFlags The flags for all possible post processing steps.
+ @param error Scene import error.
+ @return A new scene object, or nil if no scene could be loaded.
+ */
+- (SCNAssimpScene *)importScene:(NSString *)filePath
+               postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
+                          error:(NSError **)error
 {
     // Start the import on the given file with some example postprocessing
     // Usually - if speed is not the most important aspect for you - you'll t
@@ -137,6 +154,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             [NSString stringWithUTF8String:aiGetErrorString()];
         ALog(@" Scene importing failed for filePath %@", filePath);
         ALog(@" Scene importing failed with error %@", errorString);
+        
+        // Return error
+        if (error) {
+            *error = [NSError
+                      errorWithDomain:@"AssimpImporter"
+                      code:-1
+                      userInfo:@{NSLocalizedDescriptionKey:errorString}];
+        }
+        
         return nil;
     }
     // Now we can access the file's contents

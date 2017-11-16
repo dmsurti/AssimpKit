@@ -43,12 +43,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Load the scene
+    NSError *error = nil;
     SCNAssimpScene *scene =
         [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.modelFilePath]
                     postProcessFlags:AssimpKit_Process_FlipUVs |
-                                     AssimpKit_Process_Triangulate];
+                                     AssimpKit_Process_Triangulate
+                               error:&error];
+    [self showErrorIfNeeded:error];
 
     // Load the animation scene
     if (self.animFilePath)
@@ -56,7 +59,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         SCNAssimpScene *animScene =
             [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.animFilePath]
                         postProcessFlags:AssimpKit_Process_FlipUVs |
-                                         AssimpKit_Process_Triangulate];
+                                         AssimpKit_Process_Triangulate
+                                   error:&error];
+        [self showErrorIfNeeded:error];
         NSArray *animationKeys = animScene.animationKeys;
         // If multiple animations exist, load the first animation
         if (animationKeys.count > 0)
@@ -150,6 +155,30 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)showErrorIfNeeded:(NSError *)error
+{
+    if (!error.localizedDescription.length)
+    {
+        return;
+    }
+    
+    UIAlertController *vc = [UIAlertController
+                             alertControllerWithTitle:@"Error"
+                             message:error.localizedDescription
+                             preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * _Nonnull action) {}];
+    [vc addAction:action];
+    
+    [UIApplication.sharedApplication.keyWindow.rootViewController
+     presentViewController:vc
+     animated:true
+     completion:nil];
 }
 
 @end
