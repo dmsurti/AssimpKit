@@ -806,10 +806,11 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             aiScene->mMaterials[aiMesh->mMaterialIndex];
         struct aiString name;
         aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
-        DLog(
-            @" Material name is %@",
-            [NSString stringWithUTF8String:(const char *_Nonnull) & name.data]);
+        NSString *nameString = [NSString stringWithUTF8String:
+                                (const char *_Nonnull) & name.data];
+        DLog(@" Material name is %@", name);
         SCNMaterial *material = [SCNMaterial material];
+        material.name = nameString;
         int kTextureTypes = 10;
         int textureTypes[10] = {
             aiTextureType_DIFFUSE,      aiTextureType_SPECULAR,
