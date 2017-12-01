@@ -134,9 +134,12 @@
         const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
         nVertices += aiMesh->mNumVertices;
     }
-    XCTAssertEqual(sceneNode.geometry.geometrySources.count, 4,
-                   @" Expected 4 geometry sources but got %lu",
+    XCTAssertGreaterThanOrEqual(sceneNode.geometry.geometrySources.count, 4,
+                   @" Expected >= 4 geometry sources but got %lu",
                    sceneNode.geometry.geometrySources.count);
+    XCTAssertLessThanOrEqual(sceneNode.geometry.geometrySources.count, 5,
+                             @" Expected <=5 geometry sources but got %lu",
+                             sceneNode.geometry.geometrySources.count);
     SCNGeometrySource *vertexSource =
         [sceneNode.geometry.geometrySources objectAtIndex:0];
     if (nVertices != vertexSource.vectorCount)
@@ -176,9 +179,13 @@
             [testLog addErrorLog:errorLog];
         }
     }
-    XCTAssertEqual(texSource.dataStride, 8,
-                   @" The texture source data stride is %ld instead of 8",
+    XCTAssertGreaterThanOrEqual(texSource.dataStride, 8,
+                   @" The texture source data stride is %ld instead of >= 8",
                    (long)texSource.dataStride);
+    XCTAssertLessThanOrEqual(
+        texSource.dataStride, 12,
+        @" The texture source data stride is %ld instead of <= 12",
+        (long)texSource.dataStride);
     SCNGeometrySource *tangentSource =
     [sceneNode.geometry.geometrySources objectAtIndex:3];
     if (nVertices != tangentSource.vectorCount)
@@ -189,9 +196,13 @@
                 nodeName, nVertices];
         [testLog addErrorLog:errorLog];
     }
-    XCTAssertEqual(tangentSource.dataStride, 12,
-                   @" The tangent source data stride is %ld instead of 12",
+    XCTAssertGreaterThanOrEqual(tangentSource.dataStride, 8,
+                   @" The tangent source data stride is %ld instead of >= 8",
                    (long)tangentSource.dataStride);
+    XCTAssertLessThanOrEqual(
+        tangentSource.dataStride, 12,
+        @" The tangent source data stride is %ld instead of <= 12",
+        (long)tangentSource.dataStride);
 }
 
 #pragma mark - Check node materials
