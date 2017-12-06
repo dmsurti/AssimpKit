@@ -569,7 +569,7 @@ makeColorGeometrySourceForNode:(const struct aiNode *)aiNode
             return NULL;
         }
 
-        for (int j = 0; j < nVertices; j++)
+        for (int j = 0; j < aiMesh->mNumVertices; j++)
         {
             scnColors[colorsCounter++] = aiColor4D[j].r;
             scnColors[colorsCounter++] = aiColor4D[j].g;
