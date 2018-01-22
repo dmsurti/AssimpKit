@@ -242,7 +242,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     node.name = [NSString stringWithUTF8String:aiNodeName->data];
     DLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
     int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
-    DLog(@" N VERTICES: %@", nVertices);
+    NSData *nVerticesData = [NSData dataWithBytes: &nVertices length: sizeof(nVertices)];
+    DLog(@" N VERTICES: %@", nVerticesData);
     if (nVertices > 0)
     {
         node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode
@@ -875,7 +876,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
         NSString *nameString = [NSString stringWithUTF8String:
                                 (const char *_Nonnull) & name.data];
-        DLog(@" Material name is %@", name);
+        DLog(@" Material name is %@", nameString);
         SCNMaterial *material = [SCNMaterial material];
         material.name = nameString;
         int kTextureTypes = 10;
