@@ -36,6 +36,8 @@
 #import <Foundation/Foundation.h>
 #include "assimp/scene.h"       // Output data structure
 
+@class AssimpImageCache;
+
 @interface SCNTextureInfo : NSObject
 
 #pragma mark - Texture metadata
@@ -59,7 +61,8 @@
 - (id)initWithMeshIndex:(int)aiMeshIndex
             textureType:(enum aiTextureType)aiTextureType
                 inScene:(const struct aiScene *)aiScene
-                 atPath:(NSString *)path;
+                 atPath:(NSString *)path
+			 imageCache:(AssimpImageCache *)imageCache;
 
 #pragma mark - Getting texture contents
 /**

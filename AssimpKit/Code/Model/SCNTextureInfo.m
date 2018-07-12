@@ -35,6 +35,7 @@
 
 
 #import "SCNTextureInfo.h"
+#import "AssimpImageCache.h"
 #import <ImageIO/ImageIO.h>
 #import <CoreImage/CoreImage.h>
 
@@ -134,6 +135,7 @@
            textureType:(enum aiTextureType)aiTextureType
                inScene:(const struct aiScene *)aiScene
                 atPath:(NSString*)path
+			imageCache:(AssimpImageCache *)imageCache
 {
     self = [super init];
     if(self) {
@@ -154,7 +156,8 @@
         [self checkTextureTypeForMaterial:aiMaterial
                           withTextureType:aiTextureType
                                   inScene:aiScene
-                                   atPath:path];
+                                   atPath:path
+							   imageCache:imageCache];
         return self;
     }
     return nil;
@@ -175,6 +178,7 @@
                     withTextureType:(enum aiTextureType)aiTextureType
                             inScene:(const struct aiScene *)aiScene
                              atPath:(NSString *)path
+						 imageCache:(AssimpImageCache *)imageCache
 {
     int nTextures = aiGetMaterialTextureCount(aiMaterial, aiTextureType);
     DLog(@" has textures : %d", nTextures);
@@ -224,7 +228,7 @@
                     [sceneDir stringByAppendingString:texFileName];
                 DLog(@"  tex path is %@", self.externalTexturePath);
                 [self generateCGImageForExternalTextureAtPath:
-                          self.externalTexturePath];
+                          self.externalTexturePath imageCache:imageCache];
             }
         }
     }
@@ -267,11 +271,22 @@
  @param path The path to the scene file to load.
  */
 -(void)generateCGImageForExternalTextureAtPath:(NSString*)path
+									imageCache:(AssimpImageCache *)imageCache
 {
-    DLog(@" Generating external texture");
-    NSURL *imageURL = [NSURL fileURLWithPath:path];
-    self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
-    self.image = CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL);
+	CGImageRef cachedImage = [imageCache cachedFileAtPath:path];
+	if (cachedImage)
+	{
+		DLog(@" Already generated this texture; using from cache.");
+		self.image = cachedImage;
+	}
+	else
+	{
+		DLog(@" Generating external texture");
+		NSURL *imageURL = [NSURL fileURLWithPath:path];
+		self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
+		self.image = self.imageSource ? CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL) : NULL;
+		[imageCache storeImage:self.image toPath:path];
+	}
 }
 
 #pragma mark - Extract color
