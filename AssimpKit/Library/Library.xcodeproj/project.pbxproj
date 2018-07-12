@@ -61,6 +61,7 @@
 		BB1EB46220AA16E600E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBE41B7C20A9AA050069C8C6 /* AssimpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0EB60220F780290098E4FA /* AssimpImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0EB60020F780290098E4FA /* AssimpImageCache.h */; };
 		EA0EB60320F780290098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
+		EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -575,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */,
+				EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */,
 				779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */,
 				77FB46301F59751300C73D50 /* SCNTextureInfo.m in Sources */,
 				779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */,
