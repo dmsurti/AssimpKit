@@ -285,7 +285,10 @@
 		NSURL *imageURL = [NSURL fileURLWithPath:path];
 		self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
 		self.image = self.imageSource ? CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL) : NULL;
-		[imageCache storeImage:self.image toPath:path];
+		if (self.image != NULL)
+		{
+			[imageCache storeImage:self.image toPath:path];
+		}
 	}
 }
 
