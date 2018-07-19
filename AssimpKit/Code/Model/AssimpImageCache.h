@@ -7,13 +7,20 @@
 
 @import ImageIO;
 #import <Foundation/Foundation.h>
+#if TARGET_OS_OSX
+@import AppKit;
+#define ImageType NSImage
+#else
+@import UIKit;
+#define ImageType UIImage
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AssimpImageCache : NSObject
 
-- (nullable CGImageRef)cachedFileAtPath:(NSString *)path;
-- (void)storeImage:(CGImageRef)image toPath:(NSString *)path;
+- (ImageType *)cachedFileAtPath:(NSString *)path;
+- (void)storeImage:(ImageType *)image toPath:(NSString *)path;
 
 @end
 

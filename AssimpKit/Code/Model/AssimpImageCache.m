@@ -22,15 +22,14 @@
 	return self;
 }
 
-- (nullable CGImageRef)cachedFileAtPath:(NSString *)path
+- (ImageType *)cachedFileAtPath:(NSString *)path
 {
-	id image = self.cacheDictionary[path];
-	return (__bridge CGImageRef _Nullable)(image);
+	return self.cacheDictionary[path];
 }
 
-- (void)storeImage:(CGImageRef)image toPath:(NSString *)path
+- (void)storeImage:(ImageType *)image toPath:(NSString *)path
 {
-	[self.cacheDictionary setObject:(__bridge id _Nonnull)(image) forKey:path];
+	[self.cacheDictionary setObject:image forKey:path];
 }
 
 @end
