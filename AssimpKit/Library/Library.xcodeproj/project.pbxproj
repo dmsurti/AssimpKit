@@ -57,6 +57,11 @@
 		77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB46321F59751900C73D50 /* SCNTextureInfo.m */; };
 		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
 		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
+		BB1EB46120AA150700E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB1EB46020AA150700E6BA31 /* AssimpKit.h */; };
+		BB1EB46220AA16E600E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBE41B7C20A9AA050069C8C6 /* AssimpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA0EB60220F780290098E4FA /* AssimpImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0EB60020F780290098E4FA /* AssimpImageCache.h */; };
+		EA0EB60320F780290098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
+		EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +156,10 @@
 		77FB46321F59751900C73D50 /* SCNTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNTextureInfo.m; path = ../../Code/Model/SCNTextureInfo.m; sourceTree = "<group>"; };
 		77FF141A1F5843360041F4FA /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "../Assimp/lib/ios/libIrrXML-fat.a"; sourceTree = "<group>"; };
 		77FF141E1F58433D0041F4FA /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../Assimp/lib/osx/libIrrXML.a; sourceTree = "<group>"; };
+		BB1EB46020AA150700E6BA31 /* AssimpKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpKit.h; path = "AssimpKit-iOS/AssimpKit.h"; sourceTree = SOURCE_ROOT; };
+		BBE41B7C20A9AA050069C8C6 /* AssimpKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpKit.h; sourceTree = "<group>"; };
+		EA0EB60020F780290098E4FA /* AssimpImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssimpImageCache.h; path = ../../Code/Model/AssimpImageCache.h; sourceTree = "<group>"; };
+		EA0EB60120F780290098E4FA /* AssimpImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssimpImageCache.m; path = ../../Code/Model/AssimpImageCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +248,8 @@
 				7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */,
 				779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */,
 				779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */,
+				EA0EB60020F780290098E4FA /* AssimpImageCache.h */,
+				EA0EB60120F780290098E4FA /* AssimpImageCache.m */,
 				779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */,
 				779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */,
 				779DF1E11DDF2A5700DED366 /* SCNAssimpAnimation.m */,
@@ -330,6 +341,7 @@
 			files = (
 				779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */,
 				779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */,
+				EA0EB60220F780290098E4FA /* AssimpImageCache.h in Headers */,
 				779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
 				7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */,
@@ -549,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */,
+				EA0EB60320F780290098E4FA /* AssimpImageCache.m in Sources */,
 				779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */,
 				77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */,
 				779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */,
@@ -563,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */,
+				EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */,
 				779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */,
 				77FB46301F59751300C73D50 /* SCNTextureInfo.m in Sources */,
 				779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */,

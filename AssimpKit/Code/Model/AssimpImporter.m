@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #import "AssimpImporter.h"
 #import "SCNAssimpAnimation.h"
 #import "SCNTextureInfo.h"
+#import "AssimpImageCache.h"
 #include "assimp/cimport.h"     // Plain-C interface
 #include "assimp/light.h"       // Lights
 #include "assimp/material.h"    // Materials
@@ -197,8 +198,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    Assign geometry, materials, lights and cameras to the node
    ---------------------------------------------------------------------
    */
+	AssimpImageCache *imageCache = [AssimpImageCache new];
     SCNNode *scnRootNode =
-        [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path];
+        [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path imageCache:imageCache];
     [scene.rootNode addChildNode:scnRootNode];
     /*
    ---------------------------------------------------------------------
@@ -236,6 +238,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - (SCNNode *)makeSCNNodeFromAssimpNode:(const struct aiNode *)aiNode
                                inScene:(const struct aiScene *)aiScene
                                 atPath:(NSString *)path
+							imageCache:(AssimpImageCache *)imageCache
 {
     SCNNode *node = [[SCNNode alloc] init];
     const struct aiString *aiNodeName = &aiNode->mName;
@@ -248,7 +251,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode
                                                     inScene:aiScene
                                                withVertices:nVertices
-                                                     atPath:path];
+                                                     atPath:path
+												 imageCache:imageCache];
     }
     // node.light = [self makeSCNLightFromAssimpNode:aiNode inScene:aiScene];
     node.camera = [self makeSCNCameraFromAssimpNode:aiNode inScene:aiScene];
@@ -279,7 +283,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
         SCNNode *childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
                                                      inScene:aiScene
-                                                      atPath:path];
+                                                      atPath:path
+												  imageCache:imageCache];
         [node addChildNode:childNode];
     }
     return node;
@@ -863,6 +868,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
 - (NSMutableArray *)makeMaterialsForNode:(const struct aiNode *)aiNode
                                  inScene:(const struct aiScene *)aiScene
                                   atPath:(NSString *)path
+							  imageCache:(AssimpImageCache *)imageCache
 {
     NSMutableArray *scnMaterials = [[NSMutableArray alloc] init];
     for (int i = 0; i < aiNode->mNumMeshes; i++)
@@ -906,7 +912,8 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                 [[SCNTextureInfo alloc] initWithMeshIndex:aiMeshIndex
                                               textureType:textureTypes[i]
                                                   inScene:aiScene
-                                                   atPath:path];
+                                                   atPath:path
+											   imageCache:imageCache];
             [self makeMaterialPropertyForMaterial:aiMaterial
                                   withTextureInfo:textureInfo
                                   withSCNMaterial:material
@@ -971,6 +978,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                        inScene:(const struct aiScene *)aiScene
                                   withVertices:(int)nVertices
                                         atPath:(NSString *)path
+									imageCache:(AssimpImageCache *)imageCache
 {
     // make SCNGeometry with sources, elements and materials
     NSArray *scnGeometrySources = [self makeGeometrySourcesForNode:aiNode
@@ -984,7 +992,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             [SCNGeometry geometryWithSources:scnGeometrySources
                                     elements:scnGeometryElements];
         NSArray *scnMaterials =
-            [self makeMaterialsForNode:aiNode inScene:aiScene atPath:path];
+            [self makeMaterialsForNode:aiNode inScene:aiScene atPath:path imageCache:imageCache];
         if (scnMaterials.count > 0)
         {
             scnGeometry.materials = scnMaterials;
