@@ -65,3 +65,5 @@ libIrrXML-fat.a
 libassimp.a
 libIrrXML.a
 .DS_Store
+libassimp*.dylib
+libzlibstatic-fat.a

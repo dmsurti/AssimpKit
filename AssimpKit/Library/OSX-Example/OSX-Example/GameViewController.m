@@ -34,6 +34,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #import "GameViewController.h"
+#import "AppDelegate.h"
+
 #import <AssimpKit/PostProcessingFlags.h>
 #import <AssimpKit/SCNAssimpAnimSettings.h>
 #import <AssimpKit/SCNNode+AssimpImport.h>
@@ -65,73 +67,130 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     if (clicked == NSFileHandlingPanelOKButton)
     {
+        NSURL *sceneFileURL = panel.URL;
+        NSError *error = nil;
         SCNAssimpScene *scene = [SCNScene
-            assimpSceneWithURL:[NSURL URLWithString:panel.URL.absoluteString]
+            assimpSceneWithURL:sceneFileURL
               postProcessFlags:AssimpKit_Process_FlipUVs |
-                               AssimpKit_Process_Triangulate];
+                               AssimpKit_Process_Triangulate
+                                 error:&error];
+        if (error) {
+            NSLog(@"Error: \"%@\"", error);
+        }
+        
         self.gameView.scene = scene.modelScene;
+        
+        [self addAnimationFromSceneFileURL:sceneFileURL];
     }
 }
-- (IBAction)addAnimation:(id)sender
-{
-    NSOpenPanel *panel = [NSOpenPanel openPanel];
-    [panel setAllowedFileTypes:[SCNAssimpScene allowedFileExtensions]];
-    [panel setCanChooseFiles:YES];
-    [panel setCanChooseDirectories:NO];
-    [panel setAllowsMultipleSelection:NO];
-    NSInteger clicked = [panel runModal];
 
-    if (clicked == NSFileHandlingPanelOKButton)
-    {
-        SCNAssimpScene *animScene = [SCNScene
-            assimpSceneWithURL:[NSURL URLWithString:panel.URL.absoluteString]
-              postProcessFlags:AssimpKit_Process_FlipUVs |
-                               AssimpKit_Process_Triangulate];
+- (IBAction)exportModel:(id)sender {
+    @autoreleasepool{
         SCNScene *scene = self.gameView.scene;
         if (scene == nil)
         {
-            scene = animScene.modelScene;
-            self.gameView.scene = scene;
+            return;
         }
-        NSArray *animationKeys = animScene.animationKeys;
-        // If multiple animations exist, load the first animation
-        if (animationKeys.count > 0)
-        {
-            SCNAssimpAnimSettings *settings =
-                [[SCNAssimpAnimSettings alloc] init];
-            settings.repeatCount = 3;
-            
-            NSString *key = [animationKeys objectAtIndex:0];
-            SCNAnimationEventBlock eventBlock =
-                ^(CAAnimation *animation, id animatedObject,
-                  BOOL playingBackward) {
-                    NSLog(@" Animation Event triggered ");
-                  
-                    // To test removing animation uncomment
-                    // Then the animation wont repeat 3 times
-                    // as it will be removed after 90% of the first loop
-                    // is completed, as event key time is 0.9
-                    // [scene.rootNode removeAnimationSceneForKey:key];
-                    [scene.rootNode pauseAnimationSceneForKey:key];
-                    NSLog(@" Animation paused: %d",
-                          [scene.rootNode isAnimationSceneForKeyPaused:key]);
-                    // [scene.rootNode resumeAnimationSceneForKey:key];
-                };
-            SCNAnimationEvent *animEvent =
-                [SCNAnimationEvent animationEventWithKeyTime:0.9f
-                                                       block:eventBlock];
-            NSArray *animEvents =
-                [[NSArray alloc] initWithObjects:animEvent, nil];
-            settings.animationEvents = animEvents;
+        
+        NSWindow* window = ((AppDelegate*)([NSApplication sharedApplication].delegate)).window;
+        
+        NSSavePanel *panel = [NSSavePanel savePanel];
+        [panel setAllowsOtherFileTypes:NO];
+        [panel setAllowedFileTypes:@[@"scn",@"dae",@"obj"]];
+        
+        
+        [panel beginSheetModalForWindow:window completionHandler:^(NSInteger result){
+            if (result == NSFileHandlingPanelOKButton)
+            {
+                NSURL*  sceneFileURL = [panel URL];
+                
+                NSDictionary<NSString *,id> *options = @{SCNSceneExportDestinationURL : sceneFileURL};
+                [scene writeToURL:sceneFileURL
+                          options:options
+                         delegate:nil
+                  progressHandler:^(float totalProgress, NSError * _Nullable error, BOOL * _Nonnull stop) {
+                      if (error) {
+                          NSLog(@"ERROR : \"%@\"", error);
+                      }
+                  }];
+            }
+        }];
+    }
+}
 
-            settings.delegate = self;
-            
-            SCNScene *animation = [animScene animationSceneForKey:key];
-            [scene.rootNode addAnimationScene:animation
-                                       forKey:key
-                                 withSettings:settings];
-            
-            
+- (void)addAnimationFromSceneFileURL:(NSURL*)sceneFileURL {
+    NSError *error = nil;
+    SCNAssimpScene *animScene = [SCNScene
+                                 assimpSceneWithURL:sceneFileURL
+                                 postProcessFlags:AssimpKit_Process_FlipUVs |
+                                 AssimpKit_Process_Triangulate
+                                 error:&error];
+    if (error) {
+        NSLog(@"ERROR: \"%@\"", error);
+    }
+    
+    SCNScene *scene = self.gameView.scene;
+    if (scene == nil)
+    {
+        scene = animScene.modelScene;
+        self.gameView.scene = scene;
+    }
+    NSArray *animationKeys = animScene.animationKeys;
+    // If multiple animations exist, load the first animation
+    if (animationKeys.count > 0)
+    {
+        SCNAssimpAnimSettings *settings =
+        [[SCNAssimpAnimSettings alloc] init];
+        settings.repeatCount = 1;
+        settings.removedOnCompletion = NO;
+        
+        NSString *key = [animationKeys objectAtIndex:0];
+//        SCNAnimationEventBlock eventBlock =
+//        ^(CAAnimation *animation, id animatedObject,
+//          BOOL playingBackward) {
+//            NSLog(@" Animation Event triggered ");
+//            
+//            // To test removing animation uncomment
+//            // Then the animation wont repeat 3 times
+//            // as it will be removed after 90% of the first loop
+//            // is completed, as event key time is 0.9
+//            // [scene.rootNode removeAnimationSceneForKey:key];
+//            //[scene.rootNode pauseAnimationSceneForKey:key];
+//            //NSLog(@" Animation paused: %d",  [scene.rootNode isAnimationSceneForKeyPaused:key]);
+//            //[scene.rootNode resumeAnimationSceneForKey:key];
+//        };
+//        SCNAnimationEvent *animEvent =
+//        [SCNAnimationEvent animationEventWithKeyTime:0.9f
+//                                               block:eventBlock];
+//        NSArray *animEvents =
+//        [[NSArray alloc] initWithObjects:animEvent, nil];
+//        settings.animationEvents = animEvents;
+        
+        settings.delegate = self;
+        
+        SCNScene *animation = [animScene animationSceneForKey:key];
+        [scene.rootNode addAnimationScene:animation
+                                   forKey:key
+                             withSettings:settings];
+        
+        
+    }
+}
+
+- (IBAction)addAnimation:(id)sender
+{
+    @autoreleasepool{
+        NSOpenPanel *panel = [NSOpenPanel openPanel];
+        [panel setAllowedFileTypes:[SCNAssimpScene allowedFileExtensions]];
+        [panel setCanChooseFiles:YES];
+        [panel setCanChooseDirectories:NO];
+        [panel setAllowsMultipleSelection:NO];
+        NSInteger clicked = [panel runModal];
+        
+        if (clicked == NSModalResponseOK)
+        {
+            NSURL *sceneFileURL = panel.URL;
+            [self addAnimationFromSceneFileURL:sceneFileURL];
         }
     }
 }
@@ -143,7 +202,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    NSLog(@" animation did stop...");
+    NSLog(@" animation did stop...");        
 }
 
 @end

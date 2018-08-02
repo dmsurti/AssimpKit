@@ -39,7 +39,30 @@
 #import <ImageIO/ImageIO.h>
 #import <CoreImage/CoreImage.h>
 
-@interface SCNTextureInfo ()
+@interface SCNTextureInfo () {
+    /**
+     An opaque type that represents the external texture image source.
+     */
+    CGImageSourceRef _imageSource;
+    
+    
+    /**
+     A bitmap image representing either an external or embedded texture applied to
+     a material property.
+     */
+    CGImageRef _image;
+    
+    /**
+     The actual color to be applied to a material property.
+     */
+    CGColorRef _color;
+    
+    /**
+     A profile that specifies the interpretation of a color to be applied to
+     a material property.
+     */
+    CGColorSpaceRef _colorSpace;
+}
 
 #pragma mark - Texture material
 
@@ -55,17 +78,6 @@
  property.
  */
 @property bool applyColor;
-
-/**
- The actual color to be applied to a material property.
- */
-@property CGColorRef color;
-
-/**
- A profile that specifies the interpretation of a color to be applied to
- a material property.
- */
-@property CGColorSpaceRef colorSpace;
 
 #pragma mark - Embedded texture
 
@@ -93,27 +105,6 @@
  */
 @property NSString* externalTexturePath;
 
-#pragma mark - Texture image resources
-
-/**
- An opaque type that represents the external texture image source.
- */
-@property CGImageSourceRef imageSource;
-
-
-/**
- An abstraction for the raw image data of an embedded texture image source that 
- eliminates the need to manage raw memory buffer.
- */
-@property CGDataProviderRef imageDataProvider;
-
-
-/**
- A bitmap image representing either an external or embedded texture applied to 
- a material property.
- */
-@property ImageType *image;
-
 @end
 
 #pragma mark -
@@ -139,14 +130,15 @@
 {
     self = [super init];
     if(self) {
-        self.imageSource = NULL;
-        self.imageDataProvider = NULL;
-        self.image = NULL;
-        self.colorSpace = NULL;
-        self.color = NULL;
+        _imageSource = NULL;
+        _image = NULL;
+        _colorSpace = NULL;
+        _color = NULL;
+        
         const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
         const struct aiMaterial *aiMaterial =
             aiScene->mMaterials[aiMesh->mMaterialIndex];
+        self.embeddedTextureIndex = aiMesh->mMaterialIndex;
         struct aiString name;
         aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
         self.textureType = aiTextureType;
@@ -161,6 +153,11 @@
         return self;
     }
     return nil;
+}
+
+- (void)dealloc
+{
+    [self releaseContents];
 }
 
 #pragma mark - Inspect texture metadata
@@ -205,16 +202,21 @@
             DLog(@" tex file path is: %@", texFilePath);
             NSString *texFileName = [texFilePath lastPathComponent];
             
-            if(texFileName == nil || [texFileName isEqualToString:@""]) {
+            if(texFileName.length == 0) {   //Cover both cases of nil and @""
                 self.applyColor = true;
                 [self extractColorForMaterial:aiMaterial
                               withTextureType:aiTextureType];
             }
-            else if ([texFileName hasPrefix:@"*"] && aiScene->mNumTextures > 0)
+            else if ((texFileName.length > 0) && (aiScene->mNumTextures > 0))
             {
                 self.applyEmbeddedTexture = true;
-                self.embeddedTextureIndex =
-                [texFilePath substringFromIndex:1].intValue;
+                if ([texFileName hasPrefix:@"*"]) {
+                    self.embeddedTextureIndex = [texFilePath substringFromIndex:1].intValue;
+                }
+                if (self.embeddedTextureIndex >= aiScene->mNumTextures) {
+                    DLog(@"ERROR: Embedded texture index : %d is out of bounds (0..%d)", self.embeddedTextureIndex, (aiScene->mNumTextures - 1));
+                    self.embeddedTextureIndex = aiScene->mNumTextures - 1;
+                }
                 DLog(@" Embedded texture index : %d", self.embeddedTextureIndex);
                 [self generateCGImageForEmbeddedTextureAtIndex:self.embeddedTextureIndex
                     inScene:aiScene];
@@ -222,10 +224,8 @@
             else {
                 self.applyExternalTexture = true;
                 DLog(@"  tex file name is %@", texFileName);
-                NSString *sceneDir = [[path stringByDeletingLastPathComponent]
-                    stringByAppendingString:@"/"];
-                self.externalTexturePath =
-                    [sceneDir stringByAppendingString:texFileName];
+                self.externalTexturePath = [[path stringByDeletingLastPathComponent]
+                                            stringByAppendingPathComponent:texFileName];
                 DLog(@"  tex path is %@", self.externalTexturePath);
                 [self generateCGImageForExternalTextureAtPath:
                           self.externalTexturePath imageCache:imageCache];
@@ -245,32 +245,27 @@
 - (void)generateCGImageForEmbeddedTextureAtIndex:(int)index
                                          inScene:(const struct aiScene *)aiScene
 {
+    NSAssert ((_image == NULL), @"We already generated a texture");
+    
     DLog(@" Generating embedded texture ");
     const struct aiTexture *aiTexture = aiScene->mTextures[index];
     NSData *imageData = [NSData dataWithBytes:aiTexture->pcData
                                        length:aiTexture->mWidth];
-    self.imageDataProvider =
-        CGDataProviderCreateWithCFData((CFDataRef)imageData);
+    CGDataProviderRef imageDataProviderRef = CGDataProviderCreateWithCFData((CFDataRef)imageData);
     NSString* format = [NSString stringWithUTF8String:aiTexture->achFormatHint];
     if([format isEqualToString:@"png"]) {
         DLog(@" Created png embedded texture ");
-		CGImageRef imageRef = CGImageCreateWithPNGDataProvider(
-										 self.imageDataProvider, NULL, true, kCGRenderingIntentDefault);
-#if TARGET_OS_OSX
-		self.image = [[NSImage alloc] initWithCGImage:imageRef size:NSZeroSize];
-#else
-		self.image = [[UIImage alloc] initWithCGImage:imageRef];
-#endif
-    }
-    if([format isEqualToString:@"jpg"]) {
+        _image = CGImageCreateWithPNGDataProvider(
+            imageDataProviderRef, NULL, true, kCGRenderingIntentDefault);
+    } else if([format isEqualToString:@"jpg"]) {
         DLog(@" Created jpg embedded texture");
-        CGImageRef imageRef = CGImageCreateWithJPEGDataProvider(
-            self.imageDataProvider, NULL, true, kCGRenderingIntentDefault);
-#if TARGET_OS_OSX
-		self.image = [[NSImage alloc] initWithCGImage:imageRef size:NSZeroSize];
-#else
-		self.image = [[UIImage alloc] initWithCGImage:imageRef];
-#endif
+        _image = CGImageCreateWithJPEGDataProvider(
+            imageDataProviderRef, NULL, true, kCGRenderingIntentDefault);
+    }
+    
+    if (imageDataProviderRef) {
+        CGDataProviderRelease(imageDataProviderRef);
+        imageDataProviderRef = NULL;
     }
 }
 
@@ -281,30 +276,29 @@
  @param path The path to the scene file to load.
  */
 -(void)generateCGImageForExternalTextureAtPath:(NSString*)path
-									imageCache:(AssimpImageCache *)imageCache
+                                    imageCache:(AssimpImageCache *)imageCache
 {
-	ImageType *cachedImage = [imageCache cachedFileAtPath:path];
-	if (cachedImage)
-	{
-		DLog(@" Already generated this texture; using from cache.");
-		self.image = cachedImage;
-	}
-	else
-	{
-		DLog(@" Generating external texture");
-		NSURL *imageURL = [NSURL fileURLWithPath:path];
-		self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
-		CGImageRef imageRef = self.imageSource ? CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL) : NULL;
-#if TARGET_OS_OSX
-		self.image = [[NSImage alloc] initWithCGImage:imageRef size:NSZeroSize];
-#else
-		self.image = [[UIImage alloc] initWithCGImage:imageRef];
-#endif
-		if (self.image != NULL)
-		{
-			[imageCache storeImage:self.image toPath:path];
-		}
-	}
+    CGImageRef cachedImage = [imageCache cachedFileAtPath:path];
+    if (cachedImage) {
+        NSAssert ((_image == NULL), @"We already generated a cached texture");
+        DLog(@" Already generated this texture; using from cache.");
+        _image = CGImageRetain(cachedImage);
+    } else {
+        NSAssert ((_image == NULL), @"We already generated a texture");
+        NSAssert ((_imageSource == NULL), @"We already generated an image source");
+        DLog(@" Generating external texture");
+        NSURL *imageURL = [NSURL fileURLWithPath:path];
+        _imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
+        if (_imageSource != nil) {
+            _image = CGImageSourceCreateImageAtIndex(_imageSource, 0, NULL);
+        } else {
+            DLog(@"ERROR: Unable to find \"%@\" at \"%@\"", imageURL.lastPathComponent, [imageURL URLByDeletingLastPathComponent]);
+        }
+        
+        if (_image != NULL) {
+            [imageCache storeImage:_image toPath:path];
+        }
+    }
 }
 
 #pragma mark - Extract color
@@ -344,9 +338,9 @@
     }
     if (AI_SUCCESS == matColor)
     {
-            self.colorSpace = CGColorSpaceCreateDeviceRGB();
+            _colorSpace = CGColorSpaceCreateDeviceRGB();
             CGFloat components[4] = {color.r, color.g, color.b, color.a};
-            self.color = CGColorCreate(self.colorSpace, components);
+            _color = CGColorCreate(_colorSpace, components);
     }
 }
 
@@ -357,12 +351,29 @@
 
  @return Returns either a color or a bitmap image.
  */
+
 -(id)getMaterialPropertyContents {
+    CFTypeRef contentsRef = [self getMaterialPropertyContentsInternal];
+    return (__bridge id)(contentsRef);
+}
+
+-(CFTypeRef)getMaterialPropertyContentsInternal {
+    CFTypeRef contentsRef = NULL;
     if (self.applyEmbeddedTexture || self.applyExternalTexture) {
-        return (id)self.image;
+        if (_image) {
+            contentsRef = CFRetain(_image);
+        }
     } else {
-        return (id)self.color;
+        if (_color) {
+            contentsRef = CFRetain(_color);
+        }
     }
+    
+    if (contentsRef != NULL) {
+        return CFAutorelease(contentsRef);
+    }
+    
+    return NULL;
 }
 
 /**
@@ -372,20 +383,23 @@
  This method must be called by the client to avoid memory leaks!
  */
 -(void)releaseContents {
-    if(self.imageSource != NULL) {
-        CFRelease(self.imageSource);
+    if(_imageSource != NULL) {
+        CFRelease(_imageSource);
+        _imageSource = NULL;
     }
-    if(self.imageDataProvider != NULL) {
-        CGDataProviderRelease(self.imageDataProvider);
+    if(_image != NULL) {
+        CGImageRelease(_image);
+        _image = NULL;
     }
-    if(self.colorSpace != NULL)
+    if(_colorSpace != NULL)
     {
-        CGColorSpaceRelease(self.colorSpace);
+        CGColorSpaceRelease(_colorSpace);
+        _colorSpace = NULL;
     }
-    if(self.color != NULL) {
-        CGColorRelease(self.color);
+    if(_color != NULL) {
+        CGColorRelease(_color);
+        _color = NULL;
     }
-	self.image = nil;
 }
 
 @end

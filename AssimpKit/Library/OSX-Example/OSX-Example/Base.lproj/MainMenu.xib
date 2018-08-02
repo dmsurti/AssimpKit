@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
-        <plugIn identifier="com.apple.SceneKitIBPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.SceneKitIBPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -654,7 +654,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="640" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -683,10 +683,17 @@
                             <action selector="addAnimation:" target="z44-Lp-cgU" id="uP1-AK-YLf"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="CCF48D14-0756-446B-B087-F04A2F91A66E" label="Export" paletteLabel="Export" tag="-1" image="NSShareTemplate" id="mtn-dL-0cQ">
+                        <nil key="toolTip"/>
+                        <connections>
+                            <action selector="exportModel:" target="z44-Lp-cgU" id="k7f-T0-ppd"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="elh-6p-o5z"/>
                     <toolbarItem reference="Zna-NX-XyX"/>
+                    <toolbarItem reference="mtn-dL-0cQ"/>
                 </defaultToolbarItems>
             </toolbar>
             <point key="canvasLocation" x="385" y="452"/>
@@ -706,6 +713,7 @@
     </objects>
     <resources>
         <image name="3dmodel" width="128" height="128"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
         <image name="bones" width="128" height="128"/>
     </resources>
 </document>
