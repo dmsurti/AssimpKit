@@ -1479,6 +1479,7 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
                        withVertices:(int)nVertices
                          maxWeights:(int)maxWeights
 {
+    assert((nVertices > 0) && (maxWeights > 0));
     float nodeGeometryWeights[nVertices * maxWeights];
     int weightCounter = 0;
 
