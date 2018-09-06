@@ -235,8 +235,7 @@
             else {
                 self.applyExternalTexture = true;
                 DLog(@"  tex file name is %@", texFileName);
-                self.externalTexturePath = [[path stringByDeletingLastPathComponent]
-                                            stringByAppendingPathComponent:texFileName];
+                self.externalTexturePath = [[path stringByDeletingLastPathComponent] stringByAppendingPathComponent:texFilePath];
                 DLog(@"  tex path is %@", self.externalTexturePath);
                 [self generateCGImageForExternalTextureAtPath:
                           self.externalTexturePath imageCache:imageCache];
