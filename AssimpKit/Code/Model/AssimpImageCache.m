@@ -17,19 +17,28 @@
 {
 	if (self = [super init])
 	{
-		self.cacheDictionary = [NSMutableDictionary new];
+		self.cacheDictionary = [[NSMutableDictionary alloc] initWithCapacity:1];
 	}
 	return self;
 }
 
-- (ImageType *)cachedFileAtPath:(NSString *)path
+- (void)dealloc
 {
-	return self.cacheDictionary[path];
+    self.cacheDictionary = nil;    
 }
 
-- (void)storeImage:(ImageType *)image toPath:(NSString *)path
+- (CGImageRef)cachedFileAtPath:(NSString *)path
 {
-	[self.cacheDictionary setObject:image forKey:path];
+    return (__bridge CGImageRef _Nonnull)(self.cacheDictionary[path]);
+}
+
+- (void)storeImage:(CGImageRef)image toPath:(NSString *)path
+{
+    if (image == NULL) {
+        [self.cacheDictionary removeObjectForKey:path];
+    } else {
+        [self.cacheDictionary setObject:(__bridge id _Nonnull)(image) forKey:path];
+    }
 }
 
 @end

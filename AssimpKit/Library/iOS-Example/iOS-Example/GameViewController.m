@@ -46,8 +46,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     
     // Load the scene
     NSError *error = nil;
+    NSURL *modelFileURL = [NSURL fileURLWithPath:self.modelFilePath];
     SCNAssimpScene *scene =
-        [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.modelFilePath]
+        [SCNScene assimpSceneWithURL:modelFileURL
                     postProcessFlags:AssimpKit_Process_FlipUVs |
                                      AssimpKit_Process_Triangulate
                                error:&error];
@@ -55,9 +56,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     // Load the animation scene
     if (self.animFilePath)
-    {
-        SCNAssimpScene *animScene =
-            [SCNScene assimpSceneWithURL:[NSURL URLWithString:self.animFilePath]
+    {        
+        NSURL *animFileURL = [NSURL fileURLWithPath:self.animFilePath];
+           SCNAssimpScene *animScene = [SCNScene assimpSceneWithURL:animFileURL
                         postProcessFlags:AssimpKit_Process_FlipUVs |
                                          AssimpKit_Process_Triangulate
                                    error:&error];

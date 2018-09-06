@@ -834,9 +834,6 @@
  */
 - (void)checkModel:(NSString *)path testLog:(ModelLog *)testLog
 {
-    const char *pFile = [path UTF8String];
-    const struct aiScene *aiScene = aiImportFile(pFile, aiProcess_FlipUVs);
-    
     NSError *error = nil;
     AssimpImporter *importer = [[AssimpImporter alloc] init];
     SCNAssimpScene *scene =
@@ -845,12 +842,16 @@
      AssimpKit_Process_Triangulate
                     error:&error];
     
+    const char *pFile = [path UTF8String];
+    const struct aiScene *aiScene = (const struct aiScene *)[importer invokeAImportFile:pFile
+                                                                                 pFlags:aiProcess_FlipUVs];
+    
     // If the import failed, report it and assure error.localizedDescription
     // populated properly
     if (!aiScene)
     {
         NSString *errorString =
-            [NSString stringWithUTF8String:aiGetErrorString()];
+            [NSString stringWithUTF8String:[importer invokeAiGetErrorString]];
         
         XCTAssertEqualObjects(errorString, error.localizedDescription,
         @" Expected error.localizedDescription (%@)\
@@ -1012,7 +1013,7 @@
     }
     NSArray *modelFiles = [self getModelFiles];
     for (ModelFile *modelFile in modelFiles)
-    {
+    @autoreleasepool{
         NSLog(@"=== TESTING %@ file ===", modelFile.path);
         ModelLog *testLog = [[ModelLog alloc] init];
         [self checkModel:modelFile.path testLog:testLog];
@@ -1037,16 +1038,13 @@
                       scnAssetDir, error.description);
             }
 
-            NSString *fileSchemeScnAsset =
-                [@"file://" stringByAppendingString:scnAsset];
-
             SCNAssimpScene *assimpScene = [SCNAssimpScene
-                assimpSceneWithURL:[NSURL URLWithString:modelFile.path]
+                assimpSceneWithURL:[NSURL fileURLWithPath:modelFile.path]
                   postProcessFlags:AssimpKit_Process_FlipUVs |
                                    AssimpKit_Process_Triangulate
                              error:nil];
             if ([assimpScene.modelScene
-                         writeToURL:[NSURL URLWithString:fileSchemeScnAsset]
+                         writeToURL:[NSURL fileURLWithPath:scnAsset]
                             options:nil
                            delegate:nil
                     progressHandler:nil])
@@ -1068,11 +1066,10 @@
                                                 getAnimScnAssetFile:animKey]];
                 NSLog(@"=== File %@ ==> ANIM SCN: %@ ===", modelFile.file,
                       animScnAsset);
-                NSString *fileSchemeAnimScnAsset =
-                    [@"file://" stringByAppendingString:animScnAsset];
                 ++numFilesTestedForSerialization;
+                NSURL *animSceneURL = [NSURL fileURLWithPath:animScnAsset];
                 if ([animScene writeToURL:
-                                   [NSURL URLWithString:fileSchemeAnimScnAsset]
+                                   animSceneURL
                                   options:nil
                                  delegate:nil
                           progressHandler:nil])

@@ -82,4 +82,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use importScene:postProcessFlags:error:");
                postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
                           error:(NSError **)error;
 
+- (const char*) invokeAiGetErrorString;
+- (const void*)invokeAImportFile:(const char*)pFile pFlags:(unsigned int)pFlags;
+
 @end

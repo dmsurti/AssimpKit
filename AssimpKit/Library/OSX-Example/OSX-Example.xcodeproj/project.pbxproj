@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		771E8EF61DDF42690081FD6C /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF51DDF42690081FD6C /* AssimpKit.framework */; };
-		771E8EF71DDF42690081FD6C /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 771E8EF51DDF42690081FD6C /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7726B8681DF001C200856EE7 /* 3dmodel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7726B8661DF001C200856EE7 /* 3dmodel.png */; };
 		7726B8691DF001C200856EE7 /* bones.png in Resources */ = {isa = PBXBuildFile; fileRef = 7726B8671DF001C200856EE7 /* bones.png */; };
 		7726B86B1DF0029300856EE7 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7726B86A1DF0029300856EE7 /* play.png */; };
@@ -20,6 +18,8 @@
 		77CDAA761DD715FE00B7E342 /* spider.obj in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA6F1DD715FE00B7E342 /* spider.obj */; };
 		77CDAA771DD715FE00B7E342 /* SpiderTex.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA701DD715FE00B7E342 /* SpiderTex.jpg */; };
 		77CDAA7A1DD716F100B7E342 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAA781DD716F100B7E342 /* MainMenu.xib */; };
+		E832A3D920E902A9001E7597 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E832A3D820E902A9001E7597 /* AssimpKit.framework */; };
+		E8CACE3C20EA729600100323 /* AssimpKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E832A3D820E902A9001E7597 /* AssimpKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				771E8EF71DDF42690081FD6C /* AssimpKit.framework in Embed Frameworks */,
+				E8CACE3C20EA729600100323 /* AssimpKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,7 +46,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		771E8EF51DDF42690081FD6C /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7726B8661DF001C200856EE7 /* 3dmodel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3dmodel.png; sourceTree = "<group>"; };
 		7726B8671DF001C200856EE7 /* bones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bones.png; sourceTree = "<group>"; };
 		7726B86A1DF0029300856EE7 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -64,6 +63,9 @@
 		77CDAA701DD715FE00B7E342 /* SpiderTex.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpiderTex.jpg; sourceTree = "<group>"; };
 		77CDAA791DD716F100B7E342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		77CDAA801DD7172F00B7E342 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
+		E832A3D820E902A9001E7597 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86A595F20E4D48400AAAF83 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../../Assimp/lib/osx/libIrrXML.a; sourceTree = "<group>"; };
+		E8CACE3920EA727300100323 /* AssimpKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssimpKit.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/AssimpKit-eltorpbnhxoaeegeodtjeuthhsgc/Build/Products/Debug/AssimpKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				771E8EF61DDF42690081FD6C /* AssimpKit.framework in Frameworks */,
+				E832A3D920E902A9001E7597 /* AssimpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +83,7 @@
 		77CDAA491DD715C300B7E342 = {
 			isa = PBXGroup;
 			children = (
-				771E8EF51DDF42690081FD6C /* AssimpKit.framework */,
+				E8CACE3920EA727300100323 /* AssimpKit.framework */,
 				77CDAA541DD715C300B7E342 /* OSX-Example */,
 				77CDAA531DD715C300B7E342 /* Products */,
 				77CDAA7F1DD7172F00B7E342 /* Frameworks */,
@@ -129,6 +131,8 @@
 		77CDAA7F1DD7172F00B7E342 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E832A3D820E902A9001E7597 /* AssimpKit.framework */,
+				E86A595F20E4D48400AAAF83 /* libIrrXML.a */,
 				77CDAA801DD7172F00B7E342 /* libassimp.a */,
 			);
 			name = Frameworks;
@@ -167,7 +171,6 @@
 				TargetAttributes = {
 					77CDAA511DD715C300B7E342 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = PRJ5CHFB5D;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -324,7 +327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_DIR)/Library/Frameworks";
 				INFOPLIST_FILE = "OSX-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -340,7 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_DIR)/Library/Frameworks";
 				INFOPLIST_FILE = "OSX-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

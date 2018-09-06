@@ -198,7 +198,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    Assign geometry, materials, lights and cameras to the node
    ---------------------------------------------------------------------
    */
-	AssimpImageCache *imageCache = [AssimpImageCache new];
+	AssimpImageCache *imageCache = [[AssimpImageCache alloc] init];
     SCNNode *scnRootNode =
         [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path imageCache:imageCache];
     [scene.rootNode addChildNode:scnRootNode];
@@ -240,12 +240,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                                 atPath:(NSString *)path
 							imageCache:(AssimpImageCache *)imageCache
 {
-    SCNNode *node = [[SCNNode alloc] init];
     const struct aiString *aiNodeName = &aiNode->mName;
+    if (aiNodeName == NULL) {
+        return nil;
+    }
+    
+    SCNNode *node = [[SCNNode alloc] init];
     node.name = [NSString stringWithUTF8String:aiNodeName->data];
     DLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
     int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
-    DLog(@" N VERTICES: %@", nVertices);
+    DLog(@" N VERTICES: %@", @(nVertices));
     if (nVertices > 0)
     {
         node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode
@@ -673,7 +677,10 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
     {
         const struct aiFace *aiFace = &aiMesh->mFaces[i];
         // we ignore faces which are not triangulated
-        if(aiFace->mNumIndices != 3) {
+        
+        if ((aiFace  == NULL) || (aiFace->mNumIndices != 3) || (aiFace->mNumIndices > nIndices)) {
+            free(scnIndices);
+            scnIndices = NULL;
             return nil;
         }
         for (int j = 0; j < aiFace->mNumIndices; j++)
@@ -881,7 +888,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         aiGetMaterialString(aiMaterial, AI_MATKEY_NAME, &name);
         NSString *nameString = [NSString stringWithUTF8String:
                                 (const char *_Nonnull) & name.data];
-        DLog(@" Material name is %@", name);
+        DLog(@"Material name is \"%@\" Material index is \"%@\"", nameString,@(aiMesh->mMaterialIndex));
         SCNMaterial *material = [SCNMaterial material];
         material.name = nameString;
         int kTextureTypes = 10;
@@ -891,6 +898,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             aiTextureType_REFLECTION,   aiTextureType_OPACITY,
             aiTextureType_NORMALS,      aiTextureType_HEIGHT,
             aiTextureType_DISPLACEMENT, aiTextureType_SHININESS};
+#ifdef MY_DEBUG
         NSDictionary *textureTypeNames = @{
             @"0" : @"Diffuse",
             @"1" : @"Specular",
@@ -903,6 +911,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             @"8" : @"Displacement",
             @"9" : @"Shininess"
         };
+#endif
 
         for(int i = 0; i < kTextureTypes; i++) {
             DLog(@" Loading texture type : %@",
@@ -926,7 +935,7 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                withSCNMaterial:material];
         DLog(@"+++ Loading blend mode");
         unsigned int blendMode = 0;
-        unsigned int *max;
+        unsigned int *max = NULL;
         aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
                                   (int *)&blendMode, max);
         if (blendMode == aiBlendMode_Default)
@@ -1470,6 +1479,8 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
                        withVertices:(int)nVertices
                          maxWeights:(int)maxWeights
 {
+    assert((nVertices > 0) && (maxWeights > 0));
+
     float *nodeGeometryWeights = malloc(sizeof(float) * nVertices * maxWeights);
     int weightCounter = 0;
 
@@ -1716,9 +1727,11 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
-        [self makeSkinnerForAssimpNode:aiChildNode
-                               inScene:aiScene
-                              scnScene:scene];
+        if (aiChildNode != NULL) {
+            [self makeSkinnerForAssimpNode:aiChildNode
+                                   inScene:aiScene
+                                  scnScene:scene];
+        }
     }
 }
 
@@ -1863,6 +1876,14 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                                          frameAnims:currentAnimation];
         [scene.animations setValue:animation forKey:animName];
     }
+}
+
+- (const char*) invokeAiGetErrorString {
+    return aiGetErrorString();
+}
+
+- (const void*)invokeAImportFile:(const char*)pFile pFlags:(unsigned int)pFlags {
+    return ((const void*)aiImportFile(pFile, pFlags));
 }
 
 @end
