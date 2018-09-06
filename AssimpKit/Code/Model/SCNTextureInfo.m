@@ -218,8 +218,19 @@
                     self.embeddedTextureIndex = aiScene->mNumTextures - 1;
                 }
                 DLog(@" Embedded texture index : %d", self.embeddedTextureIndex);
-                [self generateCGImageForEmbeddedTextureAtIndex:self.embeddedTextureIndex
-                    inScene:aiScene];
+                
+                NSAssert ((_image == NULL), @"We already generated a texture");
+                
+                CGImageRef image = [imageCache cachedFileAtPath:texFilePath];
+                if (image != NULL) {
+                    _image = CGImageRetain(image);
+                } else {
+                    [self generateCGImageForEmbeddedTextureAtIndex:self.embeddedTextureIndex
+                        inScene:aiScene];
+                    if (_image != NULL) {
+                        [imageCache storeImage:_image toPath:texFilePath];
+                    }
+                }
             }
             else {
                 self.applyExternalTexture = true;

@@ -198,7 +198,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    Assign geometry, materials, lights and cameras to the node
    ---------------------------------------------------------------------
    */
-	AssimpImageCache *imageCache = [AssimpImageCache new];
+	AssimpImageCache *imageCache = [[AssimpImageCache alloc] init];
     SCNNode *scnRootNode =
         [self makeSCNNodeFromAssimpNode:aiRootNode inScene:aiScene atPath:path imageCache:imageCache];
     [scene.rootNode addChildNode:scnRootNode];
