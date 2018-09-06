@@ -22,6 +22,7 @@
 		77824E3D1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 77824E3B1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m */; };
 		77824E421E1A5B45000B24A3 /* SCNAssimpAnimSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77824E431E1A5B45000B24A3 /* SCNAssimpAnimSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 77824E411E1A5B45000B24A3 /* SCNAssimpAnimSettings.m */; };
+		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
 		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
 		779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +41,7 @@
 		779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF2091DDF2BB000DED366 /* SCNAssimpScene.m */; };
 		779DF2131DDF2BB000DED366 /* SCNScene+AssimpImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF2141DDF2BB000DED366 /* SCNScene+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */; };
+		779DF2151DDF2BEE00DED366 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1A71DDF262500DED366 /* libassimp.a */; };
 		779DF26E1DDF2FD500DED366 /* AssimpImporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */; };
 		779DF26F1DDF2FD500DED366 /* ModelLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF26D1DDF2FD500DED366 /* ModelLog.m */; };
 		779DF2791DDF30B200DED366 /* AssimpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1FB1DDF2B8700DED366 /* AssimpKit.framework */; };
@@ -53,16 +55,28 @@
 		77FB46301F59751300C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB462E1F59751300C73D50 /* SCNTextureInfo.m */; };
 		77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB46311F59751900C73D50 /* SCNTextureInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB46321F59751900C73D50 /* SCNTextureInfo.m */; };
-		E8631CAE21131E7F003D57C7 /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8CACE3520EA6EEB00100323 /* libIrrXML.a */; };
-		E8631CB021131E80003D57C7 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8631CAF21131E80003D57C7 /* libassimp.a */; };
-		E8631CB121131E99003D57C7 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E832A3E220E90379001E7597 /* libassimp-fat.a */; };
-		E8631CB221131E99003D57C7 /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E832A3DD20E90379001E7597 /* libIrrXML-fat.a */; };
-		E8D2518A2111DC47008D0329 /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D251882111DC46008D0329 /* AssimpImageCache.m */; };
-		E8D2518B2111DC47008D0329 /* AssimpImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E8D251892111DC46008D0329 /* AssimpImageCache.h */; };
-		E8D2518C2111DC6F008D0329 /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D251882111DC46008D0329 /* AssimpImageCache.m */; };
+		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
+		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
+		EA0EB60220F780290098E4FA /* AssimpImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0EB60020F780290098E4FA /* AssimpImageCache.h */; };
+		EA0EB60320F780290098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
+		EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		779DF2361DDF2D7B00DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 77CDAA521DD715C300B7E342;
+			remoteInfo = "OSX-Example";
+		};
+		779DF2421DDF2D8400DED366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 77CDAB3A1DD7421500B7E342;
+			remoteInfo = "iOS-Example";
+		};
 		779DF2661DDF2F9800DED366 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 779DF1801DDF257A00DED366 /* Project object */;
@@ -94,8 +108,10 @@
 		77824E3B1E1A5B21000B24A3 /* SCNAssimpAnimSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimSettings.m; path = ../../Code/Model/SCNAssimpAnimSettings.m; sourceTree = "<group>"; };
 		77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNAssimpAnimSettings.h; path = ../../Code/Model/SCNAssimpAnimSettings.h; sourceTree = "<group>"; };
 		77824E411E1A5B45000B24A3 /* SCNAssimpAnimSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpAnimSettings.m; path = ../../Code/Model/SCNAssimpAnimSettings.m; sourceTree = "<group>"; };
+		779DF1A71DDF262500DED366 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/lib/osx/libassimp.a; sourceTree = "<group>"; };
 		779DF1D31DDF29F200DED366 /* AssimpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssimpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DF1D61DDF29F200DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libassimp-fat.a"; path = "../Assimp/lib/ios/libassimp-fat.a"; sourceTree = "<group>"; };
 		779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImporter.h; path = ../../Code/Model/AssimpImporter.h; sourceTree = "<group>"; };
 		779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporter.m; path = ../../Code/Model/AssimpImporter.m; sourceTree = "<group>"; };
 		779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssimpSceneKit-Prefix.pch"; path = "../../Code/Model/AssimpSceneKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -116,6 +132,8 @@
 		779DF2091DDF2BB000DED366 /* SCNAssimpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNAssimpScene.m; path = ../../Code/Model/SCNAssimpScene.m; sourceTree = "<group>"; };
 		779DF20A1DDF2BB000DED366 /* SCNScene+AssimpImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SCNScene+AssimpImport.h"; path = "../../Code/Model/SCNScene+AssimpImport.h"; sourceTree = "<group>"; };
 		779DF20B1DDF2BB000DED366 /* SCNScene+AssimpImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SCNScene+AssimpImport.m"; path = "../../Code/Model/SCNScene+AssimpImport.m"; sourceTree = "<group>"; };
+		779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OSX-Example.xcodeproj"; path = "OSX-Example/OSX-Example.xcodeproj"; sourceTree = "<group>"; };
+		779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "iOS-Example.xcodeproj"; path = "iOS-Example/iOS-Example.xcodeproj"; sourceTree = "<group>"; };
 		779DF2601DDF2F9800DED366 /* AssimpKitTests_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssimpKitTests_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DF2641DDF2F9800DED366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		779DF26B1DDF2FD500DED366 /* AssimpImporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImporterTests.m; path = ../../Code/Model/Tests/AssimpImporterTests.m; sourceTree = "<group>"; };
@@ -134,12 +152,10 @@
 		77FB462E1F59751300C73D50 /* SCNTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNTextureInfo.m; path = ../../Code/Model/SCNTextureInfo.m; sourceTree = "<group>"; };
 		77FB46311F59751900C73D50 /* SCNTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNTextureInfo.h; path = ../../Code/Model/SCNTextureInfo.h; sourceTree = "<group>"; };
 		77FB46321F59751900C73D50 /* SCNTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNTextureInfo.m; path = ../../Code/Model/SCNTextureInfo.m; sourceTree = "<group>"; };
-		E832A3DD20E90379001E7597 /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libIrrXML-fat.a"; sourceTree = "<group>"; };
-		E832A3E220E90379001E7597 /* libassimp-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libassimp-fat.a"; sourceTree = "<group>"; };
-		E8631CAF21131E80003D57C7 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libassimp.a; sourceTree = "<group>"; };
-		E8CACE3520EA6EEB00100323 /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIrrXML.a; sourceTree = "<group>"; };
-		E8D251882111DC46008D0329 /* AssimpImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssimpImageCache.m; path = ../../Code/Model/AssimpImageCache.m; sourceTree = "<group>"; };
-		E8D251892111DC46008D0329 /* AssimpImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpImageCache.h; path = ../../Code/Model/AssimpImageCache.h; sourceTree = "<group>"; };
+		77FF141A1F5843360041F4FA /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "../Assimp/lib/ios/libIrrXML-fat.a"; sourceTree = "<group>"; };
+		77FF141E1F58433D0041F4FA /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../Assimp/lib/osx/libIrrXML.a; sourceTree = "<group>"; };
+		EA0EB60020F780290098E4FA /* AssimpImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssimpImageCache.h; path = ../../Code/Model/AssimpImageCache.h; sourceTree = "<group>"; };
+		EA0EB60120F780290098E4FA /* AssimpImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssimpImageCache.m; path = ../../Code/Model/AssimpImageCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +163,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8631CB121131E99003D57C7 /* libassimp-fat.a in Frameworks */,
-				E8631CB221131E99003D57C7 /* libIrrXML-fat.a in Frameworks */,
+				779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */,
+				77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,8 +172,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8631CB021131E80003D57C7 /* libassimp.a in Frameworks */,
-				E8631CAE21131E7F003D57C7 /* libIrrXML.a in Frameworks */,
+				779DF2151DDF2BEE00DED366 /* libassimp.a in Frameworks */,
+				77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +201,8 @@
 			children = (
 				7746DB731DEF08FE00C651DC /* not-supported-formats.txt */,
 				7746DB691DEEF93F00C651DC /* valid-extensions.txt */,
+				779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */,
+				779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */,
 				779DF1D41DDF29F200DED366 /* AssimpKit-iOS */,
 				779DF1FC1DDF2B8700DED366 /* AssimpKit-macOS */,
 				779DF2611DDF2F9800DED366 /* AssimpKitTests_iOS */,
@@ -208,8 +226,10 @@
 		779DF1A61DDF262400DED366 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E832A3DC20E90379001E7597 /* ios */,
-				E86A593620E4D38B00AAAF83 /* osx */,
+				77FF141E1F58433D0041F4FA /* libIrrXML.a */,
+				77FF141A1F5843360041F4FA /* libIrrXML-fat.a */,
+				779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */,
+				779DF1A71DDF262500DED366 /* libassimp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -217,8 +237,6 @@
 		779DF1D41DDF29F200DED366 /* AssimpKit-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				E8D251892111DC46008D0329 /* AssimpImageCache.h */,
-				E8D251882111DC46008D0329 /* AssimpImageCache.m */,
 				77FB46311F59751900C73D50 /* SCNTextureInfo.h */,
 				77FB46321F59751900C73D50 /* SCNTextureInfo.m */,
 				77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */,
@@ -226,6 +244,8 @@
 				7746DB5C1DEEBFE600C651DC /* PostProcessingFlags.h */,
 				779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */,
 				779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */,
+				EA0EB60020F780290098E4FA /* AssimpImageCache.h */,
+				EA0EB60120F780290098E4FA /* AssimpImageCache.m */,
 				779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */,
 				779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */,
 				779DF1E11DDF2A5700DED366 /* SCNAssimpAnimation.m */,
@@ -264,6 +284,22 @@
 			path = "AssimpKit-macOS";
 			sourceTree = "<group>";
 		};
+		779DF2311DDF2D7B00DED366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				779DF2371DDF2D7B00DED366 /* OSX-Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		779DF23D1DDF2D8400DED366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				779DF2431DDF2D8400DED366 /* iOS-Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		779DF2611DDF2F9800DED366 /* AssimpKitTests_iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,26 +328,6 @@
 			path = AssimpKitTests_macOS;
 			sourceTree = "<group>";
 		};
-		E832A3DC20E90379001E7597 /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				E832A3DD20E90379001E7597 /* libIrrXML-fat.a */,
-				E832A3E220E90379001E7597 /* libassimp-fat.a */,
-			);
-			name = ios;
-			path = ../Assimp/lib/ios;
-			sourceTree = "<group>";
-		};
-		E86A593620E4D38B00AAAF83 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				E8631CAF21131E80003D57C7 /* libassimp.a */,
-				E8CACE3520EA6EEB00100323 /* libIrrXML.a */,
-			);
-			name = osx;
-			path = ../Assimp/lib/osx;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -321,9 +337,9 @@
 			files = (
 				779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */,
 				779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */,
+				EA0EB60220F780290098E4FA /* AssimpImageCache.h in Headers */,
 				779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */,
 				779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */,
-				E8D2518B2111DC47008D0329 /* AssimpImageCache.h in Headers */,
 				7746DB5D1DEEBFE600C651DC /* PostProcessingFlags.h in Headers */,
 				77EB2B901E17773B004FA171 /* SCNNode+AssimpImport.h in Headers */,
 				77824E421E1A5B45000B24A3 /* SCNAssimpAnimSettings.h in Headers */,
@@ -433,18 +449,22 @@
 				TargetAttributes = {
 					779DF1D21DDF29F200DED366 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 7C2B57G77S;
 						ProvisioningStyle = Automatic;
 					};
 					779DF1FA1DDF2B8700DED366 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
 						ProvisioningStyle = Automatic;
 					};
 					779DF25F1DDF2F9800DED366 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
 						ProvisioningStyle = Automatic;
 					};
 					779DF2731DDF30B200DED366 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PRJ5CHFB5D;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -459,6 +479,16 @@
 			mainGroup = 779DF17F1DDF257A00DED366;
 			productRefGroup = 779DF18C1DDF25C500DED366 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 779DF23D1DDF2D8400DED366 /* Products */;
+					ProjectRef = 779DF23C1DDF2D8400DED366 /* iOS-Example.xcodeproj */;
+				},
+				{
+					ProductGroup = 779DF2311DDF2D7B00DED366 /* Products */;
+					ProjectRef = 779DF2301DDF2D7B00DED366 /* OSX-Example.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				779DF1D21DDF29F200DED366 /* AssimpKit-iOS */,
@@ -468,6 +498,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		779DF2371DDF2D7B00DED366 /* OSX-Example.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "OSX-Example.app";
+			remoteRef = 779DF2361DDF2D7B00DED366 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		779DF2431DDF2D8400DED366 /* iOS-Example.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "iOS-Example.app";
+			remoteRef = 779DF2421DDF2D8400DED366 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		779DF1D11DDF29F200DED366 /* Resources */ = {
@@ -510,7 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */,
-				E8D2518A2111DC47008D0329 /* AssimpImageCache.m in Sources */,
+				EA0EB60320F780290098E4FA /* AssimpImageCache.m in Sources */,
 				779DF1EC1DDF2A5700DED366 /* SCNAssimpScene.m in Sources */,
 				77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */,
 				779DF1EA1DDF2A5700DED366 /* SCNAssimpAnimation.m in Sources */,
@@ -525,7 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EB2B8B1E1776EB004FA171 /* SCNNode+AssimpImport.m in Sources */,
-				E8D2518C2111DC6F008D0329 /* AssimpImageCache.m in Sources */,
+				EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */,
 				779DF2121DDF2BB000DED366 /* SCNAssimpScene.m in Sources */,
 				77FB46301F59751300C73D50 /* SCNTextureInfo.m in Sources */,
 				779DF2101DDF2BB000DED366 /* SCNAssimpAnimation.m in Sources */,
@@ -614,7 +661,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7C2B57G77S;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -643,6 +690,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/lib/ios";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lstdc++",
@@ -655,7 +703,7 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "arm64 armv7";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -688,7 +736,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7C2B57G77S;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -724,7 +772,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/include";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "arm64 armv7";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -757,7 +805,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -830,7 +878,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -893,7 +941,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -951,7 +999,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1003,7 +1051,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1058,7 +1106,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PRJ5CHFB5D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

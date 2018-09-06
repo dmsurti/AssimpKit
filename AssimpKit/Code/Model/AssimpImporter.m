@@ -1480,7 +1480,8 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
                          maxWeights:(int)maxWeights
 {
     assert((nVertices > 0) && (maxWeights > 0));
-    float nodeGeometryWeights[nVertices * maxWeights];
+
+    float *nodeGeometryWeights = malloc(sizeof(float) * nVertices * maxWeights);
     int weightCounter = 0;
 
     for (int i = 0; i < aiNode->mNumMeshes; i++)
@@ -1547,6 +1548,7 @@ makeBoneWeightsGeometrySourceAtNode:(const struct aiNode *)aiNode
              bytesPerComponent:sizeof(float)
                     dataOffset:0
                     dataStride:maxWeights * sizeof(float)];
+    free(nodeGeometryWeights);
     return boneWeightsSource;
 }
 
