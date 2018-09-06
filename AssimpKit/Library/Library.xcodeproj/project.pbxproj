@@ -57,8 +57,6 @@
 		77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB46321F59751900C73D50 /* SCNTextureInfo.m */; };
 		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
 		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
-		BB1EB46120AA150700E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB1EB46020AA150700E6BA31 /* AssimpKit.h */; };
-		BB1EB46220AA16E600E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBE41B7C20A9AA050069C8C6 /* AssimpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0EB60220F780290098E4FA /* AssimpImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0EB60020F780290098E4FA /* AssimpImageCache.h */; };
 		EA0EB60320F780290098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
 		EA0EB61020F795850098E4FA /* AssimpImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0EB60120F780290098E4FA /* AssimpImageCache.m */; };
@@ -156,8 +154,6 @@
 		77FB46321F59751900C73D50 /* SCNTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNTextureInfo.m; path = ../../Code/Model/SCNTextureInfo.m; sourceTree = "<group>"; };
 		77FF141A1F5843360041F4FA /* libIrrXML-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libIrrXML-fat.a"; path = "../Assimp/lib/ios/libIrrXML-fat.a"; sourceTree = "<group>"; };
 		77FF141E1F58433D0041F4FA /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../Assimp/lib/osx/libIrrXML.a; sourceTree = "<group>"; };
-		BB1EB46020AA150700E6BA31 /* AssimpKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssimpKit.h; path = "AssimpKit-iOS/AssimpKit.h"; sourceTree = SOURCE_ROOT; };
-		BBE41B7C20A9AA050069C8C6 /* AssimpKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssimpKit.h; sourceTree = "<group>"; };
 		EA0EB60020F780290098E4FA /* AssimpImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AssimpImageCache.h; path = ../../Code/Model/AssimpImageCache.h; sourceTree = "<group>"; };
 		EA0EB60120F780290098E4FA /* AssimpImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AssimpImageCache.m; path = ../../Code/Model/AssimpImageCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -453,7 +449,7 @@
 				TargetAttributes = {
 					779DF1D21DDF29F200DED366 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = PRJ5CHFB5D;
+						DevelopmentTeam = 7C2B57G77S;
 						ProvisioningStyle = Automatic;
 					};
 					779DF1FA1DDF2B8700DED366 = {
@@ -665,7 +661,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DEVELOPMENT_TEAM = 7C2B57G77S;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -740,7 +736,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				DEVELOPMENT_TEAM = 7C2B57G77S;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
